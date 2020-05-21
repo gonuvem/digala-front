@@ -5,6 +5,7 @@ import { Container } from './styles';
 interface ShortTextFieldProps {
   readOnly?: boolean;
   placeholder?: string;
+  label: string;
   name: string;
   id: string;
 }
@@ -14,6 +15,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
   placeholder = '',
   name,
   id,
+  label,
 }) => {
   const [hasFocus, setHasFocus] = useState(false);
 
@@ -27,8 +29,8 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
 
   return (
     <Container hasFocus={hasFocus}>
-      <label htmlFor="shortTextField">
-        Texto Curto
+      <label htmlFor={id}>
+        {label}
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua
