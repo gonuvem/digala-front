@@ -8,4 +8,9 @@ export default createGlobalStyle`
     outline: 0;
   }
 
+  body, input, button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
 `;
