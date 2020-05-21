@@ -2,9 +2,11 @@ import React from 'react';
 
 import GlobalStyles from './styles/global';
 
+import SurveyBuilder from './pages/SurveyBuilder';
+
 const App: React.FC = () => (
   <>
-    <h1>Hello World</h1>
+    <SurveyBuilder />
     <GlobalStyles />
   </>
 );
