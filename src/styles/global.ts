@@ -16,4 +16,13 @@ export default createGlobalStyle`
     color: ${Colors.black};
     -webkit-font-smoothing: antialiased;
   }
+
+  #root {
+    max-width: 1520px;
+    margin: 0 auto;
+  }
+
+  button {
+    cursor: pointer;
+  }
 `;

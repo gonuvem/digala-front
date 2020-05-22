@@ -33,6 +33,9 @@ export const NavLink = styled.a<NavLinkProps>`
         height: 2px;
         background-color: ${Colors.primary};
         left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
         bottom: -0.5rem;
       }
     `}

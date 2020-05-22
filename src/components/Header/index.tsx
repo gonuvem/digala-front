@@ -9,7 +9,7 @@ const Header: React.FC = () => (
     <img src={logo} alt="digala-logo" />
     <nav>
       <NavLink isActive href="/survey">
-        Pesquisa
+        Pesquisas
       </NavLink>
       <NavLink href="/models">Modelos</NavLink>
       <NavLink href="/help">Ajuda</NavLink>
