@@ -2,11 +2,17 @@ import React from 'react';
 
 import { Container } from './styles';
 
-const Option: React.FC = () => (
-  <Container htmlFor="SingleChoiceField_option">
-    <input id="SingleChoiceField_option" type="radio" name="radio_btn" />
+interface OptionProps {
+  id: string;
+  fieldName: string;
+  label?: string;
+}
+
+const Option: React.FC<OptionProps> = ({ id, fieldName, label }) => (
+  <Container htmlFor={id}>
+    <input id={id} type="radio" name={fieldName} />
     <span />
-    Escolha ùnica
+    {label}
   </Container>
 );
 

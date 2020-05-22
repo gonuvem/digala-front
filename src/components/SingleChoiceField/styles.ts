@@ -9,6 +9,10 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
 
+    label + label {
+      margin-top: 1rem;
+    }
+
     p {
       font-weight: 400;
       margin-top: 0.5rem;
