@@ -7,14 +7,19 @@ interface NavLinkProps {
 }
 
 export const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   padding: 1.5rem;
 
   background-color: ${Colors.white};
   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.16);
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 1520px;
+    margin: 0 auto;
+  }
 `;
 
 export const NavLink = styled.a<NavLinkProps>`
@@ -22,8 +27,9 @@ export const NavLink = styled.a<NavLinkProps>`
   text-decoration: none;
   color: ${(props) => (props.isActive ? Colors.primary : Colors.black)};
 
-  ${(props) => props.isActive
-    && css`
+  ${(props) =>
+    props.isActive &&
+    css`
       font-weight: 500;
 
       &:after {

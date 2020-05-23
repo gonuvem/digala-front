@@ -10,16 +10,15 @@ export default createGlobalStyle`
     outline: 0;
   }
 
+  body {
+    background-color: #F4F4F4;
+  }
+
   body, input, button {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: ${Colors.black};
     -webkit-font-smoothing: antialiased;
-  }
-
-  #root {
-    max-width: 1520px;
-    margin: 0 auto;
   }
 
   button {
