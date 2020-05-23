@@ -44,6 +44,12 @@ export const Container = styled.div<ContainerProps>`
 
   > div {
     padding: 0 2rem 2rem 2rem;
+
+    h5 {
+      font-weight: 300;
+      font-size: 1rem;
+      color: ${transparentize(0.1, Colors.black)};
+    }
   }
 `;
 
@@ -51,6 +57,7 @@ export const PanelTabLink = styled.span<PanelTabLinkProps>`
   cursor: pointer;
   position: relative;
   font-weight: 500;
+  text-transform: uppercase;
   transition: color 0.3s;
 
   &:hover {

@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 
 import { Container, QuestionsContainer, PanelTabLink } from './styles';
 
+const TabLinks: string[] = ['Tipos', 'Estilos', 'Configurações'];
+
 const LeftPanel: React.FC = () => {
   const [activePanelNumber, setActivePanelNumber] = useState(0);
 
@@ -12,24 +14,14 @@ const LeftPanel: React.FC = () => {
   return (
     <Container activePanelNumber={activePanelNumber}>
       <nav>
-        <PanelTabLink
-          isActive={activePanelNumber === 0}
-          onClick={() => handleTabChange(0)}
-        >
-          Tipos
-        </PanelTabLink>
-        <PanelTabLink
-          isActive={activePanelNumber === 1}
-          onClick={() => handleTabChange(1)}
-        >
-          Estilos
-        </PanelTabLink>
-        <PanelTabLink
-          isActive={activePanelNumber === 2}
-          onClick={() => handleTabChange(2)}
-        >
-          Configurações
-        </PanelTabLink>
+        {TabLinks.map((tabLink, index) => (
+          <PanelTabLink
+            isActive={activePanelNumber === index}
+            onClick={() => handleTabChange(index)}
+          >
+            {tabLink}
+          </PanelTabLink>
+        ))}
       </nav>
       <div>
         <h5>Perguntas Básicas</h5>
