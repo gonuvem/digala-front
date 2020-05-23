@@ -1,9 +1,17 @@
 import React from 'react';
 
-import { Container } from './styles';
+import { Container, Col01 } from './styles';
 
-import Header from '../../components/Header';
+import LeftPanel from './LeftPanel';
 
-const SurveyBuilder: React.FC = () => <Container />;
+// Col01 component is just for test, erase it.
+
+const SurveyBuilder: React.FC = () => (
+  <Container>
+    <Col01>
+      <LeftPanel />
+    </Col01>
+  </Container>
+);
 
 export default SurveyBuilder;
