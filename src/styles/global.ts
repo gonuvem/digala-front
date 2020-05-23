@@ -11,8 +11,7 @@ export default createGlobalStyle`
   }
 
   body {
-    /* Erase this line */
-    margin: 30px; 
+    background-color: #F4F4F4;
   }
 
   body, input, button {
@@ -20,5 +19,9 @@ export default createGlobalStyle`
     font-size: 16px;
     color: ${Colors.black};
     -webkit-font-smoothing: antialiased;
+  }
+
+  button {
+    cursor: pointer;
   }
 `;
