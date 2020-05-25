@@ -7,7 +7,7 @@ interface NavLinkProps {
 }
 
 export const Container = styled.div`
-  padding: 1.5rem;
+  padding: 1.5rem 3.7rem;
 
   background-color: ${Colors.white};
   box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.16);
