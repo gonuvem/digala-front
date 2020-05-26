@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { FaSlidersH } from 'react-icons/fa';
 
 import { Container, QuestionsContainer, PanelTabLink } from './styles';
 
@@ -44,9 +45,11 @@ const LeftPanel: React.FC = () => {
       <div>
         <h5>Perguntas Básicas</h5>
         <QuestionsContainer>
-          <QuestionBox />
-          <QuestionBox />
-          <QuestionBox />
+          <QuestionBox icon={FaSlidersH} />
+          <QuestionBox icon={FaSlidersH} />
+          <QuestionBox icon={FaSlidersH} />
+          <QuestionBox icon={FaSlidersH} />
+          <QuestionBox icon={FaSlidersH} />
         </QuestionsContainer>
       </div>
     </Container>

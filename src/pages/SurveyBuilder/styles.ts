@@ -6,5 +6,5 @@ export const Container = styled.div`
 
 // Erase this line
 export const Col01 = styled.div`
-  max-width: 33%;
+  max-width: 27.25rem;
 `;

@@ -4,7 +4,7 @@ import Colors from '../../utils/colors';
 
 export const Container = styled.div`
   cursor: pointer;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 0.5rem 2rem;
   display: flex;
   flex-direction: column;
   place-content: center;
@@ -13,6 +13,8 @@ export const Container = styled.div`
   border-radius: 4px;
 
   max-width: 6.25rem;
+
+  margin-bottom: 0.5rem;
 
   div {
     border: solid 2px ${Colors.black};

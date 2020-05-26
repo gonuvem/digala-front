@@ -1,12 +1,17 @@
 import React from 'react';
+import { IconType } from 'react-icons';
 import { FaSlidersH } from 'react-icons/fa';
 
 import { Container } from './styles';
 
-const QuestionBox: React.FC = () => (
+interface QuestionBoxProps {
+  icon: IconType;
+}
+
+const QuestionBox: React.FC<QuestionBoxProps> = ({ icon: Icon }) => (
   <Container>
     <div>
-      <FaSlidersH size={24} />
+      <Icon />
     </div>
     <span>Slider</span>
   </Container>
