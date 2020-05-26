@@ -1,18 +1,21 @@
 import React from 'react';
 
-import { Container, TableHeader } from './styles';
+import Table from '../../components/MyResearches/Table';
+
+import { Container, Header } from './styles';
 
 import add from '../../assets/add_icon.png';
 
 const MyReasearches: React.FC = () => (
   <Container>
-    <TableHeader>
+    <Header>
       <h1>Minhas pesquisas</h1>
       <a href="/">
-        <img src={add} alt="editar" />
+        <img src={add} alt="Nova pesquisa" />
         Nova Pesquisa
       </a>
-    </TableHeader>
+    </Header>
+    <Table />
   </Container>
 );
 

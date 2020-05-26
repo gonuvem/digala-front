@@ -6,18 +6,17 @@ import Colors from '../../utils/colors';
 export const Container = styled.div`
   background: #ffff;
   height: 100vh;
-  display: flex;
-  align-items: stretch;
   padding: 30px 40px;
 `;
 
-export const TableHeader = styled.div`
+export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   flex: 1;
+  margin-bottom: 18px;
 
   h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   a {
@@ -29,8 +28,10 @@ export const TableHeader = styled.div`
     background: ${Colors.primary};
     text-decoration: none;
     color: ${Colors.white};
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
 
-    font-size: 19px;
+    font-size: 18px;
     font-weight: bold;
 
     transition: background-color 0.2s;

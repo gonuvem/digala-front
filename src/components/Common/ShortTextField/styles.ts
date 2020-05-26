@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import Colors from '../../utils/colors';
+import Colors from '../../../utils/colors';
 
 interface ContainerProps {
   hasFocus: boolean;

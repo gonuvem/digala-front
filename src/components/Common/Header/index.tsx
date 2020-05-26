@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, NavLink } from './styles';
 
-import logo from '../../assets/logo.png';
+import logo from '../../../assets/logo.png';
 
 const Header: React.FC = () => (
   <Container>
