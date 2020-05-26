@@ -1,20 +1,22 @@
 import React from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import GlobalStyles from './styles/global';
 
+import ApolloClient from './services/apoloClient';
 import Layout from './layout';
 import Header from './components/Common/Header';
 
 import MyResearches from './pages/MyResearches';
 
 const App: React.FC = () => (
-  <>
+  <ApolloProvider client={ApolloClient}>
     <Header />
     <Layout>
       <MyResearches />
     </Layout>
     <GlobalStyles />
-  </>
+  </ApolloProvider>
 );
 
 export default App;
