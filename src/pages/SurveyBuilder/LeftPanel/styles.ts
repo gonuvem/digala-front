@@ -5,11 +5,30 @@ import Colors from '../../../utils/colors';
 
 interface ContainerProps {
   activePanelNumber: number;
+  distance: number;
 }
 
 interface PanelTabLinkProps {
   isActive?: boolean;
 }
+
+export const PanelTabLink = styled.span<PanelTabLinkProps>`
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 0.3s;
+
+  &:hover {
+    color: ${shade(0.2, Colors.primary)};
+  }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      color: ${shade(0.2, Colors.primary)};
+    `}
+`;
 
 export const Container = styled.div<ContainerProps>`
   background-color: ${Colors.white};
@@ -29,16 +48,12 @@ export const Container = styled.div<ContainerProps>`
       position: absolute;
       height: 2px;
       background-color: ${Colors.primary};
-      left: 0;
-      right: 0;
+      left: 1.5rem;
+      transform: translateX(${(props) => props.distance}px);
+      margin: 0 auto;
       bottom: 0;
-    }
 
-    div {
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      position: absolute;
+      transition: transform 0.3s ease-in-out;
     }
   }
 
@@ -51,24 +66,6 @@ export const Container = styled.div<ContainerProps>`
       color: ${transparentize(0.1, Colors.black)};
     }
   }
-`;
-
-export const PanelTabLink = styled.span<PanelTabLinkProps>`
-  cursor: pointer;
-  position: relative;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: color 0.3s;
-
-  &:hover {
-    color: ${shade(0.2, Colors.primary)};
-  }
-
-  ${(props) =>
-    props.isActive &&
-    css`
-      color: ${shade(0.2, Colors.primary)};
-    `}
 `;
 
 export const QuestionsContainer = styled.div`
