@@ -7,6 +7,7 @@ export const Container = styled.div`
   background: #ffff;
   height: 100vh;
   padding: 30px 40px;
+  border-radius: 4px;
 `;
 
 export const Header = styled.div`
@@ -23,8 +24,8 @@ export const Header = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 47px;
-    width: 218px;
+    height: 2.9375rem;
+    width: 13.625rem;
     background: ${Colors.primary};
     text-decoration: none;
     color: ${Colors.white};

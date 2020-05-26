@@ -2,21 +2,21 @@ import styled from 'styled-components';
 
 import Colors from '../../../utils/colors';
 
-interface statusProps {
+interface StatusProps {
   isActive: boolean;
 }
 
 export const CreatedAt = styled.div`
-  width: 145px;
+  flex: 1;
 `;
 
 export const Answers = styled.div`
-  width: 145px;
+  flex: 1;
 `;
 
 export const Status = styled.div`
   display: flex;
-  width: 125px;
+  flex: 1;
 `;
 
 export const Actions = styled.div`
@@ -47,8 +47,7 @@ export const Actions = styled.div`
 `;
 
 export const Name = styled.div`
-  width: 300px;
-  min-width: 300px;
+  flex: 2;
 `;
 
 export const TableLabels = styled.div`
@@ -58,7 +57,7 @@ export const TableLabels = styled.div`
   padding: 0 16px;
   border-radius: 4px;
   background: ${Colors.secondary};
-
+  justify-content: space-between;
   font-size: 16px;
   font-weight: 500;
   color: ${Colors.smokeWhite};
@@ -69,14 +68,14 @@ export const TableRow = styled.div`
   padding: 0 16px;
   display: flex;
   align-items: center;
-
+  justify-content: center;
   p {
     font-size: 16px;
     color: ${Colors.black};
   }
 `;
 
-export const ColorStatus = styled.div<statusProps>`
+export const ColorStatus = styled.div<StatusProps>`
   height: 16px;
   width: 16px;
   border-radius: 50%;
@@ -103,17 +102,4 @@ export const Separator = styled.div`
   height: 1px;
   background: ${Colors.black};
   opacity: 0.12;
-`;
-
-export const ResultButon = styled.a`
-  text-decoration: none;
-  padding: 14px 30px;
-  border-radius: 4px;
-  border: 2px solid ${Colors.primary};
-
-  p {
-    font-size: 18px;
-    font-weight: bold;
-    color: ${Colors.primary};
-  }
 `;

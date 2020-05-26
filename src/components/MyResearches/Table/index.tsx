@@ -12,7 +12,6 @@ import {
   EditLabel,
   DeleteLabel,
   Separator,
-  ResultButon,
 } from './styles';
 
 import edit from '../../../assets/edit_icon.png';
@@ -62,9 +61,6 @@ const Table: React.FC = () => (
           <DeleteLabel>Deletar</DeleteLabel>
         </a>
       </Actions>
-      <ResultButon href="/">
-        <p>Resultados</p>
-      </ResultButon>
     </TableRow>
     <Separator />
   </>
