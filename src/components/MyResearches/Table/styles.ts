@@ -2,21 +2,21 @@ import styled from 'styled-components';
 
 import Colors from '../../../utils/colors';
 
-interface statusProps {
+interface StatusProps {
   isActive: boolean;
 }
 
 export const CreatedAt = styled.div`
-  width: 145px;
+  flex: 1;
 `;
 
 export const Answers = styled.div`
-  width: 145px;
+  flex: 1;
 `;
 
 export const Status = styled.div`
   display: flex;
-  width: 125px;
+  flex: 1;
 `;
 
 export const Actions = styled.div`
@@ -31,89 +31,75 @@ export const Actions = styled.div`
   }
 
   img {
-    height: 22px;
-    width: 22px;
+    height: 1.375rem;
+    width: 1.375rem;
 
-    margin-right: 6px;
+    margin-right: 0.375rem;
   }
 
   div {
     width: 0.099rem;
-    height: 25px;
+    height: 1.5625rem;
     opacity: 0.12;
     background: ${Colors.black};
-    margin: 0 8px;
+    margin: 0 0.5rem;
   }
 `;
 
 export const Name = styled.div`
-  width: 300px;
-  min-width: 300px;
+  flex: 2;
 `;
 
 export const TableLabels = styled.div`
   display: flex;
   align-items: center;
-  height: 58px;
-  padding: 0 16px;
+  height: 3.625rem;
+  padding: 0 1rem;
   border-radius: 4px;
   background: ${Colors.secondary};
-
-  font-size: 16px;
+  justify-content: space-between;
+  font-size: 1rem;
   font-weight: 500;
   color: ${Colors.smokeWhite};
 `;
 
 export const TableRow = styled.div`
-  height: 100px;
-  padding: 0 16px;
+  height: 6.25rem;
+  padding: 0 1rem;
   display: flex;
   align-items: center;
-
+  justify-content: center;
   p {
-    font-size: 16px;
+    font-size: 1rem;
     color: ${Colors.black};
   }
 `;
 
-export const ColorStatus = styled.div<statusProps>`
-  height: 16px;
-  width: 16px;
+export const ColorStatus = styled.div<StatusProps>`
+  height: 1rem;
+  width: 1rem;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 0.375rem;
   background: ${(props) =>
     props.isActive ? Colors.positive : Colors.negative};
 `;
 
 export const EditLabel = styled.h3`
-  font-size: 16px;
+  font-size: 1rem;
   align-items: center;
   font-weight: bold;
   color: ${Colors.primary};
 `;
 
 export const DeleteLabel = styled.h3`
-  font-size: 16px;
+  font-size: 1rem;
   align-items: center;
   font-weight: bold;
   color: ${Colors.negative};
 `;
 
 export const Separator = styled.div`
-  height: 1px;
+  height: 0.0625rem;
   background: ${Colors.black};
   opacity: 0.12;
-`;
-
-export const ResultButon = styled.a`
-  text-decoration: none;
-  padding: 14px 30px;
-  border-radius: 4px;
-  border: 2px solid ${Colors.primary};
-
-  p {
-    font-size: 18px;
-    font-weight: bold;
-    color: ${Colors.primary};
-  }
 `;
