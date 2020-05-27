@@ -6781,7 +6781,6 @@ pnp-webpack-plugin@1.6.4:
 polished@^3.6.3:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/polished/-/polished-3.6.3.tgz#68f4fe7ffad46530733029b939dd12978200cb59"
-  integrity sha512-QJ0q0b6gX1+0OJtPMfgVJxV0vg5XTa4im+Rca989dAtmsd/fEky3X+0A+V+OUXq1nyiDGplJwqD853dTS0gkPg==
   dependencies:
     "@babel/runtime" "^7.9.2"
 
@@ -7715,6 +7714,13 @@ react-scripts@3.4.1:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.1.2"
+
+react-tooltip@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/react-tooltip/-/react-tooltip-4.2.6.tgz#a3d5f0d1b0c597c0852ba09c5e2af0019b7cfc70"
+  dependencies:
+    prop-types "^15.7.2"
+    uuid "^7.0.3"
 
 react@^16.13.1:
   version "16.13.1"
@@ -9172,6 +9178,10 @@ uuid@8.1.0:
 uuid@^3.0.1, uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+
+uuid@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
 
 uuidv4@^6.0.9:
   version "6.0.9"

@@ -6,12 +6,13 @@ import Layout from './layout';
 import Header from './components/Common/Header';
 
 import MyResearches from './pages/MyResearches';
+import SurveyBuilder from './pages/SurveyBuilder';
 
 const App: React.FC = () => (
   <>
     <Header />
     <Layout>
-      <MyResearches />
+      <SurveyBuilder />
     </Layout>
     <GlobalStyles />
   </>

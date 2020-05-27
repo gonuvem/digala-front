@@ -45,11 +45,24 @@ const LeftPanel: React.FC = () => {
       <div>
         <h5>Perguntas Básicas</h5>
         <QuestionsContainer>
-          <QuestionBox icon={FaSlidersH} />
-          <QuestionBox icon={FaSlidersH} />
-          <QuestionBox icon={FaSlidersH} />
-          <QuestionBox icon={FaSlidersH} />
-          <QuestionBox icon={FaSlidersH} />
+          <QuestionBox
+            name="Slider"
+            description="Lorem ipsum sit dolor amet"
+            image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
+            icon={FaSlidersH}
+          />
+          <QuestionBox
+            name="Dropdown"
+            description="Lorem ipsum sit dolor amet"
+            image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
+            icon={FaSlidersH}
+          />
+          <QuestionBox
+            name="Escolha Única"
+            description="Lorem ipsum sit dolor amet"
+            image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
+            icon={FaSlidersH}
+          />
         </QuestionsContainer>
       </div>
     </Container>
