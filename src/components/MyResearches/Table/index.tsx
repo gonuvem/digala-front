@@ -14,6 +14,8 @@ import {
   Separator,
 } from './styles';
 
+import { formtDate } from '../../../utils/dates';
+
 import edit from '../../../assets/edit_icon.png';
 import trash from '../../../assets/trash_icon.png';
 
@@ -23,7 +25,7 @@ interface TableProps {
       _id: string;
       numResponses: number;
       isActive: boolean;
-      createdAt: Date;
+      createdAt: string;
       config: {
         name: string;
       };
@@ -32,7 +34,38 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ forms }) => {
-  console.log(forms);
+  const listForms = (form: any) => (
+    <div key={form._id}>
+      <TableRow>
+        <Name>
+          <p>{form.config.name}</p>
+        </Name>
+        <CreatedAt>
+          <p>{formtDate(form.createdAt)}</p>
+        </CreatedAt>
+        <Answers>
+          <p>{form.numResponses} envios</p>
+        </Answers>
+        <Status>
+          <ColorStatus isActive={form.isActive} />
+          <p>{form.isActive ? 'Ativa' : 'Finalizado'}</p>
+        </Status>
+        <Actions>
+          <a href="/">
+            <img src={edit} alt="Editar" />
+            <EditLabel>Editar</EditLabel>
+          </a>
+          <div />
+          <a href="/">
+            <img src={trash} alt="Deletar" />
+            <DeleteLabel>Deletar</DeleteLabel>
+          </a>
+        </Actions>
+      </TableRow>
+      <Separator />
+    </div>
+  );
+
   return (
     <>
       <TableLabels>
@@ -52,37 +85,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <p>AÇÕES</p>
         </Actions>
       </TableLabels>
-      {forms.map((form) => (
-        <div key={form._id}>
-          <TableRow>
-            <Name>
-              <p>{form.config.name}</p>
-            </Name>
-            <CreatedAt>
-              <p>{form.createdAt}</p>
-            </CreatedAt>
-            <Answers>
-              <p>{form.numResponses} envios</p>
-            </Answers>
-            <Status>
-              <ColorStatus isActive={true} />
-              <p>Ativa</p>
-            </Status>
-            <Actions>
-              <a href="/">
-                <img src={edit} alt="Editar" />
-                <EditLabel>Editar</EditLabel>
-              </a>
-              <div />
-              <a href="/">
-                <img src={trash} alt="Deletar" />
-                <DeleteLabel>Deletar</DeleteLabel>
-              </a>
-            </Actions>
-          </TableRow>
-          <Separator />
-        </div>
-      ))}
+      {forms.map((form) => listForms(form))}
     </>
   );
 };
