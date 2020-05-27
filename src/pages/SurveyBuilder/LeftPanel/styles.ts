@@ -23,8 +23,9 @@ export const PanelTabLink = styled.span<PanelTabLinkProps>`
     color: ${shade(0.2, Colors.primary)};
   }
 
-  ${(props) => props.isActive
-    && css`
+  ${(props) =>
+    props.isActive &&
+    css`
       color: ${shade(0.2, Colors.primary)};
     `}
 `;
@@ -73,10 +74,4 @@ export const QuestionsContainer = styled.div`
   justify-content: space-between;
 
   margin-top: 1rem;
-
-  &:after {
-    content: '';
-    flex: auto;
-    max-width: 30%;
-  }
 `;
