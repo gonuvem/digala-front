@@ -20,21 +20,21 @@ import edit from '../../../assets/edit_icon.png';
 import trash from '../../../assets/trash_icon.png';
 
 interface TableProps {
-  forms: [
-    {
-      _id: string;
-      numResponses: number;
-      isActive: boolean;
-      createdAt: string;
-      config: {
-        name: string;
-      };
-    },
-  ];
+  forms: FormData[];
+}
+
+interface FormData {
+  _id: string;
+  numResponses: number;
+  isActive: boolean;
+  createdAt: string;
+  config: {
+    name: string;
+  };
 }
 
 const Table: React.FC<TableProps> = ({ forms }) => {
-  const listForms = (form: any) => (
+  const listForms = (form: FormData) => (
     <div key={form._id}>
       <TableRow>
         <Name>
