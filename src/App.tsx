@@ -14,7 +14,8 @@ const App: React.FC = () => (
   <ApolloProvider client={ApolloClient}>
     <Header />
     <Layout>
-      <SurveyBuilder />
+      {/* <SurveyBuilder /> */}
+      <MyResearches />
     </Layout>
     <GlobalStyles />
   </ApolloProvider>
