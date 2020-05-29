@@ -5,7 +5,7 @@ import Colors from '../../utils/colors';
 
 export const Container = styled.div`
   background: ${Colors.white};
-  height: 100vh;
+  height: 100%;
   padding: 1.875rem 2.5rem;
   border-radius: 4px;
 `;
