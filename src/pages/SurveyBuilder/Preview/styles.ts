@@ -34,8 +34,9 @@ export const NavLink = styled.a<NavLinkProps>`
     font-weight: 500;
   }
 
-  ${(props) => props.isActive
-    && css`
+  ${(props) =>
+    props.isActive &&
+    css`
       font-weight: 500;
       color: ${Colors.primary};
     `}
