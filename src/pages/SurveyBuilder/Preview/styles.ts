@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
+import { animated } from 'react-spring';
 
 import Colors from '../../../utils/colors';
 
 interface NavLinkProps {
   isActive?: boolean;
+}
+
+interface QuestionsPanelProps {
+  show: boolean;
 }
 
 export const Container = styled.div`
@@ -44,7 +49,7 @@ export const PanelArea = styled.div`
   }
 `;
 
-export const QuestionsPanel = styled.div`
+export const QuestionsPanel = styled(animated.div)<QuestionsPanelProps>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
   justify-items: center;

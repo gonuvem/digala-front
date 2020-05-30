@@ -13,7 +13,7 @@ interface PanelTabLinkProps {
 }
 
 export const Container = styled.div`
-  flex: 0.8;
+  flex: 1;
 
   h5 {
     font-size: 1.3rem;
