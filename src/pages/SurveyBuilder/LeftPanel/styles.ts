@@ -13,7 +13,7 @@ interface PanelTabLinkProps {
 }
 
 export const Container = styled.div`
-  flex: 1;
+  flex: 0.8;
 
   h5 {
     font-size: 1.3rem;
@@ -80,9 +80,10 @@ export const PanelTabLink = styled.span<PanelTabLinkProps>`
 `;
 
 export const QuestionsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  justify-items: center;
+  grid-gap: 0.5rem;
 
   margin-top: 1rem;
 `;
