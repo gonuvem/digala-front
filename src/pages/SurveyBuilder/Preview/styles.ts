@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { transparentize } from 'polished';
 
 import Colors from '../../../utils/colors';
 
@@ -41,6 +42,20 @@ export const PanelArea = styled.div`
       margin-top: 1rem;
     }
   }
+`;
+
+export const QuestionsPanel = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  justify-items: center;
+  grid-gap: 1.5rem;
+
+  max-width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem;
+
+  border: solid 1px ${transparentize(0.3, Colors.gray)};
+  border-radius: 4px;
 `;
 
 export const NavLink = styled.a<NavLinkProps>`

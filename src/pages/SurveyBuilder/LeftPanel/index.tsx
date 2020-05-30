@@ -8,7 +8,7 @@ import {
   PanelArea,
 } from './styles';
 
-import QuestionBox from '../../../components/QuestionBox';
+import QuestionBox from '../../../components/Common/QuestionBox';
 
 import getDistanceBetweenElements from '../../../utils/getDistanceBetweenElements';
 

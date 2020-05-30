@@ -1,7 +1,9 @@
 import React from 'react';
-import { FiPlusCircle } from 'react-icons/fi';
+import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 
-import { Container, PanelArea, NavLink } from './styles';
+import QuestionBox from '../../../components/Common/QuestionBox';
+
+import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
 
 const Preview: React.FC = () => (
   <Container>
@@ -17,6 +19,62 @@ const Preview: React.FC = () => (
         pergunta
         <FiPlusCircle size={24} />
       </button>
+      <QuestionsPanel>
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+        <QuestionBox
+          icon={FiSliders}
+          name="Texto Curto"
+          description="Lorem ipsum sit dolor amet"
+          image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+        />
+      </QuestionsPanel>
     </PanelArea>
   </Container>
 );

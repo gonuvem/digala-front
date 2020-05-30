@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
-import Colors from '../../utils/colors';
+import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
   cursor: pointer;
