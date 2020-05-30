@@ -17,6 +17,30 @@ export const PanelArea = styled.div`
 
   background-color: ${Colors.white};
   border-radius: 4px;
+
+  h1 {
+    font-weight: 500;
+    font-size: 2.2rem;
+  }
+
+  button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    padding: 1rem 4rem;
+    margin-top: 1.5rem;
+
+    background: transparent;
+    border: dashed 1px ${Colors.gray};
+    opacity: 0.9;
+    border-radius: 4px;
+
+    svg {
+      margin-top: 1rem;
+    }
+  }
 `;
 
 export const NavLink = styled.a<NavLinkProps>`
