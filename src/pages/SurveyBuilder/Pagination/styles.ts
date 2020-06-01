@@ -18,7 +18,7 @@ export const PanelArea = styled.div`
   color: ${Colors.smokeWhite};
   border-radius: 4px;
 
-  svg:first-child {
+  svg {
     color: ${Colors.black};
     background-color: ${Colors.white};
     padding: 0.5rem;
@@ -42,6 +42,7 @@ export const PanelArea = styled.div`
 
   svg:last-child {
     cursor: pointer;
+    color: ${Colors.smokeWhite};
     background-color: ${Colors.secondary};
     border-radius: 50%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
