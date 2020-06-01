@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Name,
@@ -12,6 +12,7 @@ import {
   EditLabel,
   DeleteLabel,
   Separator,
+  ModalDelete,
 } from './styles';
 
 import { formtDate } from '../../../utils/dates';
@@ -34,6 +35,8 @@ interface FormData {
 }
 
 const Table: React.FC<TableProps> = ({ forms }) => {
+  const [deleteResearch, setDeleteReasearch] = useState(true);
+
   const listForms = (form: FormData) => (
     <div key={form._id}>
       <TableRow>
@@ -86,6 +89,22 @@ const Table: React.FC<TableProps> = ({ forms }) => {
         </Actions>
       </TableLabels>
       {forms.map((form) => listForms(form))}
+      <ModalDelete
+        isOpen={deleteResearch}
+        // onAfterOpen={afterOpenModal}
+        // onRequestClose={closeModal}
+        // style={customStyles}
+        // contentLabel="Example Modal"
+      >
+        <div>
+          <img src={trash} alt="Deletar" />
+          <p>Voce deseja apagar esta pesquisa?</p>
+        </div>
+        <div>
+          <a>Apagar</a>
+          <a>Apagar</a>
+        </div>
+      </ModalDelete>
     </>
   );
 };

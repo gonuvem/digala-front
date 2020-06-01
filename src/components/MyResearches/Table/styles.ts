@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Modal from 'react-modal';
 
 import Colors from '../../../utils/colors';
 
@@ -102,4 +103,44 @@ export const Separator = styled.div`
   height: 0.0625rem;
   background: ${Colors.black};
   opacity: 0.12;
+`;
+
+export const ModalDelete = styled(Modal)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 10.125rem;
+  width: 30.125rem;
+  margin: 10rem 30rem;
+  align-self: center;
+  background: ${Colors.white};
+
+  div {
+    display: flex;
+    margin-bottom: 1.5rem;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    a {
+      padding: 0.8rem 1.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: solid 1.5px ${Colors.white};
+      border-color: ${Colors.negative};
+      border-radius: 4px;
+
+      color: ${Colors.negative};
+      font-weight: bold;
+    }
+  }
+
+  img {
+    height: 1.375rem;
+    width: 1.375rem;
+
+    margin-right: 0.475rem;
+  }
 `;

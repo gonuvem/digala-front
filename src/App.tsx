@@ -8,13 +8,13 @@ import Layout from './layout';
 import Header from './components/Common/Header';
 
 import MyResearches from './pages/MyResearches';
-import SurveyBuilder from './pages/SurveyBuilder';
+// import SurveyBuilder from './pages/SurveyBuilder';
 
 const App: React.FC = () => (
   <ApolloProvider client={ApolloClient}>
     <Header />
     <Layout>
-      <SurveyBuilder />
+      <MyResearches />
     </Layout>
     <GlobalStyles />
   </ApolloProvider>
