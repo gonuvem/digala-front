@@ -25,10 +25,11 @@ export const Actions = styled.div`
   align-items: center;
   flex: 1;
 
-  a {
-    text-decoration: none;
+  button {
+    border: none;
     display: flex;
     align-items: flex-end;
+    background: ${Colors.white};
   }
 
   img {
@@ -105,36 +106,23 @@ export const Separator = styled.div`
   opacity: 0.12;
 `;
 
-export const ModalDelete = styled(Modal)`
+export const ModalDelete = styled(Modal).attrs({
+  style: { overlay: { background: Colors.black } },
+})`
   display: flex;
+  padding: 1.8rem 0;
+  margin: 10rem 30rem;
+  background: ${Colors.white};
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 10.125rem;
-  width: 30.125rem;
-  margin: 10rem 30rem;
-  align-self: center;
-  background: ${Colors.white};
 
   div {
+    width: 20.8rem;
     display: flex;
-    margin-bottom: 1.5rem;
     justify-content: space-between;
     font-size: 1.2rem;
     font-weight: 500;
-
-    a {
-      padding: 0.8rem 1.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: solid 1.5px ${Colors.white};
-      border-color: ${Colors.negative};
-      border-radius: 4px;
-
-      color: ${Colors.negative};
-      font-weight: bold;
-    }
   }
 
   img {
@@ -142,5 +130,9 @@ export const ModalDelete = styled(Modal)`
     width: 1.375rem;
 
     margin-right: 0.475rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
   }
 `;

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import SolidButton from '../../Common/SolidButton';
+import GhostButton from '../../MyResearches/GhostButton';
+
 import {
   Name,
   CreatedAt,
@@ -35,7 +38,7 @@ interface FormData {
 }
 
 const Table: React.FC<TableProps> = ({ forms }) => {
-  const [deleteResearch, setDeleteReasearch] = useState(true);
+  const [deleteResearch, setDeleteReasearch] = useState(false);
 
   const listForms = (form: FormData) => (
     <div key={form._id}>
@@ -54,15 +57,15 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <p>{form.isActive ? 'Ativa' : 'Finalizado'}</p>
         </Status>
         <Actions>
-          <a href="/">
+          <button>
             <img src={edit} alt="Editar" />
             <EditLabel>Editar</EditLabel>
-          </a>
+          </button>
           <div />
-          <a href="/">
+          <button onClick={() => setDeleteReasearch(true)}>
             <img src={trash} alt="Deletar" />
             <DeleteLabel>Deletar</DeleteLabel>
-          </a>
+          </button>
         </Actions>
       </TableRow>
       <Separator />
@@ -91,18 +94,20 @@ const Table: React.FC<TableProps> = ({ forms }) => {
       {forms.map((form) => listForms(form))}
       <ModalDelete
         isOpen={deleteResearch}
-        // onAfterOpen={afterOpenModal}
-        // onRequestClose={closeModal}
-        // style={customStyles}
-        // contentLabel="Example Modal"
+        onRequestClose={() => setDeleteReasearch(false)}
       >
         <div>
           <img src={trash} alt="Deletar" />
-          <p>Voce deseja apagar esta pesquisa?</p>
+          <p>Você deseja apagar esta pesquisa?</p>
         </div>
         <div>
-          <a>Apagar</a>
-          <a>Apagar</a>
+          <GhostButton onClick={() => setDeleteReasearch(false)}>
+            Apagar
+          </GhostButton>
+          <SolidButton
+            text="Cancelar"
+            onClick={() => setDeleteReasearch(false)}
+          />
         </div>
       </ModalDelete>
     </>

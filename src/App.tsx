@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import GlobalStyles from './styles/global';
@@ -7,17 +8,18 @@ import ApolloClient from './services/apoloClient';
 import Layout from './layout';
 import Header from './components/Common/Header';
 
-import MyResearches from './pages/MyResearches';
-// import SurveyBuilder from './pages/SurveyBuilder';
+import Routes from './routes';
 
 const App: React.FC = () => (
-  <ApolloProvider client={ApolloClient}>
-    <Header />
-    <Layout>
-      <MyResearches />
-    </Layout>
-    <GlobalStyles />
-  </ApolloProvider>
+  <BrowserRouter>
+    <ApolloProvider client={ApolloClient}>
+      <Header />
+      <Layout>
+        <Routes />
+      </Layout>
+      <GlobalStyles />
+    </ApolloProvider>
+  </BrowserRouter>
 );
 
 export default App;
