@@ -110,7 +110,8 @@ export const ModalDelete = styled(Modal).attrs({
   style: { overlay: { background: Colors.black } },
 })`
   display: flex;
-  padding: 1.8rem 0;
+  width: 22rem;
+  padding: 1.8rem 1rem;
   margin: 10rem 30rem;
   background: ${Colors.white};
   justify-content: center;

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+
+import { DELETE_FORM } from '../../../services/requests/forms';
 
 import SolidButton from '../../Common/SolidButton';
 import GhostButton from '../../MyResearches/GhostButton';
@@ -39,6 +42,22 @@ interface FormData {
 
 const Table: React.FC<TableProps> = ({ forms }) => {
   const [deleteResearch, setDeleteReasearch] = useState(false);
+  const [idForm, setIdForm] = useState('');
+  const [formDelete, { loading: deleteLoading, error }] = useMutation(
+    DELETE_FORM,
+  );
+
+  function deleteForm() {
+    formDelete({ variables: { id: idForm } });
+    if (!error) {
+      setDeleteReasearch(false);
+    }
+  }
+
+  function showModal(id: string) {
+    setIdForm(id);
+    setDeleteReasearch(true);
+  }
 
   const listForms = (form: FormData) => (
     <div key={form._id}>
@@ -62,7 +81,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
             <EditLabel>Editar</EditLabel>
           </button>
           <div />
-          <button onClick={() => setDeleteReasearch(true)}>
+          <button onClick={() => showModal(form._id)}>
             <img src={trash} alt="Deletar" />
             <DeleteLabel>Deletar</DeleteLabel>
           </button>
@@ -101,9 +120,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <p>Você deseja apagar esta pesquisa?</p>
         </div>
         <div>
-          <GhostButton onClick={() => setDeleteReasearch(false)}>
-            Apagar
-          </GhostButton>
+          <GhostButton onClick={() => deleteForm()}>Apagar</GhostButton>
           <SolidButton
             text="Cancelar"
             onClick={() => setDeleteReasearch(false)}
