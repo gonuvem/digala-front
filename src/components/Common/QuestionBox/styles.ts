@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
-import Colors from '../../utils/colors';
+import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
   cursor: pointer;
@@ -16,7 +16,7 @@ export const Container = styled.div`
   min-width: 7rem;
   max-width: 7rem;
 
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 
   svg {
     align-self: center;
@@ -61,7 +61,7 @@ export const Container = styled.div`
 export const Tooltip = styled(ReactTooltip)`
   display: flex;
   flex-direction: column;
-  max-width: 7.5rem;
+  width: 7.5rem;
   border-radius: 4px;
   padding: 0.5rem 0.5rem 1rem 0.5rem;
   transition: opacity 0.3s;

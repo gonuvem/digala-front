@@ -1,16 +1,17 @@
 import React from 'react';
 
-import { Container, Col01 } from './styles';
+import { Container, Panels } from './styles';
 
+import SolidButton from '../../components/Common/SolidButton';
 import LeftPanel from './LeftPanel';
-
-// Col01 component is just for test, erase it.
+import Preview from './Preview';
 
 const SurveyBuilder: React.FC = () => (
   <Container>
-    <Col01>
+    <Panels>
       <LeftPanel />
-    </Col01>
+      <Preview />
+    </Panels>
   </Container>
 );
 

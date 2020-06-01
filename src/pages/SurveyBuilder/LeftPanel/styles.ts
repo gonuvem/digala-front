@@ -12,27 +12,20 @@ interface PanelTabLinkProps {
   isActive?: boolean;
 }
 
-export const PanelTabLink = styled.span<PanelTabLinkProps>`
-  cursor: pointer;
-  position: relative;
-  font-weight: 500;
-  text-transform: uppercase;
-  transition: color 0.3s;
+export const Container = styled.div`
+  flex: 1;
 
-  &:hover {
-    color: ${shade(0.2, Colors.primary)};
+  h5 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    flex: 1;
   }
-
-  ${(props) =>
-    props.isActive &&
-    css`
-      color: ${shade(0.2, Colors.primary)};
-    `}
 `;
 
-export const Container = styled.div<ContainerProps>`
+export const PanelArea = styled.div<ContainerProps>`
   background-color: ${Colors.white};
   border-radius: 4px;
+  margin-top: 1.5rem;
 
   nav {
     display: flex;
@@ -68,10 +61,29 @@ export const Container = styled.div<ContainerProps>`
   }
 `;
 
+export const PanelTabLink = styled.span<PanelTabLinkProps>`
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 0.3s;
+
+  &:hover {
+    color: ${shade(0.2, Colors.primary)};
+  }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      color: ${shade(0.2, Colors.primary)};
+    `}
+`;
+
 export const QuestionsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  justify-items: flex-start;
+  grid-gap: 0.5rem;
 
   margin-top: 1rem;
 `;

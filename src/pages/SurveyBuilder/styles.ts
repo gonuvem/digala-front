@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  margin-top: 1.5rem;
-`;
+export const Container = styled.div``;
 
-// Erase this line
-export const Col01 = styled.div`
-  max-width: 27.25rem;
+export const Panels = styled.div`
+  display: flex;
+  align-items: baseline;
+  margin-top: 1.5rem;
+
+  & + div {
+    margin-left: 2.5rem;
+  }
 `;
