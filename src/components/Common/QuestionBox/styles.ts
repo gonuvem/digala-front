@@ -16,7 +16,7 @@ export const Container = styled.div`
   min-width: 7rem;
   max-width: 7rem;
 
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 
   svg {
     align-self: center;
