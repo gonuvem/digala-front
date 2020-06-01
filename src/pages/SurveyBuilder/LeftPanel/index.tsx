@@ -70,24 +70,6 @@ const LeftPanel: React.FC = () => {
               image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
               icon={FaSlidersH}
             />
-            <QuestionBox
-              name="Slider"
-              description="Lorem ipsum sit dolor amet"
-              image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
-              icon={FaSlidersH}
-            />
-            <QuestionBox
-              name="Dropdown"
-              description="Lorem ipsum sit dolor amet"
-              image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
-              icon={FaSlidersH}
-            />
-            <QuestionBox
-              name="Escolha Única"
-              description="Lorem ipsum sit dolor amet"
-              image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
-              icon={FaSlidersH}
-            />
           </QuestionsContainer>
         </div>
       </PanelArea>
