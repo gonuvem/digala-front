@@ -29,19 +29,21 @@ const SignIn: React.FC = () => (
       <RightSide>
         <img src={logo} alt="DigaLa logo" />
         <span>Entre no Diga Lá</span>
-        <IconTextField
-          icon={FiMail}
-          name="email"
-          id="email-field"
-          placeholder="Coloque seu e-mail"
-        />
-        <IconTextField
-          icon={FiLock}
-          name="password"
-          id="password-field"
-          placeholder="Coloque sua senha"
-        />
-        <SolidButton text="Entrar" />
+        <form action="">
+          <IconTextField
+            icon={FiMail}
+            name="email"
+            id="email-field"
+            placeholder="Coloque seu e-mail"
+          />
+          <IconTextField
+            icon={FiLock}
+            name="password"
+            id="password-field"
+            placeholder="Coloque sua senha"
+          />
+          <SolidButton text="Entrar" />
+        </form>
         <Link to="/forgot">Esqueceu sua senha/usuário?</Link>
       </RightSide>
     </Card>

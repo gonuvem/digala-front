@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 import Colors from '../../utils/colors';
 
@@ -13,6 +14,15 @@ export const Card = styled.div`
   display: flex;
 
   background-color: ${Colors.white};
+  box-shadow: 0 0px 5.5px -47px rgba(0, 0, 0, 0.051),
+    0 0px 12.3px -47px rgba(0, 0, 0, 0.063),
+    0 0px 20.9px -47px rgba(0, 0, 0, 0.069),
+    0 0px 32.2px -47px rgba(0, 0, 0, 0.073),
+    0 0px 47.7px -47px rgba(0, 0, 0, 0.077),
+    0 0px 70.1px -47px rgba(0, 0, 0, 0.081),
+    0 0px 105.1px -47px rgba(0, 0, 0, 0.088),
+    0 0px 167.5px -47px rgba(0, 0, 0, 0.099),
+    0 0px 314px -47px rgba(0, 0, 0, 0.13);
 `;
 
 export const LeftSide = styled.div`
@@ -59,6 +69,8 @@ export const RightSide = styled.div`
   flex-direction: column;
   flex: 2;
 
+  padding: 2.5rem 5rem;
+
   span {
     font-weight: 500;
     display: inline-block;
@@ -68,5 +80,32 @@ export const RightSide = styled.div`
 
   img {
     max-width: 120px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 2.5rem;
+
+    div + div {
+      margin-top: 1.5rem;
+    }
+
+    button {
+      margin-top: 2rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: ${Colors.primary};
+    margin-top: 1.5rem;
+
+    &:hover {
+      color: ${shade(0.3, Colors.primary)};
+    }
   }
 `;
