@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useTransition } from 'react-spring';
 import { Link } from 'react-router-dom';
 import { FiMail, FiPhone, FiKey, FiLock } from 'react-icons/fi';
 
@@ -57,7 +58,7 @@ const Forgot: React.FC = () => {
     setCodeSended(true);
   }, []);
 
-  const handleRenewPassword = useCallback(() => {}, []);
+  const handleRenewPassword = useCallback(() => null, []);
 
   return (
     <Container>
