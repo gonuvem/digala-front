@@ -1,5 +1,6 @@
 export default {
   black: '#333333',
+  blackOpacity: 'rgba(51, 51, 51, 0.5)',
   white: '#ffffff',
   gray: '#707070',
   smokeWhite: '#F4F4F4',

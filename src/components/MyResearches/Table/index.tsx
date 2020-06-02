@@ -1,4 +1,10 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+
+import { DELETE_FORM } from '../../../services/requests/forms';
+
+import SolidButton from '../../Common/SolidButton';
+import GhostButton from '../../MyResearches/GhostButton';
 
 import {
   Name,
@@ -12,6 +18,7 @@ import {
   EditLabel,
   DeleteLabel,
   Separator,
+  ModalDelete,
 } from './styles';
 
 import { formtDate } from '../../../utils/dates';
@@ -34,6 +41,24 @@ interface FormData {
 }
 
 const Table: React.FC<TableProps> = ({ forms }) => {
+  const [deleteResearch, setDeleteReasearch] = useState(false);
+  const [idForm, setIdForm] = useState('');
+  const [formDelete, { loading: deleteLoading, error }] = useMutation(
+    DELETE_FORM,
+  );
+
+  const deleteForm = useCallback(() => {
+    formDelete({ variables: { id: idForm } });
+    if (!error) {
+      setDeleteReasearch(false);
+    }
+  }, [error, formDelete, idForm]);
+
+  const showModal = useCallback((id: string) => {
+    setIdForm(id);
+    setDeleteReasearch(true);
+  }, []);
+
   const listForms = (form: FormData) => (
     <div key={form._id}>
       <TableRow>
@@ -51,15 +76,15 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <p>{form.isActive ? 'Ativa' : 'Finalizado'}</p>
         </Status>
         <Actions>
-          <a href="/">
+          <button>
             <img src={edit} alt="Editar" />
             <EditLabel>Editar</EditLabel>
-          </a>
+          </button>
           <div />
-          <a href="/">
+          <button onClick={() => showModal(form._id)}>
             <img src={trash} alt="Deletar" />
             <DeleteLabel>Deletar</DeleteLabel>
-          </a>
+          </button>
         </Actions>
       </TableRow>
       <Separator />
@@ -86,6 +111,23 @@ const Table: React.FC<TableProps> = ({ forms }) => {
         </Actions>
       </TableLabels>
       {forms.map((form) => listForms(form))}
+
+      <ModalDelete
+        isOpen={deleteResearch}
+        onRequestClose={() => setDeleteReasearch(false)}
+      >
+        <div>
+          <img src={trash} alt="Deletar" />
+          <p>Você deseja apagar esta pesquisa?</p>
+        </div>
+        <div>
+          <GhostButton onClick={() => deleteForm()}>Apagar</GhostButton>
+          <SolidButton
+            text="Cancelar"
+            onClick={() => setDeleteReasearch(false)}
+          />
+        </div>
+      </ModalDelete>
     </>
   );
 };

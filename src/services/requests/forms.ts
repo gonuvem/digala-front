@@ -18,3 +18,13 @@ export const LIST_OWN_FORMS = gql`
     }
   }
 `;
+
+export const DELETE_FORM = gql`
+  mutation($id: ID!) {
+    deleteOwnForm(id: $id) {
+      error {
+        message
+      }
+    }
+  }
+`;

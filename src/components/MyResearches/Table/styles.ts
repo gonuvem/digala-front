@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Modal from 'react-modal';
 
 import Colors from '../../../utils/colors';
 
@@ -24,10 +25,11 @@ export const Actions = styled.div`
   align-items: center;
   flex: 1;
 
-  a {
-    text-decoration: none;
+  button {
+    border: none;
     display: flex;
     align-items: flex-end;
+    background: ${Colors.white};
   }
 
   img {
@@ -102,4 +104,37 @@ export const Separator = styled.div`
   height: 0.0625rem;
   background: ${Colors.black};
   opacity: 0.12;
+`;
+
+export const ModalDelete = styled(Modal).attrs({
+  style: { overlay: { background: Colors.blackOpacity } },
+})`
+  display: flex;
+  position: static;
+  width: 22rem;
+  padding: 1.8rem 1rem;
+  margin: 2rem auto;
+  background: ${Colors.white};
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  div {
+    width: 20.8rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  img {
+    height: 1.375rem;
+    width: 1.375rem;
+
+    margin-right: 0.475rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
+  }
 `;
