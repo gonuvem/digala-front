@@ -8,7 +8,8 @@ import logo from '../../../assets/logo.png';
 const Header: React.FC = () => {
   const location = useLocation();
 
-  if (location.pathname === '/') return null;
+  if (location.pathname === '/' || location.pathname.includes('forgot'))
+    return null;
 
   return (
     <Container>
