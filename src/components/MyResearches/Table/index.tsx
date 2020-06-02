@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 
 import { DELETE_FORM } from '../../../services/requests/forms';
@@ -47,17 +47,17 @@ const Table: React.FC<TableProps> = ({ forms }) => {
     DELETE_FORM,
   );
 
-  function deleteForm() {
+  const deleteForm = useCallback(() => {
     formDelete({ variables: { id: idForm } });
     if (!error) {
       setDeleteReasearch(false);
     }
-  }
+  }, [error, formDelete, idForm]);
 
-  function showModal(id: string) {
+  const showModal = useCallback((id: string) => {
     setIdForm(id);
     setDeleteReasearch(true);
-  }
+  }, []);
 
   const listForms = (form: FormData) => (
     <div key={form._id}>
@@ -111,6 +111,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
         </Actions>
       </TableLabels>
       {forms.map((form) => listForms(form))}
+
       <ModalDelete
         isOpen={deleteResearch}
         onRequestClose={() => setDeleteReasearch(false)}

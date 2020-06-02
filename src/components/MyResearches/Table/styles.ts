@@ -107,12 +107,13 @@ export const Separator = styled.div`
 `;
 
 export const ModalDelete = styled(Modal).attrs({
-  style: { overlay: { background: Colors.black } },
+  style: { overlay: { background: Colors.blackOpacity } },
 })`
   display: flex;
+  position: static;
   width: 22rem;
   padding: 1.8rem 1rem;
-  margin: 10rem 30rem;
+  margin: 2rem auto;
   background: ${Colors.white};
   justify-content: center;
   align-items: center;
