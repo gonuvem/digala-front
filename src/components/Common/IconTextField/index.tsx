@@ -54,11 +54,11 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
       <input
         ref={inputRef}
         name={name}
-        type="text"
         placeholder={placeholder}
         id={id}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
+        {...rest}
       />
     </Container>
   );
