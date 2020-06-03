@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { FiHelpCircle } from 'react-icons/fi';
 import { Container, CardColor, DashedContainer, Section } from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
@@ -37,7 +37,10 @@ const ResearchStyles: React.FC = () => {
         <ShortTextField label="Texto no header" name="" id="" />
       </Section>
       <Section>
-        <p>Logo no header</p>
+        <div>
+          <p>Logo no header</p>
+          <FiHelpCircle />
+        </div>
         <SwitchToggle />
       </Section>
       <Section>

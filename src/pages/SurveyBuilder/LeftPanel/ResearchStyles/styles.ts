@@ -52,4 +52,11 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+
+  svg {
+    height: 1.2rem;
+    width: 1.2rem;
+    margin-left: 0.4rem;
+    color: ${Colors.negative};
+  }
 `;
