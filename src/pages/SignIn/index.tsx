@@ -1,6 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
+import * as Yup from 'yup';
 import { FiMail, FiPhone, FiLock } from 'react-icons/fi';
 
 import { Container, Card, LeftSide, RightSide } from './styles';
@@ -11,9 +13,21 @@ import SolidButton from '../../components/Common/SolidButton';
 import illustration from '../../assets/signin_illustration.png';
 import logo from '../../assets/logo.png';
 
+import SignInSchema from '../../schemas/signIn';
+import getValidationErrors from '../../utils/getValidationErrors';
+
 const SignIn: React.FC = () => {
-  const handleSignIn = useCallback((data) => {
-    console.log('Data >> ', data);
+  const formRef = useRef<FormHandles>(null);
+
+  const handleSignIn = useCallback(async (data) => {
+    try {
+      await SignInSchema.validate(data, { abortEarly: false });
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
+        formRef.current?.setErrors(errors);
+      }
+    }
   }, []);
 
   return (
@@ -35,7 +49,7 @@ const SignIn: React.FC = () => {
         <RightSide>
           <img src={logo} alt="DigaLa logo" />
           <span>Entre no Diga Lá</span>
-          <Form onSubmit={handleSignIn}>
+          <Form ref={formRef} onSubmit={handleSignIn}>
             <IconTextField
               icon={FiMail}
               name="email"

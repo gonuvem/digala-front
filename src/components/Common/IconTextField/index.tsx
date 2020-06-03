@@ -49,18 +49,21 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <Container hasFocus={hasFocus}>
-      <Icon size={24} />
-      <input
-        ref={inputRef}
-        name={name}
-        placeholder={placeholder}
-        id={id}
-        onFocus={handleOnFocus}
-        onBlur={handleOnBlur}
-        {...rest}
-      />
-    </Container>
+    <>
+      {error && error}
+      <Container hasFocus={hasFocus}>
+        <Icon size={24} />
+        <input
+          ref={inputRef}
+          name={name}
+          placeholder={placeholder}
+          id={id}
+          onFocus={handleOnFocus}
+          onBlur={handleOnBlur}
+          {...rest}
+        />
+      </Container>
+    </>
   );
 };
 
