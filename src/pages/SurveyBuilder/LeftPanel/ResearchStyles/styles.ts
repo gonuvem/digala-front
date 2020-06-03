@@ -28,12 +28,13 @@ export const Container = styled.div`
   }
 `;
 
-export const CardColor = styled.div<CardColorProps>`
+export const CardColor = styled.button<CardColorProps>`
   height: 3.25rem;
   width: 3.25rem;
   border-radius: 4px;
   margin: 0 0.5rem 0.5rem 0;
   background: ${(props) => props.color};
+  border: none;
 `;
 
 export const DashedContainer = styled.div`

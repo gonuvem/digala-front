@@ -20,9 +20,7 @@ const ResearchStyles: React.FC = () => {
         <p>Fundo da pesquisa</p>
         <div>
           {colors.map((color) => (
-            <a>
-              <CardColor color={color.value} />
-            </a>
+            <CardColor color={color.value} />
           ))}
         </div>
       </Section>
@@ -39,7 +37,6 @@ const ResearchStyles: React.FC = () => {
       </Section>
       <Section>
         <p>Logo no header</p>
-        <input />
       </Section>
       <Section>
         <p>Fundo no header</p>
