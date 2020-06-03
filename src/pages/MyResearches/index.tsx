@@ -23,7 +23,9 @@ const MyReasearches: React.FC = () => {
     <Container>
       <Header>
         <h1>Minhas pesquisas</h1>
-        <SolidButton text="Nova Pesquisa" icon={FaPlus} />
+        <a href="/new_survey">
+          <SolidButton text="Nova Pesquisa" icon={FaPlus} />
+        </a>
       </Header>
       <Table forms={forms} />
     </Container>
