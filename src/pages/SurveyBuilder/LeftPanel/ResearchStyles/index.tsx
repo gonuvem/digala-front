@@ -1,14 +1,9 @@
 import React from 'react';
 
-import {
-  Input,
-  Container,
-  CardColor,
-  DashedContainer,
-  Section,
-} from './styles';
+import { Container, CardColor, DashedContainer, Section } from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
+import ShortTextField from '../../../../components/Common/ShortTextField';
 import uploadIcon from '../../../../assets/uploud_icon.png';
 
 const colors = [
@@ -39,8 +34,7 @@ const ResearchStyles: React.FC = () => {
         </DashedContainer>
       </Section>
       <Section>
-        <p>Texto no header</p>
-        <Input />
+        <ShortTextField label="Texto no header" name="" id="" />
       </Section>
       <Section>
         <p>Logo no header</p>
@@ -55,8 +49,7 @@ const ResearchStyles: React.FC = () => {
         </div>
       </Section>
       <Section>
-        <p>Texto no rodapé</p>
-        <Input />
+        <ShortTextField label="Texto no rodapé" name="" id="" />
       </Section>
       <Section>
         <p>Fundo da pesquisa</p>

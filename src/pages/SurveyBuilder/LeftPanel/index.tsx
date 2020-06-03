@@ -26,7 +26,7 @@ const LeftPanel: React.FC = () => {
     [activePanelNumber],
   );
 
-  function renderSection() {
+  const renderSection = () => {
     switch (activePanelNumber) {
       case 0:
         return <ResearchTypes />;
@@ -34,8 +34,10 @@ const LeftPanel: React.FC = () => {
         return <ResearchStyles />;
       case 2:
         return <ResearchStyles />;
+      default:
+        return <ResearchTypes />;
     }
-  }
+  };
 
   return (
     <Container>

@@ -52,14 +52,4 @@ export const Section = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  input {
-    opacity: 0.5;
-  }
-`;
-
-export const Input = styled.input`
-  border-radius: 4px;
-  border: solid 1px ${Colors.black};
-  padding: 0.8rem;
 `;
