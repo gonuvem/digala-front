@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Form } from '@unform/web';
 import { FiMail, FiPhone, FiLock } from 'react-icons/fi';
 
 import { Container, Card, LeftSide, RightSide } from './styles';
@@ -29,7 +30,7 @@ const SignIn: React.FC = () => (
       <RightSide>
         <img src={logo} alt="DigaLa logo" />
         <span>Entre no Diga Lá</span>
-        <form action="">
+        <Form onSubmit={() => null}>
           <IconTextField
             icon={FiMail}
             name="email"
@@ -43,7 +44,7 @@ const SignIn: React.FC = () => (
             placeholder="Coloque sua senha"
           />
           <SolidButton text="Entrar" />
-        </form>
+        </Form>
         <Link to="/forgot">Esqueceu sua senha/usuário?</Link>
       </RightSide>
     </Card>

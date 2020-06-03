@@ -1,9 +1,16 @@
-import React, { useState, useCallback } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useEffect,
+  InputHTMLAttributes,
+} from 'react';
 import { IconType } from 'react-icons';
+import { useField } from '@unform/core';
 
 import { Container } from './styles';
 
-interface IconTextFieldProps {
+interface IconTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   readOnly?: boolean;
   placeholder?: string;
   description?: string;
@@ -19,8 +26,11 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   description,
   name,
   id,
+  ...rest
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
+  const { fieldName, registerField, error, defaultValue } = useField(name);
 
   const handleOnFocus = useCallback(() => {
     setHasFocus(true);
@@ -30,10 +40,19 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
     setHasFocus(false);
   }, []);
 
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
+
   return (
     <Container hasFocus={hasFocus}>
       <Icon size={24} />
       <input
+        ref={inputRef}
         name={name}
         type="text"
         placeholder={placeholder}
