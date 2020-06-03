@@ -1,6 +1,12 @@
 import React from 'react';
 
-import { Container, CardColor, DashedContainer, Section } from './styles';
+import {
+  Input,
+  Container,
+  CardColor,
+  DashedContainer,
+  Section,
+} from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import uploadIcon from '../../../../assets/uploud_icon.png';
@@ -34,7 +40,7 @@ const ResearchStyles: React.FC = () => {
       </Section>
       <Section>
         <p>Texto no header</p>
-        <input />
+        <Input />
       </Section>
       <Section>
         <p>Logo no header</p>
@@ -50,7 +56,7 @@ const ResearchStyles: React.FC = () => {
       </Section>
       <Section>
         <p>Texto no rodapé</p>
-        <input />
+        <Input />
       </Section>
       <Section>
         <p>Fundo da pesquisa</p>

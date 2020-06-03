@@ -18,13 +18,6 @@ export const Container = styled.div`
       display: flex;
       flex-wrap: wrap;
     }
-
-    input {
-      width: 100%;
-      border-radius: 4px;
-      border: solid 1px ${Colors.black};
-      padding: 0.8rem 0 0.8rem 0;
-    }
   }
 `;
 
@@ -56,8 +49,17 @@ export const DashedContainer = styled.div`
 
 export const Section = styled.div`
   margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
   input {
     opacity: 0.5;
   }
+`;
+
+export const Input = styled.input`
+  border-radius: 4px;
+  border: solid 1px ${Colors.black};
+  padding: 0.8rem;
 `;

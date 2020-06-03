@@ -12,7 +12,7 @@ export const CheckBoxLabel = styled.label`
   width: 70px;
   height: 32px;
   border-radius: 15px;
-  background: #bebebe;
+  background: ${Colors.disabledGray};
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -23,7 +23,7 @@ export const CheckBoxLabel = styled.label`
     width: 23px;
     height: 23px;
     margin-left: 7px;
-    background: #ffffff;
+    background: ${Colors.white};
     box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
   }
@@ -34,6 +34,9 @@ export const CheckBox = styled.input`
   border-radius: 15px;
   width: 42px;
   height: 26px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   &:checked + ${CheckBoxLabel} {
     background: ${Colors.primary};
     /* justify-content: flex-end; */
