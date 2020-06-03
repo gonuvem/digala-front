@@ -56,4 +56,8 @@ export const DashedContainer = styled.div`
 
 export const Section = styled.div`
   margin-bottom: 1.2rem;
+
+  input {
+    opacity: 0.5;
+  }
 `;

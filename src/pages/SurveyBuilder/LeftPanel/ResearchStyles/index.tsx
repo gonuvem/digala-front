@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Container, CardColor, DashedContainer, Section } from './styles';
 
+import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import uploadIcon from '../../../../assets/uploud_icon.png';
 
 const colors = [
@@ -37,6 +38,7 @@ const ResearchStyles: React.FC = () => {
       </Section>
       <Section>
         <p>Logo no header</p>
+        <SwitchToggle />
       </Section>
       <Section>
         <p>Fundo no header</p>
