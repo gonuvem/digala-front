@@ -4,7 +4,7 @@ import { IconType } from 'react-icons';
 import { Container } from './styles';
 
 interface SolidButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
+  text: string | React.ReactNode;
   icon?: IconType;
 }
 

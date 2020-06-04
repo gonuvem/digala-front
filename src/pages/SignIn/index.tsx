@@ -10,6 +10,7 @@ import { Container, Card, LeftSide, RightSide } from './styles';
 
 import IconTextField from '../../components/Common/IconTextField';
 import SolidButton from '../../components/Common/SolidButton';
+import LoadingSpinner from '../../components/Common/LoadingSpinner';
 
 import illustration from '../../assets/signin_illustration.png';
 import logo from '../../assets/logo.png';
@@ -39,13 +40,13 @@ const SignIn: React.FC = () => {
       if (response.data.login.error) {
         throw new Error(response.data.login.error.message);
       }
+
+      localStorage.setItem('token', response.data.login.token);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
         formRef.current?.setErrors(errors);
       }
-
-      console.log('Error >> ', err);
     }
   }, []);
 
@@ -82,7 +83,9 @@ const SignIn: React.FC = () => {
               placeholder="Coloque sua senha"
               type="password"
             />
-            <SolidButton text="Entrar" />
+            <SolidButton
+              text={!signInLoading ? 'Entrar' : <LoadingSpinner />}
+            />
           </Form>
           <Link to="/forgot">Esqueceu sua senha/usuário?</Link>
         </RightSide>
