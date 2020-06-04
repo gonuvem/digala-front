@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import { IconType } from 'react-icons';
 import { useField } from '@unform/core';
+import { useTransition, animated } from 'react-spring';
 
 import { Container } from './styles';
 
@@ -31,6 +32,11 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const { fieldName, registerField, error, defaultValue } = useField(name);
+  const transitions = useTransition(!!error, null, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   const handleOnFocus = useCallback(() => {
     setHasFocus(true);
@@ -49,9 +55,16 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <>
-      {error && error}
-      <Container hasFocus={hasFocus}>
+    <Container hasFocus={hasFocus} isInvalid={!!error}>
+      {transitions.map(
+        ({ item, key, props }) =>
+          item && (
+            <animated.span key={key} style={props}>
+              {error}
+            </animated.span>
+          ),
+      )}
+      <div>
         <Icon size={24} />
         <input
           ref={inputRef}
@@ -62,8 +75,8 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
           onBlur={handleOnBlur}
           {...rest}
         />
-      </Container>
-    </>
+      </div>
+    </Container>
   );
 };
 
