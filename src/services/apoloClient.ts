@@ -10,12 +10,11 @@ const link = new HttpLink({
 });
 
 const authLink = setContext(async (_, { headers }) => {
-  // const token = await getToken();
+  const token = localStorage.getItem('token');
   return {
     headers: {
       ...headers,
-      // authorization: token ? `Bearer ${token}` : '',
-      authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWNiZDNhZGY3MGE3YTA0Y2FjMzI5YTIiLCJpYXQiOjE1OTA1MjUwMjMsImV4cCI6MTU5MTEyOTgyMywiaXNzIjoiY29udGF0b0Bnb251dmVtLmNvbSJ9.87P0Qeif0F_COluQQ749qdpHtgnmKzAnJ_bHJ5NjS74`,
+      authorization: token ? `Bearer ${token}` : '',
     },
   };
 });

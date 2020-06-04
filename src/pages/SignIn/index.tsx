@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -26,10 +26,8 @@ interface SignInFormData {
 
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const [
-    signIn,
-    { data: signInData, loading: signInLoading, error },
-  ] = useMutation(SIGN_IN);
+  const history = useHistory();
+  const [signIn, { loading: signInLoading, client }] = useMutation(SIGN_IN);
 
   const handleSignIn = useCallback(async (data: SignInFormData) => {
     try {
@@ -41,7 +39,9 @@ const SignIn: React.FC = () => {
         throw new Error(response.data.login.error.message);
       }
 
+      client?.resetStore();
       localStorage.setItem('token', response.data.login.token);
+      history.push('/my_researches');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
