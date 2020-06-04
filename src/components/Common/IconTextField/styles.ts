@@ -66,6 +66,6 @@ export const Container = styled.div<ContainerProps>`
   span {
     color: ${Colors.negative};
     margin-bottom: 0.5rem;
-    margin-top: 0rem;
+    margin-top: 0rem !important;
   }
 `;
