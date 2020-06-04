@@ -31,6 +31,8 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+
   const { fieldName, registerField, error, defaultValue } = useField(name);
   const transitions = useTransition(!!error, null, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
@@ -44,6 +46,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
 
   const handleOnBlur = useCallback(() => {
     setHasFocus(false);
+    setIsFilled(!!inputRef.current?.value);
   }, []);
 
   useEffect(() => {
@@ -55,7 +58,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <Container hasFocus={hasFocus} isInvalid={!!error}>
+    <Container hasFocus={hasFocus} isInvalid={!!error} isFilled={isFilled}>
       {transitions.map(
         ({ item, key, props }) =>
           item && (

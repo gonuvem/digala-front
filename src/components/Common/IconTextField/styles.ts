@@ -5,6 +5,7 @@ import Colors from '../../../utils/colors';
 interface ContainerProps {
   hasFocus: boolean;
   isInvalid: boolean;
+  isFilled: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -40,7 +41,7 @@ export const Container = styled.div<ContainerProps>`
     }
 
     ${(props) =>
-      props.hasFocus &&
+      (props.hasFocus || props.isFilled) &&
       css`
         border-color: ${Colors.primary};
 
