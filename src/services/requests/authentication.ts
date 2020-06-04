@@ -25,3 +25,11 @@ export const FORGOT_PASSWORD = gql`
     }
   }
 `;
+
+export const RENEW_PASSWORD = gql`
+  mutation($email: String!, $password: String!, $code: String!) {
+    renewPassword(email: $email, password: $password, code: $code) {
+      ${errorFragment}
+    }
+  }
+`;

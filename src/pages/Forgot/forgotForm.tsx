@@ -37,7 +37,7 @@ const ForgotForm: React.FC<ForgotForm> = ({ onFinish }) => {
         throw new Error(response.data.forgotPassword.error.internalCode);
       }
 
-      onFinish();
+      onFinish(data.email);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMail, FiPhone } from 'react-icons/fi';
 
@@ -12,6 +12,12 @@ import logo from '../../assets/logo.png';
 
 const Forgot: React.FC = () => {
   const [codeSended, setCodeSended] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+
+  const handleFinishSendCode = useCallback((email) => {
+    setUserEmail(email);
+    setCodeSended(true);
+  }, []);
 
   return (
     <Container>
@@ -35,11 +41,11 @@ const Forgot: React.FC = () => {
             Coloque seu e-mail abaixo para receber o código de recuperação.
           </span>
           {!codeSended ? (
-            <ForgotForm onFinish={() => setCodeSended(true)} />
+            <ForgotForm onFinish={handleFinishSendCode} />
           ) : (
-            <RenewForm />
+            <RenewForm userEmail={userEmail} />
           )}
-          <Link to="/forgot">Voltar para login</Link>
+          <Link to="/">Voltar para login</Link>
         </RightSide>
       </Card>
     </Container>
