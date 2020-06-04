@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import GlobalStyles from './styles/global';
 
@@ -19,6 +21,7 @@ const App: React.FC = () => (
       </Layout>
       <GlobalStyles />
     </ApolloProvider>
+    <ToastContainer />
   </BrowserRouter>
 );
 

@@ -5,6 +5,7 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FiMail, FiPhone, FiLock } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { Container, Card, LeftSide, RightSide } from './styles';
 
@@ -18,6 +19,7 @@ import logo from '../../assets/logo.png';
 import { SIGN_IN } from '../../services/requests/authentication';
 import SignInSchema from '../../schemas/signIn';
 import getValidationErrors from '../../utils/getValidationErrors';
+import signInErrors from '../../errors/signInErrors';
 
 interface SignInFormData {
   email: string;
@@ -36,7 +38,7 @@ const SignIn: React.FC = () => {
       const response = await signIn({ variables: { ...data } });
 
       if (response.data.login.error) {
-        throw new Error(response.data.login.error.message);
+        throw new Error(response.data.login.error.internalCode);
       }
 
       client?.resetStore();
@@ -46,7 +48,11 @@ const SignIn: React.FC = () => {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
         formRef.current?.setErrors(errors);
+        return;
       }
+
+      const internalCode = err.message as string;
+      toast.error(signInErrors[internalCode]);
     }
   }, []);
 
