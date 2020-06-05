@@ -28,3 +28,58 @@ export const DELETE_FORM = gql`
     }
   }
 `;
+
+export const CREATE_OWN_FORM = gql`
+  mutation(
+    $isActive: Boolean
+    $name: String!
+    $description: String
+    $beginDate: Date
+    $endDate: Date
+    $hasLimitedResponses: Boolean
+    $maxResponses: Int
+    $isTotemMode: Boolean
+    $canDisplayProgressBar: Boolean
+    $progressBarType: String
+    $canAllowMultipleSubmissions: Boolean
+    $background: String
+    $logo: String
+    $headerText: String
+    $hasLogoInHeader: Boolean
+    $headerBackground: String
+    $footerText: String
+    $footerBackground: String
+  ) {
+    createOwnForm(
+      input: {
+        isActive: $isActive
+        config: {
+          name: $name
+          description: $description
+          beginDate: $beginDate
+          endDate: $endDate
+          hasLimitedResponses: $hasLimitedResponses
+          maxResponses: $maxResponses
+          isTotemMode: $isTotemMode
+          canDisplayProgressBar: $canDisplayProgressBar
+          progressBarType: $progressBarType
+          canAllowMultipleSubmissions: $canAllowMultipleSubmissions
+        }
+        style: {
+          background: $background
+          logo: $logo
+          headerText: $headerText
+          hasLogoInHeader: $hasLogoInHeader
+          headerBackground: $headerBackground
+          footerText: $footerText
+          footerBackground: $footerBackground
+        }
+      }
+    ) {
+      form {
+        _id
+      }
+      ${errorFragment}
+    }
+  }
+`;
