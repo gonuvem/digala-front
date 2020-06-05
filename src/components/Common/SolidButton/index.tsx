@@ -1,5 +1,4 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import { IconType } from 'react-icons';
 
 import { Container } from './styles';
 

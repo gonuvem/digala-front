@@ -13,13 +13,14 @@ import Table from '../../components/MyResearches/Table';
 import SolidButton from '../../components/Common/SolidButton';
 import GhostButton from '../../components/Common/GhostButton';
 import ShortTextField from '../../components/Common/ShortTextField';
+import LoadingSpinner from '../../components/Common/LoadingSpinner';
 
 import { LIST_OWN_FORMS, CREATE_OWN_FORM } from '../../services/requests/forms';
 import getValidationErrors from '../../utils/getValidationErrors';
 import createFormSchema from '../../schemas/createForm';
 
 interface CreateFormData {
-  name: string;
+  researchName: string;
 }
 
 const MyReasearches: React.FC = () => {
@@ -40,10 +41,11 @@ const MyReasearches: React.FC = () => {
 
   const handleCreateResearch = useCallback(async (data: CreateFormData) => {
     try {
-      console.log('Data >> ', data);
       await createFormSchema.validate(data, { abortEarly: false });
 
-      const response = await createForm({ variables: { name: data.name } });
+      const response = await createForm({
+        variables: { name: data.researchName, isActive: true },
+      });
 
       if (response.data.createOwnForm.error) {
         throw new Error(response.data.createOwnForm.error.internalCode);
@@ -90,7 +92,9 @@ const MyReasearches: React.FC = () => {
             <GhostButton onClick={() => setOpenCreateModal(false)}>
               Voltar
             </GhostButton>
-            <SolidButton type="submit">Continuar</SolidButton>
+            <SolidButton type="submit">
+              {createFormLoading ? <LoadingSpinner /> : 'Continuar'}
+            </SolidButton>
           </div>
         </Form>
       </ModalCreateResearch>
