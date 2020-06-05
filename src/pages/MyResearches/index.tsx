@@ -39,30 +39,33 @@ const MyReasearches: React.FC = () => {
     return [];
   }, [formsData, formsLoading]);
 
-  const handleCreateResearch = useCallback(async (data: CreateFormData) => {
-    try {
-      await createFormSchema.validate(data, { abortEarly: false });
+  const handleCreateResearch = useCallback(
+    async (data: CreateFormData) => {
+      try {
+        await createFormSchema.validate(data, { abortEarly: false });
 
-      const response = await createForm({
-        variables: { name: data.researchName, isActive: true },
-      });
+        const response = await createForm({
+          variables: { name: data.researchName, isActive: true },
+        });
 
-      if (response.data.createOwnForm.error) {
-        throw new Error(response.data.createOwnForm.error.internalCode);
+        if (response.data.createOwnForm.error) {
+          throw new Error(response.data.createOwnForm.error.internalCode);
+        }
+
+        history.push('/edit_survey');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        const internalCode = err.message as string;
+        toast.error(internalCode);
       }
-
-      history.push('/edit_survey');
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
-        return;
-      }
-
-      const internalCode = err.message as string;
-      toast.error(internalCode);
-    }
-  }, []);
+    },
+    [createForm, history],
+  );
 
   return (
     <>
