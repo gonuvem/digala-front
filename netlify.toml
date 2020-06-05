@@ -1,0 +1,9 @@
+[build]
+  command = "yarn run build"
+  publish = "front_diga-la/build"
+  base = "front_diga-la"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
