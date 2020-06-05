@@ -73,6 +73,7 @@ export const ModalCreateResearch = styled(Modal).attrs({
 
   form {
     width: 100%;
+    margin-top: 2rem;
 
     div:nth-child(2) {
       display: flex;

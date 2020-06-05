@@ -89,9 +89,9 @@ const SignIn: React.FC = () => {
               placeholder="Coloque sua senha"
               type="password"
             />
-            <SolidButton
-              text={!signInLoading ? 'Entrar' : <LoadingSpinner />}
-            />
+            <SolidButton>
+              {!signInLoading ? 'Entrar' : <LoadingSpinner />}
+            </SolidButton>
           </Form>
           <Link to="/forgot">Esqueceu sua senha/usuário?</Link>
         </RightSide>

@@ -58,9 +58,9 @@ const ForgotForm: React.FC<ForgotForm> = ({ onFinish }) => {
         id="email-field"
         placeholder="Coloque seu e-mail"
       />
-      <SolidButton
-        text={forgotLoading ? <LoadingSpinner /> : 'Enviar código'}
-      />
+      <SolidButton>
+        {forgotLoading ? <LoadingSpinner /> : 'Enviar código'}
+      </SolidButton>
     </Form>
   );
 };

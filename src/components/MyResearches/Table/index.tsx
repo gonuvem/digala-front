@@ -123,10 +123,9 @@ const Table: React.FC<TableProps> = ({ forms }) => {
         </div>
         <div>
           <GhostButton onClick={() => deleteForm()}>Apagar</GhostButton>
-          <SolidButton
-            text="Cancelar"
-            onClick={() => setDeleteReasearch(false)}
-          />
+          <SolidButton onClick={() => setDeleteReasearch(false)}>
+            Cancelar
+          </SolidButton>
         </div>
       </ModalDelete>
     </>
