@@ -27,9 +27,10 @@ export const PanelArea = styled.div`
   h1 {
     font-weight: 500;
     font-size: 2.2rem;
+    margin-bottom: 1.5rem;
   }
 
-  button {
+  > button {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -24,6 +24,7 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
+        <NpsField />
         <button
           type="button"
           onClick={() => setShowQuestionsPanel(!showQuestionsPanel)}
@@ -32,7 +33,6 @@ const Preview: React.FC = () => {
           pergunta
           <FiPlusCircle size={24} />
         </button>
-        <NpsField />
         {/* {transitions.map(
           ({ item, key, props }) =>
             item && (
