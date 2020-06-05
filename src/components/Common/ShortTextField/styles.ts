@@ -7,6 +7,8 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
+  width: 100%;
+
   label {
     font-weight: 500;
     color: ${Colors.black};

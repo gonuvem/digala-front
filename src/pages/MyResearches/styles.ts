@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
+import Modal from 'react-modal';
 
 import Colors from '../../utils/colors';
 
@@ -46,5 +47,37 @@ export const Header = styled.div`
     height: 1.125rem;
     width: 1.125rem;
     margin-right: 1.125rem;
+  }
+`;
+
+export const ModalCreateResearch = styled(Modal).attrs({
+  style: { overlay: { background: Colors.blackOpacity } },
+})`
+  display: flex;
+  position: static;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  max-width: 22rem;
+  transform: translateY(50%);
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+
+  background-color: ${Colors.white};
+  border-radius: 4px;
+
+  h3 {
+    font-weight: 500;
+  }
+
+  form {
+    width: 100%;
+
+    div:nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
   }
 `;

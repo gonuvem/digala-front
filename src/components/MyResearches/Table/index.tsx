@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { DELETE_FORM } from '../../../services/requests/forms';
 
 import SolidButton from '../../Common/SolidButton';
-import GhostButton from '../../MyResearches/GhostButton';
+import GhostButton from '../../Common/GhostButton';
 
 import {
   Name,
@@ -59,7 +59,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
     setDeleteReasearch(true);
   }, []);
 
-  const listForms = (form: FormData) => (
+  const listForms = (form: FormData): React.ReactElement => (
     <div key={form._id}>
       <TableRow>
         <Name>
@@ -76,12 +76,12 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <p>{form.isActive ? 'Ativa' : 'Finalizado'}</p>
         </Status>
         <Actions>
-          <button>
+          <button type="button">
             <img src={edit} alt="Editar" />
             <EditLabel>Editar</EditLabel>
           </button>
           <div />
-          <button onClick={() => showModal(form._id)}>
+          <button type="button" onClick={() => showModal(form._id)}>
             <img src={trash} alt="Deletar" />
             <DeleteLabel>Deletar</DeleteLabel>
           </button>
