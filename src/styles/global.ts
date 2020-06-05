@@ -30,6 +30,19 @@ export default createGlobalStyle`
     transition: opacity 0.3s ease-in-out;
   }
 
+  .ReactModal__Content {
+    transform: translateY(-10vh);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .ReactModal__Content--after-open {
+    transform: translateY(10vh);
+  }
+
+  .ReactModal__Content--before-close {
+    transform: translateY(-10vh);
+  }
+
   .ReactModal__Overlay--after-open {
     opacity: 1;
   }

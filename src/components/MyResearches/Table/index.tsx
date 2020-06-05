@@ -115,6 +115,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
       <ModalDelete
         isOpen={deleteResearch}
         onRequestClose={() => setDeleteReasearch(false)}
+        closeTimeoutMS={300}
       >
         <div>
           <img src={trash} alt="Deletar" />

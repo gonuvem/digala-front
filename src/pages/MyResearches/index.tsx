@@ -38,7 +38,11 @@ const MyReasearches: React.FC = () => {
         </Header>
         <Table forms={forms} />
       </Container>
-      <ModalCreateResearch isOpen={openCreateModal} closeTimeoutMS={100}>
+      <ModalCreateResearch
+        isOpen={openCreateModal}
+        onRequestClose={() => setOpenCreateModal(false)}
+        closeTimeoutMS={300}
+      >
         <h3>Criar nova pesquisa</h3>
         <Form onSubmit={handleCreateResearch}>
           <ShortTextField
@@ -48,7 +52,9 @@ const MyReasearches: React.FC = () => {
             placeholder="Coloque um título para sua pesquisa"
           />
           <div>
-            <GhostButton>Voltar</GhostButton>
+            <GhostButton onClick={() => setOpenCreateModal(false)}>
+              Voltar
+            </GhostButton>
             <SolidButton type="button" text="Continuar" />
           </div>
         </Form>
