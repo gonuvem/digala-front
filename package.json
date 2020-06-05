@@ -12,6 +12,8 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-modal": "^3.10.5",
+    "@unform/core": "^2.1.0",
+    "@unform/web": "^2.1.0",
     "apollo-boost": "^0.4.9",
     "apollo-link-context": "^1.0.20",
     "date-fns": "^2.14.0",
@@ -24,10 +26,12 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
+    "react-toastify": "^6.0.5",
     "react-tooltip": "^4.2.6",
     "styled-components": "^5.1.0",
     "typescript": "~3.7.2",
-    "uuidv4": "^6.0.9"
+    "uuidv4": "^6.0.9",
+    "yup": "^0.29.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,6 +54,7 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.0",
+    "@types/yup": "^0.29.2",
     "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.31.0",
     "eslint": "^6.8.0",

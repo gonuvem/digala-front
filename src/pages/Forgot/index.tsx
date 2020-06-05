@@ -1,64 +1,23 @@
 import React, { useState, useCallback } from 'react';
-import { useTransition } from 'react-spring';
 import { Link } from 'react-router-dom';
-import { FiMail, FiPhone, FiKey, FiLock } from 'react-icons/fi';
+import { FiMail, FiPhone } from 'react-icons/fi';
 
 import { Container, Card, LeftSide, RightSide } from './styles';
 
-import IconTextField from '../../components/Common/IconTextField';
-import SolidButton from '../../components/Common/SolidButton';
+import ForgotForm from './forgotForm';
+import RenewForm from './renewPasswordForm';
 
 import illustration from '../../assets/signin_illustration.png';
 import logo from '../../assets/logo.png';
 
-interface FormProps {
-  onFinish: any;
-}
-
-const SendCodeForm: React.FC<FormProps> = ({ onFinish }) => (
-  <form action="">
-    <IconTextField
-      icon={FiMail}
-      name="email"
-      id="email-field"
-      placeholder="Coloque seu e-mail"
-    />
-    <SolidButton onClick={onFinish} text="Enviar código" />
-  </form>
-);
-
-const RenewPasswordForm: React.FC<FormProps> = ({ onFinish }) => (
-  <form action="">
-    <IconTextField
-      icon={FiKey}
-      name="code"
-      id="code-field"
-      placeholder="Código"
-    />
-    <IconTextField
-      icon={FiLock}
-      name="new-password"
-      id="new-password-field"
-      placeholder="Coloque sua nova senha"
-    />
-    <IconTextField
-      icon={FiLock}
-      name="confirm-new-password"
-      id="confirm-new-password-field"
-      placeholder="Confirme sua nova senha"
-    />
-    <SolidButton onClick={onFinish} text="Renovar senha" />
-  </form>
-);
-
 const Forgot: React.FC = () => {
   const [codeSended, setCodeSended] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
 
-  const handleSendCode = useCallback(() => {
+  const handleFinishSendCode = useCallback((email) => {
+    setUserEmail(email);
     setCodeSended(true);
   }, []);
-
-  const handleRenewPassword = useCallback(() => null, []);
 
   return (
     <Container>
@@ -82,11 +41,11 @@ const Forgot: React.FC = () => {
             Coloque seu e-mail abaixo para receber o código de recuperação.
           </span>
           {!codeSended ? (
-            <SendCodeForm onFinish={handleSendCode} />
+            <ForgotForm onFinish={handleFinishSendCode} />
           ) : (
-            <RenewPasswordForm onFinish={handleRenewPassword} />
+            <RenewForm userEmail={userEmail} />
           )}
-          <Link to="/forgot">Voltar para login</Link>
+          <Link to="/">Voltar para login</Link>
         </RightSide>
       </Card>
     </Container>
