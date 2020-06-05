@@ -1,26 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Container, Title, NumberBar, Number } from './styles';
 
-const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+interface NpsProps {
+  name: string;
+  description: string;
+  startNumber: number;
+  endNumber: number;
+  showSubtitles: boolean;
+  leftSubtitle?: string;
+  rightSubtitle?: string;
+}
 
-const NpsField: React.FC = () => {
+const NpsField: React.FC<NpsProps> = ({
+  name,
+  description,
+  startNumber,
+  endNumber,
+  showSubtitles,
+  leftSubtitle,
+  rightSubtitle,
+}) => {
   const [selectedNumber, setSelectedNumber] = useState(-1);
+  const [arrayNumbers, setArrayNumbers] = useState<Array<number>>([]);
+
+  useEffect(() => {
+    const numbers = [];
+
+    for (var i = startNumber; i <= endNumber; i++) {
+      numbers.push(i);
+    }
+    setArrayNumbers(numbers);
+  }, [endNumber, startNumber]);
+
   return (
     <Container>
-      <Title>NPS</Title>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua
-      </p>
+      <Title>{name}</Title>
+      <p>{description}</p>
       <div>
-        <div>
-          <p>Pouco provavel</p>
-          <p>Muito provavel</p>
-        </div>
+        {showSubtitles && (
+          <div>
+            <p>{leftSubtitle}</p>
+            <p>{rightSubtitle}</p>
+          </div>
+        )}
         <NumberBar>
-          {numbers.map((value, index) => (
+          {arrayNumbers.map((value, index) => (
             <Number
+              key={index}
               isSelected={index === selectedNumber}
               onClick={() => setSelectedNumber(index)}
             >

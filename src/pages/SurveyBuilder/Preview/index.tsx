@@ -24,7 +24,17 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
-        <NpsField />
+        <NpsField
+          name={'Nps'}
+          description={
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
+          }
+          showSubtitles={true}
+          rightSubtitle={'Pouco provável'}
+          leftSubtitle={'Muito provável'}
+          startNumber={1}
+          endNumber={10}
+        />
         <button
           type="button"
           onClick={() => setShowQuestionsPanel(!showQuestionsPanel)}
