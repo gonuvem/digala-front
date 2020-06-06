@@ -3,7 +3,7 @@ import { FiHelpCircle } from 'react-icons/fi';
 import { Container, CardColor, DashedContainer, Section } from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
-import ShortTextField from '../../../../components/Common/ShortTextField';
+import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
 import uploadIcon from '../../../../assets/uploud_icon.png';
 
 const colors = [
