@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
       }
 
       client?.resetStore();
-      localStorage.setItem('token', response.data.login.token);
+      localStorage.setItem('Digl:token', response.data.login.token);
       history.push('/my_researches');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
