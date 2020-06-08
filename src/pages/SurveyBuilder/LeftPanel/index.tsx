@@ -4,13 +4,14 @@ import { Container, PanelTabLink, PanelArea } from './styles';
 
 import ResearchStyles from './ResearchStyles';
 import ResearchTypes from './ResearchTypes';
+import ResearchConfigurations from './ResearchConfigurations';
 
 import getDistanceBetweenElements from '../../../utils/getDistanceBetweenElements';
 
 const TabLinks: string[] = ['Tipos', 'Estilos', 'Configurações'];
 
 const LeftPanel: React.FC = () => {
-  const [activePanelNumber, setActivePanelNumber] = useState(0);
+  const [activePanelNumber, setActivePanelNumber] = useState(2);
   const [distanceToTravel, setDistanceToTravel] = useState(0);
 
   const handleTabChange = useCallback(
@@ -28,12 +29,10 @@ const LeftPanel: React.FC = () => {
 
   const renderSection = () => {
     switch (activePanelNumber) {
-      case 0:
-        return <ResearchTypes />;
       case 1:
         return <ResearchStyles />;
       case 2:
-        return <ResearchStyles />;
+        return <ResearchConfigurations />;
       default:
         return <ResearchTypes />;
     }
