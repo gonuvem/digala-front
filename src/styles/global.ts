@@ -24,4 +24,30 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .ReactModal__Content {
+    transform: translateY(-10vh);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .ReactModal__Content--after-open {
+    transform: translateY(10vh);
+  }
+
+  .ReactModal__Content--before-close {
+    transform: translateY(-10vh);
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
 `;

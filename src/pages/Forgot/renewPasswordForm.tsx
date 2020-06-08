@@ -83,7 +83,9 @@ const RenewPasswordForm: React.FC<RenewFormProps> = ({ userEmail }) => {
         placeholder="Confirme sua nova senha"
         type="password"
       />
-      <SolidButton text={renewLoading ? <LoadingSpinner /> : 'Renovar senha'} />
+      <SolidButton>
+        {renewLoading ? <LoadingSpinner /> : 'Renovar senha'}
+      </SolidButton>
     </Form>
   );
 };
