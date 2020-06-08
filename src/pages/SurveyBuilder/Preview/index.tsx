@@ -2,10 +2,39 @@ import React, { useState } from 'react';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
 
-import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
-import NpsField from '../../../components/ResearchFields/NpsField';
+// import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
+import ImageChoices from '../../../components/ResearchFields/ImagesChoice';
+// import NpsField from '../../../components/ResearchFields/NpsField';
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
+
+const images = [
+  {
+    img:
+      'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+    name: 'Escolha 1',
+  },
+  {
+    img:
+      'https://images.unsplash.com/photo-1426604966848-d7adac402bff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+    name: 'Escolha 2',
+  },
+  {
+    img:
+      'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=840&q=80',
+    name: 'Escolha 3',
+  },
+  {
+    img:
+      'https://images.unsplash.com/photo-1474524955719-b9f87c50ce47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=752&q=80',
+    name: 'Escolha 4',
+  },
+  {
+    img:
+      'https://images.unsplash.com/photo-1482192505345-5655af888cc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80',
+    name: 'Escolha 5',
+  },
+];
 
 const Preview: React.FC = () => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
@@ -24,7 +53,7 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
-        <NpsField
+        {/* <NpsField
           name={'Nps'}
           description={
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
@@ -34,6 +63,11 @@ const Preview: React.FC = () => {
           leftSubtitle={'Muito provável'}
           startNumber={1}
           endNumber={10}
+        /> */}
+        <ImageChoices
+          label="Escolha entre imagens"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+          choices={images}
         />
         <button
           type="button"
