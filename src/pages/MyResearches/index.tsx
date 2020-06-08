@@ -12,7 +12,7 @@ import { Container, Header, ModalCreateResearch } from './styles';
 import Table from '../../components/MyResearches/Table';
 import SolidButton from '../../components/Common/SolidButton';
 import GhostButton from '../../components/Common/GhostButton';
-import ShortTextField from '../../components/Common/ShortTextField';
+import ShortTextField from '../../components/ResearchFields/ShortTextField';
 import LoadingSpinner from '../../components/Common/LoadingSpinner';
 
 import { LIST_OWN_FORMS, CREATE_OWN_FORM } from '../../services/requests/forms';

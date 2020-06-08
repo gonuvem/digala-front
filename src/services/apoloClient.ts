@@ -10,7 +10,7 @@ const link = new HttpLink({
 });
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('Digl:token');
   return {
     headers: {
       ...headers,
