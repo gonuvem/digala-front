@@ -1,14 +1,23 @@
-import React, { useState, useCallback } from 'react';
+/* eslint-disable import/no-duplicates */
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { CalendarProps } from 'react-calendar';
-// eslint-disable-next-line import/no-duplicates
+import { useField } from '@unform/core';
 import { format } from 'date-fns';
-// eslint-disable-next-line import/no-duplicates
 import { ptBR } from 'date-fns/locale';
 
 import { Container, CustomCalendar } from './styles';
 
-const Calendar: React.FC<CalendarProps> = ({ ...rest }) => {
+interface CustomCalendarProps extends CalendarProps {
+  readOnly?: boolean;
+  label?: string;
+  name: string;
+}
+
+const Calendar: React.FC<CustomCalendarProps> = ({ name, label, ...rest }) => {
+  const calendarRef = useRef(null);
   const [value, setValue] = useState<Date | Date[]>(new Date());
+
+  const { fieldName, registerField, error } = useField(name);
 
   const onChange = useCallback(
     (nextValue: Date | Date[]) => setValue(nextValue),
@@ -20,6 +29,17 @@ const Calendar: React.FC<CalendarProps> = ({ ...rest }) => {
 
     return dateFormated.slice(0, 1);
   }, []);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: calendarRef.current,
+      path: 'props.value',
+      clearValue: (ref: any) => {
+        ref.clear();
+      },
+    });
+  }, [fieldName, registerField]);
 
   return (
     <CustomCalendar

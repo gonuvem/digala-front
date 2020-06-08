@@ -27,6 +27,7 @@ const ResearchConfigurations: React.FC = () => (
       </section>
       <section>
         <Calendar
+          name="researchExpireDate"
           selectRange
           view="month"
           next2Label={null}
