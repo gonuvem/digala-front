@@ -6,6 +6,7 @@ import TextAreaField from '../../../../components/ResearchFields/TextAreaField';
 import Calendar from '../../../../components/ResearchFields/Calendar';
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import NumericField from '../../../../components/ResearchFields/NumericField';
+import SelectField from '../../../../components/ResearchFields/SelectField';
 
 import { Container } from './styles';
 
@@ -45,6 +46,26 @@ const ResearchConfigurations: React.FC = () => (
       </section>
       <section>
         <NumericField name="answersQuant" label="Quantidade de respostas" />
+      </section>
+      <section>
+        <SwitchToggle
+          name="totemMode"
+          label="Modo Totem"
+          helpHint="Lorem ipsum"
+        />
+      </section>
+      <section>
+        <SwitchToggle
+          name="showProgressBar"
+          label="Mostrar barra de progresso"
+          helpHint="Lorem ipsum"
+        />
+      </section>
+      <section>
+        <SelectField
+          name="progressBarType"
+          label="Tipo da barra de progresso"
+        />
       </section>
     </Form>
   </Container>
