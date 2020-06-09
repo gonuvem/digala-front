@@ -4,7 +4,13 @@ import { transparentize } from 'polished';
 
 import Colors from '../../../utils/colors';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  span {
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+`;
 
 export const CustomCalendar = styled(ReactCalendar)`
   .react-calendar__navigation {

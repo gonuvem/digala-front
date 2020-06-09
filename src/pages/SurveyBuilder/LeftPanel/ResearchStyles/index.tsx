@@ -41,7 +41,7 @@ const ResearchStyles: React.FC = () => {
           <p>Logo no header</p>
           <FiHelpCircle />
         </div>
-        <SwitchToggle />
+        <SwitchToggle name="logoInHeader" />
       </Section>
       <Section>
         <p>Fundo no header</p>

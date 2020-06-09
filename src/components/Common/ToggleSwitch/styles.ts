@@ -2,9 +2,29 @@ import styled from 'styled-components';
 
 import Colors from '../../../utils/colors';
 
+export const Container = styled.div`
+  div {
+    display: flex;
+    align-items: end;
+  }
+
+  span {
+    display: inline-block;
+    font-weight: 500;
+    color: ${Colors.black};
+    margin-bottom: 1rem;
+  }
+
+  svg {
+    margin-top: 0.2rem;
+    margin-left: 0.5rem;
+  }
+`;
+
 export const CheckBoxWrapper = styled.div`
   position: relative;
 `;
+
 export const CheckBoxLabel = styled.label`
   position: absolute;
   top: 0;
@@ -16,6 +36,7 @@ export const CheckBoxLabel = styled.label`
   display: flex;
   align-items: center;
   cursor: pointer;
+
   &::after {
     content: '';
     display: block;
@@ -28,6 +49,7 @@ export const CheckBoxLabel = styled.label`
     transition: 0.2s;
   }
 `;
+
 export const CheckBox = styled.input`
   opacity: 0;
   z-index: 1;
@@ -37,6 +59,7 @@ export const CheckBox = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
   &:checked + ${CheckBoxLabel} {
     background: ${Colors.primary};
     /* justify-content: flex-end; */

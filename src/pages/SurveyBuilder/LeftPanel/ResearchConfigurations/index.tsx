@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
 import TextAreaField from '../../../../components/ResearchFields/TextAreaField';
 import Calendar from '../../../../components/ResearchFields/Calendar';
+import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 
 import { Container } from './styles';
 
@@ -32,6 +33,13 @@ const ResearchConfigurations: React.FC = () => (
           view="month"
           next2Label={null}
           prev2Label={null}
+        />
+      </section>
+      <section>
+        <SwitchToggle
+          name="limitedAnswerQuant"
+          label="Quantidade de respostas limitada?"
+          helpHint="Lorem ipsum sit dolor amet"
         />
       </section>
     </Form>
