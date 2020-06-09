@@ -5,6 +5,7 @@ import ShortTextField from '../../../../components/ResearchFields/ShortTextField
 import TextAreaField from '../../../../components/ResearchFields/TextAreaField';
 import Calendar from '../../../../components/ResearchFields/Calendar';
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
+import NumericField from '../../../../components/ResearchFields/NumericField';
 
 import { Container } from './styles';
 
@@ -41,6 +42,9 @@ const ResearchConfigurations: React.FC = () => (
           label="Quantidade de respostas limitada?"
           helpHint="Lorem ipsum sit dolor amet"
         />
+      </section>
+      <section>
+        <NumericField name="answersQuant" label="Quantidade de respostas" />
       </section>
     </Form>
   </Container>
