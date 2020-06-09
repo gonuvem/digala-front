@@ -11,7 +11,7 @@ import getDistanceBetweenElements from '../../../utils/getDistanceBetweenElement
 const TabLinks: string[] = ['Tipos', 'Estilos', 'Configurações'];
 
 const LeftPanel: React.FC = () => {
-  const [activePanelNumber, setActivePanelNumber] = useState(2);
+  const [activePanelNumber, setActivePanelNumber] = useState(0);
   const [distanceToTravel, setDistanceToTravel] = useState(0);
 
   const handleTabChange = useCallback(

@@ -67,6 +67,13 @@ const ResearchConfigurations: React.FC = () => (
           label="Tipo da barra de progresso"
         />
       </section>
+      <section>
+        <SwitchToggle
+          name="allowMultipleSubmissions"
+          label="Permitir múltiplas submissões"
+          helpHint="Lorem ipsum"
+        />
+      </section>
     </Form>
   </Container>
 );
