@@ -12,8 +12,6 @@ import Header from './components/Common/Header';
 
 import Routes from './routes';
 
-import Sort from './components/ResearchFields/SortAnswers';
-
 const App: React.FC = () => (
   <BrowserRouter>
     <ApolloProvider client={ApolloClient}>

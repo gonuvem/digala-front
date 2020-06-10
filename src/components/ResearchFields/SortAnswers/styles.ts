@@ -4,6 +4,7 @@ import Colors from '../../../utils/colors';
 
 interface DragContainerProps {
   isDraggingOver: boolean;
+  optionsLength: number;
 }
 
 export const Container = styled.div`
@@ -28,7 +29,7 @@ export const DragContainer = styled.div<DragContainerProps>`
   margin-top: 1.3rem;
   background: ${(props) =>
     props.isDraggingOver ? Colors.disabledGray : Colors.white};
-  min-height: 150px;
+  min-height: ${(props) => props.optionsLength * 3.625}rem;
 `;
 
 export const Option = styled.div`
