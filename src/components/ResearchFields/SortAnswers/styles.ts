@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Colors from '../../../utils/colors';
 
 interface DragContainerProps {
-  snapshot: any;
+  isDraggingOver: boolean;
 }
 
 export const Container = styled.div`
@@ -27,7 +27,7 @@ export const Container = styled.div`
 export const DragContainer = styled.div<DragContainerProps>`
   margin-top: 1.3rem;
   background: ${(props) =>
-    props.snapshot.isDraggingOver ? Colors.disabledGray : Colors.white};
+    props.isDraggingOver ? Colors.disabledGray : Colors.white};
   min-height: 150px;
 `;
 

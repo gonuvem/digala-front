@@ -1,20 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FiMove } from 'react-icons/fi';
-import { uuid } from 'uuidv4';
-
 import { Container, DragContainer, Option } from './styles';
 
 interface SortAnswersProps {
   label: string;
   description?: string;
+  listOptions: ListOptions[];
 }
 
-const listOptions = [
-  { id: uuid(), content: 'Opção 01' },
-  { id: uuid(), content: 'Opção 02' },
-  { id: uuid(), content: 'Opção 03' },
-];
+interface ListOptions {
+  id: string;
+  content: string;
+}
 
 const reorder = (list: any, startIndex: any, endIndex: any) => {
   const result = Array.from(list);
@@ -24,7 +22,11 @@ const reorder = (list: any, startIndex: any, endIndex: any) => {
   return result;
 };
 
-const SortAnswers: React.FC<SortAnswersProps> = ({ label, description }) => {
+const SortAnswers: React.FC<SortAnswersProps> = ({
+  label,
+  description,
+  listOptions,
+}) => {
   const [options, setOptions] = useState(listOptions);
 
   const onDragEnd = useCallback((result: any, item: any, setItem: any) => {
@@ -49,7 +51,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({ label, description }) => {
               <DragContainer
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                snapshot={snapshot}
+                isDraggingOver={snapshot.isDraggingOver}
               >
                 {options.map((item, index) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
