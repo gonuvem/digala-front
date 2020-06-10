@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 import Colors from '../../../utils/colors';
 
+interface DragContainerProps {
+  snapshot: any;
+}
+
 export const Container = styled.div`
   > label {
     font-weight: 500;
@@ -13,21 +17,31 @@ export const Container = styled.div`
       margin-top: 1rem;
     }
 
-    p {
+    > p {
       font-weight: 400;
       margin-top: 0.5rem;
-    }
-
-    > div {
-      width: 100vw;
-      min-height: 100vh;
-      /* background: #000; */
     }
   }
 `;
 
-export const Rect = styled.div`
-  height: 50px;
-  width: 50px;
-  background: #632678;
+export const DragContainer = styled.div<DragContainerProps>`
+  margin-top: 1.3rem;
+  background: ${(props) =>
+    props.snapshot.isDraggingOver ? Colors.disabledGray : Colors.white};
+  min-height: 150px;
+`;
+
+export const Option = styled.div`
+  user-select: 'none';
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 3px;
+  min-height: 3.125rem;
+  background: ${Colors.option};
+
+  justify-content: space-between;
+  align-items: center;
+
+  display: flex;
+  color: ${Colors.white};
 `;
