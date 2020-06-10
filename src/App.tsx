@@ -12,17 +12,20 @@ import Header from './components/Common/Header';
 
 import Routes from './routes';
 
+import Sort from './components/ResearchFields/SortAnswers';
+
 const App: React.FC = () => (
-  <BrowserRouter>
-    <ApolloProvider client={ApolloClient}>
-      <Header />
-      <Layout>
-        <Routes />
-      </Layout>
-      <GlobalStyles />
-    </ApolloProvider>
-    <ToastContainer />
-  </BrowserRouter>
+  // <BrowserRouter>
+  //   <ApolloProvider client={ApolloClient}>
+  //     <Header />
+  //     <Layout>
+  //       <Routes />
+  //     </Layout>
+  //     <GlobalStyles />
+  //   </ApolloProvider>
+  //   <ToastContainer />
+  // </BrowserRouter>
+  <Sort label="sdfsd" />
 );
 
 export default App;

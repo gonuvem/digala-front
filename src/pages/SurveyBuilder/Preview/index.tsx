@@ -4,6 +4,7 @@ import { useTransition } from 'react-spring';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import NpsField from '../../../components/ResearchFields/NpsField';
+import SortAnswers from '../../../components/ResearchFields/SortAnswers';
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
 
@@ -24,7 +25,7 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
-        <NpsField
+        {/* <NpsField
           name={'Nps'}
           description={
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
@@ -34,6 +35,10 @@ const Preview: React.FC = () => {
           leftSubtitle={'Muito provável'}
           startNumber={1}
           endNumber={10}
+        /> */}
+        <SortAnswers
+          label="Ordenar Respostas"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
         />
         <button
           type="button"
