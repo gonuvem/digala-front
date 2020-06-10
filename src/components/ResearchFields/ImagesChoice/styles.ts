@@ -38,6 +38,7 @@ export const CardImage = styled.div<CardImage>`
   background-image: url(${(props) => props.image});
   display: flex;
   align-items: flex-end;
+  cursor: pointer;
 
   button {
     height: 1.2rem;

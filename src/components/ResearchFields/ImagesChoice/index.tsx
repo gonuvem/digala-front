@@ -31,7 +31,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
               onClick={() => setSelectedImage(index)}
             >
               <div>
-                <button />
+                <button type="button" />
                 <p>{option.name}</p>
               </div>
             </CardImage>
