@@ -34,3 +34,25 @@ export const LIST_OWN_QUESTIONS = gql`
     }
   }
 `;
+
+export const LIST_QUESTION_TYPES = gql`
+  query {
+    data: listQuestionTypes {
+      types {
+        _id
+        kind
+        alias
+        name
+        cover
+        description
+      }
+      total
+      pages
+      error {
+        message
+        statusCode
+        internalCode
+      }
+    }
+  }
+`;

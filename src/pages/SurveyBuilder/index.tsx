@@ -14,18 +14,18 @@ import { LIST_OWN_QUESTIONS } from '../../services/requests/questions';
 const SurveyBuilder: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { data: listQuestionsData } = useQuery(LIST_OWN_QUESTIONS, {
+  const { data: questionsList } = useQuery(LIST_OWN_QUESTIONS, {
     variables: { form: '5ede7552b3c9d80017446c40' },
   });
 
   useEffect(() => {
-    if (listQuestionsData?.data?.error !== null) {
+    if (questionsList?.data?.error !== null) {
       dispatch(QuestionsActions.loadQuestions([]));
       return;
     }
-    const questions = listQuestionsData?.data?.questions;
+    const questions = questionsList?.data?.questions;
     dispatch(QuestionsActions.loadQuestions(questions));
-  }, [listQuestionsData, dispatch]);
+  }, [questionsList, dispatch]);
 
   return (
     <Container>

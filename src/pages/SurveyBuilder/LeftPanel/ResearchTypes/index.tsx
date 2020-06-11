@@ -7,7 +7,18 @@ import QuestionBox from '../../../../components/SurveyBuilder/QuestionBox';
 import { QuestionsContainer } from './styles';
 import * as QuestionsActions from '../../../../store/ducks/questions/actions';
 
-const ResearchTypes: React.FC = () => {
+interface ResearchTypes {
+  questions: QuestionDTO[];
+}
+
+interface QuestionDTO {
+  name: string;
+  cover: string;
+  alias: string;
+  description: string;
+}
+
+const ResearchTypes: React.FC<ResearchTypes> = ({ questions }) => {
   const dispatch = useDispatch();
 
   const addFieldToForm = useCallback(() => {
@@ -22,25 +33,14 @@ const ResearchTypes: React.FC = () => {
     <div>
       <h5>Perguntas Básicas</h5>
       <QuestionsContainer>
-        <QuestionBox
-          name="Slider"
-          description="Lorem ipsum sit dolor amet"
-          image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
-          icon={FaSlidersH}
-          onClick={addFieldToForm}
-        />
-        <QuestionBox
-          name="Dropdown"
-          description="Lorem ipsum sit dolor amet"
-          image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
-          icon={FaSlidersH}
-        />
-        <QuestionBox
-          name="Escolha Única"
-          description="Lorem ipsum sit dolor amet"
-          image="https://media.giphy.com/media/h1zypyYAgZE96sCNuV/giphy.gif"
-          icon={FaSlidersH}
-        />
+        {questions.map((question) => (
+          <QuestionBox
+            name={question.name}
+            description={question.description}
+            image={question.description}
+            icon={FaSlidersH}
+          />
+        ))}
       </QuestionsContainer>
     </div>
   );
