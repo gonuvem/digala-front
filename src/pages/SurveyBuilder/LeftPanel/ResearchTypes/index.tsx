@@ -5,11 +5,8 @@ import { FaSlidersH } from 'react-icons/fa';
 import QuestionBox from '../../../../components/SurveyBuilder/QuestionBox';
 
 import { QuestionsContainer } from './styles';
-import * as QuestionsActions from '../../../../store/ducks/questions/actions';
 
-interface ResearchTypes {
-  questions: QuestionDTO[];
-}
+import addFieldToForm from '../../../../services/logic/addFieldToForm';
 
 interface QuestionDTO {
   name: string;
@@ -18,16 +15,17 @@ interface QuestionDTO {
   description: string;
 }
 
-const ResearchTypes: React.FC<ResearchTypes> = ({ questions }) => {
+interface ResearchTypesProps {
+  questions: QuestionDTO[];
+}
+
+const ResearchTypes: React.FC<ResearchTypesProps> = ({ questions }) => {
   const dispatch = useDispatch();
 
-  const addFieldToForm = useCallback(() => {
-    dispatch(
-      QuestionsActions.addQuestion({
-        alias: 'Slider',
-      }),
-    );
-  }, [dispatch]);
+  const handleQuestionBoxClick = useCallback(
+    (alias) => addFieldToForm(dispatch, { alias }),
+    [dispatch],
+  );
 
   return (
     <div>
@@ -39,6 +37,7 @@ const ResearchTypes: React.FC<ResearchTypes> = ({ questions }) => {
             description={question.description}
             image={question.description}
             icon={FaSlidersH}
+            onClick={() => handleQuestionBoxClick(question.alias)}
           />
         ))}
       </QuestionsContainer>

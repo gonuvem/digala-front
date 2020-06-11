@@ -26,8 +26,6 @@ const LeftPanel: React.FC = () => {
     [questionTypesData],
   );
 
-  console.log('Question Types >> ', questionTypes);
-
   const handleTabChange = useCallback(
     (tab) => {
       const distanceBetweenTabs = getDistanceBetweenElements(

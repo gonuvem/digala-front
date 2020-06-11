@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
 
@@ -7,13 +8,22 @@ import NpsField from '../../../components/ResearchFields/NpsField';
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
 
+import addFieldToForm from '../../../services/logic/addFieldToForm';
+
 const Preview: React.FC = () => {
+  const dispatch = useDispatch();
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
+
   const transitions = useTransition(showQuestionsPanel, null, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
     enter: { opacity: 1, transform: 'translateY(0)' },
     leave: { opacity: 0, transform: 'translateY(-10vh)' },
   });
+
+  const handleQuestionBoxClick = useCallback(
+    (alias: string) => addFieldToForm(dispatch, { alias }),
+    [dispatch],
+  );
 
   return (
     <Container>
@@ -50,6 +60,7 @@ const Preview: React.FC = () => {
                   name="Texto Curto"
                   description="Lorem ipsum sit dolor amet"
                   image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
+                  onClick={() => handleQuestionBoxClick('shortText')}
                 />
                 <QuestionBox
                   icon={FiSliders}
