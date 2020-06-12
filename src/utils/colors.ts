@@ -8,6 +8,7 @@ export default {
   smokeWhiteSecondary: '#FAFAFA',
   primary: '#3475D2',
   secondary: '#C85C83',
+  secondaryOpacity: 'rgba(200, 92, 131, 0.5)',
   positive: '#34D286',
   negative: '#EA1A65',
 };
