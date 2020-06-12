@@ -43,7 +43,7 @@ const Preview: React.FC = () => {
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
-            <Field alias={field.alias} />
+            <Field fieldId={field.id} config={field} />
           ))}
         </Form>
         <button

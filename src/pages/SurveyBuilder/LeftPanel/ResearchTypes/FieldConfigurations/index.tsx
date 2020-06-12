@@ -1,11 +1,12 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import LinkConfiguration from './linkConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
 import FieldsTypes from '../../../../../utils/fieldsTypes';
-
-import LinkConfiguration from './linkConfiguration';
+import changeFieldConfiguration from '../../../../../services/logic/changeFieldConfiguration';
 
 interface FieldConfigurationsProps {
   fieldId: string;
@@ -14,9 +15,17 @@ interface FieldConfigurationsProps {
 const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
   fieldId,
 }) => {
+  const dispatch = useDispatch();
+
   const field = useSelector<ApplicationState, Question | undefined>((state) =>
     state.questions.questions.find((question) => question.id === fieldId),
   );
+
+  const handleChange = useCallback((value: string, attribute) => {
+    if (field !== undefined) {
+      changeFieldConfiguration(dispatch, { attribute, value, field });
+    }
+  }, []);
 
   if (field === undefined) {
     return <p>Não foi possível encontrar um campo correspondente</p>;
@@ -24,7 +33,7 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
 
   switch (field.alias) {
     case FieldsTypes.Link:
-      return <LinkConfiguration />;
+      return <LinkConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }

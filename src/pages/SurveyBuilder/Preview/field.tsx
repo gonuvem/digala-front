@@ -1,19 +1,26 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { FiLink } from 'react-icons/fi';
 
 import ShortTextField from '../../../components/ResearchFields/ShortTextField';
 import IconTextField from '../../../components/ResearchFields/IconTextField';
 import SingleChoiceField from '../../../components/ResearchFields/SingleChoiceField';
 
+import { ApplicationState } from '../../../store';
+import { Question } from '../../../store/ducks/questions/types';
 import FieldsTypes from '../../../utils/fieldsTypes';
 
 interface FieldProps {
-  alias: string;
-  config?: {};
+  fieldId: string;
+  config?: Question;
 }
 
-const Field: React.FC<FieldProps> = ({ alias, config }) => {
-  switch (alias) {
+const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
+  const field = useSelector<ApplicationState, Question | undefined>((state) =>
+    state.questions.questions.find((question) => question.id === fieldId),
+  );
+
+  switch (field?.alias) {
     case FieldsTypes.ShortText:
       return <ShortTextField name="short-teste" id="short-id" />;
     case FieldsTypes.SingleChoice:
@@ -26,7 +33,14 @@ const Field: React.FC<FieldProps> = ({ alias, config }) => {
         />
       );
     case FieldsTypes.Link:
-      return <IconTextField name="icon-teste" id="icon-id" icon={FiLink} />;
+      return (
+        <IconTextField
+          icon={FiLink}
+          name={config?.name || 'name'}
+          id={config?.id || 'id'}
+          label={config?.label}
+        />
+      );
     default:
       return null;
   }

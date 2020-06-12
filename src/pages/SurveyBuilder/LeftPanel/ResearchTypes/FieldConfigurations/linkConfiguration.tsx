@@ -7,15 +7,22 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 
 import { Container } from './styles';
 
-const LinkFieldConfigurarion: React.FC = () => (
+interface LinkFieldConfigurarionProps {
+  handleChange: Function;
+}
+
+const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
+  handleChange,
+}) => (
   <Container>
     <Form onSubmit={() => null}>
       <section>
         <ShortTextField
           label="Nome"
           placeholder="Link"
-          name="linkName"
-          id="linkNameField"
+          name="linkLabel"
+          id="linkLabelField"
+          onChange={(event) => handleChange(event.target.value, 'label')}
         />
       </section>
       <section>

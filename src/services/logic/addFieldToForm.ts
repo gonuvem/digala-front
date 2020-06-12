@@ -11,7 +11,14 @@ export default function addFieldToForm(
   { alias }: QuestionDTO,
 ): void {
   const localQuestionId = uuid();
+  const localFieldName = `${alias}:${localQuestionId}`;
 
-  dispatch(QuestionsActions.addQuestion({ alias, id: localQuestionId }));
+  dispatch(
+    QuestionsActions.addQuestion({
+      alias,
+      id: localQuestionId,
+      name: localFieldName,
+    }),
+  );
   dispatch(QuestionsActions.focusQuestion(localQuestionId));
 }
