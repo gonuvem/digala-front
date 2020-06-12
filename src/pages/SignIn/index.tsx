@@ -42,7 +42,7 @@ const SignIn: React.FC = () => {
       }
 
       client?.resetStore();
-      localStorage.setItem('token', response.data.login.token);
+      localStorage.setItem('Digl:token', response.data.login.token);
       history.push('/my_researches');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
@@ -89,9 +89,9 @@ const SignIn: React.FC = () => {
               placeholder="Coloque sua senha"
               type="password"
             />
-            <SolidButton
-              text={!signInLoading ? 'Entrar' : <LoadingSpinner />}
-            />
+            <SolidButton>
+              {!signInLoading ? 'Entrar' : <LoadingSpinner />}
+            </SolidButton>
           </Form>
           <Link to="/forgot">Esqueceu sua senha/usuário?</Link>
         </RightSide>

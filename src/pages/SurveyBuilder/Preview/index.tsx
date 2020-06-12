@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
+import { uuid } from 'uuidv4';
 
-import QuestionBox from '../../../components/Common/QuestionBox';
+import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
+import NpsField from '../../../components/ResearchFields/NpsField';
+import SortAnswers from '../../../components/ResearchFields/SortAnswers';
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
+
+const listOptions = [
+  { id: uuid(), content: 'Opção 01' },
+  { id: uuid(), content: 'Opção 02' },
+  { id: uuid(), content: 'Opção 03' },
+  { id: uuid(), content: 'Opção 04' },
+  { id: uuid(), content: 'Opção 05' },
+];
 
 const Preview: React.FC = () => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
@@ -23,6 +34,11 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
+        <SortAnswers
+          label="Ordenar Respostas"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+          listOptions={listOptions}
+        />
         <button
           type="button"
           onClick={() => setShowQuestionsPanel(!showQuestionsPanel)}

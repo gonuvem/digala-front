@@ -15,7 +15,7 @@ const Pagination: React.FC = () => {
 
   return (
     <Container>
-      <SolidButton text="Publicar" />
+      <SolidButton>Publicar</SolidButton>
       <PanelArea>
         {[...Array(pagesCount)].map((e, i) => (
           <>

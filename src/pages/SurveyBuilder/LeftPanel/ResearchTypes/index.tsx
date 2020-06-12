@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FaSlidersH } from 'react-icons/fa';
 
-import QuestionBox from '../../../../components/Common/QuestionBox';
+import QuestionBox from '../../../../components/SurveyBuilder/QuestionBox';
 
 import { QuestionsContainer } from './styles';
 
