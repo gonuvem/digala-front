@@ -3,6 +3,7 @@ import { QuestionsTypes, QuestionsState } from './types';
 
 const INITIAL_STATE: QuestionsState = {
   questions: [],
+  focusedQuestion: null,
 };
 
 const reducer: Reducer<QuestionsState> = (state = INITIAL_STATE, action) => {
@@ -11,6 +12,8 @@ const reducer: Reducer<QuestionsState> = (state = INITIAL_STATE, action) => {
       return { ...state, questions: [...state.questions, action.payload] };
     case QuestionsTypes.LOAD_QUESTIONS:
       return { ...state, questions: action.payload };
+    case QuestionsTypes.FOCUS_QUESTION:
+      return { ...state, focusedQuestion: action.payload };
     default:
       return { ...state };
   }

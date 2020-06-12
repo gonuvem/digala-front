@@ -3,6 +3,7 @@
  */
 export enum QuestionsTypes {
   ADD_QUESTION = '@questions/ADD_QUESTION',
+  FOCUS_QUESTION = '@questions/FOCUS_QUESTION',
   LOAD_QUESTIONS = '@questions/LOAD_QUESTIONS',
 }
 
@@ -11,6 +12,7 @@ export enum QuestionsTypes {
  */
 export interface Question {
   alias: string;
+  id: string;
 }
 
 /**
@@ -18,4 +20,5 @@ export interface Question {
  */
 export interface QuestionsState {
   readonly questions: Question[];
+  readonly focusedQuestion: string | null;
 }

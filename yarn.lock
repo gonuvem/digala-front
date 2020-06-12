@@ -9783,9 +9783,9 @@ uuid@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
 
-uuidv4@^6.0.9:
-  version "6.0.9"
-  resolved "https://registry.yarnpkg.com/uuidv4/-/uuidv4-6.0.9.tgz#cfab0855ef9f58aff8b0bb75c51670cf4242ecac"
+uuidv4@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/uuidv4/-/uuidv4-6.1.0.tgz#a8d50c71e46da4dd0edc887a2b766a75e48e5740"
   dependencies:
     uuid "8.1.0"
 
