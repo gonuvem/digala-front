@@ -1,18 +1,25 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Form } from '@unform/web';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
-import NpsField from '../../../components/ResearchFields/NpsField';
+import Field from './field';
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
 
+import { ApplicationState } from '../../../store';
+import { Question } from '../../../store/ducks/questions/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 
 const Preview: React.FC = () => {
-  const dispatch = useDispatch();
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
+  const dispatch = useDispatch();
+
+  const fieldsRegistered = useSelector<ApplicationState, Question[]>(
+    (state) => state.questions.questions,
+  );
 
   const transitions = useTransition(showQuestionsPanel, null, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -34,15 +41,11 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
-        <NpsField
-          name="Nps"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-          showSubtitles
-          rightSubtitle="Pouco provável"
-          leftSubtitle="Muito provável"
-          startNumber={1}
-          endNumber={10}
-        />
+        <Form onSubmit={() => null}>
+          {fieldsRegistered.map((field) => (
+            <Field alias={field.alias} />
+          ))}
+        </Form>
         <button
           type="button"
           onClick={() => setShowQuestionsPanel(!showQuestionsPanel)}
@@ -61,54 +64,6 @@ const Preview: React.FC = () => {
                   description="Lorem ipsum sit dolor amet"
                   image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
                   onClick={() => handleQuestionBoxClick('shortText')}
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                />
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
                 />
               </QuestionsPanel>
             ),

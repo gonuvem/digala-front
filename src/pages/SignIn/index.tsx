@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 import { Container, Card, LeftSide, RightSide } from './styles';
 
-import IconTextField from '../../components/Common/IconTextField';
+import IconTextField from '../../components/ResearchFields/IconTextField';
 import SolidButton from '../../components/Common/SolidButton';
 import LoadingSpinner from '../../components/Common/LoadingSpinner';
 

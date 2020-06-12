@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { FiKey, FiLock } from 'react-icons/fi';
 
-import IconTextField from '../../components/Common/IconTextField';
+import IconTextField from '../../components/ResearchFields/IconTextField';
 import SolidButton from '../../components/Common/SolidButton';
 import LoadingSpinner from '../../components/Common/LoadingSpinner';
 

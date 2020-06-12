@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { FiMail } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 
-import IconTextField from '../../components/Common/IconTextField';
+import IconTextField from '../../components/ResearchFields/IconTextField';
 import SolidButton from '../../components/Common/SolidButton';
 import LoadingSpinner from '../../components/Common/LoadingSpinner';
 
