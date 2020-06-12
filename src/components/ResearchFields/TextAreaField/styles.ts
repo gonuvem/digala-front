@@ -25,7 +25,7 @@ export const Container = styled.div<ContainerProps>`
       margin-bottom: 1rem;
     }
 
-    input {
+    textarea {
       border-radius: 4px;
       border: solid 2px ${Colors.black};
       padding: 1rem;

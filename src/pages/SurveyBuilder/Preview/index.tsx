@@ -34,17 +34,6 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
-        {/* <NpsField
-          name={'Nps'}
-          description={
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
-          }
-          showSubtitles={true}
-          rightSubtitle={'Pouco provável'}
-          leftSubtitle={'Muito provável'}
-          startNumber={1}
-          endNumber={10}
-        /> */}
         <SortAnswers
           label="Ordenar Respostas"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
@@ -58,7 +47,7 @@ const Preview: React.FC = () => {
           pergunta
           <FiPlusCircle size={24} />
         </button>
-        {/* {transitions.map(
+        {transitions.map(
           ({ item, key, props }) =>
             item && (
               <QuestionsPanel show={showQuestionsPanel} key={key} style={props}>
@@ -118,7 +107,7 @@ const Preview: React.FC = () => {
                 />
               </QuestionsPanel>
             ),
-        )} */}
+        )}
       </PanelArea>
     </Container>
   );
