@@ -7,6 +7,7 @@ import {
 } from 'react-beautiful-dnd';
 import { FiMove } from 'react-icons/fi';
 import { Container, DragContainer, Option } from './styles';
+
 interface SortAnswersProps {
   label: string;
   description?: string;
@@ -37,30 +38,25 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>(listOptions);
 
-  const onDragEnd = useCallback(
-    (result: DropResult, options: Array<ListOptions>, setOptions: any) => {
-      if (!result.destination) return;
+  const onDragEnd = useCallback((result: DropResult) => {
+    if (!result.destination) return;
 
-      const items = reorder(
-        options,
-        result.source.index,
-        result.destination.index,
-      );
-      setOptions(items);
-    },
-    [],
-  );
+    const items = reorder(
+      options,
+      result.source.index,
+      result.destination.index,
+    );
+    setOptions(items);
+  }, []);
 
   return (
     <Container>
-      <label>
+      <label htmlFor="id">
         {label}
         {description && <p>{description}</p>}
 
-        <DragDropContext
-          onDragEnd={(result) => onDragEnd(result, options, setOptions)}
-        >
-          <Droppable droppableId={'id'} key={'id'}>
+        <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+          <Droppable droppableId="id" key="id">
             {(provided, snapshot) => (
               <DragContainer
                 {...provided.droppableProps}
