@@ -1,10 +1,16 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  InputHTMLAttributes,
+} from 'react';
 import { useField } from '@unform/core';
 import { useTransition, animated } from 'react-spring';
 
 import { Container } from './styles';
 
-interface ShortTextFieldProps {
+interface ShortTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   readOnly?: boolean;
   placeholder?: string;
   description?: string;
@@ -20,6 +26,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
   name,
   id,
   label,
+  ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
@@ -63,6 +70,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
           type="text"
           id={id}
           placeholder={placeholder}
+          {...rest}
         />
       </label>
       {transitions.map(
