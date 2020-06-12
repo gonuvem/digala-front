@@ -39,6 +39,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || 'name'}
           id={config?.id || 'id'}
           label={config?.label}
+          description={config?.description}
         />
       );
     default:

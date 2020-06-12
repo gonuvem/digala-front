@@ -20,7 +20,6 @@ export const Container = styled.div<ContainerProps>`
     p {
       font-weight: 400;
       margin-top: 0.5rem;
-      margin-bottom: 1rem;
     }
   }
 

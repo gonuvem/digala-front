@@ -12,7 +12,9 @@ export default function changeFieldConfiguration(
   { value, attribute, field }: FieldDTO,
 ): void {
   const changedField = { ...field };
+  console.log('Changed Field >> ', changedField);
   changedField[attribute] = value;
+  console.log('Changed Field After >> ', changedField);
 
   dispatch(QuestionsActions.replaceQuestion(changedField));
 }

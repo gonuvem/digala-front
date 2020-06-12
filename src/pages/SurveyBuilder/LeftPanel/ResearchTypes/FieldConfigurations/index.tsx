@@ -21,11 +21,14 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
     state.questions.questions.find((question) => question.id === fieldId),
   );
 
-  const handleChange = useCallback((value: string, attribute) => {
-    if (field !== undefined) {
-      changeFieldConfiguration(dispatch, { attribute, value, field });
-    }
-  }, []);
+  const handleChange = useCallback(
+    (value: string, attribute) => {
+      if (field !== undefined) {
+        changeFieldConfiguration(dispatch, { attribute, value, field });
+      }
+    },
+    [field, dispatch],
+  );
 
   if (field === undefined) {
     return <p>Não foi possível encontrar um campo correspondente</p>;
