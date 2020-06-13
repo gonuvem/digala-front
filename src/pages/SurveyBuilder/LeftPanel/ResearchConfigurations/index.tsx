@@ -53,7 +53,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
         />
       </section>
       <section>
-        <NumericField name="answersQuant" label="Quantidade de respostas" />
+        <NumericField name="maxResponses" label="Quantidade de respostas" />
       </section>
       <section>
         <SwitchToggle
