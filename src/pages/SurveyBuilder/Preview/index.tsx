@@ -42,7 +42,7 @@ const Preview: React.FC = () => {
         <NavLink href="/">Resultados</NavLink>
       </nav>
       <PanelArea>
-        <h1>{formData?.name}</h1>
+        <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
             <Field fieldId={field.id} config={field} />

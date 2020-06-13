@@ -51,7 +51,7 @@ const LeftPanel: React.FC = () => {
       case 1:
         return <ResearchStyles />;
       case 2:
-        return <ResearchConfigurations />;
+        return <ResearchConfigurations formData={formData} />;
       default:
         return <ResearchTypes questions={questionTypes} />;
     }
@@ -59,7 +59,7 @@ const LeftPanel: React.FC = () => {
 
   return (
     <Container>
-      <h5>{formData?.name}</h5>
+      <h5>{formData?.config.name}</h5>
       <PanelArea
         activePanelNumber={activePanelNumber}
         distance={distanceToTravel}

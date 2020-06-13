@@ -10,21 +10,29 @@ import SelectField from '../../../../components/ResearchFields/SelectField';
 
 import { Container } from './styles';
 
-const ResearchConfigurations: React.FC = () => (
+import { Form as FormType } from '../../../../store/ducks/forms/types';
+
+interface ResearchConfigurationsProps {
+  formData: FormType | null;
+}
+
+const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
+  formData,
+}) => (
   <Container>
     <span>Informações Básicas</span>
-    <Form onSubmit={() => null}>
+    <Form initialData={formData?.config} onSubmit={() => null}>
       <section>
         <ShortTextField
           label="Nome da pesquisa"
-          name="researchName"
+          name="name"
           id="researchNameField"
         />
       </section>
       <section>
         <TextAreaField
           label="Descrição da Pesquisa"
-          name="researchDescription"
+          name="description"
           id="researchDescriptionField"
         />
       </section>
@@ -39,7 +47,7 @@ const ResearchConfigurations: React.FC = () => (
       </section>
       <section>
         <SwitchToggle
-          name="limitedAnswerQuant"
+          name="hasLimitedResponses"
           label="Quantidade de respostas limitada?"
           helpHint="Lorem ipsum sit dolor amet"
         />
@@ -49,14 +57,14 @@ const ResearchConfigurations: React.FC = () => (
       </section>
       <section>
         <SwitchToggle
-          name="totemMode"
+          name="isTotemMode"
           label="Modo Totem"
           helpHint="Lorem ipsum"
         />
       </section>
       <section>
         <SwitchToggle
-          name="showProgressBar"
+          name="canDisplayProgressBar"
           label="Mostrar barra de progresso"
           helpHint="Lorem ipsum"
         />
@@ -69,7 +77,7 @@ const ResearchConfigurations: React.FC = () => (
       </section>
       <section>
         <SwitchToggle
-          name="allowMultipleSubmissions"
+          name="canAllowMultipleSubmissions"
           label="Permitir múltiplas submissões"
           helpHint="Lorem ipsum"
         />

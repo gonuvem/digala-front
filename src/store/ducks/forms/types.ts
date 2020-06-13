@@ -9,7 +9,18 @@ export enum FormsTypes {
  * Data Types
  */
 export interface Form {
-  name: string;
+  config: {
+    name: string;
+    description?: string;
+    beginDate?: Date;
+    endDate?: Date;
+    hasLimitedResponses: boolean;
+    maxResponses?: number;
+    isTotemMode: boolean;
+    canDisplayProgressBar: boolean;
+    progressBarType?: string;
+    canAllowMultipleSubmissions: boolean;
+  };
   id: string;
 }
 

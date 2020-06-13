@@ -7,6 +7,15 @@ interface FormDTO {
       _id: string;
       config: {
         name: string;
+        description?: string;
+        beginDate?: Date;
+        endDate?: Date;
+        hasLimitedResponses: boolean;
+        maxResponses?: number;
+        isTotemMode: boolean;
+        canDisplayProgressBar: boolean;
+        progressBarType?: string;
+        canAllowMultipleSubmissions: boolean;
       };
     } | null;
     __typename: string;
@@ -20,8 +29,10 @@ export default function loadOwnForm(
   if (formData !== undefined && formData.data.form !== null) {
     dispatch(
       FormsActions.loadForm({
-        name: formData.data.form.config.name,
         id: formData.data.form._id,
+        config: {
+          ...formData.data.form.config,
+        },
       }),
     );
   }
