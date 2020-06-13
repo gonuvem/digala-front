@@ -21,7 +21,7 @@ const SurveyBuilder: React.FC = () => {
   const { data: formData } = useQuery(READ_FORM, { variables: { id } });
 
   const { data: questionsList } = useQuery(LIST_OWN_QUESTIONS, {
-    variables: { form: '5ede7552b3c9d80017446c40' },
+    variables: { form: id },
   });
 
   useEffect(() => loadOwnForm(dispatch, formData), [formData, dispatch]);
