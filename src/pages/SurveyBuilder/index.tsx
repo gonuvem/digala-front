@@ -12,6 +12,7 @@ import Pagination from './Pagination';
 import * as QuestionsActions from '../../store/ducks/questions/actions';
 import { READ_FORM } from '../../services/requests/forms';
 import { LIST_OWN_QUESTIONS } from '../../services/requests/questions';
+import loadOwnForm from '../../services/logic/loadOwnForm';
 
 const SurveyBuilder: React.FC = () => {
   const dispatch = useDispatch();
@@ -23,11 +24,7 @@ const SurveyBuilder: React.FC = () => {
     variables: { form: '5ede7552b3c9d80017446c40' },
   });
 
-  useEffect(() => {
-    if (formData?.data?.error !== null) {
-      // dispatch();
-    }
-  }, []);
+  useEffect(() => loadOwnForm(dispatch, formData), [formData, dispatch]);
 
   useEffect(() => {
     if (questionsList?.data?.error !== null) {

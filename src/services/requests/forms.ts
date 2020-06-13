@@ -86,7 +86,7 @@ export const CREATE_OWN_FORM = gql`
 
 export const READ_FORM = gql`
   query($id: ID!) {
-    readOwnForm(id: $id) {
+    data: readOwnForm(id: $id) {
       form {
         isActive
         _id
