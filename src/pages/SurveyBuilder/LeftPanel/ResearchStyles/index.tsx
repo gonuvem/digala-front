@@ -6,6 +6,7 @@ import { Container, CardColor, DashedContainer, Section } from './styles';
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
 import uploadIcon from '../../../../assets/uploud_icon.png';
+import ColorPicker from '../../../../components/Common/ColorPicker';
 
 const colors = [
   { name: 'Amarelo', value: '#FFA825' },
@@ -23,9 +24,7 @@ const ResearchStyles: React.FC = () => {
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
-            {colors.map((color) => (
-              <CardColor color={color.value} />
-            ))}
+            <ColorPicker name="researchBackground" colors={colors} />
           </div>
         </Section>
         <Section>
@@ -48,9 +47,7 @@ const ResearchStyles: React.FC = () => {
         <Section>
           <p>Fundo no header</p>
           <div>
-            {colors.map((color) => (
-              <CardColor color={color.value} />
-            ))}
+            <ColorPicker name="headerBackground" colors={colors} />
           </div>
         </Section>
         <Section>
