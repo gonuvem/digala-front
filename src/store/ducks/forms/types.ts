@@ -21,6 +21,15 @@ export interface Form {
     progressBarType?: { value?: string; label?: string };
     canAllowMultipleSubmissions: boolean;
   };
+  style: {
+    background?: { value?: string; name?: string };
+    logo?: string;
+    headerText?: string;
+    hasLogoInHeader: boolean;
+    headerBackground?: { value?: string; name?: string };
+    footerText?: string;
+    footerBackground?: { value?: string; name?: string };
+  };
   id: string;
 }
 

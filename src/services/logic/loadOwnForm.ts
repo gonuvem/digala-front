@@ -17,6 +17,15 @@ interface FormDTO {
         progressBarType?: string;
         canAllowMultipleSubmissions: boolean;
       };
+      style: {
+        background: string;
+        logo: string;
+        headerText: string;
+        hasLogoInHeader: boolean;
+        headerBackground: string;
+        footerText: string;
+        footerBackground: string;
+      };
     } | null;
     __typename: string;
   };
@@ -35,6 +44,21 @@ export default function loadOwnForm(
           progressBarType: {
             value: formData.data.form.config.progressBarType,
             label: 'Linear',
+          },
+        },
+        style: {
+          ...formData.data.form.style,
+          background: {
+            value: formData.data.form.style.background,
+            name: 'Azul',
+          },
+          headerBackground: {
+            value: formData.data.form.style.headerBackground,
+            name: 'Azul',
+          },
+          footerBackground: {
+            value: formData.data.form.style.footerBackground,
+            name: 'Azul',
           },
         },
       }),

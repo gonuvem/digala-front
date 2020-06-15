@@ -49,7 +49,7 @@ const LeftPanel: React.FC = () => {
   const renderSection = (): React.ReactNode => {
     switch (activePanelNumber) {
       case 1:
-        return <ResearchStyles />;
+        return <ResearchStyles formData={formData} />;
       case 2:
         return <ResearchConfigurations formData={formData} />;
       default:

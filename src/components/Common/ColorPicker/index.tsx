@@ -19,7 +19,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ colors, name }) => {
     value: '#ffffff',
   });
 
-  const { fieldName, registerField } = useField(name);
+  const { fieldName, registerField, defaultValue } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -30,6 +30,10 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ colors, name }) => {
       },
     });
   }, [selectedColor, fieldName, registerField]);
+
+  useEffect(() => {
+    setSelectedColor(defaultValue);
+  }, [defaultValue]);
 
   const handleSelectColor = useCallback((color: Color) => {
     setSelectedColor(color);
