@@ -1,5 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Container, PanelTabLink, PanelArea } from './styles';
@@ -9,28 +8,21 @@ import ResearchTypes from './ResearchTypes';
 import ResearchConfigurations from './ResearchConfigurations';
 
 import getDistanceBetweenElements from '../../../utils/getDistanceBetweenElements';
-import { LIST_QUESTION_TYPES } from '../../../services/requests/questions';
 import { ApplicationState } from '../../../store';
 import { Form } from '../../../store/ducks/forms/types';
 
 const TabLinks: string[] = ['Tipos', 'Estilos', 'Configurações'];
 
-const LeftPanel: React.FC = () => {
+interface LeftPanelProps {
+  questionsTypes: [];
+}
+
+const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
   const [activePanelNumber, setActivePanelNumber] = useState(0);
   const [distanceToTravel, setDistanceToTravel] = useState(0);
 
   const formData = useSelector<ApplicationState, Form | null>(
     (state) => state.forms.form,
-  );
-
-  const { data: questionTypesData } = useQuery(LIST_QUESTION_TYPES);
-
-  const questionTypes = useMemo(
-    () =>
-      questionTypesData?.data?.error === null
-        ? questionTypesData?.data?.types
-        : [],
-    [questionTypesData],
   );
 
   const handleTabChange = useCallback(
@@ -53,7 +45,7 @@ const LeftPanel: React.FC = () => {
       case 2:
         return <ResearchConfigurations formData={formData} />;
       default:
-        return <ResearchTypes questions={questionTypes} />;
+        return <ResearchTypes questions={questionsTypes} />;
     }
   };
 

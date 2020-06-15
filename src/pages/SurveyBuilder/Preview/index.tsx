@@ -14,7 +14,18 @@ import { Question } from '../../../store/ducks/questions/types';
 import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 
-const Preview: React.FC = () => {
+interface QuestionDTO {
+  name: string;
+  cover: string;
+  alias: string;
+  description: string;
+}
+
+interface PreviewProps {
+  questionsTypes: QuestionDTO[];
+}
+
+const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
   const dispatch = useDispatch();
 
@@ -30,7 +41,10 @@ const Preview: React.FC = () => {
   });
 
   const handleQuestionBoxClick = useCallback(
-    (alias: string) => addFieldToForm(dispatch, { alias }),
+    (alias: string) => {
+      addFieldToForm(dispatch, { alias });
+      setShowQuestionsPanel(false);
+    },
     [dispatch],
   );
 
@@ -60,13 +74,15 @@ const Preview: React.FC = () => {
           ({ item, key, props }) =>
             item && (
               <QuestionsPanel show={showQuestionsPanel} key={key} style={props}>
-                <QuestionBox
-                  icon={FiSliders}
-                  name="Texto Curto"
-                  description="Lorem ipsum sit dolor amet"
-                  image="https://media.giphy.com/media/kcIjlDEBvWb4BZB29g/giphy.gif"
-                  onClick={() => handleQuestionBoxClick('shortText')}
-                />
+                {questionsTypes.map((question) => (
+                  <QuestionBox
+                    icon={FiSliders}
+                    name={question.name}
+                    description={question.description}
+                    image={question.description}
+                    onClick={() => handleQuestionBoxClick(question.alias)}
+                  />
+                ))}
               </QuestionsPanel>
             ),
         )}
