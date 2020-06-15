@@ -21,7 +21,10 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
 }) => (
   <Container>
     <span>Informações Básicas</span>
-    <Form initialData={formData?.config} onSubmit={() => null}>
+    <Form
+      initialData={formData?.config}
+      onSubmit={(data) => console.log('Data >> ', data)}
+    >
       <section>
         <ShortTextField
           label="Nome da pesquisa"
