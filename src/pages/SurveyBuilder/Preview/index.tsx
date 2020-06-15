@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
 
+import SliderField from '../../../components/ResearchFields/SliderField';
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
-import NpsField from '../../../components/ResearchFields/NpsField';
+// import NpsField from '../../../components/ResearchFields/NpsField';
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
 
@@ -24,14 +25,9 @@ const Preview: React.FC = () => {
       </nav>
       <PanelArea>
         <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
-        <NpsField
-          name="Nps"
+        <SliderField
+          label="Slider"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-          showSubtitles
-          rightSubtitle="Pouco provável"
-          leftSubtitle="Muito provável"
-          startNumber={1}
-          endNumber={10}
         />
         <button
           type="button"
