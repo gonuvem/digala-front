@@ -18,7 +18,7 @@ export interface Form {
     maxResponses?: number;
     isTotemMode: boolean;
     canDisplayProgressBar: boolean;
-    progressBarType?: string;
+    progressBarType?: { value?: string; label?: string };
     canAllowMultipleSubmissions: boolean;
   };
   id: string;

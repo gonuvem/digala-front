@@ -73,6 +73,10 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
         <SelectField
           name="progressBarType"
           label="Tipo da barra de progresso"
+          options={[
+            { value: 'Step', label: 'Step' },
+            { value: 'Linear', label: 'Linear' },
+          ]}
         />
       </section>
       <section>
