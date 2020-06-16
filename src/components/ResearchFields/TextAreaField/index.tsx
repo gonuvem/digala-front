@@ -1,10 +1,17 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  TextareaHTMLAttributes,
+} from 'react';
 import { useField } from '@unform/core';
 import { useTransition, animated } from 'react-spring';
 
 import { Container } from './styles';
 
-interface TextAreaFieldProps {
+interface TextAreaFieldProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   readOnly?: boolean;
   placeholder?: string;
   description?: string;
@@ -20,6 +27,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
   name,
   id,
   label,
+  ...rest
 }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
@@ -62,6 +70,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
           name={name}
           id={id}
           placeholder={placeholder}
+          {...rest}
         />
       </label>
       {transitions.map(

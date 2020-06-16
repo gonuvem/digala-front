@@ -83,3 +83,43 @@ export const CREATE_OWN_FORM = gql`
     }
   }
 `;
+
+export const READ_FORM = gql`
+  query($id: ID!) {
+    readOwnForm(id: $id) {
+      form {
+        isActive
+        _id
+        config {
+          name
+          description
+          beginDate
+          endDate
+          hasLimitedResponses
+          maxResponses
+          isTotemMode
+          canDisplayProgressBar
+          progressBarType
+          canAllowMultipleSubmissions
+        }
+        style {
+          background
+          logo
+          headerText
+          hasLogoInHeader
+          headerBackground
+          footerText
+          footerBackground
+        }
+        numResponses
+        createdAt
+        updatedAt
+      }
+      error {
+        message
+        statusCode
+        internalCode
+      }
+    }
+  }
+`;
