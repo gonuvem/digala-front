@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
+import { uuid } from 'uuidv4';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from './field';
