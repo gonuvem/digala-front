@@ -34,12 +34,15 @@ const Calendar: React.FC<CustomCalendarProps> = ({ name, label, ...rest }) => {
     registerField({
       name: fieldName,
       ref: calendarRef.current,
-      path: 'props.value',
+      path: undefined,
+      getValue: () => {
+        return value;
+      },
       clearValue: (ref: any) => {
         ref.clear();
       },
     });
-  }, [fieldName, registerField]);
+  }, [fieldName, registerField, value]);
 
   return (
     <Container>

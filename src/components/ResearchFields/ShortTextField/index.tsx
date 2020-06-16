@@ -66,6 +66,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
           disabled={readOnly}
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
+          defaultValue={defaultValue}
           name={name}
           type="text"
           id={id}

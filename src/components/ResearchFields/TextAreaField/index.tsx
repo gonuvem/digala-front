@@ -69,6 +69,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
           onBlur={handleOnBlur}
           name={name}
           id={id}
+          defaultValue={defaultValue}
           placeholder={placeholder}
           {...rest}
         />

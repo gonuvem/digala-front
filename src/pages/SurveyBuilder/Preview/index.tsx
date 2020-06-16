@@ -12,15 +12,17 @@ import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
+import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 
 const Preview: React.FC = () => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
   const dispatch = useDispatch();
 
-  const fieldsRegistered = useSelector<ApplicationState, Question[]>(
-    (state) => state.questions.questions,
-  );
+  const [fieldsRegistered, formData] = useSelector<
+    ApplicationState,
+    [Question[], FormType | null]
+  >((state) => [state.questions.questions, state.forms.form]);
 
   const transitions = useTransition(showQuestionsPanel, null, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -41,7 +43,7 @@ const Preview: React.FC = () => {
         <NavLink href="/">Resultados</NavLink>
       </nav>
       <PanelArea>
-        <h1>Pesquisa eleitoral de Lagoa Alegre</h1>
+        <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
             <Field fieldId={field.id} config={field} />

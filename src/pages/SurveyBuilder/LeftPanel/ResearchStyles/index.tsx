@@ -6,6 +6,9 @@ import { Container, CardColor, DashedContainer, Section } from './styles';
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
 import uploadIcon from '../../../../assets/uploud_icon.png';
+import ColorPicker from '../../../../components/Common/ColorPicker';
+
+import { Form as FormType } from '../../../../store/ducks/forms/types';
 
 const colors = [
   { name: 'Amarelo', value: '#FFA825' },
@@ -16,16 +19,18 @@ const colors = [
   { name: 'Azul', value: '#3FA4F6' },
 ];
 
-const ResearchStyles: React.FC = () => {
+interface ResearchStylesProps {
+  formData: FormType | null;
+}
+
+const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={formData?.style} onSubmit={() => null}>
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
-            {colors.map((color) => (
-              <CardColor color={color.value} />
-            ))}
+            <ColorPicker name="background" colors={colors} />
           </div>
         </Section>
         <Section>
@@ -36,32 +41,28 @@ const ResearchStyles: React.FC = () => {
           </DashedContainer>
         </Section>
         <Section>
-          <ShortTextField label="Texto no header" name="" id="" />
+          <ShortTextField label="Texto no header" name="headerText" id="" />
         </Section>
         <Section>
           <div>
             <p>Logo no header</p>
             <FiHelpCircle />
           </div>
-          <SwitchToggle name="logoInHeader" />
+          <SwitchToggle name="hasLogoInHeader" />
         </Section>
         <Section>
           <p>Fundo no header</p>
           <div>
-            {colors.map((color) => (
-              <CardColor color={color.value} />
-            ))}
+            <ColorPicker name="headerBackground" colors={colors} />
           </div>
         </Section>
         <Section>
-          <ShortTextField label="Texto no rodapé" name="" id="" />
+          <ShortTextField label="Texto no rodapé" name="footerText" id="" />
         </Section>
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
-            {colors.map((color) => (
-              <CardColor color={color.value} />
-            ))}
+            <ColorPicker name="headerBackground" colors={colors} />
           </div>
         </Section>
       </Form>
