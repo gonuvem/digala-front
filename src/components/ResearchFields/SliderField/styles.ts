@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
 
 import Colors from '../../../utils/colors';
 
@@ -19,4 +20,58 @@ export const Container = styled.div`
       margin-bottom: 1rem;
     }
   }
+
+  div {
+    div {
+      display: flex;
+      flex: 1;
+      justify-content: space-between;
+    }
+  }
+`;
+
+export const Slider = styled.input`
+  width: 100%;
+  cursor: pointer;
+  -webkit-appearance: none;
+
+  &::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background: ${Colors.primary};
+  }
+
+  ::-moz-range-track {
+    -webkit-appearance: none;
+    outline: none;
+    background: ${Colors.primary};
+    height: 0.4rem;
+    opacity: 0.7;
+    border-radius: 4px;
+  }
+
+  ::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    outline: none;
+    background: ${Colors.primaryOpacity};
+    height: 0.52rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  ::-webkit-slider-thumb {
+    position: relative;
+    -webkit-appearance: none;
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 50%;
+    background: ${Colors.primary};
+    margin-top: -0.3rem;
+  }
+`;
+
+export const Tooltip = styled(ReactTooltip)`
+  display: flex;
 `;
