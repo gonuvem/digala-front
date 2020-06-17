@@ -3,6 +3,8 @@
  */
 export enum FormsTypes {
   LOAD_FORM = '@forms/LOAD_FORM',
+  UPDATE_FORM_CONFIG = '@forms/UPDATE_FORM_CONFIG',
+  UPDATE_FORM_STYLE = '@forms/UPDATE_FORM_STYLE',
 }
 
 /**
@@ -38,4 +40,5 @@ export interface Form {
  */
 export interface FormsState {
   readonly form: Form | null;
+  readonly saved: boolean;
 }
