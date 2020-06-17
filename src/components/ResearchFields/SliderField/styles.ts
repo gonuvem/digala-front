@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ReactTooltip from 'react-tooltip';
 
 import Colors from '../../../utils/colors';
 
@@ -22,6 +21,12 @@ export const Container = styled.div`
   }
 
   div {
+    div:first-child {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: ${Colors.secondary};
+      margin-bottom: 0.7rem;
+    }
     div {
       display: flex;
       flex: 1;
@@ -70,8 +75,4 @@ export const Slider = styled.input`
     background: ${Colors.primary};
     margin-top: -0.3rem;
   }
-`;
-
-export const Tooltip = styled(ReactTooltip)`
-  display: flex;
 `;
