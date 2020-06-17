@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -14,6 +14,7 @@ import { Container } from './styles';
 
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
+import useDebounce from '../../../../hooks/useDebounce';
 
 interface ResearchConfigurationsProps {
   formData: FormType | null;
@@ -22,22 +23,25 @@ interface ResearchConfigurationsProps {
 const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
   formData,
 }) => {
+  const [tempInformation, setTempInformation] = useState('');
   const formRef = useRef<FormHandles>(null);
   const dispatch = useDispatch();
 
-  const handleChange = useCallback(() => {
+  const debouncedTrigger = useDebounce(tempInformation, 500);
+
+  const handleChange = useCallback((event) => {
+    setTempInformation(event.target.value);
+  }, []);
+
+  useEffect(() => {
     const data = formRef.current?.getData();
     changeFormConfiguration(dispatch, { attribute: 'config', config: data });
-  }, []);
+  }, [debouncedTrigger, dispatch]);
 
   return (
     <Container>
       <span>Informações Básicas</span>
-      <Form
-        ref={formRef}
-        initialData={formData?.config}
-        onSubmit={(data) => console.log('Data >> ', data)}
-      >
+      <Form ref={formRef} initialData={formData?.config} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome da pesquisa"
