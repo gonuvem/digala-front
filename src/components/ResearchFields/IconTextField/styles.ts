@@ -10,10 +10,24 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   width: 100%;
+
+  label {
+    font-weight: 500;
+    color: ${Colors.black};
+    display: flex;
+    flex-direction: column;
+
+    p {
+      font-weight: 400;
+      margin-top: 0.5rem;
+    }
+  }
+
   div {
     display: flex;
     align-items: center;
 
+    margin-top: 1rem;
     padding: 1rem 0.5rem;
 
     border: solid 2px ${Colors.black};

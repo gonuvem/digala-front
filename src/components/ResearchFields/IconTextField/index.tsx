@@ -15,6 +15,7 @@ interface IconTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   readOnly?: boolean;
   placeholder?: string;
   description?: string;
+  label?: string;
   icon: IconType;
   name: string;
   id: string;
@@ -23,6 +24,7 @@ interface IconTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 const IconTextField: React.FC<IconTextFieldProps> = ({
   icon: Icon,
   placeholder,
+  label,
   readOnly,
   description,
   name,
@@ -59,6 +61,22 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
 
   return (
     <Container hasFocus={hasFocus} isInvalid={!!error} isFilled={isFilled}>
+      <label htmlFor={id}>
+        {label && label}
+        {description && <p>{description}</p>}
+        <div>
+          <Icon size={24} />
+          <input
+            ref={inputRef}
+            name={name}
+            placeholder={placeholder}
+            id={id}
+            onFocus={handleOnFocus}
+            onBlur={handleOnBlur}
+            {...rest}
+          />
+        </div>
+      </label>
       {transitions.map(
         ({ item, key, props }) =>
           item && (
@@ -67,18 +85,6 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
             </animated.span>
           ),
       )}
-      <div>
-        <Icon size={24} />
-        <input
-          ref={inputRef}
-          name={name}
-          placeholder={placeholder}
-          id={id}
-          onFocus={handleOnFocus}
-          onBlur={handleOnBlur}
-          {...rest}
-        />
-      </div>
     </Container>
   );
 };

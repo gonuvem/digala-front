@@ -30,6 +30,10 @@ export const PanelArea = styled.div`
     margin-bottom: 1.5rem;
   }
 
+  form > div {
+    margin-top: 1rem;
+  }
+
   > button {
     display: flex;
     flex-direction: column;

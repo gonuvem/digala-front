@@ -25,6 +25,12 @@ export const Actions = styled.div`
   align-items: center;
   flex: 1;
 
+  a {
+    text-decoration: none;
+    display: flex;
+    align-items: flex-end;
+  }
+
   button {
     border: none;
     display: flex;
