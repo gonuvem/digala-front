@@ -30,8 +30,8 @@ const Preview: React.FC = () => {
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
           minValue={0}
           maxValue={100}
-          leftSubtitle={'Muito Ruim'}
-          rightSubtitle={'Muito Bom'}
+          leftSubtitle="Muito Ruim"
+          rightSubtitle="Muito Bom"
         />
         <button
           type="button"

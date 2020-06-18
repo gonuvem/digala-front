@@ -22,7 +22,7 @@ const SliderField: React.FC<SliderFieldProps> = ({
   const [valueRange, setValueRange] = useState(0);
 
   const handleChangeSlider = useCallback((e) => {
-    setValueRange(parseInt(e.target.value));
+    setValueRange(parseInt(e.target.value, 10));
   }, []);
 
   return (
@@ -45,9 +45,9 @@ const SliderField: React.FC<SliderFieldProps> = ({
           value={valueRange}
           onChange={handleChangeSlider}
           data-tip
-          data-for={`rangeSlider`}
+          data-for="rangeSlider"
         />
-        {/* <Tooltip id={`rangeSlider`} effect="solid" place="top" type="dark">
+        {/* <Tooltip id="rangeSlider" effect="solid" place="top" type="dark">
           <p>{valueRange}</p>
         </Tooltip> */}
         <div>
