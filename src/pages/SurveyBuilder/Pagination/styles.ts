@@ -4,6 +4,10 @@ import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
   margin-left: 2.5rem;
+
+  #loading-container {
+    width: 3.9rem;
+  }
 `;
 
 export const PanelArea = styled.div`

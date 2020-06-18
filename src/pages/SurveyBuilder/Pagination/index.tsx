@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { FiBookmark, FiPlusCircle } from 'react-icons/fi';
 
 import SolidButton from '../../../components/Common/SolidButton';
+import LoadingSpinner from '../../../components/Common/LoadingSpinner';
 
 import { Container, PanelArea } from './styles';
 
@@ -31,7 +32,15 @@ const Pagination: React.FC = () => {
 
   return (
     <Container>
-      <SolidButton onClick={handleUpdate}>Publicar</SolidButton>
+      <SolidButton onClick={handleUpdate}>
+        {!updateFormLoading ? (
+          'Publicar'
+        ) : (
+          <div id="loading-container">
+            <LoadingSpinner />
+          </div>
+        )}
+      </SolidButton>
       <PanelArea>
         {[...Array(pagesCount)].map((e, i) => (
           <>
