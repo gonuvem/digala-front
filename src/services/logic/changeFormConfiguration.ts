@@ -12,6 +12,8 @@ export default function changeFormConfiguration(
 ): void {
   const dataToDispatch = attribute === 'config' ? config : style;
 
+  console.log('Data to Dispatch >> ', dataToDispatch);
+
   if (dataToDispatch) {
     const action =
       attribute === 'config'

@@ -29,8 +29,8 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
 
   const debouncedTrigger = useDebounce(tempInformation, 500);
 
-  const handleChange = useCallback((event) => {
-    setTempInformation(event.target.value);
+  const handleChange = useCallback((value) => {
+    setTempInformation(value);
   }, []);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             label="Nome da pesquisa"
             name="name"
             id="researchNameField"
-            onChange={handleChange}
+            onChange={(event) => handleChange(event.target.value)}
           />
         </section>
         <section>
@@ -98,6 +98,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
               { value: 'Step', label: 'Step' },
               { value: 'Linear', label: 'Linear' },
             ]}
+            onChange={handleChange}
           />
         </section>
         <section>
