@@ -1,6 +1,6 @@
 import React, { InputHTMLAttributes, useState, useCallback } from 'react';
 
-import { Container, Slider } from './styles';
+import { Container, Slider, Tooltip } from './styles';
 
 interface SliderFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -40,11 +40,16 @@ const SliderField: React.FC<SliderFieldProps> = ({
         )}
         <Slider
           type="range"
-          min={0}
-          max={50}
+          min={minValue}
+          max={maxValue}
           value={valueRange}
           onChange={handleChangeSlider}
+          data-tip
+          data-for={`rangeSlider`}
         />
+        {/* <Tooltip id={`rangeSlider`} effect="solid" place="top" type="dark">
+          <p>{valueRange}</p>
+        </Tooltip> */}
         <div>
           <p>{minValue}</p>
           <p>{maxValue}</p>

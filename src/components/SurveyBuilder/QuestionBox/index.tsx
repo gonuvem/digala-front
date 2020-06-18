@@ -21,7 +21,7 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
       <Icon size={20} />
       <span>{name}</span>
     </Container>
-    <Tooltip id={`question-${name}`} effect="solid" place="right" type="light">
+    <Tooltip id={`question-${name}`} effect="solid" place="top" type="light">
       <img alt="question-helper-video" src={image} />
       <h3>{name}</h3>
       <p>{description}</p>

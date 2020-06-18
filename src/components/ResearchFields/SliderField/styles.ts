@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import ReactTooltip from 'react-tooltip';
+
 import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
@@ -74,5 +76,22 @@ export const Slider = styled.input`
     border-radius: 50%;
     background: ${Colors.primary};
     margin-top: -0.3rem;
+  }
+`;
+
+export const Tooltip = styled(ReactTooltip)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 0.5rem;
+  transition: opacity 0.3s;
+  opacity: 1 !important;
+  left: 15rem;
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+
+  p {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 `;
