@@ -27,6 +27,16 @@ interface ResearchStylesProps {
   formData: FormType | null;
 }
 
+interface FormStyleDTO {
+  background?: { value?: string; name?: string };
+  logo?: string;
+  headerText?: string;
+  hasLogoInHeader: string;
+  headerBackground?: { value?: string; name?: string };
+  footerText?: string;
+  footerBackground?: { value?: string; name?: string };
+}
+
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   const [tempInformation, setTempInformation] = useState('');
   const formRef = useRef<FormHandles>(null);
@@ -40,7 +50,10 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
 
   useEffect(() => {
     const data = formRef.current?.getData();
-    changeFormConfiguration(dispatch, { attribute: 'style', style: data });
+    changeFormConfiguration(dispatch, {
+      attribute: 'style',
+      style: data as FormStyleDTO,
+    });
   }, [debouncedTrigger, dispatch]);
 
   return (

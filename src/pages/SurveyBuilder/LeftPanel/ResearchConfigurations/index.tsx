@@ -20,6 +20,19 @@ interface ResearchConfigurationsProps {
   formData: FormType | null;
 }
 
+interface FormConfigDTO {
+  name: string;
+  description?: string;
+  beginDate?: Date;
+  endDate?: Date;
+  hasLimitedResponses: string;
+  maxResponses?: string;
+  isTotemMode: string;
+  canDisplayProgressBar: string;
+  progressBarType?: { value?: string; label?: string };
+  canAllowMultipleSubmissions: string;
+}
+
 const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
   formData,
 }) => {
@@ -35,7 +48,10 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
 
   useEffect(() => {
     const data = formRef.current?.getData();
-    changeFormConfiguration(dispatch, { attribute: 'config', config: data });
+    changeFormConfiguration(dispatch, {
+      attribute: 'config',
+      config: data as FormConfigDTO,
+    });
   }, [debouncedTrigger, dispatch]);
 
   return (
@@ -74,7 +90,11 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
           />
         </section>
         <section>
-          <NumericField name="maxResponses" label="Quantidade de respostas" />
+          <NumericField
+            name="maxResponses"
+            label="Quantidade de respostas"
+            onChange={(event) => handleChange(event.target.value)}
+          />
         </section>
         <section>
           <SwitchToggle
