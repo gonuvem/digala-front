@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn';
 import Forgot from '../pages/Forgot';
 import MyResearches from '../pages/MyResearches';
 import SurveyBuilder from '../pages/SurveyBuilder';
+import ShareSurvey from '../pages/ShareSurvey';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -14,6 +15,7 @@ const Routes: React.FC = () => (
     <Route path="/forgot" component={Forgot} />
     <Route path="/my_researches" isPrivate component={MyResearches} />
     <Route path="/edit_survey/:id" isPrivate component={SurveyBuilder} />
+    <Route path="/share" isPrivate component={ShareSurvey} />
   </Switch>
 );
 

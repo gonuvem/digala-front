@@ -39,7 +39,7 @@ const Preview: React.FC = () => {
     <Container>
       <nav>
         <NavLink href="/">Editar</NavLink>
-        <NavLink href="/">Compartilhar</NavLink>
+        <NavLink href="/share">Compartilhar</NavLink>
         <NavLink href="/">Resultados</NavLink>
       </nav>
       <PanelArea>
