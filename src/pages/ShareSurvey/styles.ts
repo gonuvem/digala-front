@@ -102,6 +102,7 @@ export const Separator = styled.div`
   width: 0.05rem;
   margin: 0 1rem;
   background: ${Colors.blackOpacity};
+  opacity: 0.3;
 `;
 
 export const ShareOptions = styled.div`
