@@ -5,4 +5,5 @@ export default {
   ImageChoice: 'imageChoice',
   SingleChoice: 'radioButton',
   Link: 'link',
+  Nps: 'nps',
 };
