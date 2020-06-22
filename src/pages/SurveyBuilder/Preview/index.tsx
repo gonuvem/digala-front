@@ -3,9 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
+import { uuid } from 'uuidv4';
 
+import SliderField from '../../../components/ResearchFields/SliderField';
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
+<<<<<<< HEAD
+// import NpsField from '../../../components/ResearchFields/NpsField';
+=======
 import Field from './field';
+>>>>>>> edcc704b333e3d4ae6b4d70e0c99d632483912d8
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
 
