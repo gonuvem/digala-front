@@ -32,10 +32,10 @@ const SelectField: React.FC<SelectFieldProps> = ({ label, name, ...rest }) => {
         if (!ref.state.value) {
           return '';
         }
-        return ref.state.value.value;
+        return ref.state.value;
       },
     });
-  }, [fieldName, inputRef]);
+  }, [fieldName, inputRef, registerField]);
 
   return (
     <Container>

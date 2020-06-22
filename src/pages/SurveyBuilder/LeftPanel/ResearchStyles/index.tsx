@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiHelpCircle } from 'react-icons/fi';
-import { Container, CardColor, DashedContainer, Section } from './styles';
+import { Container, DashedContainer, Section } from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
@@ -9,6 +11,8 @@ import uploadIcon from '../../../../assets/uploud_icon.png';
 import ColorPicker from '../../../../components/Common/ColorPicker';
 
 import { Form as FormType } from '../../../../store/ducks/forms/types';
+import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
+import useDebounce from '../../../../hooks/useDebounce';
 
 const colors = [
   { name: 'Amarelo', value: '#FFA825' },
@@ -23,10 +27,38 @@ interface ResearchStylesProps {
   formData: FormType | null;
 }
 
+interface FormStyleDTO {
+  background?: { value?: string; name?: string };
+  logo?: string;
+  headerText?: string;
+  hasLogoInHeader: string;
+  headerBackground?: { value?: string; name?: string };
+  footerText?: string;
+  footerBackground?: { value?: string; name?: string };
+}
+
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
+  const [tempInformation, setTempInformation] = useState('');
+  const formRef = useRef<FormHandles>(null);
+  const dispatch = useDispatch();
+
+  const debouncedTrigger = useDebounce(tempInformation, 500);
+
+  const handleChange = useCallback((event) => {
+    setTempInformation(event.target.value);
+  }, []);
+
+  useEffect(() => {
+    const data = formRef.current?.getData();
+    changeFormConfiguration(dispatch, {
+      attribute: 'style',
+      style: data as FormStyleDTO,
+    });
+  }, [debouncedTrigger, dispatch]);
+
   return (
     <Container>
-      <Form initialData={formData?.style} onSubmit={() => null}>
+      <Form ref={formRef} initialData={formData?.style} onSubmit={() => null}>
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
@@ -41,7 +73,12 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
           </DashedContainer>
         </Section>
         <Section>
-          <ShortTextField label="Texto no header" name="headerText" id="" />
+          <ShortTextField
+            label="Texto no header"
+            name="headerText"
+            id="headerTextField"
+            onChange={handleChange}
+          />
         </Section>
         <Section>
           <div>
