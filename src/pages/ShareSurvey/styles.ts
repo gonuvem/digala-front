@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Colors from '../../utils/colors';
 
@@ -10,20 +10,59 @@ interface NameProps {
   fontColor: string;
 }
 
+interface NavLinkProps {
+  isActive?: boolean;
+}
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  /* background: #000; */
+  padding: 0 10rem;
+`;
+
+export const Titles = styled.div`
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 11rem;
+  }
 `;
 
 export const Header = styled.div`
   flex: 1;
 `;
 
+export const NavLink = styled.a<NavLinkProps>`
+  text-decoration: none;
+  color: ${Colors.black};
+
+  transition: color 0.3s;
+
+  & + a {
+    margin-left: 1.5rem;
+  }
+
+  &:hover {
+    color: ${Colors.primary};
+    font-weight: 500;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      font-weight: 500;
+      color: ${Colors.primary};
+    `}
+`;
+
 export const LinkShare = styled.div`
   flex: 1;
   display: flex;
-  width: 100%;
   padding: 1rem;
   background: ${Colors.white};
   border-radius: 6px;
@@ -68,9 +107,16 @@ export const Separator = styled.div`
 export const ShareOptions = styled.div`
   display: flex;
   margin-top: 1.5rem;
-  div {
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  button {
     width: 17.875rem;
-    margin-right: 0.51rem;
+    margin-bottom: 1rem;
+    border: none;
+    text-decoration: none;
+    text-align: left;
+    background: ${Colors.smokeWhite};
   }
 `;
 

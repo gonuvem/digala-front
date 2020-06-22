@@ -12,6 +12,8 @@ import {
   Separator,
   CardOption,
   Name,
+  Titles,
+  NavLink,
 } from './styles';
 
 import whatsapp from '../../assets/whatsapp_icon.png';
@@ -23,6 +25,16 @@ const ShareSurvey: React.FC = () => {
   return (
     <Container>
       <Header>
+        <Titles>
+          <span>Pesquisa Eleitoral de Lago Alegre</span>
+          <nav>
+            <NavLink href="/">Editar</NavLink>
+            <NavLink isActive={true} href="/share">
+              Compartilhar
+            </NavLink>
+            <NavLink href="/">Resultados</NavLink>
+          </nav>
+        </Titles>
         <LinkShare>
           <div>
             <p>Copie o link e envie-o para compartilhar a pesquisa</p>
@@ -47,7 +59,7 @@ const ShareSurvey: React.FC = () => {
         </LinkShare>
       </Header>
       <ShareOptions>
-        <div>
+        <button type="button">
           <CardOption gradientColor="180deg, #3475D2 0%, #3475D2 0.01%, #4E8DE6 100%">
             <MdMail />
           </CardOption>
@@ -56,8 +68,8 @@ const ShareSurvey: React.FC = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-        </div>
-        <div>
+        </button>
+        <button type="button">
           <CardOption gradientColor="180deg, #C85C83 0%, #FF75A7 100%">
             <RiQrCodeLine />
           </CardOption>
@@ -66,8 +78,8 @@ const ShareSurvey: React.FC = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-        </div>
-        <div>
+        </button>
+        <button type="button">
           <CardOption gradientColor="180deg, #E2846A 0%, #E2846A 0.01%, #FF9578 100%">
             <AiFillHtml5 />
           </CardOption>
@@ -76,7 +88,7 @@ const ShareSurvey: React.FC = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-        </div>
+        </button>
       </ShareOptions>
     </Container>
   );
