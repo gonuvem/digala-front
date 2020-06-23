@@ -12,11 +12,13 @@ import { Container, InputContainer } from './styles';
 interface NumericFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
+  measurement?: string;
 }
 
 const NumericField: React.FC<NumericFieldProps> = ({
   name,
   label,
+  measurement,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,13 +40,16 @@ const NumericField: React.FC<NumericFieldProps> = ({
     <Container>
       {label && <span>{label}</span>}
       <InputContainer>
-        <input
-          ref={inputRef}
-          type="number"
-          name={name}
-          defaultValue={defaultValue}
-          {...rest}
-        />
+        <div>
+          <input
+            ref={inputRef}
+            type="number"
+            name={name}
+            defaultValue={defaultValue}
+            {...rest}
+          />
+          <p>{measurement}</p>
+        </div>
         <div>
           <MdArrowDropUp onClick={() => handleChangeInValue(1)} size={32} />
           <MdArrowDropDown onClick={() => handleChangeInValue(-1)} size={32} />

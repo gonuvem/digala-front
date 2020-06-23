@@ -78,6 +78,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
         <NumberField
           label="Escala"
           name="scale"
+          measurement="unidades"
           onChange={(event) => handleChange(event.target.value)}
         />
       </section>
