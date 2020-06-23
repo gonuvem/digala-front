@@ -19,7 +19,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  /* background: #000; */
   padding: 0 10rem;
 `;
 
@@ -112,21 +111,24 @@ export const ShareOptions = styled.div`
   flex-wrap: wrap;
 
   button {
-    background: #000;
-    width: 18.875rem;
+    flex: 1;
     margin-bottom: 1rem;
     border: none;
     text-decoration: none;
     text-align: left;
     background: ${Colors.smokeWhite};
   }
+
+  button + button {
+    margin-left: 1rem;
+  }
 `;
 
 export const CardOption = styled.div<CardOptionProps>`
+  flex: 1;
   display: flex;
   border-radius: 5px;
   height: 12.75rem;
-  width: 18.875rem;
   justify-content: center;
   align-items: center;
   background: ${(props) => `linear-gradient(${props.gradientColor})`};
