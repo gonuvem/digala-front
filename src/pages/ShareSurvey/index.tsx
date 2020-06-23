@@ -3,7 +3,6 @@ import { MdMail } from 'react-icons/md';
 import { RiQrCodeLine } from 'react-icons/ri';
 import { AiFillHtml5 } from 'react-icons/ai';
 
-import SolidButton from '../../components/Common/SolidButton';
 import {
   Container,
   Header,
@@ -14,6 +13,8 @@ import {
   Name,
   Titles,
   NavLink,
+  ButtonMedia,
+  ButtonCopy,
 } from './styles';
 
 import whatsapp from '../../assets/whatsapp_icon.png';
@@ -40,7 +41,7 @@ const ShareSurvey: React.FC = () => {
             <p>Copie o link e envie-o para compartilhar a pesquisa</p>
             <div>
               <input type="text" value="https://www.digalalink/lagoa-alegre" />
-              <SolidButton>COPIAR</SolidButton>
+              <ButtonCopy>COPIAR</ButtonCopy>
             </div>
           </div>
           <Separator />
@@ -50,10 +51,18 @@ const ShareSurvey: React.FC = () => {
               sociais
             </p>
             <div>
-              <img src={whatsapp} alt="Whatsapp Link" />
-              <img src={facebook} alt="Facebook Link" />
-              <img src={telegram} alt="Telegram Link" />
-              <img src={twitter} alt="Twitter Link" />
+              <ButtonMedia type="button">
+                <img src={whatsapp} alt="Whatsapp Link" />
+              </ButtonMedia>
+              <ButtonMedia type="button">
+                <img src={facebook} alt="Facebook Link" />
+              </ButtonMedia>
+              <ButtonMedia type="button">
+                <img src={telegram} alt="Telegram Link" />
+              </ButtonMedia>
+              <ButtonMedia type="button">
+                <img src={twitter} alt="Twitter Link" />
+              </ButtonMedia>
             </div>
           </div>
         </LinkShare>

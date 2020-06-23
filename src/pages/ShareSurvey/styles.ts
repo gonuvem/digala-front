@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 import Colors from '../../utils/colors';
 
@@ -81,7 +82,6 @@ export const LinkShare = styled.div`
   img {
     height: 2rem;
     width: 2rem;
-    margin: 1rem 0.5rem 0 0;
   }
 
   input {
@@ -112,7 +112,8 @@ export const ShareOptions = styled.div`
   flex-wrap: wrap;
 
   button {
-    width: 17.875rem;
+    background: #000;
+    width: 18.875rem;
     margin-bottom: 1rem;
     border: none;
     text-decoration: none;
@@ -124,8 +125,8 @@ export const ShareOptions = styled.div`
 export const CardOption = styled.div<CardOptionProps>`
   display: flex;
   border-radius: 5px;
-  height: 10.75rem;
-  width: 17.875rem;
+  height: 12.75rem;
+  width: 18.875rem;
   justify-content: center;
   align-items: center;
   background: ${(props) => `linear-gradient(${props.gradientColor})`};
@@ -140,4 +141,33 @@ export const CardOption = styled.div<CardOptionProps>`
 export const Name = styled.h3<NameProps>`
   color: ${(props) => props.fontColor};
   margin: 0.5rem 0 0.5rem 0;
+`;
+
+export const ButtonMedia = styled.button`
+  border: none;
+  background: none;
+  margin: 1rem 0.5rem 0 0;
+`;
+
+export const ButtonCopy = styled.button`
+  display: flex;
+  justify-content: center;
+  border: none;
+  align-items: center;
+  height: 2.9375rem;
+  padding: 0rem 1.5rem;
+  background: ${Colors.primary};
+  text-decoration: none;
+  color: ${Colors.white};
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+
+  font-size: 1.125rem;
+  font-weight: bold;
+
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: ${shade(0.2, Colors.primary)};
+  }
 `;
