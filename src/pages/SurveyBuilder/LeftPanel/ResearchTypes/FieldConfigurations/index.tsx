@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import LinkConfiguration from './linkConfiguration';
+import NpsConfiguration from './npsConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -37,6 +38,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
   switch (field.alias) {
     case FieldsTypes.Link:
       return <LinkConfiguration handleChange={handleChange} />;
+    case FieldsTypes.Nps:
+      return <NpsConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }

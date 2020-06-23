@@ -20,6 +20,14 @@ export const InputContainer = styled.div`
   border-radius: 4px;
   border: solid 2px ${Colors.black};
 
+  div:first-child {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1rem;
+  }
+
   input {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
@@ -33,9 +41,10 @@ export const InputContainer = styled.div`
 
     border: none;
 
-    display: flex;
-    flex: 1;
-    padding: 1rem;
+    margin-right: 0.3rem;
+
+    width: 1.2rem;
+    text-align: right;
 
     font-size: 1.1rem;
 

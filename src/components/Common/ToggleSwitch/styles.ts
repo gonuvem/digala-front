@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 import Colors from '../../../utils/colors';
 
+interface CheckBoxWrapperProps {
+  isChecked: boolean;
+}
+
 export const Container = styled.div`
   div {
     display: flex;
@@ -21,8 +25,15 @@ export const Container = styled.div`
   }
 `;
 
-export const CheckBoxWrapper = styled.div`
+export const CheckBoxWrapper = styled.div<CheckBoxWrapperProps>`
   position: relative;
+  display: flex;
+  align-items: center;
+
+  span {
+    margin: 0.3rem 0 0 1rem;
+    opacity: ${(props) => (props.isChecked ? 1 : 0.5)};
+  }
 `;
 
 export const CheckBoxLabel = styled.label`
@@ -35,7 +46,7 @@ export const CheckBoxLabel = styled.label`
   background: ${Colors.disabledGray};
   display: flex;
   align-items: center;
-  cursor: pointer;
+  /* cursor: pointer; */
 
   &::after {
     content: '';
@@ -54,11 +65,12 @@ export const CheckBox = styled.input`
   opacity: 0;
   z-index: 1;
   border-radius: 15px;
-  width: 42px;
-  height: 26px;
+  width: 70px;
+  height: 32px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  cursor: pointer;
 
   &:checked + ${CheckBoxLabel} {
     background: ${Colors.primary};
