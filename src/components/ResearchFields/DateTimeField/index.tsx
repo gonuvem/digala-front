@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { startOfHour, addHours, getHours } from 'date-fns';
 import InputMask from 'react-input-mask';
 import { useTransition, animated } from 'react-spring';
@@ -8,6 +8,7 @@ import Calendar from '../Calendar';
 import { Container, InputContainer, CalendarContainer } from './styles';
 
 const DateTimeField: React.FC = () => {
+  const [timeValue, setTimeValue] = useState('');
   const [showTimeSelector, setShowTimeSelect] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
 
@@ -35,6 +36,17 @@ const DateTimeField: React.FC = () => {
     }
 
     return generatedHours;
+  }, []);
+
+  const handleSetTime = useCallback((newTime) => {
+    const selectedHour = getHours(newTime);
+    const formattedString = `${selectedHour < 10 && 0}${selectedHour}:00`;
+    setTimeValue(formattedString);
+  }, []);
+
+  const handleChangeTime = useCallback((event) => {
+    const { value } = event.target;
+    setTimeValue(value);
   }, []);
 
   return (
@@ -73,6 +85,8 @@ const DateTimeField: React.FC = () => {
         <InputContainer>
           <InputMask
             onClick={() => setShowTimeSelect((state) => !state)}
+            onChange={handleChangeTime}
+            value={timeValue}
             mask="99:99:99"
             type="text"
             placeholder="Hh:Mm:Ss"
@@ -82,7 +96,9 @@ const DateTimeField: React.FC = () => {
               item && (
                 <animated.div id="time-selector" key={key} style={props}>
                   {hours.map((hour) => (
-                    <button type="button">{`${getHours(hour)}:00`}</button>
+                    <button onClick={() => handleSetTime(hour)} type="button">
+                      {`${getHours(hour)}:00`}
+                    </button>
                   ))}
                 </animated.div>
               ),
