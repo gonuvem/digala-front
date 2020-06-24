@@ -76,3 +76,51 @@ export const Container = styled.div<ContainerProps>`
     line-height: 0;
   }
 `;
+
+export const InputContainer = styled.div`
+  position: relative;
+
+  div {
+    z-index: 9999;
+    display: flex;
+    max-width: 7.5rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    top: 100%;
+    position: absolute;
+    margin-top: 0.7rem;
+    padding: 1rem 0.5rem;
+
+    background-color: ${Colors.white};
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      width: 16px;
+      height: 16px;
+      background-color: ${Colors.white};
+      transform: rotate(45deg);
+    }
+
+    button {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+
+      background-color: ${Colors.primary};
+      color: ${Colors.white};
+
+      border: none;
+      border-radius: 8px;
+
+      transition: background-color 0.1s ease-in-out;
+
+      &:hover {
+        background-color: ${Colors.secondary};
+      }
+    }
+  }
+`;
