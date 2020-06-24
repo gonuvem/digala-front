@@ -5,6 +5,7 @@ import { FiLink } from 'react-icons/fi';
 import ShortTextField from '../../../components/ResearchFields/ShortTextField';
 import IconTextField from '../../../components/ResearchFields/IconTextField';
 import SingleChoiceField from '../../../components/ResearchFields/SingleChoiceField';
+import NpsField from '../../../components/ResearchFields/NpsField';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
@@ -40,6 +41,16 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || 'id'}
           label={config?.label}
           description={config?.description}
+        />
+      );
+    case FieldsTypes.Nps:
+      return (
+        <NpsField
+          label={config?.label || ''}
+          description={config?.description || ''}
+          showSubtitles={config?.showSubtitles || false}
+          scale={config?.scale || 10}
+          startZero={config?.startZero || false}
         />
       );
     default:
