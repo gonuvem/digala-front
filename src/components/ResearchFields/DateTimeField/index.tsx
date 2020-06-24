@@ -3,7 +3,9 @@ import { startOfHour, addHours, getHours } from 'date-fns';
 import InputMask from 'react-input-mask';
 import { useTransition, animated } from 'react-spring';
 
-import { Container, InputContainer } from './styles';
+import Calendar from '../Calendar';
+
+import { Container, InputContainer, CalendarContainer } from './styles';
 
 const DateTimeField: React.FC = () => {
   const [showTimeSelector, setShowTimeSelect] = useState(false);
@@ -37,8 +39,19 @@ const DateTimeField: React.FC = () => {
           eiusmod tempor incididunt ut labore et dolore magna aliqua
         </p>
       </label>
-      <div>
-        <InputMask mask="99/99/9999" type="text" placeholder="DD/MM/YYYY" />
+      <div id="inputs">
+        <InputContainer>
+          <InputMask mask="99/99/9999" type="text" placeholder="DD/MM/YYYY" />
+          <CalendarContainer>
+            <Calendar
+              name="timeSelect"
+              selectRange
+              view="month"
+              next2Label={null}
+              prev2Label={null}
+            />
+          </CalendarContainer>
+        </InputContainer>
         <span>:</span>
         <InputContainer>
           <InputMask
@@ -50,7 +63,7 @@ const DateTimeField: React.FC = () => {
           {transitions.map(
             ({ item, key, props }) =>
               item && (
-                <animated.div key={key} style={props}>
+                <animated.div id="time-selector" key={key} style={props}>
                   {hours.map((hour) => (
                     <button type="button">{`${getHours(hour)}:00`}</button>
                   ))}

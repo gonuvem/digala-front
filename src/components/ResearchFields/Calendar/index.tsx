@@ -46,7 +46,6 @@ const Calendar: React.FC<CustomCalendarProps> = ({ name, label, ...rest }) => {
 
   return (
     <Container>
-      <span>Validade da pesquisa</span>
       <CustomCalendar
         value={value}
         onChange={onChange}

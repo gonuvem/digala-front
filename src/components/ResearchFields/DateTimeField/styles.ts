@@ -26,7 +26,7 @@ export const Container = styled.div<ContainerProps>`
     }
   }
 
-  div {
+  #inputs {
     display: flex;
     align-items: center;
   }
@@ -80,7 +80,7 @@ export const Container = styled.div<ContainerProps>`
 export const InputContainer = styled.div`
   position: relative;
 
-  div {
+  #time-selector {
     z-index: 9999;
     display: flex;
     max-width: 7.5rem;
@@ -122,5 +122,24 @@ export const InputContainer = styled.div`
         background-color: ${Colors.secondary};
       }
     }
+  }
+`;
+
+export const CalendarContainer = styled.div`
+  position: absolute;
+  width: 200%;
+  margin-top: 0.7rem;
+
+  z-index: 999;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: ${Colors.primary};
+    transform: rotate(45deg);
+    left: 25%;
+    top: -5px;
   }
 `;
