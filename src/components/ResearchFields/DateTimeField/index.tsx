@@ -9,8 +9,15 @@ import { Container, InputContainer, CalendarContainer } from './styles';
 
 const DateTimeField: React.FC = () => {
   const [showTimeSelector, setShowTimeSelect] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
 
-  const transitions = useTransition(showTimeSelector, null, {
+  const timeSelectorTransitions = useTransition(showTimeSelector, null, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
+
+  const calendarTransitions = useTransition(showCalendar, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -41,16 +48,26 @@ const DateTimeField: React.FC = () => {
       </label>
       <div id="inputs">
         <InputContainer>
-          <InputMask mask="99/99/9999" type="text" placeholder="DD/MM/YYYY" />
-          <CalendarContainer>
-            <Calendar
-              name="timeSelect"
-              selectRange
-              view="month"
-              next2Label={null}
-              prev2Label={null}
-            />
-          </CalendarContainer>
+          <InputMask
+            onClick={() => setShowCalendar((state) => !state)}
+            mask="99/99/9999"
+            type="text"
+            placeholder="DD/MM/YYYY"
+          />
+          {calendarTransitions.map(
+            ({ item, key, props }) =>
+              item && (
+                <CalendarContainer key={key} style={props}>
+                  <Calendar
+                    name="timeSelect"
+                    selectRange
+                    view="month"
+                    next2Label={null}
+                    prev2Label={null}
+                  />
+                </CalendarContainer>
+              ),
+          )}
         </InputContainer>
         <span>:</span>
         <InputContainer>
@@ -60,7 +77,7 @@ const DateTimeField: React.FC = () => {
             type="text"
             placeholder="Hh:Mm:Ss"
           />
-          {transitions.map(
+          {timeSelectorTransitions.map(
             ({ item, key, props }) =>
               item && (
                 <animated.div id="time-selector" key={key} style={props}>

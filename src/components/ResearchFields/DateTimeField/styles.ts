@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 
 import Colors from '../../../utils/colors';
 
@@ -125,7 +126,7 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const CalendarContainer = styled.div`
+export const CalendarContainer = styled(animated.div)`
   position: absolute;
   width: 200%;
   margin-top: 0.7rem;
