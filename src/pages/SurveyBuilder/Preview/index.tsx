@@ -63,7 +63,11 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       <PanelArea>
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
-          <DateTimeField />
+          <DateTimeField
+            // selectRange
+            dateFormat="month/year"
+            timeFormat="hour/minute"
+          />
           {fieldsRegistered.map((field) => (
             <Field fieldId={field.id} config={field} />
           ))}

@@ -1,56 +1,23 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { startOfHour, addHours, getHours } from 'date-fns';
-import InputMask from 'react-input-mask';
-import { useTransition, animated } from 'react-spring';
+import React from 'react';
 
-import Calendar from '../Calendar';
+import DateInput from './DateInput';
+import TimeInput from './TimeInput';
 
-import { Container, InputContainer, CalendarContainer } from './styles';
+import { Container } from './styles';
 
-const DateTimeField: React.FC = () => {
-  const [timeValue, setTimeValue] = useState('');
-  const [showTimeSelector, setShowTimeSelect] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
+interface DateTimeFieldProps {
+  selectRange?: boolean;
+  dateFormat: 'month/year' | 'day/month/year' | 'day/month';
+  timeFormat: 'hour/minute' | 'hour/minute/second';
+}
 
-  const timeSelectorTransitions = useTransition(showTimeSelector, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
-
-  const calendarTransitions = useTransition(showCalendar, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
-
-  const hours: Date[] = useMemo(() => {
-    const now = new Date();
-    const nowStartHour = startOfHour(now);
-
-    const generatedHours = [nowStartHour];
-
-    for (let i = 0; i <= 6; i += 1) {
-      const nextHour = addHours(nowStartHour, i + 1);
-      generatedHours.push(nextHour);
-    }
-
-    return generatedHours;
-  }, []);
-
-  const handleSetTime = useCallback((newTime) => {
-    const selectedHour = getHours(newTime);
-    const formattedString = `${selectedHour < 10 && 0}${selectedHour}:00`;
-    setTimeValue(formattedString);
-  }, []);
-
-  const handleChangeTime = useCallback((event) => {
-    const { value } = event.target;
-    setTimeValue(value);
-  }, []);
-
+const DateTimeField: React.FC<DateTimeFieldProps> = ({
+  selectRange,
+  dateFormat,
+  timeFormat,
+}) => {
   return (
-    <Container>
+    <Container selectRange={selectRange}>
       <label htmlFor="">
         Data e Hora
         <p>
@@ -59,51 +26,14 @@ const DateTimeField: React.FC = () => {
         </p>
       </label>
       <div id="inputs">
-        <InputContainer>
-          <InputMask
-            onClick={() => setShowCalendar((state) => !state)}
-            mask="99/99/9999"
-            type="text"
-            placeholder="DD/MM/YYYY"
-          />
-          {calendarTransitions.map(
-            ({ item, key, props }) =>
-              item && (
-                <CalendarContainer key={key} style={props}>
-                  <Calendar
-                    name="timeSelect"
-                    selectRange
-                    view="month"
-                    next2Label={null}
-                    prev2Label={null}
-                  />
-                </CalendarContainer>
-              ),
-          )}
-        </InputContainer>
-        <span>:</span>
-        <InputContainer>
-          <InputMask
-            onClick={() => setShowTimeSelect((state) => !state)}
-            onChange={handleChangeTime}
-            value={timeValue}
-            mask="99:99:99"
-            type="text"
-            placeholder="Hh:Mm:Ss"
-          />
-          {timeSelectorTransitions.map(
-            ({ item, key, props }) =>
-              item && (
-                <animated.div id="time-selector" key={key} style={props}>
-                  {hours.map((hour) => (
-                    <button onClick={() => handleSetTime(hour)} type="button">
-                      {`${getHours(hour)}:00`}
-                    </button>
-                  ))}
-                </animated.div>
-              ),
-          )}
-        </InputContainer>
+        {selectRange && <span>De</span>}
+        <DateInput dateFormat={dateFormat} />
+        <span>{selectRange ? 'Até' : ':'}</span>
+        {selectRange ? (
+          <DateInput dateFormat={dateFormat} />
+        ) : (
+          <TimeInput timeFormat={timeFormat} />
+        )}
       </div>
     </Container>
   );

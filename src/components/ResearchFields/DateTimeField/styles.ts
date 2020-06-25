@@ -7,6 +7,7 @@ interface ContainerProps {
   hasFocus?: boolean;
   isInvalid?: boolean;
   isFilled?: boolean;
+  selectRange?: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -74,6 +75,13 @@ export const Container = styled.div<ContainerProps>`
     margin: 0 0.5rem;
 
     font-size: 3rem;
+
+    ${(props) =>
+      props.selectRange &&
+      css`
+        font-size: 1rem;
+        font-weight: bold;
+      `}
     line-height: 0;
   }
 `;
