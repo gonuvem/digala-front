@@ -20,7 +20,7 @@ export const timeFormats = {
   'hour/minute': {
     mask: '99:99',
     placeholder: 'Hh:Mm',
-    fnsMak: 'HH:mm',
+    fnsMask: 'HH:mm',
   },
   'hour/minute/second': {
     mask: '99:99:99',

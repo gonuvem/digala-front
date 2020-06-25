@@ -29,10 +29,16 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
     setShowCalendar(false);
   }, []);
 
+  const handleChangeDate = useCallback((event) => {
+    const { value } = event.target;
+    setDateValue(value);
+  }, []);
+
   return (
     <InputContainer>
       <InputMask
         onClick={() => setShowCalendar((state) => !state)}
+        onChange={handleChangeDate}
         mask={dateFormats[dateFormat].mask}
         value={dateValue}
         type="text"
