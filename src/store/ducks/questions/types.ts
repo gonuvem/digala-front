@@ -21,6 +21,9 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
+
+  lowerLimit?: number;
+  upperLimit?: number;
 }
 
 /**

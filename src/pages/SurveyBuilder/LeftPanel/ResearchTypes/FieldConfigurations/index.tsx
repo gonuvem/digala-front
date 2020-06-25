@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import LinkConfiguration from './linkConfiguration';
 import NpsConfiguration from './npsConfiguration';
+import SliderConfiguration from './sliderConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -40,6 +41,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <LinkConfiguration handleChange={handleChange} />;
     case FieldsTypes.Nps:
       return <NpsConfiguration handleChange={handleChange} />;
+    case FieldsTypes.Slider:
+      return <SliderConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }
