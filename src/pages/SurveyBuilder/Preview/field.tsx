@@ -49,6 +49,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label || ''}
           description={config?.description || ''}
           showSubtitles={config?.showSubtitles || false}
+          leftSubtitle={config?.leftSubtitle}
+          rightSubtitle={config?.rightSubtitle}
           scale={config?.scale || 10}
           startZero={config?.startZero || false}
         />
