@@ -21,9 +21,11 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
-
-  lowerLimit?: number;
-  upperLimit?: number;
+  startZero?: boolean;
+  scale?: number;
+  showSubtitles?: boolean;
+  leftSubtitle?: string;
+  rightSubtitle?: string;
 }
 
 /**
