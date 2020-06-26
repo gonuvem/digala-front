@@ -17,7 +17,7 @@ import { Question } from '../../../store/ducks/questions/types';
 import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 
-import MatrixField from '../../../components/ResearchFields/MatrixField';
+import DateTimeField from '../../../components/ResearchFields/DateTimeField';
 
 interface QuestionDTO {
   name: string;
@@ -63,10 +63,10 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       <PanelArea>
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
-          <MatrixField
-            name="matrixField"
-            columns={['Coluna 01', 'Coluna 02', 'Coluna 03']}
-            lines={['Linha 01', 'Linha 02']}
+          <DateTimeField
+            // selectRange
+            dateFormat="monthYear"
+            timeFormat="hourMinute"
           />
           {fieldsRegistered.map((field) => (
             <Field fieldId={field.id} config={field} />

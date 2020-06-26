@@ -10,18 +10,29 @@ import { Container, CustomCalendar } from './styles';
 interface CustomCalendarProps extends CalendarProps {
   readOnly?: boolean;
   label?: string;
+  onParentChange?: Function;
   name: string;
 }
 
-const Calendar: React.FC<CustomCalendarProps> = ({ name, label, ...rest }) => {
+const Calendar: React.FC<CustomCalendarProps> = ({
+  name,
+  label,
+  onParentChange,
+  ...rest
+}) => {
   const calendarRef = useRef(null);
   const [value, setValue] = useState<Date | Date[]>(new Date());
 
   const { fieldName, registerField } = useField(name);
 
   const onChange = useCallback(
-    (nextValue: Date | Date[]) => setValue(nextValue),
-    [],
+    (nextValue: Date | Date[]) => {
+      setValue(nextValue);
+      if (onParentChange) {
+        onParentChange(nextValue);
+      }
+    },
+    [onParentChange],
   );
 
   const formatShortWeekday = useCallback((locale: string, date: Date) => {
@@ -46,10 +57,10 @@ const Calendar: React.FC<CustomCalendarProps> = ({ name, label, ...rest }) => {
 
   return (
     <Container>
-      <span>Validade da pesquisa</span>
       <CustomCalendar
         value={value}
         onChange={onChange}
+        onClickMonth={onChange}
         formatShortWeekday={formatShortWeekday}
         {...rest}
       />
