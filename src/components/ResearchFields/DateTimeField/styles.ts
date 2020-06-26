@@ -34,7 +34,7 @@ export const Container = styled.div<ContainerProps>`
   }
 
   input {
-    padding: 1rem;
+    padding: 0.5rem;
     max-width: 7.5rem;
 
     border-radius: 4px;

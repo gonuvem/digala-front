@@ -8,7 +8,7 @@ import { InputContainer } from './styles';
 import { timeFormats } from '../../../utils/dateTimeFormats';
 
 interface TimeInputProps {
-  timeFormat: 'hour/minute' | 'hour/minute/second';
+  timeFormat: 'hourMinute' | 'hourMinuteSecond';
 }
 
 const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {

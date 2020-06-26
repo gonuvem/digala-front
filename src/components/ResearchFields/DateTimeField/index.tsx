@@ -7,8 +7,8 @@ import { Container } from './styles';
 
 interface DateTimeFieldProps {
   selectRange?: boolean;
-  dateFormat: 'month/year' | 'day/month/year' | 'day/month';
-  timeFormat: 'hour/minute' | 'hour/minute/second';
+  dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
+  timeFormat: 'hourMinute' | 'hourMinuteSecond';
 }
 
 const DateTimeField: React.FC<DateTimeFieldProps> = ({

@@ -10,7 +10,7 @@ import { dateFormats } from '../../../utils/dateTimeFormats';
 import { InputContainer, CalendarContainer } from './styles';
 
 interface DateInputProps {
-  dateFormat: 'month/year' | 'day/month/year' | 'day/month';
+  dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
 }
 
 const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
@@ -49,9 +49,9 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
           item && (
             <CalendarContainer key={key} style={props}>
               <Calendar
-                name="timeSelect"
+                name="dateSelect"
                 onParentChange={handleCalendarChange}
-                view="month"
+                view={dateFormats[dateFormat].calendarView}
                 next2Label={null}
                 prev2Label={null}
               />

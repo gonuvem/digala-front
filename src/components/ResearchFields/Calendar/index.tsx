@@ -25,12 +25,15 @@ const Calendar: React.FC<CustomCalendarProps> = ({
 
   const { fieldName, registerField } = useField(name);
 
-  const onChange = useCallback((nextValue: Date | Date[]) => {
-    setValue(nextValue);
-    if (onParentChange) {
-      onParentChange(nextValue);
-    }
-  }, []);
+  const onChange = useCallback(
+    (nextValue: Date | Date[]) => {
+      setValue(nextValue);
+      if (onParentChange) {
+        onParentChange(nextValue);
+      }
+    },
+    [onParentChange],
+  );
 
   const formatShortWeekday = useCallback((locale: string, date: Date) => {
     const dateFormated = format(date, 'eee', { locale: ptBR });
@@ -57,6 +60,7 @@ const Calendar: React.FC<CustomCalendarProps> = ({
       <CustomCalendar
         value={value}
         onChange={onChange}
+        onClickMonth={onChange}
         formatShortWeekday={formatShortWeekday}
         {...rest}
       />
