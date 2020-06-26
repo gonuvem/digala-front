@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { format } from 'date-fns';
 import InputMask from 'react-input-mask';
 import { useTransition } from 'react-spring';
@@ -6,6 +6,7 @@ import { useTransition } from 'react-spring';
 import Calendar from '../Calendar';
 
 import { dateFormats } from '../../../utils/dateTimeFormats';
+import useOutsider from '../../../hooks/useOutsider';
 
 import { InputContainer, CalendarContainer } from './styles';
 
@@ -14,8 +15,11 @@ interface DateInputProps {
 }
 
 const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
+  const calendarRef = useRef(null);
   const [dateValue, setDateValue] = useState('');
   const [showCalendar, setShowCalendar] = useState(false);
+
+  useOutsider(calendarRef, () => setShowCalendar(false));
 
   const calendarTransitions = useTransition(showCalendar, null, {
     from: { opacity: 0 },
@@ -47,7 +51,7 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
       {calendarTransitions.map(
         ({ item, key, props }) =>
           item && (
-            <CalendarContainer key={key} style={props}>
+            <CalendarContainer ref={calendarRef} key={key} style={props}>
               <Calendar
                 name="dateSelect"
                 onParentChange={handleCalendarChange}
