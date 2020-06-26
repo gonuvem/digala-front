@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef } from 'react';
 import { startOfHour, addHours, getHours, format } from 'date-fns';
 import InputMask from 'react-input-mask';
 import { useTransition, animated } from 'react-spring';
@@ -6,14 +6,18 @@ import { useTransition, animated } from 'react-spring';
 import { InputContainer } from './styles';
 
 import { timeFormats } from '../../../utils/dateTimeFormats';
+import useOutsider from '../../../hooks/useOutsider';
 
 interface TimeInputProps {
   timeFormat: 'hourMinute' | 'hourMinuteSecond';
 }
 
 const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {
+  const timeSelectorRef = useRef(null);
   const [timeValue, setTimeValue] = useState('');
   const [showTimeSelector, setShowTimeSelect] = useState(false);
+
+  useOutsider(timeSelectorRef, () => setShowTimeSelect(false));
 
   const timeSelectorTransitions = useTransition(showTimeSelector, null, {
     from: { opacity: 0 },
@@ -59,7 +63,12 @@ const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {
       {timeSelectorTransitions.map(
         ({ item, key, props }) =>
           item && (
-            <animated.div id="time-selector" key={key} style={props}>
+            <animated.div
+              ref={timeSelectorRef}
+              id="time-selector"
+              key={key}
+              style={props}
+            >
               {hours.map((hour) => (
                 <button onClick={() => handleSetTime(hour)} type="button">
                   {`${getHours(hour)}:00`}
