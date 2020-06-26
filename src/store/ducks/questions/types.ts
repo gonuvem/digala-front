@@ -21,7 +21,6 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
-
   startZero?: boolean;
   scale?: number;
   showSubtitles?: boolean;
