@@ -63,11 +63,11 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       <PanelArea>
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
-          <MatrixField
+          {/* <MatrixField
             name="matrixField"
             columns={['Coluna 01', 'Coluna 02', 'Coluna 03']}
             lines={['Linha 01', 'Linha 02']}
-          />
+          /> */}
           {fieldsRegistered.map((field) => (
             <Field fieldId={field.id} config={field} />
           ))}

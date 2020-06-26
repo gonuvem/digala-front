@@ -39,7 +39,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <NumberField
           label="Limite inferior"
           name="lowerLimit"
-          onChange={(event) => handleChange(event.target.value)}
+          onChange={(event) => handleChange(event.target.value, 'lowerLimit')}
         />
       </section>
       <section>
@@ -48,14 +48,14 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           placeholder="Legenda esquerda"
           name="leftSubtitleLabel"
           id="leftSubtitleLabelField"
-          onChange={(event) => handleChange(event.target.value, 'label')}
+          onChange={(event) => handleChange(event.target.value, 'leftSubtitle')}
         />
       </section>
       <section>
         <NumberField
           label="Limite superior"
           name="upperLimit"
-          onChange={(event) => handleChange(event.target.value)}
+          onChange={(event) => handleChange(event.target.value, 'upperLimit')}
         />
       </section>
       <section>
@@ -64,7 +64,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           placeholder="Legenda direita"
           name="rightSubtitleLabel"
           id="rightSubtileLabelField"
-          onChange={(event) => handleChange(event.target.value, 'label')}
+          onChange={(event) =>
+            handleChange(event.target.value, 'rightSubtitle')
+          }
         />
       </section>
       <section>
@@ -72,6 +74,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           label="Obrigatório"
           helpHint="Caso o usuário seja obrigado a responder"
           name="sliderRequired"
+          onChange={(event) => {
+            handleChange(event.target.checked, 'required');
+          }}
         />
       </section>
       <section>
