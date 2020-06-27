@@ -21,11 +21,15 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
+  /* Nps */
   startZero?: boolean;
   scale?: number;
   showSubtitles?: boolean;
   leftSubtitle?: string;
   rightSubtitle?: string;
+  /* Slider */
+  lowerLimit?: number;
+  upperLimit?: number;
 }
 
 /**

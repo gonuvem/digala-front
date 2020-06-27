@@ -10,6 +10,7 @@ interface NpsProps {
   rightSubtitle?: string;
   scale: number;
   startZero?: boolean;
+  isRequired?: boolean;
 }
 
 const NpsField: React.FC<NpsProps> = ({
@@ -20,6 +21,7 @@ const NpsField: React.FC<NpsProps> = ({
   rightSubtitle,
   scale,
   startZero,
+  isRequired,
 }) => {
   const [selectedNumber, setSelectedNumber] = useState(-1);
   const [arrayNumbers, setArrayNumbers] = useState<Array<number>>([]);
