@@ -17,7 +17,7 @@ import { Question } from '../../../store/ducks/questions/types';
 import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 
-import MatrixField from '../../../components/ResearchFields/MatrixField';
+import DateTimeField from '../../../components/ResearchFields/DateTimeField';
 
 interface QuestionDTO {
   name: string;
