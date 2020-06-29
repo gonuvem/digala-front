@@ -21,6 +21,12 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
+  /* DateTime */
+  dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
+  timeFormat?: 'hourMinute' | 'hourMinuteSecond';
+  dateRequired?: boolean;
+  timeRequired?: boolean;
+  selectRange?: boolean;
   /* Nps */
   startZero?: boolean;
   scale?: number;

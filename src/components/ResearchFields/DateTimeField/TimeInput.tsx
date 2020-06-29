@@ -70,7 +70,11 @@ const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {
               style={props}
             >
               {hours.map((hour) => (
-                <button onClick={() => handleSetTime(hour)} type="button">
+                <button
+                  key={`${hour}-button`}
+                  onClick={() => handleSetTime(hour)}
+                  type="button"
+                >
                   {`${getHours(hour)}:00`}
                 </button>
               ))}
