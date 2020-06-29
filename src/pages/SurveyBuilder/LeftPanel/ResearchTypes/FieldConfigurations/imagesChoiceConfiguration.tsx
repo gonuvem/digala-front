@@ -5,8 +5,7 @@ import ShortTextField from '../../../../../components/ResearchFields/ShortTextFi
 import TextAreaField from '../../../../../components/ResearchFields/TextAreaField';
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
-
-import ImageOption from '../../../../../components/Common/ImageOption';
+import ImageUpload from '../../../../../components/Common/ImageUpload';
 
 import { Container } from './styles';
 
@@ -85,7 +84,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
         />
       </section>
       <section>
-        <ImageOption />
+        <ImageUpload label="Opções" />
       </section>
     </Form>
   </Container>
