@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import LinkConfiguration from './linkConfiguration';
 import NpsConfiguration from './npsConfiguration';
+import DateTimeConfiguration from './dateTimeConfiguration';
 import SliderConfiguration from './sliderConfiguration';
 
 import { ApplicationState } from '../../../../../store';
@@ -41,6 +42,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <LinkConfiguration handleChange={handleChange} />;
     case FieldsTypes.Nps:
       return <NpsConfiguration handleChange={handleChange} />;
+    case FieldsTypes.Date:
+      return <DateTimeConfiguration handleChange={handleChange} />;
     case FieldsTypes.Slider:
       return <SliderConfiguration handleChange={handleChange} />;
     default:
