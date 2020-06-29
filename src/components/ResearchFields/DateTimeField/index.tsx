@@ -6,12 +6,18 @@ import TimeInput from './TimeInput';
 import { Container } from './styles';
 
 interface DateTimeFieldProps {
+  label: string;
+  description: string;
+  name: string;
   selectRange?: boolean;
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat: 'hourMinute' | 'hourMinuteSecond';
 }
 
 const DateTimeField: React.FC<DateTimeFieldProps> = ({
+  name,
+  label,
+  description,
   selectRange,
   dateFormat,
   timeFormat,
@@ -19,11 +25,8 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   return (
     <Container selectRange={selectRange}>
       <label htmlFor="">
-        Data e Hora
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua
-        </p>
+        {label}
+        <p>{description}</p>
       </label>
       <div id="inputs">
         {selectRange && <span>De</span>}

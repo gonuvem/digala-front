@@ -21,6 +21,10 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
+  /* DateTime */
+  dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
+  timeFormat?: 'hourMinute' | 'hourMinuteSecond';
+  selectRange?: boolean;
 }
 
 /**

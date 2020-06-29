@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 import { useTransition } from 'react-spring';
-import { uuid } from 'uuidv4';
 
-import SliderField from '../../../components/ResearchFields/SliderField';
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
-// import NpsField from '../../../components/ResearchFields/NpsField';
 import Field from './field';
 
 import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
@@ -16,8 +13,6 @@ import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
 import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
-
-import DateTimeField from '../../../components/ResearchFields/DateTimeField';
 
 interface QuestionDTO {
   name: string;
@@ -63,11 +58,6 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       <PanelArea>
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
-          <DateTimeField
-            // selectRange
-            dateFormat="monthYear"
-            timeFormat="hourMinute"
-          />
           {fieldsRegistered.map((field) => (
             <Field fieldId={field.id} config={field} />
           ))}
