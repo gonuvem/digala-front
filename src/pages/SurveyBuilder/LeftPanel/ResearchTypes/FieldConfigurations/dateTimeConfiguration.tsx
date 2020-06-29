@@ -51,6 +51,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           label="Obrigatório"
           helpHint="Campo é obrigatório responder"
           name="dateTimeRequired"
+          onChange={(event) => handleChange(event.target.checked, 'required')}
         />
       </section>
       <section>
@@ -58,6 +59,8 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           label="Exigir data"
           helpHint="Usuário será obrigado a colocar data"
           name="dateTimeDateRequired"
+          onChange={(event) =>
+            handleChange(event.target.checked, 'dateRequired')}
         />
       </section>
       <section>
@@ -65,6 +68,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           name="dateTimeDateFormat"
           label="Formato da data"
           options={dateOptions}
+          onChange={(value: any) => handleChange(value?.value, 'dateFormat')}
         />
       </section>
       <section>
@@ -72,6 +76,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           label="Exigir hora"
           helpHint="Usuário será obrigado a colocar horário"
           name="dateTimeTimeRequired"
+          onChange={(event) =>
+            handleChange(event.target.checked, 'timeRequired')
+          }
         />
       </section>
       <section>
@@ -79,6 +86,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           name="dateTimeTimeFormat"
           label="Formato da hora"
           options={timeOptions}
+          onChange={(value: any) => handleChange(value?.value, 'timeFormat')}
         />
       </section>
       <section>
@@ -86,6 +94,8 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           label="Capturar intervalo"
           helpHint="Usuário é perguntado por um intervalo de datas"
           name="selectRange"
+          onChange={(event) =>
+            handleChange(event.target.checked, 'selectRange')}
         />
       </section>
     </Form>

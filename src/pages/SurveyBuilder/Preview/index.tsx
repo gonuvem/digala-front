@@ -59,7 +59,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
-            <Field fieldId={field.id} config={field} />
+            <Field key={field.id} fieldId={field.id} config={field} />
           ))}
         </Form>
         <button

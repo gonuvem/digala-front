@@ -53,6 +53,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || 'date-time-field-name'}
           dateFormat={config?.dateFormat || 'dayMonthYear'}
           timeFormat={config?.timeFormat || 'hourMinute'}
+          selectRange={config?.selectRange || false}
         />
       );
     case FieldsTypes.Nps:

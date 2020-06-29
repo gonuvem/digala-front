@@ -27,11 +27,14 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
     leave: { opacity: 0 },
   });
 
-  const handleCalendarChange = useCallback((nextDate: Date) => {
-    const dateFormated = format(nextDate, dateFormats[dateFormat].fnsMask);
-    setDateValue(dateFormated);
-    setShowCalendar(false);
-  }, []);
+  const handleCalendarChange = useCallback(
+    (nextDate: Date) => {
+      const dateFormated = format(nextDate, dateFormats[dateFormat].fnsMask);
+      setDateValue(dateFormated);
+      setShowCalendar(false);
+    },
+    [dateFormat],
+  );
 
   const handleChangeDate = useCallback((event) => {
     const { value } = event.target;

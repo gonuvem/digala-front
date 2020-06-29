@@ -24,6 +24,8 @@ export interface Question {
   /* DateTime */
   dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat?: 'hourMinute' | 'hourMinuteSecond';
+  dateRequired?: boolean;
+  timeRequired?: boolean;
   selectRange?: boolean;
   /* Nps */
   startZero?: boolean;
