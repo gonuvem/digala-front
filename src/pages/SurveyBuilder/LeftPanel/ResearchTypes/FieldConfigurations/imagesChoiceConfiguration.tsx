@@ -6,6 +6,8 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
+import ImageOption from '../../../../../components/Common/ImageOption';
+
 import { Container } from './styles';
 
 interface ImagesChoiceConfigurationProps {
@@ -81,6 +83,9 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             handleChange(event.target.checked, 'randomOrder')
           }
         />
+      </section>
+      <section>
+        <ImageOption />
       </section>
     </Form>
   </Container>
