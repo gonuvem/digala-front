@@ -1,16 +1,21 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, InputHTMLAttributes } from 'react';
 import { useField } from '@unform/core';
 import { FiHelpCircle } from 'react-icons/fi';
 
 import { CheckBoxWrapper, CheckBox, CheckBoxLabel, Container } from './styles';
 
-interface ToggleSwitchProps {
+interface ToggleSwitchProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
   helpHint?: string;
 }
 
-const Switch: React.FC<ToggleSwitchProps> = ({ name, label, helpHint }) => {
+const Switch: React.FC<ToggleSwitchProps> = ({
+  name,
+  label,
+  helpHint,
+  ...rest
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isChecked, setIsChecked] = useState(false);
   const { fieldName, registerField, error, defaultValue } = useField(name);
@@ -37,6 +42,7 @@ const Switch: React.FC<ToggleSwitchProps> = ({ name, label, helpHint }) => {
           id="checkbox"
           type="checkbox"
           onChange={(event) => setIsChecked(event.target.checked)}
+          {...rest}
         />
         <CheckBoxLabel htmlFor="checkbox" />
         <span>{isChecked ? 'Habilitado' : 'Desabilitado'}</span>

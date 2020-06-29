@@ -14,11 +14,11 @@ export const Container = styled.div`
     color: ${Colors.black};
     display: flex;
     flex-direction: column;
+    margin-bottom: 1rem;
 
     p {
       font-weight: 400;
       margin-top: 0.5rem;
-      margin-bottom: 1rem;
     }
   }
 

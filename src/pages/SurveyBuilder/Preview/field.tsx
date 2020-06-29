@@ -6,6 +6,8 @@ import ShortTextField from '../../../components/ResearchFields/ShortTextField';
 import IconTextField from '../../../components/ResearchFields/IconTextField';
 import SingleChoiceField from '../../../components/ResearchFields/SingleChoiceField';
 import DateTimeField from '../../../components/ResearchFields/DateTimeField';
+import NpsField from '../../../components/ResearchFields/NpsField';
+import SliderField from '../../../components/ResearchFields/SliderField';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
@@ -51,6 +53,30 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || 'date-time-field-name'}
           dateFormat={config?.dateFormat || 'dayMonthYear'}
           timeFormat={config?.timeFormat || 'hourMinute'}
+        />
+      );
+    case FieldsTypes.Nps:
+      return (
+        <NpsField
+          label={config?.label || ''}
+          description={config?.description || ''}
+          showSubtitles={config?.showSubtitles || false}
+          leftSubtitle={config?.leftSubtitle}
+          rightSubtitle={config?.rightSubtitle}
+          scale={config?.scale || 10}
+          startZero={config?.startZero || false}
+          isRequired={config?.required || false}
+        />
+      );
+    case FieldsTypes.Slider:
+      return (
+        <SliderField
+          label={config?.label || ''}
+          description={config?.description || ''}
+          minValue={config?.lowerLimit || 0}
+          maxValue={config?.upperLimit || 10}
+          leftSubtitle={config?.leftSubtitle}
+          rightSubtitle={config?.rightSubtitle}
         />
       );
     default:

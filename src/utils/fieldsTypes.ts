@@ -6,4 +6,5 @@ export default {
   SingleChoice: 'radioButton',
   Link: 'link',
   Nps: 'nps',
+  Slider: 'slider',
 };

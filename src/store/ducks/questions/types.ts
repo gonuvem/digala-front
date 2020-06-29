@@ -25,6 +25,15 @@ export interface Question {
   dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat?: 'hourMinute' | 'hourMinuteSecond';
   selectRange?: boolean;
+  /* Nps */
+  startZero?: boolean;
+  scale?: number;
+  showSubtitles?: boolean;
+  leftSubtitle?: string;
+  rightSubtitle?: string;
+  /* Slider */
+  lowerLimit?: number;
+  upperLimit?: number;
 }
 
 /**
