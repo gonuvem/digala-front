@@ -3,39 +3,42 @@ import React, { useState, useEffect } from 'react';
 import { Container, Title, NumberBar, Number } from './styles';
 
 interface NpsProps {
-  name: string;
+  label: string;
   description: string;
-  startNumber: number;
-  endNumber: number;
   showSubtitles: boolean;
   leftSubtitle?: string;
   rightSubtitle?: string;
+  scale: number;
+  startZero?: boolean;
+  isRequired?: boolean;
 }
 
 const NpsField: React.FC<NpsProps> = ({
-  name,
+  label,
   description,
-  startNumber,
-  endNumber,
   showSubtitles,
   leftSubtitle,
   rightSubtitle,
+  scale,
+  startZero,
+  isRequired,
 }) => {
   const [selectedNumber, setSelectedNumber] = useState(-1);
   const [arrayNumbers, setArrayNumbers] = useState<Array<number>>([]);
 
   useEffect(() => {
     const numbers = [];
+    var i = startZero ? 0 : 1;
 
-    for (var i = startNumber; i <= endNumber; i++) {
+    for (i; i <= scale; i++) {
       numbers.push(i);
     }
     setArrayNumbers(numbers);
-  }, [endNumber, startNumber]);
+  }, [startZero, scale]);
 
   return (
     <Container>
-      <Title>{name}</Title>
+      <Title>{label}</Title>
       <p>{description}</p>
       <div>
         {showSubtitles && (
