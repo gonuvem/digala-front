@@ -5,6 +5,8 @@ import SolidButton from '../SolidButton';
 
 import { Container, OptionsContainer } from './styles';
 
+import uploadImage from '../../../services/logic/uploadImage';
+
 interface ImageOption {
   image: string;
   label?: string;
@@ -22,32 +24,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ label }) => {
     fileInputRef.current?.click();
   }, []);
 
-  const handleUpload = useCallback((event) => {
-    const cloudinaryUrl = `https://api.cloudinary.com/v1_1/gonuvem/image/upload`;
-
-    const file = event.target.files[0];
-    const data = new FormData();
-
-    data.append('api_key', '212628251629853');
-    data.append('upload_preset', 'digala_preset');
-    data.append('public_id', `${file.name}${Date.now()}`);
-    data.append('file', file);
-
-    fetch(cloudinaryUrl, {
-      method: 'POST',
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((responseData: any) => {
-        const newImageOption: ImageOption = {
-          image: responseData.secure_url,
-          label: '',
-        };
-        setImageOptions((state) => [...state, newImageOption]);
-      })
-      .catch((err) => {
-        console.error('Error >> ', err);
-      });
+  const onPhotoUploaded = useCallback((imageData) => {
+    const newImageOption: ImageOption = {
+      image: imageData.secure_url,
+      label: '',
+    };
+    setImageOptions((state) => [...state, newImageOption]);
   }, []);
 
   return (
@@ -59,7 +41,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ label }) => {
         ))}
         <input
           ref={fileInputRef}
-          onChange={handleUpload}
+          onChange={(event) => uploadImage(event, onPhotoUploaded)}
           style={{ display: 'none' }}
           type="file"
           name="newOption"
