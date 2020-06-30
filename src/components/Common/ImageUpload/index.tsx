@@ -10,6 +10,7 @@ import uploadImage from '../../../services/logic/uploadImage';
 interface ImageOption {
   image: string;
   label?: string;
+  loading: boolean;
 }
 
 interface ImageUploadProps {
@@ -28,24 +29,35 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ label }) => {
     const newImageOption: ImageOption = {
       image: imageData.secure_url,
       label: '',
+      loading: false,
     };
-    setImageOptions((state) => [...state, newImageOption]);
+    setImageOptions((state) => [...state.splice(-1, 1), newImageOption]);
+  }, []);
+
+  const handleUploadPhoto = useCallback((event) => {
+    const preImageOption: ImageOption = {
+      image: '',
+      label: '',
+      loading: true,
+    };
+    setImageOptions((state) => [...state, preImageOption]);
+    uploadImage(event, onPhotoUploaded);
   }, []);
 
   return (
     <Container>
       <div>{label && <span>{label}</span>}</div>
       <OptionsContainer>
-        {/* {imageOptions.map((option) => (
-          <ImageOption image={option.image} label={option.label} />
-        ))} */}
-        <ImageOption
-          loading
-          image="https://images.unsplash.com/photo-1593515529105-cec0bd21e1f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-        />
+        {imageOptions.map((option) => (
+          <ImageOption
+            image={option.image}
+            label={option.label}
+            loading={option.loading}
+          />
+        ))}
         <input
           ref={fileInputRef}
-          onChange={(event) => uploadImage(event, onPhotoUploaded)}
+          onChange={handleUploadPhoto}
           style={{ display: 'none' }}
           type="file"
           name="newOption"
