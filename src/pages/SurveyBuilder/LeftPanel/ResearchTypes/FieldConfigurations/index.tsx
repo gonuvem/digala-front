@@ -5,6 +5,7 @@ import LinkConfiguration from './linkConfiguration';
 import NpsConfiguration from './npsConfiguration';
 import DateTimeConfiguration from './dateTimeConfiguration';
 import SliderConfiguration from './sliderConfiguration';
+import SortConfiguration from './sortAnswersConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -46,6 +47,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <DateTimeConfiguration handleChange={handleChange} />;
     case FieldsTypes.Slider:
       return <SliderConfiguration handleChange={handleChange} />;
+    case FieldsTypes.SortList:
+      return <SortConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }
