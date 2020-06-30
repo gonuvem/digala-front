@@ -4,8 +4,20 @@ export const Container = styled.div`
   display: flex;
   position: relative;
 
+  width: 100%;
+
   & + div {
     margin-top: 0.5rem;
+  }
+
+  div:first-child {
+    display: flex;
+
+    width: inherit;
+    height: 10rem;
+
+    border-radius: 4px;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   }
 
   img {

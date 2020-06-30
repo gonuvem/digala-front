@@ -36,9 +36,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ label }) => {
     <Container>
       <div>{label && <span>{label}</span>}</div>
       <OptionsContainer>
-        {imageOptions.map((option) => (
+        {/* {imageOptions.map((option) => (
           <ImageOption image={option.image} label={option.label} />
-        ))}
+        ))} */}
+        <ImageOption
+          loading
+          image="https://images.unsplash.com/photo-1593515529105-cec0bd21e1f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+        />
         <input
           ref={fileInputRef}
           onChange={(event) => uploadImage(event, onPhotoUploaded)}
