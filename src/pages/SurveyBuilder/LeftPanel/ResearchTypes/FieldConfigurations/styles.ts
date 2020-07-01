@@ -26,8 +26,14 @@ export const DragContainer = styled.div<DragContainerProps>`
   min-height: ${(props) => props.optionsLength * 3.625}rem;
 
   button {
-    border: none;
+    border: 0.5px solid ${Colors.negative};
     background: none;
+    display: flex;
+    place-content: center;
+    border-radius: 50%;
+    padding: 0.3rem;
+
+    margin-left: 0.3rem;
   }
 `;
 
@@ -47,7 +53,10 @@ export const Option = styled.div`
 
   svg {
     color: ${Colors.negative};
-    margin-left: 0.5rem;
+  }
+
+  svg + svg {
+    color: #000;
   }
 
   input {

@@ -154,7 +154,9 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
                               handleChangeInput(event.target.value, index)
                             }
                           />
-                          <FiMove />
+                          <button type="button">
+                            <FiMove />
+                          </button>
                           <button
                             type="button"
                             onClick={() => handleDeleteInput(index)}
