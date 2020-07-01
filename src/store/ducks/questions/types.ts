@@ -11,6 +11,11 @@ export enum QuestionsTypes {
 /**
  * Data Types
  */
+interface ImageChoice {
+  img: string;
+  name: string;
+}
+
 export interface Question {
   alias: string;
   id: string;
@@ -36,6 +41,8 @@ export interface Question {
   /* Slider */
   lowerLimit?: number;
   upperLimit?: number;
+  /* Images Choice */
+  imgChoices?: ImageChoice[];
 }
 
 /**

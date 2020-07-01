@@ -8,6 +8,7 @@ import SingleChoiceField from '../../../components/ResearchFields/SingleChoiceFi
 import DateTimeField from '../../../components/ResearchFields/DateTimeField';
 import NpsField from '../../../components/ResearchFields/NpsField';
 import SliderField from '../../../components/ResearchFields/SliderField';
+import ImagesChoice from '../../../components/ResearchFields/ImagesChoice';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
@@ -78,6 +79,15 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           maxValue={config?.upperLimit || 10}
           leftSubtitle={config?.leftSubtitle}
           rightSubtitle={config?.rightSubtitle}
+        />
+      );
+    case FieldsTypes.ImageChoice:
+      return (
+        <ImagesChoice
+          label={config?.label || ''}
+          description={config?.description || ''}
+          id={config?.id || ''}
+          choices={config?.imgChoices || []}
         />
       );
     default:
