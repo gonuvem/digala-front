@@ -41,7 +41,6 @@ const reorder = (
 const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
   handleChange,
 }) => {
-  // const listOptions = [{ id: '1', content: '1' }];
   const [options, setOptions] = useState<Array<ListOptions>>([
     { id: uuid(), content: '' },
   ]);
@@ -57,11 +56,12 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
         result.destination.index,
       );
       setOptions(items);
+      handleChange(items, 'listOptions');
     },
     [options, setOptions],
   );
 
-  function handleOption() {
+  function handleAddOption() {
     const newOption = { id: uuid(), content: '' };
     const copyOptions = options;
 
@@ -69,12 +69,15 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
 
     setOptions(copyOptions);
     setRefresh(!refresh);
-
-    // console.log(options);
   }
 
   function handleChangeInput(text: string, index: number) {
-    // console.log(index);
+    const newArray = options;
+
+    newArray[index].content = text;
+    setOptions(newArray);
+
+    handleChange(options, 'listOptions');
   }
 
   function handleDeleteInput(index: number) {
@@ -82,6 +85,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
     newArray.splice(index, 1);
     setOptions(newArray);
     setRefresh(!refresh);
+    handleChange(options, 'listOptions');
   }
 
   return (
@@ -90,9 +94,9 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
         <section>
           <ShortTextField
             label="Nome"
-            placeholder="Link"
-            name="linkLabel"
-            id="linkLabelField"
+            placeholder="Nome"
+            name="sortLabel"
+            id="sortLabelField"
             onChange={(event) => handleChange(event.target.value, 'label')}
           />
         </section>
@@ -100,8 +104,8 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="linkDescripion"
-            id="linkDescriptionField"
+            name="sortDescripion"
+            id="sortDescriptionField"
             onChange={(event) =>
               handleChange(event.target.value, 'description')
             }
@@ -111,18 +115,19 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="linkRequired"
+            name="sortRequired"
+            onChange={(event) => handleChange(event.target.value, 'required')}
           />
         </section>
         <section>
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="sortOptions"
+            name="ramdomSort"
+            onChange={(event) => handleChange(event.target.value, 'ramdomSort')}
           />
         </section>
         <section>
-          {/* <Sort label="Opções" listOptions={options} /> */}
           <span>Opções</span>
           <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
             <Droppable droppableId="id" key="id">
@@ -170,7 +175,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
             </Droppable>
           </DragDropContext>
           <ViewButton>
-            <SolidButton onClick={handleOption}>Adicionar Opção</SolidButton>
+            <SolidButton onClick={handleAddOption}>Adicionar Opção</SolidButton>
           </ViewButton>
         </section>
       </Form>

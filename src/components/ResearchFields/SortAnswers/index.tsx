@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   DragDropContext,
   Droppable,
@@ -11,12 +11,12 @@ import { Container, DragContainer, Option } from './styles';
 interface SortAnswersProps {
   label: string;
   description?: string;
-  listOptions: ListOptions[];
+  listOptions?: ListOptions[];
 }
 
 interface ListOptions {
-  id: string;
-  content: string;
+  id?: string;
+  content?: string;
 }
 
 const reorder = (
@@ -36,7 +36,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   description,
   listOptions,
 }) => {
-  const [options, setOptions] = useState<Array<ListOptions>>(listOptions);
+  const [options, setOptions] = useState<Array<ListOptions>>(listOptions || []);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -52,42 +52,53 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
     [options, setOptions],
   );
 
+  useEffect(() => {
+    if (listOptions) {
+      setOptions(listOptions);
+    }
+  }, [listOptions, setOptions]);
+
   return (
     <Container>
       <label htmlFor="id">
         {label}
         {description && <p>{description}</p>}
-
-        <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-          <Droppable droppableId="id" key="id">
-            {(provided, snapshot) => (
-              <DragContainer
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                isDraggingOver={snapshot.isDraggingOver}
-                optionsLength={options.length}
-              >
-                {options.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided) => (
-                      <Option
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{
-                          ...provided.draggableProps.style,
-                        }}
-                      >
-                        {item.content}
-                        <FiMove />
-                      </Option>
-                    )}
-                  </Draggable>
-                ))}
-              </DragContainer>
-            )}
-          </Droppable>
-        </DragDropContext>
+        {options && (
+          <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+            <Droppable droppableId="id" key="id">
+              {(provided, snapshot) => (
+                <DragContainer
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  isDraggingOver={snapshot.isDraggingOver}
+                  optionsLength={options.length}
+                >
+                  {options.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id ? item.id : ''}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <Option
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={{
+                            ...provided.draggableProps.style,
+                          }}
+                        >
+                          {item.content}
+                          <FiMove />
+                        </Option>
+                      )}
+                    </Draggable>
+                  ))}
+                </DragContainer>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
       </label>
     </Container>
   );

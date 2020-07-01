@@ -8,20 +8,24 @@ import SingleChoiceField from '../../../components/ResearchFields/SingleChoiceFi
 import DateTimeField from '../../../components/ResearchFields/DateTimeField';
 import NpsField from '../../../components/ResearchFields/NpsField';
 import SliderField from '../../../components/ResearchFields/SliderField';
+import SortAnswer from '../../../components/ResearchFields/SortAnswers';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
 import FieldsTypes from '../../../utils/fieldsTypes';
-
 interface FieldProps {
   fieldId: string;
   config?: Question;
 }
 
+const temp = [{ id: '123', content: 'joao' }];
+
 const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
   const field = useSelector<ApplicationState, Question | undefined>((state) =>
     state.questions.questions.find((question) => question.id === fieldId),
   );
+
+  // console.log(config?.listOptions);
 
   switch (field?.alias) {
     case FieldsTypes.ShortText:
@@ -79,6 +83,17 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           leftSubtitle={config?.leftSubtitle}
           rightSubtitle={config?.rightSubtitle}
         />
+      );
+
+    case FieldsTypes.SortList:
+      return (
+        <>
+          <SortAnswer
+            label={config?.label || ''}
+            description={config?.description}
+            listOptions={config?.listOptions}
+          />
+        </>
       );
     default:
       return null;
