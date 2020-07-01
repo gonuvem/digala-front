@@ -26,6 +26,22 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     fileInputRef.current?.click();
   }, []);
 
+  const handleLabelChange = useCallback(
+    (newData: { id: string; label: string }) => {
+      const updatedImageOptions = imageOptions.map((imageOption) => {
+        if (imageOption.id === newData.id) {
+          return {
+            ...imageOption,
+            label: newData.label,
+          };
+        }
+        return imageOption;
+      });
+      onChange(updatedImageOptions);
+    },
+    [imageOptions],
+  );
+
   const onPhotoUploaded = useCallback(
     (imageData) => {
       const newImageOption: ImageChoice = {
@@ -34,7 +50,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         loading: false,
         id: uuid(),
       };
-      onChange([...imageOptions.splice(-1, 1), newImageOption]);
+      onChange([...imageOptions, newImageOption]);
     },
     [imageOptions],
   );
@@ -59,10 +75,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       <OptionsContainer>
         {imageOptions.map((option) => (
           <ImageOption
+            key={option.id}
             id={option.id}
             image={option.image}
-            label={option.label}
             loading={option.loading}
+            onChange={handleLabelChange}
           />
         ))}
         <input
