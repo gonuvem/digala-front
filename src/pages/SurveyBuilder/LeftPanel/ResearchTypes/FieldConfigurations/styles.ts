@@ -24,6 +24,11 @@ export const DragContainer = styled.div<DragContainerProps>`
   background: ${(props) =>
     props.isDraggingOver ? Colors.disabledGray : Colors.white};
   min-height: ${(props) => props.optionsLength * 3.625}rem;
+
+  button {
+    border: none;
+    background: none;
+  }
 `;
 
 export const Option = styled.div`

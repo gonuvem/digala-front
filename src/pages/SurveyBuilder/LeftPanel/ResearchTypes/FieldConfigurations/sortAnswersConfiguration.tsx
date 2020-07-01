@@ -17,7 +17,6 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import SolidButton from '../../../../../components/Common/SolidButton';
 
 import { Container, DragContainer, Option, ViewButton } from './styles';
-
 interface SortAnswerConfigurarionProps {
   handleChange: Function;
 }
@@ -44,8 +43,9 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
 }) => {
   // const listOptions = [{ id: '1', content: '1' }];
   const [options, setOptions] = useState<Array<ListOptions>>([
-    { id: '134', content: '234' },
+    { id: uuid(), content: '' },
   ]);
+  const [refresh, setRefresh] = useState(true);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -61,16 +61,28 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
     [options, setOptions],
   );
 
-  const handleOption = () => {
-    const newOption = { id: '1234', content: '234' };
+  function handleOption() {
+    const newOption = { id: uuid(), content: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
+    setRefresh(!refresh);
 
-    console.log(options);
-  };
+    // console.log(options);
+  }
+
+  function handleChangeInput(text: string, index: number) {
+    // console.log(index);
+  }
+
+  function handleDeleteInput(index: number) {
+    const newArray = options;
+    newArray.splice(index, 1);
+    setOptions(newArray);
+    setRefresh(!refresh);
+  }
 
   return (
     <Container>
@@ -136,9 +148,19 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
                             ...provided.draggableProps.style,
                           }}
                         >
-                          <input placeholder="Escreva a opção" />
+                          <input
+                            placeholder="Escreva a opção"
+                            onChange={(event) =>
+                              handleChangeInput(event.target.value, index)
+                            }
+                          />
                           <FiMove />
-                          <FaTrashAlt />
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteInput(index)}
+                          >
+                            <FaTrashAlt />
+                          </button>
                         </Option>
                       )}
                     </Draggable>
@@ -148,9 +170,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
             </Droppable>
           </DragDropContext>
           <ViewButton>
-            <SolidButton onClick={() => handleOption}>
-              Adicionar Opção
-            </SolidButton>
+            <SolidButton onClick={handleOption}>Adicionar Opção</SolidButton>
           </ViewButton>
         </section>
       </Form>
