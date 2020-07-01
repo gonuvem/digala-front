@@ -25,25 +25,30 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     fileInputRef.current?.click();
   }, []);
 
-  const onPhotoUploaded = useCallback((imageData) => {
-    const newImageOption: ImageChoice = {
-      image: imageData.secure_url,
-      label: '',
-      loading: false,
-    };
-    // onChange([imageOptions.splice(-1, 1)])
-    // setImageOptions((state) => [...state.splice(-1, 1), newImageOption]);
-  }, []);
+  const onPhotoUploaded = useCallback(
+    (imageData) => {
+      const newImageOption: ImageChoice = {
+        image: imageData.secure_url,
+        label: '',
+        loading: false,
+      };
+      onChange([...imageOptions.splice(-1, 1), newImageOption]);
+    },
+    [imageOptions],
+  );
 
-  const handleUploadPhoto = useCallback((event) => {
-    const preImageOption: ImageChoice = {
-      image: '',
-      label: '',
-      loading: true,
-    };
-    onChange([...imageOptions, preImageOption]);
-    uploadImage(event, onPhotoUploaded);
-  }, []);
+  const handleUploadPhoto = useCallback(
+    (event) => {
+      const preImageOption: ImageChoice = {
+        image: '',
+        label: '',
+        loading: true,
+      };
+      onChange([...imageOptions, preImageOption]);
+      uploadImage(event, onPhotoUploaded);
+    },
+    [imageOptions],
+  );
 
   return (
     <Container>

@@ -36,6 +36,7 @@ export const CardImage = styled.div<CardImage>`
   border-radius: 4px;
   margin: 0 1rem 1rem 0;
   background-image: url(${(props) => props.image});
+  background-size: contain;
   display: flex;
   align-items: flex-end;
   cursor: pointer;
