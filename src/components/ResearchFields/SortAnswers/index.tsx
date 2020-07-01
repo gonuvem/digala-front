@@ -7,11 +7,11 @@ import {
 } from 'react-beautiful-dnd';
 import { FiMove } from 'react-icons/fi';
 import { Container, DragContainer, Option } from './styles';
-
 interface SortAnswersProps {
   label: string;
   description?: string;
   listOptions?: ListOptions[];
+  randomSort?: boolean;
 }
 
 interface ListOptions {
@@ -35,8 +35,13 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   label,
   description,
   listOptions,
+  randomSort = false,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>(listOptions || []);
+  const [randonOptions, setRandonOptions] = useState<Array<ListOptions>>(
+    listOptions || [],
+  );
+  const [refresh, setRefresh] = useState(false);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -53,10 +58,36 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   );
 
   useEffect(() => {
-    if (listOptions) {
+    if (listOptions /*&& !randomSort*/) {
       setOptions(listOptions);
     }
-  }, [listOptions, setOptions]);
+    // else if (listOptions && randomSort) {
+    //   setOptions(listOptions);
+    //   shuffle();
+    // }
+  }, [listOptions, setOptions, randomSort]);
+
+  function shuffle() {
+    const list = options;
+    var currentIndex = list.length,
+      temporaryValue,
+      randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = list[currentIndex];
+      list[currentIndex] = list[randomIndex];
+      list[randomIndex] = temporaryValue;
+    }
+
+    setOptions(list);
+    setRefresh(!refresh);
+  }
 
   return (
     <Container>

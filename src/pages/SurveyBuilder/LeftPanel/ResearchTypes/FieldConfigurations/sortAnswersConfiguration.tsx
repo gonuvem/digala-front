@@ -116,15 +116,17 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
             name="sortRequired"
-            onChange={(event) => handleChange(event.target.value, 'required')}
+            onChange={(event) => handleChange(event.target.checked, 'required')}
           />
         </section>
         <section>
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="ramdomSort"
-            onChange={(event) => handleChange(event.target.value, 'ramdomSort')}
+            name="randomSort"
+            onChange={(event) =>
+              handleChange(event.target.checked, 'randomSort')
+            }
           />
         </section>
         <section>
