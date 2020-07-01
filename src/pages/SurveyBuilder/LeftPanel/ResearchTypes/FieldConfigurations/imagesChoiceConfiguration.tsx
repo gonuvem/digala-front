@@ -53,20 +53,24 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           label="Escolha Múltipla"
           helpHint="Caso o usuário possa escolhar mais de uma opção"
           name="imagesChoiceMultiple"
-          onChange={(event) => handleChange(event.target.checked, 'required')}
-        />
-      </section>
-      <section>
-        <NumberField
-          label="Limite de Escolhas"
-          name="choiceMaxAmmount"
-          defaultValue={1}
           onChange={(event) =>
-            parseInt(event.target.value, 10) <= 10
-              ? handleChange(event.target.value, 'choiceMaxAmmount')
-              : undefined}
+            handleChange(event.target.checked, 'multipleChoice')
+          }
         />
       </section>
+      {field?.multipleChoice && (
+        <section>
+          <NumberField
+            label="Limite de Escolhas"
+            name="choiceMaxAmmount"
+            defaultValue={1}
+            onChange={(event) =>
+              parseInt(event.target.value, 10) <= 10
+                ? handleChange(event.target.value, 'choiceMaxAmmount')
+                : undefined}
+          />
+        </section>
+      )}
       <section>
         <ToggleSwitch
           label="Adicionar opção outros(a)"

@@ -28,6 +28,8 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
+  multipleChoice?: boolean;
+  choiceMaxAmmount?: number;
   /* DateTime */
   dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat?: 'hourMinute' | 'hourMinuteSecond';
