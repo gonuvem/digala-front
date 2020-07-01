@@ -6,41 +6,42 @@ import SolidButton from '../SolidButton';
 import { Container, OptionsContainer } from './styles';
 
 import uploadImage from '../../../services/logic/uploadImage';
-
-interface ImageOption {
-  image: string;
-  label?: string;
-  loading: boolean;
-}
+import { ImageChoice } from '../../../store/ducks/questions/types';
 
 interface ImageUploadProps {
   label?: string;
+  onChange: Function;
+  imageOptions: ImageChoice[];
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ label }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({
+  label,
+  onChange,
+  imageOptions,
+}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imageOptions, setImageOptions] = useState<ImageOption[]>([]);
 
   const handleClick = useCallback(() => {
     fileInputRef.current?.click();
   }, []);
 
   const onPhotoUploaded = useCallback((imageData) => {
-    const newImageOption: ImageOption = {
+    const newImageOption: ImageChoice = {
       image: imageData.secure_url,
       label: '',
       loading: false,
     };
-    setImageOptions((state) => [...state.splice(-1, 1), newImageOption]);
+    // onChange([imageOptions.splice(-1, 1)])
+    // setImageOptions((state) => [...state.splice(-1, 1), newImageOption]);
   }, []);
 
   const handleUploadPhoto = useCallback((event) => {
-    const preImageOption: ImageOption = {
+    const preImageOption: ImageChoice = {
       image: '',
       label: '',
       loading: true,
     };
-    setImageOptions((state) => [...state, preImageOption]);
+    onChange([...imageOptions, preImageOption]);
     uploadImage(event, onPhotoUploaded);
   }, []);
 

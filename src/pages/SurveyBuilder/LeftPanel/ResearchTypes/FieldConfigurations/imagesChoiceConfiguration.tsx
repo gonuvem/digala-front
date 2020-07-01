@@ -7,14 +7,18 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 import ImageUpload from '../../../../../components/Common/ImageUpload';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface ImagesChoiceConfigurationProps {
   handleChange: Function;
+  field: Question | undefined;
 }
 
 const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   handleChange,
+  field,
 }) => (
   <Container>
     <Form onSubmit={() => null}>
@@ -58,7 +62,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           name="choiceMaxAmmount"
           defaultValue={1}
           onChange={(event) =>
-            parseInt(event.target.value) <= 10
+            parseInt(event.target.value, 10) <= 10
               ? handleChange(event.target.value, 'choiceMaxAmmount')
               : undefined}
         />
@@ -84,7 +88,11 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
         />
       </section>
       <section>
-        <ImageUpload label="Opções" />
+        <ImageUpload
+          label="Opções"
+          imageOptions={field?.imgChoices || []}
+          onChange={(value: any) => handleChange(value, 'imgChoices')}
+        />
       </section>
     </Form>
   </Container>

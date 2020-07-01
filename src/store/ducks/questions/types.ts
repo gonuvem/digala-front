@@ -11,9 +11,10 @@ export enum QuestionsTypes {
 /**
  * Data Types
  */
-interface ImageChoice {
-  img: string;
-  name: string;
+export interface ImageChoice {
+  image: string;
+  label?: string;
+  loading: boolean;
 }
 
 export interface Question {

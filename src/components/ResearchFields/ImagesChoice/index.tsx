@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Container, CardImage } from './styles';
 
+import { ImageChoice } from '../../../store/ducks/questions/types';
+
 interface ImagesChoiceProps {
   description?: string;
   label: string;
   id: string;
-  choices: {
-    img: string;
-    name: string;
-  }[];
+  choices: ImageChoice[];
 }
 
 const ImagesChoice: React.FC<ImagesChoiceProps> = ({
@@ -26,13 +25,13 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
         <div>
           {choices.map((option, index) => (
             <CardImage
-              image={option.img}
+              image={option.image}
               isSelected={index === selectedImage}
               onClick={() => setSelectedImage(index)}
             >
               <div>
                 <button type="button" />
-                <p>{option.name}</p>
+                <p>{option.label}</p>
               </div>
             </CardImage>
           ))}
