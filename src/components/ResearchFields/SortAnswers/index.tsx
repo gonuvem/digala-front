@@ -38,16 +38,19 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>(listOptions);
 
-  const onDragEnd = useCallback((result: DropResult) => {
-    if (!result.destination) return;
+  const onDragEnd = useCallback(
+    (result: DropResult) => {
+      if (!result.destination) return;
 
-    const items = reorder(
-      options,
-      result.source.index,
-      result.destination.index,
-    );
-    setOptions(items);
-  }, []);
+      const items = reorder(
+        options,
+        result.source.index,
+        result.destination.index,
+      );
+      setOptions(items);
+    },
+    [options, setOptions],
+  );
 
   return (
     <Container>
