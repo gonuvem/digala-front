@@ -1,4 +1,5 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback } from 'react';
+import { uuid } from 'uuidv4';
 
 import ImageOption from './ImageOption';
 import SolidButton from '../SolidButton';
@@ -31,6 +32,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         image: imageData.secure_url,
         label: '',
         loading: false,
+        id: uuid(),
       };
       onChange([...imageOptions.splice(-1, 1), newImageOption]);
     },
@@ -42,6 +44,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       const preImageOption: ImageChoice = {
         image: '',
         label: '',
+        id: '',
         loading: true,
       };
       onChange([...imageOptions, preImageOption]);
@@ -56,6 +59,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       <OptionsContainer>
         {imageOptions.map((option) => (
           <ImageOption
+            id={option.id}
             image={option.image}
             label={option.label}
             loading={option.loading}

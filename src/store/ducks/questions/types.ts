@@ -15,6 +15,7 @@ export interface ImageChoice {
   image: string;
   label?: string;
   loading: boolean;
+  id: string;
 }
 
 export interface Question {

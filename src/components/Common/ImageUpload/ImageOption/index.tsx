@@ -6,11 +6,17 @@ import { Container } from './styles';
 
 interface ImageOptionProps {
   image: string;
+  id: string;
   label?: string;
   loading?: boolean;
 }
 
-const ImageOption: React.FC<ImageOptionProps> = ({ image, label, loading }) => (
+const ImageOption: React.FC<ImageOptionProps> = ({
+  image,
+  label,
+  loading,
+  id,
+}) => (
   <Container>
     {loading ? (
       <div>
