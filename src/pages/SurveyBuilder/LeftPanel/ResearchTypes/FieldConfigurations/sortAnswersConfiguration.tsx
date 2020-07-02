@@ -68,7 +68,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
 
     setOptions(copyOptions);
     handleChange(options, 'listOptions');
-  }, [options, setOptions]);
+  }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
     (text: string, index: number) => {
@@ -78,7 +78,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
       setOptions(newArray);
       handleChange(options, 'listOptions');
     },
-    [options, setOptions],
+    [options, setOptions, handleChange],
   );
 
   const handleDeleteInput = useCallback(
@@ -88,7 +88,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
       setOptions(newArray);
       handleChange(options, 'listOptions');
     },
-    [options, setOptions],
+    [options, setOptions, handleChange],
   );
 
   return (
