@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -7,7 +7,10 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 import ImageUpload from '../../../../../components/Common/ImageUpload';
 
-import { Question } from '../../../../../store/ducks/questions/types';
+import {
+  Question,
+  ImageChoice,
+} from '../../../../../store/ducks/questions/types';
 import randomSortArray from '../../../../../utils/randomSortArray';
 
 import { Container } from './styles';
@@ -21,12 +24,39 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   handleChange,
   field,
 }) => {
+  const randomSort = useMemo(() => field?.randomSort, [field]);
+  const imageChoices = useMemo(() => {
+    if (field?.imgChoices) {
+      return field.imgChoices;
+    }
+    return [];
+  }, [field]);
+  const addOtherOption = useMemo(() => field?.addOtherOption, [field]);
+
   useEffect(() => {
-    if (field?.imgChoices && field.randomSort) {
-      const randomSortedArray = randomSortArray(field.imgChoices);
+    if (imageChoices && randomSort) {
+      const randomSortedArray = randomSortArray(imageChoices);
       handleChange(randomSortedArray, 'imgChoices');
     }
-  }, [field?.randomSort]);
+  }, [randomSort]);
+
+  useEffect(() => {
+    if (addOtherOption) {
+      const otherOption: ImageChoice = {
+        label: '',
+        loading: false,
+        image:
+          'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+        id: 'other-option',
+      };
+      handleChange([...imageChoices, otherOption], 'imgChoices');
+    } else {
+      const removedOtherOptionImageChoices = imageChoices.filter(
+        (imageChoice) => imageChoice.id !== 'other-option',
+      );
+      handleChange(removedOtherOptionImageChoices, 'imgChoices');
+    }
+  }, [addOtherOption]);
 
   return (
     <Container>
