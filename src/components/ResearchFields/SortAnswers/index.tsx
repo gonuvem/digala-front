@@ -64,7 +64,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
     }
   }, [listOptions, setOptions, randomSort]);
 
-  function shuffle() {
+  const shuffle = useCallback(() => {
     const list = options;
     var currentIndex = list.length,
       temporaryValue,
@@ -84,7 +84,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
 
     setOptions(list);
     setRefresh(!refresh);
-  }
+  }, [options, setOptions, refresh]);
 
   return (
     <Container>

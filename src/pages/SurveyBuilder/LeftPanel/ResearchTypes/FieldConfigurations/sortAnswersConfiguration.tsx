@@ -44,7 +44,6 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
   const [options, setOptions] = useState<Array<ListOptions>>([
     { id: uuid(), content: '' },
   ]);
-  const [refresh, setRefresh] = useState(true);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -61,32 +60,36 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
     [options, setOptions],
   );
 
-  function handleAddOption() {
+  const handleAddOption = useCallback(() => {
     const newOption = { id: uuid(), content: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    setRefresh(!refresh);
-  }
-
-  function handleChangeInput(text: string, index: number) {
-    const newArray = options;
-
-    newArray[index].content = text;
-    setOptions(newArray);
-
     handleChange(options, 'listOptions');
-  }
+  }, [options, setOptions]);
 
-  function handleDeleteInput(index: number) {
-    const newArray = options;
-    newArray.splice(index, 1);
-    setOptions(newArray);
-    setRefresh(!refresh);
-    handleChange(options, 'listOptions');
-  }
+  const handleChangeInput = useCallback(
+    (text: string, index: number) => {
+      const newArray = options;
+
+      newArray[index].content = text;
+      setOptions(newArray);
+      handleChange(options, 'listOptions');
+    },
+    [options, setOptions],
+  );
+
+  const handleDeleteInput = useCallback(
+    (index: number) => {
+      const newArray = options;
+      newArray.splice(index, 1);
+      setOptions(newArray);
+      handleChange(options, 'listOptions');
+    },
+    [options, setOptions],
+  );
 
   return (
     <Container>
