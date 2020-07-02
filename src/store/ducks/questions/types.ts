@@ -47,6 +47,7 @@ export interface Question {
   upperLimit?: number;
   /* Images Choice */
   imgChoices?: ImageChoice[];
+  randomSort?: boolean;
 }
 
 /**
