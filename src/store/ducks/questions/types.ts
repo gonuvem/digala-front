@@ -36,6 +36,14 @@ export interface Question {
   /* Slider */
   lowerLimit?: number;
   upperLimit?: number;
+
+  listOptions?: ListOptionsProps[];
+  randomSort?: boolean;
+}
+
+interface ListOptionsProps {
+  id: string;
+  content: string;
 }
 
 /**
