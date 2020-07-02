@@ -38,9 +38,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   randomSort = false,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>(listOptions || []);
-  const [randonOptions, setRandonOptions] = useState<Array<ListOptions>>(
-    listOptions || [],
-  );
+
   const [refresh, setRefresh] = useState(false);
 
   const onDragEnd = useCallback(
@@ -58,13 +56,12 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   );
 
   useEffect(() => {
-    if (listOptions /*&& !randomSort*/) {
+    if (listOptions && !randomSort) {
       setOptions(listOptions);
+    } else if (listOptions && randomSort) {
+      setOptions(listOptions);
+      shuffle();
     }
-    // else if (listOptions && randomSort) {
-    //   setOptions(listOptions);
-    //   shuffle();
-    // }
   }, [listOptions, setOptions, randomSort]);
 
   function shuffle() {
