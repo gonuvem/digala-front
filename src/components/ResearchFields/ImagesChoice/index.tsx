@@ -25,11 +25,12 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
   const handleSelectImage = useCallback(
     (index: number) => {
       if (multipleChoice) {
-        console.log('Choice Max Ammount >> ', choiceMaxAmmount);
-        setSelectedImages((state) => [
-          ...state.slice(-1 * choiceMaxAmmount - 1),
-          index,
-        ]);
+        setSelectedImages((state) => {
+          if (state.includes(index)) {
+            return state;
+          }
+          return [...state.slice(-1 * (choiceMaxAmmount - 1)), index];
+        });
         return;
       }
       setSelectedImages([index]);
