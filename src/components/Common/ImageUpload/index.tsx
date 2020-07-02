@@ -39,7 +39,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       });
       onChange(updatedImageOptions);
     },
-    [imageOptions],
+    [imageOptions, onChange],
   );
 
   const onPhotoUploaded = useCallback(
@@ -52,7 +52,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       };
       onChange([...imageOptions, newImageOption]);
     },
-    [imageOptions],
+    [imageOptions, onChange],
   );
 
   const handleUploadPhoto = useCallback(
@@ -66,7 +66,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       onChange([...imageOptions, preImageOption]);
       uploadImage(event, onPhotoUploaded);
     },
-    [imageOptions],
+    [imageOptions, onChange],
   );
 
   return (

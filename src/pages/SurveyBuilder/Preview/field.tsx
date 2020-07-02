@@ -88,6 +88,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           description={config?.description || ''}
           id={config?.id || ''}
           choices={config?.imgChoices || []}
+          multipleChoice={config?.multipleChoice || false}
+          choiceMaxAmmount={config?.choiceMaxAmmount || 2}
         />
       );
     default:

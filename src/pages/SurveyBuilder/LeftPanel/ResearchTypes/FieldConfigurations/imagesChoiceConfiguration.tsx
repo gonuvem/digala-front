@@ -94,8 +94,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             helpHint="Caso o usuário possa escolhar mais de uma opção"
             name="imagesChoiceMultiple"
             onChange={(event) =>
-              handleChange(event.target.checked, 'multipleChoice')
-            }
+              handleChange(event.target.checked, 'multipleChoice')}
           />
         </section>
         {field?.multipleChoice && (
@@ -103,7 +102,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             <NumberField
               label="Limite de Escolhas"
               name="choiceMaxAmmount"
-              defaultValue={1}
+              // defaultValue={2}
               onChange={(event) =>
                 parseInt(event.target.value, 10) <= 10
                   ? handleChange(event.target.value, 'choiceMaxAmmount')
