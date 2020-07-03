@@ -9,6 +9,7 @@ import SliderConfiguration from './sliderConfiguration';
 import SortConfiguration from './sortAnswersConfiguration';
 import ImagesChoiceConfiguration from './imagesChoiceConfiguration';
 import ShortTextConfiguration from './shortTextConfiguration';
+import NumericFieldConfiguration from './numericFieldConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -61,6 +62,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <ShortTextConfiguration handleChange={handleChange} />;
     case FieldsTypes.LongText:
       return <ShortTextConfiguration handleChange={handleChange} />;
+    case FieldsTypes.Number:
+      return <NumericFieldConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }

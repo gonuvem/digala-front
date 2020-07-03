@@ -35,8 +35,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             name="linkDescripion"
             id="linkDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')
-            }
+              handleChange(event.target.value, 'description')}
           />
         </section>
         <section>
@@ -67,8 +66,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
                 name="linkLeftSubtitle"
                 id="linkLeftSubtitleField"
                 onChange={(event) =>
-                  handleChange(event.target.value, 'leftSubtitle')
-                }
+                  handleChange(event.target.value, 'leftSubtitle')}
               />
             </section>
             <section>
@@ -78,8 +76,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
                 name="linkRightSubtitle"
                 id="linkRightSubtitleField"
                 onChange={(event) =>
-                  handleChange(event.target.value, 'rightSubtitle')
-                }
+                  handleChange(event.target.value, 'rightSubtitle')}
               />
             </section>
           </>
@@ -90,8 +87,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             helpHint="Caso seja ativado o limite inferior será 0"
             name="linkStartZero"
             onChange={(event) =>
-              handleChange(event.target.checked, 'startZero')
-            }
+              handleChange(event.target.checked, 'startZero')}
           />
         </section>
         <section>
@@ -101,10 +97,9 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             measurement="unidades"
             defaultValue={10}
             onChange={(event) =>
-              parseInt(event.target.value) <= 10
+              parseInt(event.target.value, 10) <= 10
                 ? handleChange(event.target.value, 'scale')
-                : undefined
-            }
+                : undefined}
           />
         </section>
       </Form>
