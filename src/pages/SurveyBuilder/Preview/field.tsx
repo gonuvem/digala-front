@@ -56,7 +56,15 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
         />
       );
     case FieldsTypes.Email:
-      return <IconTextField icon={FiMail} name="email-field" id="email-id" />;
+      return (
+        <IconTextField
+          icon={FiMail}
+          name={config?.name || ''}
+          id={config?.id || ''}
+          label={config?.label || ''}
+          description={config?.description || ''}
+        />
+      );
     case FieldsTypes.SingleChoice:
       return (
         <SingleChoiceField

@@ -31,6 +31,8 @@ export interface Question {
   multipleChoice?: boolean;
   choiceMaxAmmount?: number;
   addOtherOption?: boolean;
+  /* Icon Inputs */
+  validatePattern?: boolean;
   /* DateTime */
   dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat?: 'hourMinute' | 'hourMinuteSecond';

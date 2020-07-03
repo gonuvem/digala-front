@@ -47,7 +47,9 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
           label="Validação de e-mail"
           helpHint="Validar se o formato é um e-mail válido"
           name="emailValidation"
-          onChange={(event) => handleChange(event.target.checked, 'required')}
+          onChange={(event) =>
+            handleChange(event.target.checked, 'validatePattern')
+          }
         />
       </section>
     </Form>
