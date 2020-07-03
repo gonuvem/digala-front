@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import EmailConfiguration from './emailConfiguration';
 import LinkConfiguration from './linkConfiguration';
 import NpsConfiguration from './npsConfiguration';
 import DateTimeConfiguration from './dateTimeConfiguration';
@@ -40,6 +41,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
   }
 
   switch (field.alias) {
+    case FieldsTypes.Email:
+      return <EmailConfiguration handleChange={handleChange} />;
     case FieldsTypes.Link:
       return <LinkConfiguration handleChange={handleChange} />;
     case FieldsTypes.Nps:

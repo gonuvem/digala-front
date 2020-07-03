@@ -64,12 +64,14 @@ const RenewPasswordForm: React.FC<RenewFormProps> = ({ userEmail }) => {
   return (
     <Form ref={renewFormRef} onSubmit={handleRenewPassword}>
       <IconTextField
+        validatePattern={false}
         icon={FiKey}
         name="code"
         id="code-field"
         placeholder="Código"
       />
       <IconTextField
+        validatePattern={false}
         icon={FiLock}
         name="newPassword"
         id="new-password-field"
@@ -77,6 +79,7 @@ const RenewPasswordForm: React.FC<RenewFormProps> = ({ userEmail }) => {
         type="password"
       />
       <IconTextField
+        validatePattern={false}
         icon={FiLock}
         name="confirmPassword"
         id="confirm-new-password-field"
