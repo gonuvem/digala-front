@@ -5,6 +5,7 @@ import LinkConfiguration from './linkConfiguration';
 import NpsConfiguration from './npsConfiguration';
 import DateTimeConfiguration from './dateTimeConfiguration';
 import SliderConfiguration from './sliderConfiguration';
+import SortConfiguration from './sortAnswersConfiguration';
 import ImagesChoiceConfiguration from './imagesChoiceConfiguration';
 
 import { ApplicationState } from '../../../../../store';
@@ -47,6 +48,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <DateTimeConfiguration handleChange={handleChange} />;
     case FieldsTypes.Slider:
       return <SliderConfiguration handleChange={handleChange} />;
+    case FieldsTypes.SortList:
+      return <SortConfiguration handleChange={handleChange} />;
     case FieldsTypes.ImageChoice:
       return (
         <ImagesChoiceConfiguration field={field} handleChange={handleChange} />

@@ -49,6 +49,12 @@ export interface Question {
   /* Images Choice */
   imgChoices?: ImageChoice[];
   randomSort?: boolean;
+
+  listOptions?: ListOptionsProps[];
+}
+interface ListOptionsProps {
+  id: string;
+  content: string;
 }
 
 /**

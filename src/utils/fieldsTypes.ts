@@ -7,4 +7,5 @@ export default {
   Link: 'link',
   Nps: 'nps',
   Slider: 'slider',
+  SortList: 'sortList',
 };
