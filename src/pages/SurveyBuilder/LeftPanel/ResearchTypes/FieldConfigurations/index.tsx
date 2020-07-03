@@ -8,6 +8,7 @@ import DateTimeConfiguration from './dateTimeConfiguration';
 import SliderConfiguration from './sliderConfiguration';
 import SortConfiguration from './sortAnswersConfiguration';
 import ImagesChoiceConfiguration from './imagesChoiceConfiguration';
+import ShortTextConfiguration from './shortTextConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -57,6 +58,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return (
         <ImagesChoiceConfiguration field={field} handleChange={handleChange} />
       );
+    case FieldsTypes.ShortText:
+      return <ShortTextConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }
