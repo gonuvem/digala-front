@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { FiLink } from 'react-icons/fi';
+import { FiLink, FiMail } from 'react-icons/fi';
 
 import ShortTextField from '../../../components/ResearchFields/ShortTextField';
 import IconTextField from '../../../components/ResearchFields/IconTextField';
@@ -13,6 +13,7 @@ import SortAnswer from '../../../components/ResearchFields/SortAnswers';
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
 import FieldsTypes from '../../../utils/fieldsTypes';
+
 interface FieldProps {
   fieldId: string;
   config?: Question;
@@ -25,11 +26,11 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     state.questions.questions.find((question) => question.id === fieldId),
   );
 
-  // console.log(config?.listOptions);
-
   switch (field?.alias) {
     case FieldsTypes.ShortText:
       return <ShortTextField name="short-teste" id="short-id" />;
+    case FieldsTypes.Email:
+      return <IconTextField icon={FiMail} name="email-field" id="email-id" />;
     case FieldsTypes.SingleChoice:
       return (
         <SingleChoiceField
