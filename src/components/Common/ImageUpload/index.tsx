@@ -1,4 +1,5 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback } from 'react';
+import { uuid } from 'uuidv4';
 
 import ImageOption from './ImageOption';
 import SolidButton from '../SolidButton';
@@ -6,43 +7,67 @@ import SolidButton from '../SolidButton';
 import { Container, OptionsContainer } from './styles';
 
 import uploadImage from '../../../services/logic/uploadImage';
-
-interface ImageOption {
-  image: string;
-  label?: string;
-  loading: boolean;
-}
+import { ImageChoice } from '../../../store/ducks/questions/types';
 
 interface ImageUploadProps {
   label?: string;
+  onChange: Function;
+  imageOptions: ImageChoice[];
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({ label }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({
+  label,
+  onChange,
+  imageOptions,
+}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imageOptions, setImageOptions] = useState<ImageOption[]>([]);
 
   const handleClick = useCallback(() => {
     fileInputRef.current?.click();
   }, []);
 
-  const onPhotoUploaded = useCallback((imageData) => {
-    const newImageOption: ImageOption = {
-      image: imageData.secure_url,
-      label: '',
-      loading: false,
-    };
-    setImageOptions((state) => [...state.splice(-1, 1), newImageOption]);
-  }, []);
+  const handleLabelChange = useCallback(
+    (newData: { id: string; label: string }) => {
+      const updatedImageOptions = imageOptions.map((imageOption) => {
+        if (imageOption.id === newData.id) {
+          return {
+            ...imageOption,
+            label: newData.label,
+          };
+        }
+        return imageOption;
+      });
+      onChange(updatedImageOptions);
+    },
+    [imageOptions, onChange],
+  );
 
-  const handleUploadPhoto = useCallback((event) => {
-    const preImageOption: ImageOption = {
-      image: '',
-      label: '',
-      loading: true,
-    };
-    setImageOptions((state) => [...state, preImageOption]);
-    uploadImage(event, onPhotoUploaded);
-  }, []);
+  const onPhotoUploaded = useCallback(
+    (imageData) => {
+      const newImageOption: ImageChoice = {
+        image: imageData.secure_url,
+        label: '',
+        loading: false,
+        id: uuid(),
+      };
+      onChange([...imageOptions, newImageOption]);
+    },
+    [imageOptions, onChange],
+  );
+
+  const handleUploadPhoto = useCallback(
+    (event) => {
+      const preImageOption: ImageChoice = {
+        image: '',
+        label: '',
+        id: '',
+        loading: true,
+      };
+      onChange([...imageOptions, preImageOption]);
+      uploadImage(event, onPhotoUploaded);
+    },
+    [imageOptions, onChange],
+  );
 
   return (
     <Container>
@@ -50,9 +75,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ label }) => {
       <OptionsContainer>
         {imageOptions.map((option) => (
           <ImageOption
+            key={option.id}
+            id={option.id}
             image={option.image}
-            label={option.label}
             loading={option.loading}
+            onChange={handleLabelChange}
           />
         ))}
         <input

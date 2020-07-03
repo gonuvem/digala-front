@@ -60,9 +60,9 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
       <Form ref={formRef} initialData={formData?.config} onSubmit={() => null}>
         <section>
           <ShortTextField
-            label="Nome da pesquisa"
             name="name"
             id="researchNameField"
+            label="Nome da pesquisa"
             onChange={(event) => handleChange(event.target.value)}
           />
         </section>

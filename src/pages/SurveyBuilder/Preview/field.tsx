@@ -8,6 +8,7 @@ import SingleChoiceField from '../../../components/ResearchFields/SingleChoiceFi
 import DateTimeField from '../../../components/ResearchFields/DateTimeField';
 import NpsField from '../../../components/ResearchFields/NpsField';
 import SliderField from '../../../components/ResearchFields/SliderField';
+import ImagesChoice from '../../../components/ResearchFields/ImagesChoice';
 import SortAnswer from '../../../components/ResearchFields/SortAnswers';
 
 import { ApplicationState } from '../../../store';
@@ -84,7 +85,17 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           rightSubtitle={config?.rightSubtitle}
         />
       );
-
+    case FieldsTypes.ImageChoice:
+      return (
+        <ImagesChoice
+          label={config?.label || ''}
+          description={config?.description || ''}
+          id={config?.id || ''}
+          choices={config?.imgChoices || []}
+          multipleChoice={config?.multipleChoice || false}
+          choiceMaxAmmount={config?.choiceMaxAmmount || 2}
+        />
+      );
     case FieldsTypes.SortList:
       return (
         <>

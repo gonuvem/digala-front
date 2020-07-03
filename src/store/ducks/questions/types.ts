@@ -11,6 +11,13 @@ export enum QuestionsTypes {
 /**
  * Data Types
  */
+export interface ImageChoice {
+  image: string;
+  label?: string;
+  loading: boolean;
+  id: string;
+}
+
 export interface Question {
   alias: string;
   id: string;
@@ -21,6 +28,9 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
+  multipleChoice?: boolean;
+  choiceMaxAmmount?: number;
+  addOtherOption?: boolean;
   /* DateTime */
   dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat?: 'hourMinute' | 'hourMinuteSecond';
@@ -36,11 +46,12 @@ export interface Question {
   /* Slider */
   lowerLimit?: number;
   upperLimit?: number;
+  /* Images Choice */
+  imgChoices?: ImageChoice[];
+  randomSort?: boolean;
 
   listOptions?: ListOptionsProps[];
-  randomSort?: boolean;
 }
-
 interface ListOptionsProps {
   id: string;
   content: string;

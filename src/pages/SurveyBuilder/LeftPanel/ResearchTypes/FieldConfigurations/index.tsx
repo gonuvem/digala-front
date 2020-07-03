@@ -51,7 +51,9 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
     case FieldsTypes.SortList:
       return <SortConfiguration handleChange={handleChange} />;
     case FieldsTypes.ImageChoice:
-      return <ImagesChoiceConfiguration handleChange={handleChange} />;
+      return (
+        <ImagesChoiceConfiguration field={field} handleChange={handleChange} />
+      );
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }

@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Container, CardImage } from './styles';
+
+import { ImageChoice } from '../../../store/ducks/questions/types';
 
 interface ImagesChoiceProps {
   description?: string;
+  multipleChoice: boolean;
+  choiceMaxAmmount: number;
   label: string;
   id: string;
-  choices: {
-    img: string;
-    name: string;
-  }[];
+  choices: ImageChoice[];
 }
 
 const ImagesChoice: React.FC<ImagesChoiceProps> = ({
   label,
   description,
+  multipleChoice,
+  choiceMaxAmmount,
   choices,
   id,
 }) => {
-  const [selectedImage, setSelectedImage] = useState(1);
+  const [selectedImages, setSelectedImages] = useState<number[]>([]);
+
+  const handleSelectImage = useCallback(
+    (index: number) => {
+      if (multipleChoice) {
+        setSelectedImages((state) => {
+          if (state.includes(index)) {
+            return state;
+          }
+          return [...state.slice(-1 * (choiceMaxAmmount - 1)), index];
+        });
+        return;
+      }
+      setSelectedImages([index]);
+    },
+    [multipleChoice, choiceMaxAmmount],
+  );
+
   return (
     <Container>
       <label htmlFor={id}>
@@ -26,13 +46,13 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
         <div>
           {choices.map((option, index) => (
             <CardImage
-              image={option.img}
-              isSelected={index === selectedImage}
-              onClick={() => setSelectedImage(index)}
+              image={option.image}
+              isSelected={selectedImages.includes(index)}
+              onClick={() => handleSelectImage(index)}
             >
               <div>
                 <button type="button" />
-                <p>{option.name}</p>
+                <p>{option.label}</p>
               </div>
             </CardImage>
           ))}
