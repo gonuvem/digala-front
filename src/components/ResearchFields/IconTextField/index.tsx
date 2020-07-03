@@ -5,6 +5,7 @@ import React, {
   useEffect,
   InputHTMLAttributes,
 } from 'react';
+import InputMask from 'react-input-mask';
 import { IconType } from 'react-icons';
 import { useField } from '@unform/core';
 import { useTransition, animated } from 'react-spring';
@@ -16,6 +17,8 @@ interface IconTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string;
   description?: string;
   label?: string;
+  validatePattern?: boolean;
+  mask?: string;
   icon: IconType;
   name: string;
   id: string;
@@ -26,6 +29,8 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   placeholder,
   label,
   readOnly,
+  validatePattern,
+  mask,
   description,
   name,
   id,
@@ -66,13 +71,16 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
         {description && <p>{description}</p>}
         <div>
           <Icon size={24} />
-          <input
-            ref={inputRef}
+          <InputMask
+            mask={validatePattern && mask ? mask : ''}
+            defaultValue={defaultValue}
+            inputRef={inputRef}
             name={name}
             placeholder={placeholder}
             id={id}
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
+            readOnly={readOnly}
             {...rest}
           />
         </div>

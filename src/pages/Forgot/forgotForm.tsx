@@ -53,6 +53,7 @@ const ForgotForm: React.FC<ForgotForm> = ({ onFinish }) => {
   return (
     <Form ref={forgotFormRef} onSubmit={handleSendCode}>
       <IconTextField
+        validatePattern={false}
         icon={FiMail}
         name="email"
         id="email-field"
