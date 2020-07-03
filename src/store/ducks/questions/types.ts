@@ -49,8 +49,12 @@ export interface Question {
   /* Images Choice */
   imgChoices?: ImageChoice[];
   randomSort?: boolean;
-
+  /* SortAnswers */
   listOptions?: ListOptionsProps[];
+  /* ShortText */
+  shortTextPlaceholder?: string;
+  limitCharacter?: boolean;
+  shortTextMaxValue?: number;
 }
 interface ListOptionsProps {
   id: string;

@@ -55,6 +55,7 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
             name="shortTextRequired"
+            onChange={(event) => handleChange(event.target.checked, 'required')}
           />
         </section>
         <section>
@@ -64,6 +65,7 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             name="limitCharacter"
             onChange={(event) => {
               setLimitCharacter(event.target.checked);
+              handleChange(event.target.checked, 'limitCharacter');
             }}
           />
         </section>
@@ -72,7 +74,9 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             <NumberField
               label="Limite de caracteres"
               name="shortTextMaxValue"
-              defaultValue={30}
+              onChange={(event) =>
+                handleChange(event.target.value, 'shortTextMaxValue')
+              }
             />
           </section>
         )}

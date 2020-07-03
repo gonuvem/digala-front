@@ -29,7 +29,18 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
 
   switch (field?.alias) {
     case FieldsTypes.ShortText:
-      return <ShortTextField name="short-teste" id="short-id" />;
+      return (
+        <ShortTextField
+          name={config?.name || 'name'}
+          id={config?.id || 'id'}
+          label={config?.label}
+          description={config?.description}
+          placeholder={config?.shortTextPlaceholder}
+          maxLength={
+            config?.limitCharacter ? config?.shortTextMaxValue : undefined
+          }
+        />
+      );
     case FieldsTypes.Email:
       return <IconTextField icon={FiMail} name="email-field" id="email-id" />;
     case FieldsTypes.SingleChoice:
