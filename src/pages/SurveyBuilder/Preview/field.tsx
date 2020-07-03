@@ -10,6 +10,7 @@ import NpsField from '../../../components/ResearchFields/NpsField';
 import SliderField from '../../../components/ResearchFields/SliderField';
 import ImagesChoice from '../../../components/ResearchFields/ImagesChoice';
 import SortAnswer from '../../../components/ResearchFields/SortAnswers';
+import LongTextField from '../../../components/ResearchFields/TextAreaField';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
@@ -31,6 +32,19 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     case FieldsTypes.ShortText:
       return (
         <ShortTextField
+          name={config?.name || 'name'}
+          id={config?.id || 'id'}
+          label={config?.label}
+          description={config?.description}
+          placeholder={config?.shortTextPlaceholder}
+          maxLength={
+            config?.limitCharacter ? config?.shortTextMaxValue : undefined
+          }
+        />
+      );
+    case FieldsTypes.LongText:
+      return (
+        <LongTextField
           name={config?.name || 'name'}
           id={config?.id || 'id'}
           label={config?.label}

@@ -1,5 +1,6 @@
 export default {
   ShortText: 'shortText',
+  LongText: 'longText',
   Date: 'date',
   Email: 'email',
   ImageChoice: 'imageChoice',

@@ -40,7 +40,6 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
   if (field === undefined) {
     return <p>Não foi possível encontrar um campo correspondente</p>;
   }
-
   switch (field.alias) {
     case FieldsTypes.Email:
       return <EmailConfiguration handleChange={handleChange} />;
@@ -59,6 +58,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
         <ImagesChoiceConfiguration field={field} handleChange={handleChange} />
       );
     case FieldsTypes.ShortText:
+      return <ShortTextConfiguration handleChange={handleChange} />;
+    case FieldsTypes.LongText:
       return <ShortTextConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
