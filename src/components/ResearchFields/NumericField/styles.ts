@@ -7,6 +7,10 @@ export const Container = styled.div`
     display: inline-block;
     font-weight: 500;
   }
+
+  > p {
+    margin-top: 0.5rem;
+  }
 `;
 
 export const InputContainer = styled.div`

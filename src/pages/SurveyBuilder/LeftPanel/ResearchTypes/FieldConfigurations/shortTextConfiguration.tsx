@@ -35,7 +35,8 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             name="shortTextDescripion"
             id="shortTextDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')}
+              handleChange(event.target.value, 'description')
+            }
           />
         </section>
         <section>
@@ -45,7 +46,8 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             name="shortTextPlaceholder"
             id="shortTextPlaceholderField"
             onChange={(event) =>
-              handleChange(event.target.value, 'shortTextPlaceholder')}
+              handleChange(event.target.value, 'shortTextPlaceholder')
+            }
           />
         </section>
         <section>
@@ -71,12 +73,14 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
           <section>
             <NumberField
               label="Limite de caracteres"
+              id="shortTextMaxValueField"
               name="shortTextMaxValue"
               onChange={(event) =>
                 handleChange(
                   parseInt(event.target.value, 10),
                   'shortTextMaxValue',
-                )}
+                )
+              }
             />
           </section>
         )}

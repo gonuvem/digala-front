@@ -77,8 +77,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             name="imagesChoiceDescripion"
             id="imagesChoiceDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')
-            }
+              handleChange(event.target.value, 'description')}
           />
         </section>
         <section>
@@ -95,8 +94,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             helpHint="Caso o usuário possa escolhar mais de uma opção"
             name="imagesChoiceMultiple"
             onChange={(event) =>
-              handleChange(event.target.checked, 'multipleChoice')
-            }
+              handleChange(event.target.checked, 'multipleChoice')}
           />
         </section>
         {field?.multipleChoice && (
@@ -104,6 +102,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             <NumberField
               label="Limite de Escolhas"
               name="choiceMaxAmmount"
+              id="choiceMaxAmmountField"
               // defaultValue={2}
               onChange={(event) =>
                 parseInt(event.target.value, 10) <= 10
@@ -111,8 +110,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
                       parseInt(event.target.value, 10),
                       'choiceMaxAmmount',
                     )
-                  : undefined
-              }
+                  : undefined}
             />
           </section>
         )}
@@ -122,7 +120,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             helpHint="Adicionar uma opção genérica outros"
             name="addOtherOption"
             onChange={(event) =>
-              handleChange(event.target.checked, 'addOtherOption')}
+              handleChange(event.target.checked, 'addOtherOption')
+            }
           />
         </section>
         <section>
@@ -131,7 +130,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             helpHint="Toda vez que será gerado uma ordem aleatória para as opções"
             name="randomOrder"
             onChange={(event) =>
-              handleChange(event.target.checked, 'randomSort')}
+              handleChange(event.target.checked, 'randomSort')
+            }
           />
         </section>
         <section>

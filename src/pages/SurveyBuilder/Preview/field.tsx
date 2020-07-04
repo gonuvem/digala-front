@@ -133,7 +133,15 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
         />
       );
     case FieldsTypes.Number:
-      return <NumberField name="numberName" />;
+      return (
+        <NumberField
+          name={config?.name || ''}
+          label={config?.label || ''}
+          description={config?.description || ''}
+          id={config?.id || ''}
+          measurement="unidade"
+        />
+      );
     default:
       return null;
   }

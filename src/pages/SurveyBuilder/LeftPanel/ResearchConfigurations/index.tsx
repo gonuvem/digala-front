@@ -91,6 +91,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
         </section>
         <section>
           <NumericField
+            id="maxResponsesField"
             name="maxResponses"
             label="Quantidade de respostas"
             onChange={(event) => handleChange(event.target.value)}

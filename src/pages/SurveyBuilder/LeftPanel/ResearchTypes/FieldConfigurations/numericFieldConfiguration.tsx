@@ -36,7 +36,8 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             name="numericDescripion"
             id="numericDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')}
+              handleChange(event.target.value, 'description')
+            }
           />
         </section>
         <section>
@@ -62,6 +63,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
           <>
             <section>
               <NumberField
+                id="minValueField"
                 label="Número minímo"
                 name="minValue"
                 defaultValue={1}
@@ -71,6 +73,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             <section>
               <NumberField
                 label="Número máximo"
+                id="maxValueField"
                 name="maxValue"
                 defaultValue={1}
                 onChange={(event) => handleChange(event.target.value, 'scale')}
@@ -81,6 +84,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
         <section>
           <NumberField
             label="Valor do incrementador"
+            id="stepSizeField"
             name="stepSize"
             defaultValue={1}
             onChange={(event) => handleChange(event.target.value, 'scale')}

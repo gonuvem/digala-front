@@ -11,6 +11,8 @@ import { Container, InputContainer } from './styles';
 
 interface NumericFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
+  id: string;
+  description?: string;
   label?: string;
   measurement?: string;
 }
@@ -19,6 +21,8 @@ const NumericField: React.FC<NumericFieldProps> = ({
   name,
   label,
   measurement,
+  id,
+  description,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,12 +43,14 @@ const NumericField: React.FC<NumericFieldProps> = ({
   return (
     <Container>
       {label && <span>{label}</span>}
+      {description && <p>{description}</p>}
       <InputContainer>
         <div>
           <input
             ref={inputRef}
             type="number"
             name={name}
+            id={id}
             defaultValue={defaultValue}
             {...rest}
           />
