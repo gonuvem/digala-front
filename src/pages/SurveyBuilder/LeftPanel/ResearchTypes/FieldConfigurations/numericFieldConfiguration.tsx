@@ -87,7 +87,9 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             id="stepSizeField"
             name="stepSize"
             defaultValue={1}
-            onChange={(event) => handleChange(event.target.value, 'scale')}
+            onChange={(event) =>
+              handleChange(parseInt(event.target.value, 10), 'stepSize')
+            }
           />
         </section>
       </Form>

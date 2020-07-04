@@ -12,6 +12,7 @@ import { Container, InputContainer } from './styles';
 interface NumericFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
+  stepSize?: number;
   description?: string;
   label?: string;
   measurement?: string;
@@ -23,14 +24,22 @@ const NumericField: React.FC<NumericFieldProps> = ({
   measurement,
   id,
   description,
+  stepSize = 1,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { fieldName, registerField, error, defaultValue } = useField(name);
 
-  const handleChangeInValue = useCallback((ammount: number) => {
-    inputRef?.current?.stepUp(ammount);
-  }, []);
+  const handleChangeInValue = useCallback(
+    (signal: number) => {
+      if (signal > 0) {
+        inputRef.current?.stepUp(stepSize);
+      } else {
+        inputRef.current?.stepDown(stepSize);
+      }
+    },
+    [stepSize],
+  );
 
   useEffect(() => {
     registerField({

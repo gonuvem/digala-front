@@ -55,7 +55,10 @@ export interface Question {
   shortTextPlaceholder?: string;
   limitCharacter?: boolean;
   shortTextMaxValue?: number;
+  /* Numeric */
+  stepSize?: number;
 }
+
 interface ListOptionsProps {
   id: string;
   content: string;

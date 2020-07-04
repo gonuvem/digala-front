@@ -139,7 +139,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label || ''}
           description={config?.description || ''}
           id={config?.id || ''}
-          measurement="unidade"
+          stepSize={config?.stepSize || 1}
         />
       );
     default:
