@@ -69,7 +69,7 @@ export const InputContainer = styled.div`
     }
 
     svg:first-child {
-      margin-bottom: -50%;
+      margin-bottom: -40%;
     }
 
     svg:hover {

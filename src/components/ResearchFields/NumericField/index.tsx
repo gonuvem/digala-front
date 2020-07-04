@@ -12,7 +12,6 @@ import { Container, InputContainer } from './styles';
 interface NumericFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
-  limitMaxMin?: boolean;
   minValue?: number;
   maxValue?: number;
   stepSize?: number;
@@ -28,7 +27,6 @@ const NumericField: React.FC<NumericFieldProps> = ({
   id,
   description,
   stepSize = 1,
-  limitMaxMin,
   minValue,
   maxValue,
   ...rest
@@ -43,6 +41,9 @@ const NumericField: React.FC<NumericFieldProps> = ({
       } else {
         inputRef.current?.stepDown(stepSize);
       }
+
+      const event = new Event('input', { bubbles: true });
+      inputRef.current?.dispatchEvent(event);
     },
     [stepSize],
   );
