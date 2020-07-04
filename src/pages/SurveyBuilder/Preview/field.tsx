@@ -140,6 +140,9 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           description={config?.description || ''}
           id={config?.id || ''}
           stepSize={config?.stepSize || 1}
+          limitMaxMin={config?.limitMaxMin}
+          maxValue={config?.maxValue}
+          minValue={config?.minValue}
         />
       );
     default:

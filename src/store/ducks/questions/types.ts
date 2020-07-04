@@ -57,6 +57,9 @@ export interface Question {
   shortTextMaxValue?: number;
   /* Numeric */
   stepSize?: number;
+  limitMaxMin?: boolean;
+  minValue?: number;
+  maxValue?: number;
 }
 
 interface ListOptionsProps {
