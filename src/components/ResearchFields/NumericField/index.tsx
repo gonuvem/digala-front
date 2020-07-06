@@ -12,6 +12,7 @@ import { Container, InputContainer } from './styles';
 interface NumericFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   id: string;
+  limitMaxMin?: boolean;
   minValue?: number;
   maxValue?: number;
   stepSize?: number;
@@ -26,9 +27,10 @@ const NumericField: React.FC<NumericFieldProps> = ({
   measurement,
   id,
   description,
+  limitMaxMin,
   stepSize = 1,
-  minValue,
-  maxValue,
+  minValue = 1,
+  maxValue = 10,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -68,8 +70,8 @@ const NumericField: React.FC<NumericFieldProps> = ({
             name={name}
             id={id}
             defaultValue={defaultValue}
-            min={minValue}
-            max={maxValue}
+            min={limitMaxMin ? minValue : undefined}
+            max={limitMaxMin ? maxValue : undefined}
             {...rest}
           />
           <p>{measurement}</p>

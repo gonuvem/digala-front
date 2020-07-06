@@ -36,7 +36,8 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             name="numericDescripion"
             id="numericDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')}
+              handleChange(event.target.value, 'description')
+            }
           />
         </section>
         <section>
@@ -67,7 +68,8 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
                 name="minValue"
                 defaultValue={1}
                 onChange={(event) =>
-                  handleChange(event.target.value, 'minValue')}
+                  handleChange(event.target.value, 'minValue')
+                }
               />
             </section>
             <section>
@@ -75,10 +77,9 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
                 label="Número máximo"
                 id="maxValueField"
                 name="maxValue"
-                defaultValue={1}
+                defaultValue={10}
                 onChange={(event) =>
-                  handleChange(event.target.value, 'maxValue')
-                }
+                  handleChange(event.target.value, 'maxValue')}
               />
             </section>
           </>
@@ -90,7 +91,8 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             name="stepSize"
             defaultValue={1}
             onChange={(event) =>
-              handleChange(parseInt(event.target.value, 10), 'stepSize')}
+              handleChange(parseInt(event.target.value, 10), 'stepSize')
+            }
           />
         </section>
       </Form>
