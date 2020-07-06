@@ -4,8 +4,9 @@ import { Form } from '@unform/web';
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
 import TextAreaField from '../../../../../components/ResearchFields/TextAreaField';
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
+import SolidButton from '../../../../../components/Common/SolidButton';
 
-import { Container } from './styles';
+import { Container, SectionTitle } from './styles';
 
 interface MatrixConfigurationProps {
   handleChange: Function;
@@ -43,6 +44,18 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
             name="matrixRequired"
             onChange={(event) => handleChange(event.target.checked, 'required')}
           />
+        </section>
+        <section>
+          <ToggleSwitch
+            label="Escolha Múltipla por linha"
+            helpHint="Caso o usuário possa escolher mais de uma opção por linha"
+            name="matrixMultipleChoice"
+            onChange={(event) => handleChange(event.target.checked, 'required')}
+          />
+        </section>
+        <section>
+          <SectionTitle>Opções</SectionTitle>
+          <SolidButton>Editar Tabela</SolidButton>
         </section>
       </Form>
     </Container>

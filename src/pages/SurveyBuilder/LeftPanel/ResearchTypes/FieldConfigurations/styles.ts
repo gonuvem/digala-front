@@ -19,6 +19,13 @@ export const Container = styled.div`
   }
 `;
 
+export const SectionTitle = styled.span`
+  display: inline-block;
+  font-weight: 500;
+  color: ${Colors.black};
+  margin-bottom: 1rem;
+`;
+
 export const DragContainer = styled.div<DragContainerProps>`
   margin-top: 1.3rem;
   background: ${(props) =>
