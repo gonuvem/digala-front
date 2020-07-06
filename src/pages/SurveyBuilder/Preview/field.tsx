@@ -11,6 +11,7 @@ import SliderField from '../../../components/ResearchFields/SliderField';
 import ImagesChoice from '../../../components/ResearchFields/ImagesChoice';
 import SortAnswer from '../../../components/ResearchFields/SortAnswers';
 import LongTextField from '../../../components/ResearchFields/TextAreaField';
+import NumberField from '../../../components/ResearchFields/NumericField';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
@@ -132,14 +133,25 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
       );
     case FieldsTypes.SortList:
       return (
-        <>
-          <SortAnswer
-            label={config?.label || ''}
-            description={config?.description}
-            listOptions={config?.listOptions}
-            randomSort={config?.randomSort}
-          />
-        </>
+        <SortAnswer
+          label={config?.label || ''}
+          description={config?.description}
+          listOptions={config?.listOptions}
+          randomSort={config?.randomSort}
+        />
+      );
+    case FieldsTypes.Number:
+      return (
+        <NumberField
+          name={config?.name || ''}
+          label={config?.label || ''}
+          description={config?.description || ''}
+          id={config?.id || ''}
+          stepSize={config?.stepSize || 1}
+          limitMaxMin={config?.limitMaxMin || false}
+          maxValue={config?.maxValue}
+          minValue={config?.minValue}
+        />
       );
     default:
       return null;

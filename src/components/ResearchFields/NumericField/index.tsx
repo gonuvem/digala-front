@@ -11,6 +11,12 @@ import { Container, InputContainer } from './styles';
 
 interface NumericFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
+  id: string;
+  limitMaxMin?: boolean;
+  minValue?: number;
+  maxValue?: number;
+  stepSize?: number;
+  description?: string;
   label?: string;
   measurement?: string;
 }
@@ -19,14 +25,30 @@ const NumericField: React.FC<NumericFieldProps> = ({
   name,
   label,
   measurement,
+  id,
+  description,
+  limitMaxMin,
+  stepSize = 1,
+  minValue = 1,
+  maxValue = 10,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { fieldName, registerField, error, defaultValue } = useField(name);
 
-  const handleChangeInValue = useCallback((ammount: number) => {
-    inputRef?.current?.stepUp(ammount);
-  }, []);
+  const handleChangeInValue = useCallback(
+    (signal: number) => {
+      if (signal > 0) {
+        inputRef.current?.stepUp(stepSize);
+      } else {
+        inputRef.current?.stepDown(stepSize);
+      }
+
+      const event = new Event('input', { bubbles: true });
+      inputRef.current?.dispatchEvent(event);
+    },
+    [stepSize],
+  );
 
   useEffect(() => {
     registerField({
@@ -39,13 +61,17 @@ const NumericField: React.FC<NumericFieldProps> = ({
   return (
     <Container>
       {label && <span>{label}</span>}
+      {description && <p>{description}</p>}
       <InputContainer>
         <div>
           <input
             ref={inputRef}
             type="number"
             name={name}
+            id={id}
             defaultValue={defaultValue}
+            min={limitMaxMin ? minValue : undefined}
+            max={limitMaxMin ? maxValue : undefined}
             {...rest}
           />
           <p>{measurement}</p>

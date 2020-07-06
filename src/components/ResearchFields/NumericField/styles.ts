@@ -7,6 +7,10 @@ export const Container = styled.div`
     display: inline-block;
     font-weight: 500;
   }
+
+  > p {
+    margin-top: 0.5rem;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -65,7 +69,7 @@ export const InputContainer = styled.div`
     }
 
     svg:first-child {
-      margin-bottom: -50%;
+      margin-bottom: -40%;
     }
 
     svg:hover {

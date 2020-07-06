@@ -98,10 +98,11 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
           <NumberField
             label="Escala"
             name="scale"
+            id="scaleFieldId"
             measurement="unidades"
             defaultValue={10}
             onChange={(event) =>
-              parseInt(event.target.value) <= 10
+              parseInt(event.target.value, 10) <= 10
                 ? handleChange(event.target.value, 'scale')
                 : undefined
             }

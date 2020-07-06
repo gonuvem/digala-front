@@ -9,4 +9,5 @@ export default {
   Nps: 'nps',
   Slider: 'slider',
   SortList: 'sortList',
+  Number: 'number',
 };
