@@ -10,6 +10,7 @@ import SortConfiguration from './sortAnswersConfiguration';
 import ImagesChoiceConfiguration from './imagesChoiceConfiguration';
 import ShortTextConfiguration from './shortTextConfiguration';
 import NumericFieldConfiguration from './numericFieldConfiguration';
+import MatrixConfiguration from './matrixConfiguration';
 import SingleChoiceConfiguration from './singleChoiceConfiguration';
 
 import { ApplicationState } from '../../../../../store';
@@ -65,6 +66,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <ShortTextConfiguration handleChange={handleChange} />;
     case FieldsTypes.Number:
       return <NumericFieldConfiguration handleChange={handleChange} />;
+    case FieldsTypes.Matrix:
+      return <MatrixConfiguration handleChange={handleChange} />;
     case FieldsTypes.SingleChoice:
       return <SingleChoiceConfiguration handleChange={handleChange} />;
     default:

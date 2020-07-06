@@ -10,4 +10,5 @@ export default {
   Slider: 'slider',
   SortList: 'sortList',
   Number: 'number',
+  Matrix: 'matrix',
 };

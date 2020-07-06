@@ -12,6 +12,7 @@ import ImagesChoice from '../../../components/ResearchFields/ImagesChoice';
 import SortAnswer from '../../../components/ResearchFields/SortAnswers';
 import LongTextField from '../../../components/ResearchFields/TextAreaField';
 import NumberField from '../../../components/ResearchFields/NumericField';
+import MatrixField from '../../../components/ResearchFields/MatrixField';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
@@ -151,6 +152,14 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           limitMaxMin={config?.limitMaxMin || false}
           maxValue={config?.maxValue}
           minValue={config?.minValue}
+        />
+      );
+    case FieldsTypes.Matrix:
+      return (
+        <MatrixField
+          name="matrix-field"
+          lines={['line 01', 'line 02']}
+          columns={['col 01', 'col 02']}
         />
       );
     default:
