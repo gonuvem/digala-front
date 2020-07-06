@@ -10,6 +10,7 @@ import SortConfiguration from './sortAnswersConfiguration';
 import ImagesChoiceConfiguration from './imagesChoiceConfiguration';
 import ShortTextConfiguration from './shortTextConfiguration';
 import NumericFieldConfiguration from './numericFieldConfiguration';
+import SingleChoiceConfiguration from './singleChoiceConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -64,6 +65,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <ShortTextConfiguration handleChange={handleChange} />;
     case FieldsTypes.Number:
       return <NumericFieldConfiguration handleChange={handleChange} />;
+    case FieldsTypes.SingleChoice:
+      return <SingleChoiceConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }
