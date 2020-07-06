@@ -43,7 +43,7 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
           <h3>Editar matriz de escolhas</h3>
           <p>Realize abaixo as modificações desejadas na matriz de escolha</p>
         </div>
-        <SolidButton>Confirmar</SolidButton>
+        <SolidButton onClick={() => onClose()}>Confirmar</SolidButton>
       </div>
       <Form onSubmit={() => null}>
         <Line>
