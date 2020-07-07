@@ -76,6 +76,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           description={config?.description || ''}
           choices={config?.listOptions}
           anotherOption={config?.anotherOption}
+          randomSort={config?.randomSort}
         />
       );
     case FieldsTypes.Link:
