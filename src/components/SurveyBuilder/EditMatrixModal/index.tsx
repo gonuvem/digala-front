@@ -1,5 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useMemo } from 'react';
 import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
 import { FaPlusCircle } from 'react-icons/fa';
 
 import SolidButton from 'components/Common/SolidButton';
@@ -10,6 +11,7 @@ import { ContainerModal, Line, AddButton, FakeCheckbox } from './styles';
 interface EditMatrixModalProps {
   isOpen: boolean;
   onClose: Function;
+  handleChange: Function;
   columns: string[];
   lines: string[];
 }
@@ -18,8 +20,10 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
   isOpen,
   onClose,
   columns,
+  handleChange,
   lines,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [localLines, setLocalLines] = useState<string[]>(lines);
   const [localColumns, setLocalColumns] = useState<string[]>(columns);
 
@@ -30,6 +34,37 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
   const handleAddColumn = useCallback(() => {
     setLocalColumns((state) => [...state, '']);
   }, []);
+
+  const handleUpdateMatrix = useCallback(
+    (data: any) => {
+      const fieldsNames = Object.keys(data);
+
+      const lineFieldsNames = fieldsNames.filter((fieldName) =>
+        fieldName.includes('line'),
+      );
+      const columnFieldsNames = fieldsNames.filter((fieldName) =>
+        fieldName.includes('col'),
+      );
+
+      const newLines = lineFieldsNames.map((line) => data[line]);
+      const newColumns = columnFieldsNames.map((col) => data[col]);
+
+      handleChange([newLines, newColumns], ['lines', 'columns']);
+      onClose();
+    },
+    [handleChange],
+  );
+
+  const initialData = useMemo(() => {
+    const formData: any = {};
+    lines.forEach((line, index) => {
+      formData[`line-${index}`] = line;
+    });
+    columns.forEach((column, index) => {
+      formData[`col-${index}`] = column;
+    });
+    return formData;
+  }, [lines, columns]);
 
   return (
     <ContainerModal
@@ -43,25 +78,31 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
           <h3>Editar matriz de escolhas</h3>
           <p>Realize abaixo as modificações desejadas na matriz de escolha</p>
         </div>
-        <SolidButton onClick={() => onClose()}>Confirmar</SolidButton>
+        <SolidButton onClick={() => formRef.current?.submitForm()}>
+          Confirmar
+        </SolidButton>
       </div>
-      <Form onSubmit={() => null}>
+      <Form
+        initialData={initialData}
+        ref={formRef}
+        onSubmit={handleUpdateMatrix}
+      >
         <Line>
           <ShortTextField
             name="fake-header"
             id="fake-line"
             style={{ visibility: 'hidden' }}
           />
-          {localColumns.map((column) => (
-            <ShortTextField name="linha 01" id="linha01" />
+          {localColumns.map((column, index) => (
+            <ShortTextField name={`col-${index}`} id={`col-id-${index}`} />
           ))}
-          <AddButton onClick={handleAddColumn}>
+          <AddButton type="button" onClick={handleAddColumn}>
             <FaPlusCircle />
           </AddButton>
         </Line>
-        {localLines.map((line) => (
+        {localLines.map((line, index) => (
           <Line>
-            <ShortTextField name="linha 01" id="linha01" />
+            <ShortTextField name={`line-${index}`} id={`line-id-${index}`} />
             {localColumns.map((column) => (
               <FakeCheckbox />
             ))}
@@ -69,7 +110,7 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
           </Line>
         ))}
         <Line id="last-line">
-          <AddButton onClick={handleAddLine}>
+          <AddButton type="button" onClick={handleAddLine}>
             <FaPlusCircle />
           </AddButton>
         </Line>

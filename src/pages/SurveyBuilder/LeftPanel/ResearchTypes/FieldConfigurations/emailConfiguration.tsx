@@ -22,7 +22,7 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
           placeholder="E-mail"
           name="emailLabel"
           id="emailLabelField"
-          onChange={(event) => handleChange(event.target.value, 'label')}
+          onChange={(event) => handleChange([event.target.value], ['label'])}
         />
       </section>
       <section>
@@ -31,7 +31,9 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
           placeholder="Coloque aqui sua descrição"
           name="emailDescripion"
           id="emailDescriptionField"
-          onChange={(event) => handleChange(event.target.value, 'description')}
+          onChange={(event) =>
+            handleChange([event.target.value], ['description'])
+          }
         />
       </section>
       <section>
@@ -39,7 +41,8 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
           label="Obrigatório"
           helpHint="Caso o usuário seja obrigado a responder"
           name="emailRequired"
-          onChange={(event) => handleChange(event.target.checked, 'required')}
+          onChange={(event) =>
+            handleChange([event.target.checked], ['required'])}
         />
       </section>
       <section>
@@ -48,8 +51,7 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
           helpHint="Validar se o formato é um e-mail válido"
           name="emailValidation"
           onChange={(event) =>
-            handleChange(event.target.checked, 'validatePattern')
-          }
+            handleChange([event.target.checked], ['validatePattern'])}
         />
       </section>
     </Form>

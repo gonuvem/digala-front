@@ -26,7 +26,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             placeholder="Número"
             name="numericLabel"
             id="numericLabelField"
-            onChange={(event) => handleChange(event.target.value, 'label')}
+            onChange={(event) => handleChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -36,7 +36,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             name="numericDescripion"
             id="numericDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')
+              handleChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -45,7 +45,8 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
             name="numericRequired"
-            onChange={(event) => handleChange(event.target.checked, 'required')}
+            onChange={(event) =>
+              handleChange([event.target.checked], ['required'])}
           />
         </section>
         <section>
@@ -54,7 +55,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             helpHint="Limitar valores máximos e minímos"
             name="limitMaxMin"
             onChange={(event) => {
-              handleChange(event.target.checked, 'limitMaxMin');
+              handleChange([event.target.checked], ['limitMaxMin']);
               setShowLimiters(event.target.checked);
             }}
           />
@@ -68,7 +69,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
                 name="minValue"
                 defaultValue={1}
                 onChange={(event) =>
-                  handleChange(event.target.value, 'minValue')
+                  handleChange([event.target.value], ['minValue'])
                 }
               />
             </section>
@@ -79,7 +80,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
                 name="maxValue"
                 defaultValue={10}
                 onChange={(event) =>
-                  handleChange(event.target.value, 'maxValue')}
+                  handleChange([event.target.value], ['maxValue'])}
               />
             </section>
           </>
@@ -91,7 +92,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             name="stepSize"
             defaultValue={1}
             onChange={(event) =>
-              handleChange(parseInt(event.target.value, 10), 'stepSize')
+              handleChange([parseInt(event.target.value, 10)], ['stepSize'])
             }
           />
         </section>

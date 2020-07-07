@@ -23,7 +23,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           placeholder="Slider"
           name="sliderLabel"
           id="sliderLabelField"
-          onChange={(event) => handleChange(event.target.value, 'label')}
+          onChange={(event) => handleChange([event.target.value], ['label'])}
         />
       </section>
       <section>
@@ -32,7 +32,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           placeholder="Coloque aqui sua descrição"
           name="sliderDescripion"
           id="sliderDescriptionField"
-          onChange={(event) => handleChange(event.target.value, 'description')}
+          onChange={(event) =>
+            handleChange([event.target.value], ['description'])
+          }
         />
       </section>
       <section>
@@ -40,7 +42,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           label="Limite inferior"
           id="lowerLimitField"
           name="lowerLimit"
-          onChange={(event) => handleChange(event.target.value, 'lowerLimit')}
+          onChange={(event) =>
+            handleChange([event.target.value], ['lowerLimit'])
+          }
         />
       </section>
       <section>
@@ -49,7 +53,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           placeholder="Legenda esquerda"
           name="leftSubtitleLabel"
           id="leftSubtitleLabelField"
-          onChange={(event) => handleChange(event.target.value, 'leftSubtitle')}
+          onChange={(event) =>
+            handleChange([event.target.value], ['leftSubtitle'])
+          }
         />
       </section>
       <section>
@@ -57,7 +63,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           label="Limite superior"
           id="upperLimitField"
           name="upperLimit"
-          onChange={(event) => handleChange(event.target.value, 'upperLimit')}
+          onChange={(event) =>
+            handleChange([event.target.value], ['upperLimit'])
+          }
         />
       </section>
       <section>
@@ -67,8 +75,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           name="rightSubtitleLabel"
           id="rightSubtileLabelField"
           onChange={(event) =>
-            handleChange(event.target.value, 'rightSubtitle')
-          }
+            handleChange([event.target.value], ['rightSubtitle'])}
         />
       </section>
       <section>
@@ -77,7 +84,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           helpHint="Caso o usuário seja obrigado a responder"
           name="sliderRequired"
           onChange={(event) => {
-            handleChange(event.target.checked, 'required');
+            handleChange([event.target.checked], ['required']);
           }}
         />
       </section>

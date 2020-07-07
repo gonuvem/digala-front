@@ -22,7 +22,7 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
           placeholder="Link"
           name="linkLabel"
           id="linkLabelField"
-          onChange={(event) => handleChange(event.target.value, 'label')}
+          onChange={(event) => handleChange([event.target.value], ['label'])}
         />
       </section>
       <section>
@@ -31,7 +31,9 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
           placeholder="Coloque aqui sua descrição"
           name="linkDescripion"
           id="linkDescriptionField"
-          onChange={(event) => handleChange(event.target.value, 'description')}
+          onChange={(event) =>
+            handleChange([event.target.value], ['description'])
+          }
         />
       </section>
       <section>

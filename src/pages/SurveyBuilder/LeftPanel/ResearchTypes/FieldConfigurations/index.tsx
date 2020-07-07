@@ -32,9 +32,9 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
   );
 
   const handleChange = useCallback(
-    (value: string, attribute) => {
+    (values: string[], attributes) => {
       if (field !== undefined) {
-        changeFieldConfiguration(dispatch, { attribute, value, field });
+        changeFieldConfiguration(dispatch, { attributes, values, field });
       }
     },
     [field, dispatch],
@@ -67,7 +67,7 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
     case FieldsTypes.Number:
       return <NumericFieldConfiguration handleChange={handleChange} />;
     case FieldsTypes.Matrix:
-      return <MatrixConfiguration handleChange={handleChange} />;
+      return <MatrixConfiguration handleChange={handleChange} field={field} />;
     case FieldsTypes.SingleChoice:
       return <SingleChoiceConfiguration handleChange={handleChange} />;
     default:
