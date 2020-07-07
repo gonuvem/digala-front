@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useEffect } from 'react';
 
 import { uuid } from 'uuidv4';
 import Option from './Option';
@@ -9,9 +9,15 @@ interface SingleChoiceFieldProps {
   readOnly?: boolean;
   description?: string;
   label: string;
-  choices: string[];
+  choices?: ChoicesProps[];
   name: string;
   id: string;
+  anotherOption?: boolean;
+}
+
+interface ChoicesProps {
+  id: string;
+  content: string;
 }
 
 const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
@@ -21,16 +27,24 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   choices,
   label,
   description,
-}) => (
-  <Container>
-    <label htmlFor={id}>
-      {label}
-      {description && <p>{description}</p>}
-      {choices.map((choice) => (
-        <Option id={uuid()} fieldName={name} label={choice} />
-      ))}
-    </label>
-  </Container>
-);
+  anotherOption,
+}) => {
+  const another = { id: uuid(), content: 'outros(a)' };
+  return (
+    <Container>
+      <label htmlFor={id}>
+        {label}
+        {description && <p>{description}</p>}
+        {choices &&
+          choices.map((choice) => (
+            <Option id={choice.id} fieldName={name} label={choice.content} />
+          ))}
+        {anotherOption && (
+          <Option id={another.id} fieldName={name} label={another.content} />
+        )}
+      </label>
+    </Container>
+  );
+};
 
 export default SingleChoiceField;

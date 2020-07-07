@@ -126,9 +126,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Adicionar opção outros(a)"
             helpHint="Cria um novo campo com o valor Outros "
-            name="anotherOptions"
+            name="anotherOption"
             onChange={(event) =>
-              handleChange(event.target.checked, 'anotherOptions')
+              handleChange(event.target.checked, 'anotherOption')
             }
           />
         </section>

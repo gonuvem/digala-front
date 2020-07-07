@@ -70,10 +70,12 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     case FieldsTypes.SingleChoice:
       return (
         <SingleChoiceField
-          label="Teste"
-          name="single-teste"
-          id="single-id"
-          choices={['opção 01', 'opção 02', 'opção 03']}
+          label={config?.label || ''}
+          name={config?.name || ''}
+          id={config?.id || ''}
+          description={config?.description || ''}
+          choices={config?.listOptions}
+          anotherOption={config?.anotherOption}
         />
       );
     case FieldsTypes.Link:

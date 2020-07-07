@@ -62,6 +62,8 @@ export interface Question {
   limitMaxMin?: boolean;
   minValue?: number;
   maxValue?: number;
+  /* SingleChoices */
+  anotherOption?: boolean;
 }
 
 interface ListOptionsProps {
