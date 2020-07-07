@@ -3,7 +3,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import { uuid } from 'uuidv4';
 import Option from './Option';
 
-import { Container } from './styles';
+import { Container, ViewOptions } from './styles';
 interface SingleChoiceFieldProps {
   readOnly?: boolean;
   description?: string;
@@ -13,6 +13,7 @@ interface SingleChoiceFieldProps {
   id: string;
   anotherOption?: boolean;
   randomSort?: boolean;
+  rowDirection?: boolean;
 }
 
 interface ChoicesProps {
@@ -29,6 +30,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   description,
   anotherOption,
   randomSort,
+  rowDirection = false,
 }) => {
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
@@ -69,13 +71,15 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
       <label htmlFor={id}>
         {label}
         {description && <p>{description}</p>}
-        {listChoices &&
-          listChoices.map((choice) => (
-            <Option id={choice.id} fieldName={name} label={choice.content} />
-          ))}
-        {anotherOption && (
-          <Option id={another.id} fieldName={name} label={another.content} />
-        )}
+        <ViewOptions rowDirection={rowDirection}>
+          {listChoices &&
+            listChoices.map((choice) => (
+              <Option id={choice.id} fieldName={name} label={choice.content} />
+            ))}
+          {anotherOption && (
+            <Option id={another.id} fieldName={name} label={another.content} />
+          )}
+        </ViewOptions>
       </label>
     </Container>
   );

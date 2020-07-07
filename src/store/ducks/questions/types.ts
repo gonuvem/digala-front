@@ -64,6 +64,7 @@ export interface Question {
   maxValue?: number;
   /* SingleChoices */
   anotherOption?: boolean;
+  rowDirection?: boolean;
 }
 
 interface ListOptionsProps {

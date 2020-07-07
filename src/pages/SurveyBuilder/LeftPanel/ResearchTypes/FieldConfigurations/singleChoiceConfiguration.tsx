@@ -136,9 +136,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Alinhamento horizontal"
             helpHint="Alinha as opções de forma horizontal no formulário"
-            name="direction"
+            name="rowDirection"
             onChange={(event) =>
-              handleChange(event.target.checked, 'direction')
+              handleChange(event.target.checked, 'rowDirection')
             }
           />
         </section>
