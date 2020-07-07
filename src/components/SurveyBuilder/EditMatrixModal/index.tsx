@@ -1,12 +1,18 @@
 import React, { useState, useCallback, useRef, useMemo } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { FaPlusCircle } from 'react-icons/fa';
+import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa';
 
 import SolidButton from 'components/Common/SolidButton';
 import ShortTextField from '../../ResearchFields/ShortTextField';
 
-import { ContainerModal, Line, AddButton, FakeCheckbox } from './styles';
+import {
+  ContainerModal,
+  Line,
+  Button,
+  FakeCheckbox,
+  InputField,
+} from './styles';
 
 interface EditMatrixModalProps {
   isOpen: boolean;
@@ -34,6 +40,24 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
   const handleAddColumn = useCallback(() => {
     setLocalColumns((state) => [...state, '']);
   }, []);
+
+  const handleRemoveLine = useCallback(
+    (index: number) => {
+      const localLinesCopy = [...localLines];
+      localLinesCopy.splice(index, 1);
+      setLocalLines(localLinesCopy);
+    },
+    [localLines],
+  );
+
+  const handleRemoveColumn = useCallback(
+    (index: number) => {
+      const localColumnsCopy = [...localColumns];
+      localColumnsCopy.splice(index, 1);
+      setLocalColumns(localColumnsCopy);
+    },
+    [localColumns],
+  );
 
   const handleUpdateMatrix = useCallback(
     (data: any) => {
@@ -94,15 +118,21 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
             style={{ visibility: 'hidden' }}
           />
           {localColumns.map((column, index) => (
-            <ShortTextField name={`col-${index}`} id={`col-id-${index}`} />
+            <InputField>
+              <FaMinusCircle onClick={() => handleRemoveColumn(index)} />
+              <ShortTextField name={`col-${index}`} id={`col-id-${index}`} />
+            </InputField>
           ))}
-          <AddButton type="button" onClick={handleAddColumn}>
+          <Button type="button" onClick={handleAddColumn}>
             <FaPlusCircle />
-          </AddButton>
+          </Button>
         </Line>
         {localLines.map((line, index) => (
           <Line>
-            <ShortTextField name={`line-${index}`} id={`line-id-${index}`} />
+            <InputField>
+              <FaMinusCircle onClick={() => handleRemoveLine(index)} />
+              <ShortTextField name={`line-${index}`} id={`line-id-${index}`} />
+            </InputField>
             {localColumns.map((column) => (
               <FakeCheckbox />
             ))}
@@ -110,9 +140,9 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
           </Line>
         ))}
         <Line id="last-line">
-          <AddButton type="button" onClick={handleAddLine}>
+          <Button type="button" onClick={handleAddLine}>
             <FaPlusCircle />
-          </AddButton>
+          </Button>
         </Line>
       </Form>
     </ContainerModal>
