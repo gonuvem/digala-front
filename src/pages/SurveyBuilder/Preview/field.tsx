@@ -160,6 +160,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           lines={config?.lines || ['']}
           columns={config?.columns || ['']}
+          multipleChoice={config?.multipleChoice || false}
         />
       );
     default:
