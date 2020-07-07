@@ -5,12 +5,16 @@ import CustomCheckbox from './CustomCheckbox';
 import { Container, LineTitle } from './styles';
 
 interface MatrixFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+  description?: string;
+  label?: string;
   name: string;
   columns: string[];
   lines: string[];
 }
 
 const MatrixField: React.FC<MatrixFieldProps> = ({
+  description,
+  label,
   name,
   columns,
   lines,
@@ -19,11 +23,8 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
   return (
     <Container>
       <label htmlFor="">
-        Matriz de escolhas
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua
-        </p>
+        {label && <span>{label}</span>}
+        {description && <p>{description}</p>}
       </label>
       <table>
         <thead>

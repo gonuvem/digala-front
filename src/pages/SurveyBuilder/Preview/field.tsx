@@ -23,8 +23,6 @@ interface FieldProps {
   config?: Question;
 }
 
-const temp = [{ id: '123', content: 'joao' }];
-
 const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
   const field = useSelector<ApplicationState, Question | undefined>((state) =>
     state.questions.questions.find((question) => question.id === fieldId),
@@ -157,9 +155,11 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     case FieldsTypes.Matrix:
       return (
         <MatrixField
-          name="matrix-field"
-          lines={['line 01', 'line 02']}
-          columns={['col 01', 'col 02']}
+          label={config?.label}
+          description={config?.description}
+          name={config?.name || ''}
+          lines={config?.lines || ['']}
+          columns={config?.columns || ['']}
         />
       );
     default:

@@ -38,8 +38,7 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               name="matrixDescripion"
               id="matrixDescriptionField"
               onChange={(event) =>
-                handleChange(event.target.value, 'description')
-              }
+                handleChange(event.target.value, 'description')}
             />
           </section>
           <section>
@@ -48,7 +47,8 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               helpHint="Caso o usuário seja obrigado a responder"
               name="matrixRequired"
               onChange={(event) =>
-                handleChange(event.target.checked, 'required')}
+                handleChange(event.target.checked, 'required')
+              }
             />
           </section>
           <section>
@@ -57,7 +57,8 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               helpHint="Caso o usuário possa escolher mais de uma opção por linha"
               name="matrixMultipleChoice"
               onChange={(event) =>
-                handleChange(event.target.checked, 'required')}
+                handleChange(event.target.checked, 'multipleChoice')
+              }
             />
           </section>
           <section>
