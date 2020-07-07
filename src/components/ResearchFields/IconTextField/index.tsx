@@ -36,6 +36,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   id,
   ...rest
 }) => {
+  const auxRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -59,7 +60,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: inputRef.current,
+      ref: auxRef.current,
       path: 'value',
     });
   }, [fieldName, registerField]);
@@ -72,9 +73,9 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
         <div>
           <Icon size={24} />
           <InputMask
+            ref={auxRef}
             mask={validatePattern && mask ? mask : ''}
             defaultValue={defaultValue}
-            inputRef={inputRef}
             name={name}
             placeholder={placeholder}
             id={id}
