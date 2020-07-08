@@ -11,4 +11,5 @@ export default {
   SortList: 'sortList',
   Number: 'number',
   Matrix: 'matrix',
+  Phone: 'phone',
 };
