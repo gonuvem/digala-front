@@ -17,6 +17,7 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import SolidButton from '../../../../../components/Common/SolidButton';
 
 import { Container, DragContainer, Option, ViewButton } from './styles';
+
 interface SingleChoiceConfigurarionProps {
   handleChange: Function;
 }
@@ -55,7 +56,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
         result.destination.index,
       );
       setOptions(items);
-      handleChange(items, 'listOptions');
+      handleChange([items], ['listOptions']);
     },
     [options, setOptions],
   );
@@ -67,7 +68,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    handleChange(options, 'listOptions');
+    handleChange([options], ['listOptions']);
   }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
@@ -76,7 +77,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
 
       newArray[index].content = text;
       setOptions(newArray);
-      handleChange(options, 'listOptions');
+      handleChange([options], ['listOptions']);
     },
     [options, setOptions, handleChange],
   );
@@ -86,7 +87,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
       const newArray = options;
       newArray.splice(index, 1);
       setOptions(newArray);
-      handleChange(options, 'listOptions');
+      handleChange([options], ['listOptions']);
     },
     [options, setOptions, handleChange],
   );
@@ -100,7 +101,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             placeholder="Nome"
             name="singleChoiceLabel"
             id="singleChoiceLabelField"
-            onChange={(event) => handleChange(event.target.value, 'label')}
+            onChange={(event) => handleChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -110,8 +111,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             name="singleChoiceDescripion"
             id="singleChoiceDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')
-            }
+              handleChange([event.target.value], ['description'])}
           />
         </section>
         <section>
@@ -119,7 +119,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
             name="singleChoiceRequired"
-            onChange={(event) => handleChange(event.target.checked, 'required')}
+            onChange={(event) =>
+              handleChange([event.target.checked], ['required'])
+            }
           />
         </section>
         <section>
@@ -128,8 +130,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             helpHint="Cria um novo campo com o valor Outros "
             name="anotherOptions"
             onChange={(event) =>
-              handleChange(event.target.checked, 'anotherOptions')
-            }
+              handleChange([event.target.checked], ['anotherOptions'])}
           />
         </section>
         <section>
@@ -138,8 +139,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             helpHint="Alinha as opções de forma horizontal no formulário"
             name="direction"
             onChange={(event) =>
-              handleChange(event.target.checked, 'direction')
-            }
+              handleChange([event.target.checked], ['direction'])}
           />
         </section>
         <section>
@@ -148,8 +148,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
             name="singleChoicerandomSort"
             onChange={(event) =>
-              handleChange(event.target.checked, 'randomSort')
-            }
+              handleChange([event.target.checked], ['randomSort'])}
           />
         </section>
         <section>
@@ -181,8 +180,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
                           <input
                             placeholder="Escreva a opção"
                             onChange={(event) =>
-                              handleChangeInput(event.target.value, index)
-                            }
+                              handleChangeInput(event.target.value, index)}
                           />
                           <button type="button">
                             <FiMove />

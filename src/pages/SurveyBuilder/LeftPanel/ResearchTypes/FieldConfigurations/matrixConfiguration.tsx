@@ -7,14 +7,18 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import SolidButton from '../../../../../components/Common/SolidButton';
 import EditMatrixModal from '../../../../../components/SurveyBuilder/EditMatrixModal';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container, SectionTitle } from './styles';
 
 interface MatrixConfigurationProps {
   handleChange: Function;
+  field: Question | undefined;
 }
 
 const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
   handleChange,
+  field,
 }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -28,7 +32,8 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               placeholder="matrix"
               name="matrixLabel"
               id="matrixLabelField"
-              onChange={(event) => handleChange(event.target.value, 'label')}
+              onChange={(event) =>
+                handleChange([event.target.value], ['label'])}
             />
           </section>
           <section>
@@ -38,8 +43,7 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               name="matrixDescripion"
               id="matrixDescriptionField"
               onChange={(event) =>
-                handleChange(event.target.value, 'description')
-              }
+                handleChange([event.target.value], ['description'])}
             />
           </section>
           <section>
@@ -48,7 +52,8 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               helpHint="Caso o usuário seja obrigado a responder"
               name="matrixRequired"
               onChange={(event) =>
-                handleChange(event.target.checked, 'required')}
+                handleChange([event.target.checked], ['required'])
+              }
             />
           </section>
           <section>
@@ -57,7 +62,8 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               helpHint="Caso o usuário possa escolher mais de uma opção por linha"
               name="matrixMultipleChoice"
               onChange={(event) =>
-                handleChange(event.target.checked, 'required')}
+                handleChange([event.target.checked], ['multipleChoice'])
+              }
             />
           </section>
           <section>
@@ -70,9 +76,10 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
       </Container>
       <EditMatrixModal
         isOpen={isEditModalOpen}
+        handleChange={handleChange}
         onClose={() => setIsEditModalOpen(false)}
-        columns={['coluna 01', 'coluna 02', 'coluna 03']}
-        lines={['linha 01', 'linha 02', 'linha 03']}
+        columns={field?.columns || []}
+        lines={field?.lines || []}
       />
     </>
   );

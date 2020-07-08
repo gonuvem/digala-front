@@ -62,6 +62,9 @@ export interface Question {
   limitMaxMin?: boolean;
   minValue?: number;
   maxValue?: number;
+  /* Matrix */
+  columns?: string[];
+  lines?: string[];
 }
 
 interface ListOptionsProps {

@@ -4,11 +4,12 @@ import * as QuestionsActions from '../../store/ducks/questions/actions';
 
 interface QuestionDTO {
   alias: string;
+  defaultPayload?: any;
 }
 
 export default function addFieldToForm(
   dispatch: Function,
-  { alias }: QuestionDTO,
+  { alias, defaultPayload }: QuestionDTO,
 ): void {
   const localQuestionId = uuid();
   const localFieldName = `${alias}:${localQuestionId}`;
@@ -18,6 +19,7 @@ export default function addFieldToForm(
       alias,
       id: localQuestionId,
       name: localFieldName,
+      ...defaultPayload,
     }),
   );
   dispatch(QuestionsActions.focusQuestion(localQuestionId));
