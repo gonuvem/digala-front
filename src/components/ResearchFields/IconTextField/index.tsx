@@ -10,6 +10,8 @@ import { IconType } from 'react-icons';
 import { useField } from '@unform/core';
 import { useTransition, animated } from 'react-spring';
 
+import { urlValidation } from '../../../utils/validations';
+
 import { Container } from './styles';
 
 interface IconTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -40,6 +42,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [value, setValue] = useState('');
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
   const transitions = useTransition(!!error, null, {
@@ -55,7 +58,11 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   const handleOnBlur = useCallback(() => {
     setHasFocus(false);
     setIsFilled(!!inputRef.current?.value);
-  }, []);
+
+    if (validatePattern) {
+      console.log(urlValidation(value));
+    }
+  }, [value, validatePattern]);
 
   useEffect(() => {
     registerField({
@@ -82,6 +89,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
             readOnly={readOnly}
+            onChange={(text) => setValue(text?.target?.value)}
             {...rest}
           />
         </div>
