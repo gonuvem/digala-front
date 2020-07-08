@@ -88,6 +88,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || 'id'}
           label={config?.label}
           description={config?.description}
+          validatePattern={config?.validatePattern}
         />
       );
     case FieldsTypes.Date:

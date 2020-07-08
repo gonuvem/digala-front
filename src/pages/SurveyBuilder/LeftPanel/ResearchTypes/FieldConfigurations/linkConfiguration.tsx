@@ -41,6 +41,9 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
           label="Obrigatório"
           helpHint="Caso o usuário seja obrigado a responder"
           name="linkRequired"
+          onChange={(event) =>
+            handleChange([event.target.checked], ['required'])
+          }
         />
       </section>
       <section>
@@ -48,6 +51,9 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
           label="Ativar validação de link"
           helpHint="O formato do link sera validado"
           name="linkValidation"
+          onChange={(event) =>
+            handleChange([event.target.checked], ['validatePattern'])
+          }
         />
       </section>
     </Form>
