@@ -65,6 +65,9 @@ export interface Question {
   /* SingleChoices */
   anotherOption?: boolean;
   rowDirection?: boolean;
+  /* Matrix */
+  columns?: string[];
+  lines?: string[];
 }
 
 interface ListOptionsProps {

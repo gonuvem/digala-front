@@ -66,6 +66,36 @@ export const Line = styled.div`
   }
 `;
 
+export const InputField = styled.div`
+  position: relative;
+  width: 100%;
+
+  svg {
+    /* display: none; */
+    position: absolute;
+    top: 50%;
+    left: 5%;
+
+    margin-right: 0.5rem;
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+
+    cursor: pointer;
+
+    color: ${Colors.secondary};
+    opacity: 0;
+
+    transition: opacity 0.2s;
+  }
+
+  &:hover {
+    svg {
+      /* display: block; */
+      opacity: 1;
+    }
+  }
+`;
+
 export const FakeCheckbox = styled.div`
   display: flex;
   justify-content: center !important;
@@ -83,11 +113,10 @@ export const FakeCheckbox = styled.div`
   }
 `;
 
-export const AddButton = styled.button`
+export const Button = styled.button`
   display: flex;
 
   max-width: 2rem;
-  margin-left: 1rem;
 
   background: none;
   border: none;

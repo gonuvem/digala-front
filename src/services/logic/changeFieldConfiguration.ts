@@ -3,16 +3,18 @@ import { Question } from '../../store/ducks/questions/types';
 
 interface FieldDTO {
   field: Question;
-  value: string;
-  attribute: 'name' | 'label' | 'description';
+  values: string[];
+  attributes: ['name' | 'label' | 'description'];
 }
 
 export default function changeFieldConfiguration(
   dispatch: Function,
-  { value, attribute, field }: FieldDTO,
+  { values, attributes, field }: FieldDTO,
 ): void {
   const changedField = { ...field };
-  changedField[attribute] = value;
+  attributes.forEach((attribute, index) => {
+    changedField[attribute] = values[index];
+  });
 
   dispatch(QuestionsActions.replaceQuestion(changedField));
 }

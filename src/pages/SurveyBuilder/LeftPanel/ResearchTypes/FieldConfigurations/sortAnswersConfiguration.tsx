@@ -17,6 +17,7 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import SolidButton from '../../../../../components/Common/SolidButton';
 
 import { Container, DragContainer, Option, ViewButton } from './styles';
+
 interface SortAnswerConfigurarionProps {
   handleChange: Function;
 }
@@ -55,7 +56,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
         result.destination.index,
       );
       setOptions(items);
-      handleChange(items, 'listOptions');
+      handleChange([items], ['listOptions']);
     },
     [options, setOptions],
   );
@@ -67,7 +68,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    handleChange(options, 'listOptions');
+    handleChange([options], ['listOptions']);
   }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
@@ -76,7 +77,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
 
       newArray[index].content = text;
       setOptions(newArray);
-      handleChange(options, 'listOptions');
+      handleChange([options], ['listOptions']);
     },
     [options, setOptions, handleChange],
   );
@@ -86,7 +87,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
       const newArray = options;
       newArray.splice(index, 1);
       setOptions(newArray);
-      handleChange(options, 'listOptions');
+      handleChange([options], ['listOptions']);
     },
     [options, setOptions, handleChange],
   );
@@ -100,7 +101,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
             placeholder="Nome"
             name="sortLabel"
             id="sortLabelField"
-            onChange={(event) => handleChange(event.target.value, 'label')}
+            onChange={(event) => handleChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -110,7 +111,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
             name="sortDescripion"
             id="sortDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')
+              handleChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -119,7 +120,9 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
             name="sortRequired"
-            onChange={(event) => handleChange(event.target.checked, 'required')}
+            onChange={(event) =>
+              handleChange([event.target.checked], ['required'])
+            }
           />
         </section>
         <section>
@@ -128,7 +131,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
             name="randomSort"
             onChange={(event) =>
-              handleChange(event.target.checked, 'randomSort')
+              handleChange([event.target.checked], ['randomSort'])
             }
           />
         </section>

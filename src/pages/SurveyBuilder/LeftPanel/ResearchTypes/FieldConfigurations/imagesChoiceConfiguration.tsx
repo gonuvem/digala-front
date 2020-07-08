@@ -36,7 +36,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   useEffect(() => {
     if (imageChoices && randomSort) {
       const randomSortedArray = randomSortArray(imageChoices);
-      handleChange(randomSortedArray, 'imgChoices');
+      handleChange([randomSortedArray], ['imgChoices']);
     }
   }, [randomSort]);
 
@@ -49,12 +49,12 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
         id: 'other-option',
       };
-      handleChange([...imageChoices, otherOption], 'imgChoices');
+      handleChange([[...imageChoices, otherOption]], ['imgChoices']);
     } else {
       const removedOtherOptionImageChoices = imageChoices.filter(
         (imageChoice) => imageChoice.id !== 'other-option',
       );
-      handleChange(removedOtherOptionImageChoices, 'imgChoices');
+      handleChange([removedOtherOptionImageChoices], ['imgChoices']);
     }
   }, [addOtherOption]);
 
@@ -67,7 +67,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             placeholder="Escolha de imagens"
             name="imagesChoiceLabel"
             id="imagesChoiceLabelField"
-            onChange={(event) => handleChange(event.target.value, 'label')}
+            onChange={(event) => handleChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -77,7 +77,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             name="imagesChoiceDescripion"
             id="imagesChoiceDescriptionField"
             onChange={(event) =>
-              handleChange(event.target.value, 'description')}
+              handleChange([event.target.value], ['description'])}
           />
         </section>
         <section>
@@ -85,7 +85,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
             name="imagesChoiceRequired"
-            onChange={(event) => handleChange(event.target.checked, 'required')}
+            onChange={(event) =>
+              handleChange([event.target.checked], ['required'])}
           />
         </section>
         <section>
@@ -94,7 +95,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             helpHint="Caso o usuário possa escolhar mais de uma opção"
             name="imagesChoiceMultiple"
             onChange={(event) =>
-              handleChange(event.target.checked, 'multipleChoice')}
+              handleChange([event.target.checked], ['multipleChoice'])
+            }
           />
         </section>
         {field?.multipleChoice && (
@@ -107,8 +109,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
               onChange={(event) =>
                 parseInt(event.target.value, 10) <= 10
                   ? handleChange(
-                      parseInt(event.target.value, 10),
-                      'choiceMaxAmmount',
+                      [parseInt(event.target.value, 10)],
+                      ['choiceMaxAmmount'],
                     )
                   : undefined}
             />
@@ -120,7 +122,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             helpHint="Adicionar uma opção genérica outros"
             name="addOtherOption"
             onChange={(event) =>
-              handleChange(event.target.checked, 'addOtherOption')
+              handleChange([event.target.checked], ['addOtherOption'])
             }
           />
         </section>
@@ -130,7 +132,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             helpHint="Toda vez que será gerado uma ordem aleatória para as opções"
             name="randomOrder"
             onChange={(event) =>
-              handleChange(event.target.checked, 'randomSort')
+              handleChange([event.target.checked], ['randomSort'])
             }
           />
         </section>
@@ -138,7 +140,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ImageUpload
             label="Opções"
             imageOptions={field?.imgChoices || []}
-            onChange={(value: any) => handleChange(value, 'imgChoices')}
+            onChange={(value: any) => handleChange([value], ['imgChoices'])}
           />
         </section>
       </Form>

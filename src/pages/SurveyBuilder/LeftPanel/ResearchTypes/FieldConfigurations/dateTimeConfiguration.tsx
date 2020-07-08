@@ -34,7 +34,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           placeholder="Data e Hora"
           name="dateTimeLabel"
           id="dateTimeField"
-          onChange={(event) => handleChange(event.target.value, 'label')}
+          onChange={(event) => handleChange([event.target.value], ['label'])}
         />
       </section>
       <section>
@@ -43,7 +43,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           placeholder="Coloque aqui sua descrição..."
           name="dateTimeDescription"
           id="dateTimeDescriptionField"
-          onChange={(event) => handleChange(event.target.value, 'description')}
+          onChange={(event) =>
+            handleChange([event.target.value], ['description'])
+          }
         />
       </section>
       <section>
@@ -51,7 +53,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           label="Obrigatório"
           helpHint="Campo é obrigatório responder"
           name="dateTimeRequired"
-          onChange={(event) => handleChange(event.target.checked, 'required')}
+          onChange={(event) =>
+            handleChange([event.target.checked], ['required'])
+          }
         />
       </section>
       <section>
@@ -60,7 +64,8 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           helpHint="Usuário será obrigado a colocar data"
           name="dateTimeDateRequired"
           onChange={(event) =>
-            handleChange(event.target.checked, 'dateRequired')}
+            handleChange([event.target.checked], ['dateRequired'])
+          }
         />
       </section>
       <section>
@@ -68,7 +73,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           name="dateTimeDateFormat"
           label="Formato da data"
           options={dateOptions}
-          onChange={(value: any) => handleChange(value?.value, 'dateFormat')}
+          onChange={(value: any) =>
+            handleChange([value?.value], ['dateFormat'])
+          }
         />
       </section>
       <section>
@@ -77,8 +84,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           helpHint="Usuário será obrigado a colocar horário"
           name="dateTimeTimeRequired"
           onChange={(event) =>
-            handleChange(event.target.checked, 'timeRequired')
-          }
+            handleChange([event.target.checked], ['timeRequired'])}
         />
       </section>
       <section>
@@ -86,7 +92,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           name="dateTimeTimeFormat"
           label="Formato da hora"
           options={timeOptions}
-          onChange={(value: any) => handleChange(value?.value, 'timeFormat')}
+          onChange={(value: any) =>
+            handleChange([value?.value], ['timeFormat'])
+          }
         />
       </section>
       <section>
@@ -95,7 +103,8 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           helpHint="Usuário é perguntado por um intervalo de datas"
           name="selectRange"
           onChange={(event) =>
-            handleChange(event.target.checked, 'selectRange')}
+            handleChange([event.target.checked], ['selectRange'])
+          }
         />
       </section>
     </Form>

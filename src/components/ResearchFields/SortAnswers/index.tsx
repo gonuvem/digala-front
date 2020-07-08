@@ -7,6 +7,7 @@ import {
 } from 'react-beautiful-dnd';
 import { FiMove } from 'react-icons/fi';
 import { Container, DragContainer, Option } from './styles';
+
 interface SortAnswersProps {
   label: string;
   description?: string;
@@ -66,11 +67,11 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
 
   const shuffle = useCallback(() => {
     const list = options;
-    var currentIndex = list.length,
-      temporaryValue,
-      randomIndex;
+    let currentIndex = list.length;
+    let temporaryValue;
+    let randomIndex;
 
-    while (0 !== currentIndex) {
+    while (currentIndex !== 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
 
