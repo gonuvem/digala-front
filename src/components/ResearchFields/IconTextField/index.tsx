@@ -18,7 +18,7 @@ interface IconTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   description?: string;
   label?: string;
   validatePattern?: boolean;
-  mask?: string;
+  mask?: string | RegExp[];
   icon: IconType;
   name: string;
   id: string;
@@ -71,7 +71,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
         {label && label}
         {description && <p>{description}</p>}
         <div>
-          <Icon size={24} />
+          <Icon color="#000000" size={24} />
           <InputMask
             ref={auxRef}
             mask={validatePattern && mask ? mask : ''}

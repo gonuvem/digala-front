@@ -12,6 +12,7 @@ import ShortTextConfiguration from './shortTextConfiguration';
 import NumericFieldConfiguration from './numericFieldConfiguration';
 import MatrixConfiguration from './matrixConfiguration';
 import SingleChoiceConfiguration from './singleChoiceConfiguration';
+import TelephoneConfiguration from './telephoneConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -70,6 +71,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <MatrixConfiguration handleChange={handleChange} field={field} />;
     case FieldsTypes.SingleChoice:
       return <SingleChoiceConfiguration handleChange={handleChange} />;
+    case FieldsTypes.Phone:
+      return <TelephoneConfiguration handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }

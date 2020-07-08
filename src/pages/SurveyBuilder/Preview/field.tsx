@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FiLink, FiMail } from 'react-icons/fi';
+import { FaPhoneAlt } from 'react-icons/fa';
 
 import ShortTextField from '../../../components/ResearchFields/ShortTextField';
 import IconTextField from '../../../components/ResearchFields/IconTextField';
@@ -63,6 +64,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || ''}
           label={config?.label || ''}
           description={config?.description || ''}
+          validatePattern={config?.validatePattern || false}
         />
       );
     case FieldsTypes.SingleChoice:
@@ -165,6 +167,18 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           lines={config?.lines || ['']}
           columns={config?.columns || ['']}
           multipleChoice={config?.multipleChoice || false}
+        />
+      );
+    case FieldsTypes.Phone:
+      return (
+        <IconTextField
+          icon={FaPhoneAlt}
+          name={config?.name || ''}
+          id={config?.id || ''}
+          label={config?.label}
+          description={config?.description}
+          validatePattern={config?.validatePattern || false}
+          mask="(99) 99999-9999"
         />
       );
     default:
