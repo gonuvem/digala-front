@@ -11,7 +11,7 @@ export const Container = styled.label`
   border: solid 1px ${Colors.black};
   border-radius: 4px;
   padding: 0.8rem 1rem;
-
+  margin: 0 1rem 1rem 0;
   transition: background-color 0.2s;
 
   &:hover {

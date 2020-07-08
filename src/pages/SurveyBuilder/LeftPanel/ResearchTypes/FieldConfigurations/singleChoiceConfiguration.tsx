@@ -111,7 +111,8 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             name="singleChoiceDescripion"
             id="singleChoiceDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])}
+              handleChange([event.target.value], ['description'])
+            }
           />
         </section>
         <section>
@@ -128,18 +129,20 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Adicionar opção outros(a)"
             helpHint="Cria um novo campo com o valor Outros "
-            name="anotherOptions"
+            name="anotherOption"
             onChange={(event) =>
-              handleChange([event.target.checked], ['anotherOptions'])}
+              handleChange([event.target.checked], ['anotherOption'])
+            }
           />
         </section>
         <section>
           <ToggleSwitch
             label="Alinhamento horizontal"
             helpHint="Alinha as opções de forma horizontal no formulário"
-            name="direction"
+            name="rowDirection"
             onChange={(event) =>
-              handleChange([event.target.checked], ['direction'])}
+              handleChange([event.target.checked], ['rowDirection'])
+            }
           />
         </section>
         <section>
@@ -148,7 +151,8 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
             name="singleChoicerandomSort"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])}
+              handleChange([event.target.checked], ['randomSort'])
+            }
           />
         </section>
         <section>
@@ -180,7 +184,8 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
                           <input
                             placeholder="Escreva a opção"
                             onChange={(event) =>
-                              handleChangeInput(event.target.value, index)}
+                              handleChangeInput(event.target.value, index)
+                            }
                           />
                           <button type="button">
                             <FiMove />

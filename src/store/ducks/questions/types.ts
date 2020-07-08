@@ -62,6 +62,9 @@ export interface Question {
   limitMaxMin?: boolean;
   minValue?: number;
   maxValue?: number;
+  /* SingleChoices */
+  anotherOption?: boolean;
+  rowDirection?: boolean;
   /* Matrix */
   columns?: string[];
   lines?: string[];
