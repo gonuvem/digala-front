@@ -70,7 +70,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    handleChange([options], ['listOptions']);
+    handleChange([copyOptions], ['listOptions']);
   }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
@@ -81,8 +81,8 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
       newArray[index].value = text;
       newArray[index].label = text;
       setOptions(newArray);
-      console.log(newArray);
-      handleChange([options], ['listOptions']);
+
+      handleChange([newArray], ['listOptions']);
     },
     [options, setOptions, handleChange],
   );
