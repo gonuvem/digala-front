@@ -46,7 +46,8 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             helpHint="Caso o usuário seja obrigado a responder"
             name="numericRequired"
             onChange={(event) =>
-              handleChange([event.target.checked], ['required'])}
+              handleChange([event.target.checked], ['required'])
+            }
           />
         </section>
         <section>
@@ -80,7 +81,8 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
                 name="maxValue"
                 defaultValue={10}
                 onChange={(event) =>
-                  handleChange([event.target.value], ['maxValue'])}
+                  handleChange([event.target.value], ['maxValue'])
+                }
               />
             </section>
           </>

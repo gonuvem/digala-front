@@ -13,6 +13,7 @@ import NumericFieldConfiguration from './numericFieldConfiguration';
 import MatrixConfiguration from './matrixConfiguration';
 import SingleChoiceConfiguration from './singleChoiceConfiguration';
 import TelephoneConfiguration from './telephoneConfiguration';
+import MultipleChoiceConfigurarion from './multipleChoiceConfiguration';
 
 import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
@@ -72,6 +73,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <MatrixConfiguration handleChange={handleChange} field={field} />;
     case FieldsTypes.SingleChoice:
       return <SingleChoiceConfiguration handleChange={handleChange} />;
+    case FieldsTypes.MultipleChoice:
+      return <MultipleChoiceConfigurarion handleChange={handleChange} />;
     case FieldsTypes.Phone:
       return <TelephoneConfiguration handleChange={handleChange} />;
     case FieldsTypes.Dropdown:

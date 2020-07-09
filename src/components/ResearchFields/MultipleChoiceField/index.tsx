@@ -5,6 +5,11 @@ import Option from '../../Common/Option';
 
 import { Container, ViewOptions } from './styles';
 
+interface ChoicesProps {
+  id: string;
+  content: string;
+}
+
 interface SingleChoiceFieldProps {
   readOnly?: boolean;
   description?: string;
@@ -15,14 +20,11 @@ interface SingleChoiceFieldProps {
   anotherOption?: boolean;
   randomSort?: boolean;
   rowDirection?: boolean;
+  limitChoices?: boolean;
+  choiceMaxAmmount?: number;
 }
 
-interface ChoicesProps {
-  id: string;
-  content: string;
-}
-
-const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
+const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   readOnly = false,
   id,
   name,
@@ -32,10 +34,14 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   anotherOption,
   randomSort,
   rowDirection = false,
+  limitChoices,
+  choiceMaxAmmount = 2,
 }) => {
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
+  const [checkeds, setCheckeds] = useState<string[]>([]);
+
   const [refresh, setRefresh] = useState(false);
   const another = { id: uuid(), content: 'outros(a)' };
 
@@ -67,6 +73,23 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
     }
   }, [choices, setListChoices, randomSort]);
 
+  const handleOptionClick = useCallback(
+    (event, choiceId: string) => {
+      const { checked } = event.target;
+      if (limitChoices && checkeds.length >= choiceMaxAmmount && checked) {
+        return;
+      }
+      if (checked) {
+        setCheckeds((state) => [...state, choiceId]);
+        return;
+      }
+      setCheckeds((state) => [
+        ...state.filter((checkedId) => checkedId !== choiceId),
+      ]);
+    },
+    [checkeds, limitChoices, choiceMaxAmmount],
+  );
+
   return (
     <Container>
       <label htmlFor={id}>
@@ -75,10 +98,22 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&
             listChoices.map((choice) => (
-              <Option id={choice.id} fieldName={name} label={choice.content} />
+              <Option
+                type="checkbox"
+                id={choice.id}
+                fieldName={name}
+                label={choice.content}
+                checked={checkeds.includes(choice.id)}
+                onChange={(event: any) => handleOptionClick(event, choice.id)}
+              />
             ))}
           {anotherOption && (
-            <Option id={another.id} fieldName={name} label={another.content} />
+            <Option
+              type="checkbox"
+              id={another.id}
+              fieldName={name}
+              label={another.content}
+            />
           )}
         </ViewOptions>
       </label>
@@ -86,4 +121,4 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   );
 };
 
-export default SingleChoiceField;
+export default MultipleChoiceField;
