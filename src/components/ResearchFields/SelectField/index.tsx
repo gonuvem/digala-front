@@ -1,13 +1,21 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { useField } from '@unform/core';
 import { components, Props as SelectProps, OptionTypeBase } from 'react-select';
 import { MdArrowDropDown } from 'react-icons/md';
 
 import { Container, CustomSelect } from './styles';
-
 interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   name: string;
   label?: string;
+  description?: string;
+  listOptions?: OptionsProps[];
+}
+
+interface OptionsProps {
+  id: string;
+  content: string;
+  label?: string;
+  value?: string;
 }
 
 // I have to fix the type of this parameter later
@@ -17,7 +25,13 @@ const DropdownIndicator = (props: any): React.ReactNode => (
   </components.DropdownIndicator>
 );
 
-const SelectField: React.FC<SelectFieldProps> = ({ label, name, ...rest }) => {
+const SelectField: React.FC<SelectFieldProps> = ({
+  label,
+  name,
+  description,
+  listOptions,
+  ...rest
+}) => {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
@@ -40,6 +54,7 @@ const SelectField: React.FC<SelectFieldProps> = ({ label, name, ...rest }) => {
   return (
     <Container>
       {label && <span>{label}</span>}
+      {description && <p>{description}</p>}
       <CustomSelect
         ref={inputRef}
         defaultValue={defaultValue}
@@ -47,6 +62,7 @@ const SelectField: React.FC<SelectFieldProps> = ({ label, name, ...rest }) => {
         placeholder="Escolha uma opção"
         components={{ DropdownIndicator }}
         noOptionsMessage={noOptionsMessage}
+        options={listOptions}
         {...rest}
       />
     </Container>

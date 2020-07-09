@@ -73,6 +73,8 @@ export interface Question {
 interface ListOptionsProps {
   id: string;
   content: string;
+  value?: string;
+  label?: string;
 }
 
 /**
