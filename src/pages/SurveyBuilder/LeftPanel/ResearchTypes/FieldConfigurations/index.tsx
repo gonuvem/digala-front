@@ -18,6 +18,7 @@ import { ApplicationState } from '../../../../../store';
 import { Question } from '../../../../../store/ducks/questions/types';
 import FieldsTypes from '../../../../../utils/fieldsTypes';
 import changeFieldConfiguration from '../../../../../services/logic/changeFieldConfiguration';
+import DropdownConfigurarion from './dropdownConfiguration';
 
 interface FieldConfigurationsProps {
   fieldId: string;
@@ -73,6 +74,8 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return <SingleChoiceConfiguration handleChange={handleChange} />;
     case FieldsTypes.Phone:
       return <TelephoneConfiguration handleChange={handleChange} />;
+    case FieldsTypes.Dropdown:
+      return <DropdownConfigurarion handleChange={handleChange} />;
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }

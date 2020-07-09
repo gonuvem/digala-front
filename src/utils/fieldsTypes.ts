@@ -12,4 +12,5 @@ export default {
   Number: 'number',
   Matrix: 'matrix',
   Phone: 'phone',
+  Dropdown: 'dropDown',
 };
