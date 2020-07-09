@@ -76,16 +76,13 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   const handleOptionClick = useCallback(
     (event, choiceId: string) => {
       const { checked } = event.target;
-      console.log('Checked >> ', checked);
       if (limitChoices && checkeds.length >= choiceMaxAmmount && checked) {
         return;
       }
       if (checked) {
-        console.log('choiceId >> ', choiceId);
         setCheckeds((state) => [...state, choiceId]);
         return;
       }
-      console.log('choiceId >> ', choiceId);
       setCheckeds((state) => [
         ...state.filter((checkedId) => checkedId !== choiceId),
       ]);
