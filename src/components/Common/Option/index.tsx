@@ -7,6 +7,8 @@ interface OptionProps {
   fieldName: string;
   label?: string;
   type?: 'radio' | 'checkbox';
+  checked?: boolean;
+  onChange?: Function;
 }
 
 const Option: React.FC<OptionProps> = ({
@@ -14,9 +16,17 @@ const Option: React.FC<OptionProps> = ({
   fieldName,
   label,
   type = 'radio',
+  checked,
+  onChange,
 }) => (
   <Container htmlFor={id}>
-    <input id={id} type={type} name={fieldName} />
+    <input
+      checked={checked}
+      id={id}
+      type={type}
+      name={fieldName}
+      onChange={(event) => onChange && onChange(event)}
+    />
     <span />
     {label}
   </Container>

@@ -160,9 +160,9 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Limite de escolhas"
             helpHint="Isso irá permitir que o usuário marque de uma opção na pergunta"
-            name="multipleChoice"
+            name="limitChoices"
             onChange={(event) => {
-              handleChange([event.target.checked], ['multipleChoice']);
+              handleChange([event.target.checked], ['limitChoices']);
               setLimitChoiceAmmount(event.target.checked);
             }}
           />

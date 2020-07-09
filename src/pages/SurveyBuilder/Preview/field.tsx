@@ -92,6 +92,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           anotherOption={config?.anotherOption}
           randomSort={config?.randomSort}
           rowDirection={config?.rowDirection}
+          limitChoices={config?.limitChoices || false}
+          choiceMaxAmmount={config?.choiceMaxAmmount || 2}
         />
       );
     case FieldsTypes.Link:

@@ -68,6 +68,8 @@ export interface Question {
   /* Matrix */
   columns?: string[];
   lines?: string[];
+  /* Limit Choices */
+  limitChoices?: boolean;
 }
 
 interface ListOptionsProps {

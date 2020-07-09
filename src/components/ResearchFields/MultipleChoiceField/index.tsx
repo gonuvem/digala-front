@@ -20,6 +20,8 @@ interface SingleChoiceFieldProps {
   anotherOption?: boolean;
   randomSort?: boolean;
   rowDirection?: boolean;
+  limitChoices?: boolean;
+  choiceMaxAmmount?: number;
 }
 
 const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
@@ -32,10 +34,14 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   anotherOption,
   randomSort,
   rowDirection = false,
+  limitChoices,
+  choiceMaxAmmount = 2,
 }) => {
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
+  const [checkeds, setCheckeds] = useState<string[]>([]);
+
   const [refresh, setRefresh] = useState(false);
   const another = { id: uuid(), content: 'outros(a)' };
 
@@ -67,6 +73,26 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
     }
   }, [choices, setListChoices, randomSort]);
 
+  const handleOptionClick = useCallback(
+    (event, choiceId: string) => {
+      const { checked } = event.target;
+      console.log('Checked >> ', checked);
+      if (limitChoices && checkeds.length >= choiceMaxAmmount && checked) {
+        return;
+      }
+      if (checked) {
+        console.log('choiceId >> ', choiceId);
+        setCheckeds((state) => [...state, choiceId]);
+        return;
+      }
+      console.log('choiceId >> ', choiceId);
+      setCheckeds((state) => [
+        ...state.filter((checkedId) => checkedId !== choiceId),
+      ]);
+    },
+    [checkeds, limitChoices, choiceMaxAmmount],
+  );
+
   return (
     <Container>
       <label htmlFor={id}>
@@ -80,6 +106,8 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 id={choice.id}
                 fieldName={name}
                 label={choice.content}
+                checked={checkeds.includes(choice.id)}
+                onChange={(event: any) => handleOptionClick(event, choice.id)}
               />
             ))}
           {anotherOption && (
