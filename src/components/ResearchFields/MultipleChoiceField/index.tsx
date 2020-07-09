@@ -5,6 +5,11 @@ import Option from '../../Common/Option';
 
 import { Container, ViewOptions } from './styles';
 
+interface ChoicesProps {
+  id: string;
+  content: string;
+}
+
 interface SingleChoiceFieldProps {
   readOnly?: boolean;
   description?: string;
@@ -17,12 +22,7 @@ interface SingleChoiceFieldProps {
   rowDirection?: boolean;
 }
 
-interface ChoicesProps {
-  id: string;
-  content: string;
-}
-
-const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
+const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   readOnly = false,
   id,
   name,
@@ -75,10 +75,20 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&
             listChoices.map((choice) => (
-              <Option id={choice.id} fieldName={name} label={choice.content} />
+              <Option
+                type="checkbox"
+                id={choice.id}
+                fieldName={name}
+                label={choice.content}
+              />
             ))}
           {anotherOption && (
-            <Option id={another.id} fieldName={name} label={another.content} />
+            <Option
+              type="checkbox"
+              id={another.id}
+              fieldName={name}
+              label={another.content}
+            />
           )}
         </ViewOptions>
       </label>
@@ -86,4 +96,4 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   );
 };
 
-export default SingleChoiceField;
+export default MultipleChoiceField;

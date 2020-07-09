@@ -6,6 +6,7 @@ import { FaPhoneAlt } from 'react-icons/fa';
 import ShortTextField from '../../../components/ResearchFields/ShortTextField';
 import IconTextField from '../../../components/ResearchFields/IconTextField';
 import SingleChoiceField from '../../../components/ResearchFields/SingleChoiceField';
+import MultipleChoiceField from '../../../components/ResearchFields/MultipleChoiceField';
 import DateTimeField from '../../../components/ResearchFields/DateTimeField';
 import NpsField from '../../../components/ResearchFields/NpsField';
 import SliderField from '../../../components/ResearchFields/SliderField';
@@ -70,6 +71,19 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     case FieldsTypes.SingleChoice:
       return (
         <SingleChoiceField
+          label={config?.label || ''}
+          name={config?.name || ''}
+          id={config?.id || ''}
+          description={config?.description || ''}
+          choices={config?.listOptions}
+          anotherOption={config?.anotherOption}
+          randomSort={config?.randomSort}
+          rowDirection={config?.rowDirection}
+        />
+      );
+    case FieldsTypes.MultipleChoice:
+      return (
+        <MultipleChoiceField
           label={config?.label || ''}
           name={config?.name || ''}
           id={config?.id || ''}

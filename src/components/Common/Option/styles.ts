@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 
-import Colors from '../../../../utils/colors';
+import Colors from '../../../utils/colors';
 
 export const Container = styled.label`
   display: flex;
