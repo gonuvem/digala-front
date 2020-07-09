@@ -5,6 +5,7 @@ export default {
   Email: 'email',
   ImageChoice: 'imageChoice',
   SingleChoice: 'radioButton',
+  MultipleChoice: 'checkBox',
   Link: 'link',
   Nps: 'nps',
   Slider: 'slider',
