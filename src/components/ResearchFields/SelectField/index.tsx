@@ -9,6 +9,7 @@ interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   label?: string;
   description?: string;
   listOptions?: OptionsProps[];
+  randomSort?: boolean;
 }
 
 interface OptionsProps {
@@ -30,10 +31,14 @@ const SelectField: React.FC<SelectFieldProps> = ({
   name,
   description,
   listOptions,
+  randomSort,
   ...rest
 }) => {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
+  const [options, setOptions] = useState<Array<OptionsProps>>(
+    listOptions || [],
+  );
 
   const noOptionsMessage = useCallback(() => 'Não há opções', []);
 
@@ -51,20 +56,52 @@ const SelectField: React.FC<SelectFieldProps> = ({
     });
   }, [fieldName, inputRef, registerField]);
 
+  useEffect(() => {
+    console.log('foi');
+    if (listOptions) {
+      setOptions(listOptions);
+    } else if (listOptions && randomSort) {
+      setOptions(listOptions);
+      shuffle();
+    }
+  }, [listOptions, options, randomSort]);
+
+  const shuffle = useCallback(() => {
+    const list = options;
+    let currentIndex = list.length;
+    let temporaryValue;
+    let randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = list[currentIndex];
+      list[currentIndex] = list[randomIndex];
+      list[randomIndex] = temporaryValue;
+    }
+
+    setOptions(list);
+  }, [options, setOptions]);
+
   return (
     <Container>
       {label && <span>{label}</span>}
       {description && <p>{description}</p>}
-      <CustomSelect
-        ref={inputRef}
-        defaultValue={defaultValue}
-        classNamePrefix="react-select"
-        placeholder="Escolha uma opção"
-        components={{ DropdownIndicator }}
-        noOptionsMessage={noOptionsMessage}
-        options={listOptions}
-        {...rest}
-      />
+      {options && (
+        <CustomSelect
+          ref={inputRef}
+          defaultValue={defaultValue}
+          classNamePrefix="react-select"
+          placeholder="Escolha uma opção"
+          components={{ DropdownIndicator }}
+          noOptionsMessage={noOptionsMessage}
+          options={options}
+          // isLoading={refresh}
+          // loadOptions={getOptions}
+          {...rest}
+        />
+      )}
     </Container>
   );
 };
