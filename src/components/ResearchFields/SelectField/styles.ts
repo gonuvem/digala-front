@@ -7,11 +7,15 @@ export const Container = styled.div`
   span {
     display: inline-block;
     font-weight: 500;
-    margin-bottom: 1rem;
+  }
+
+  > p {
+    margin-top: 0.5rem;
   }
 `;
 
 export const CustomSelect = styled(Select)`
+  margin-top: 1rem;
   .react-select__control {
     border-radius: 4px;
     border: solid 2px ${Colors.black};

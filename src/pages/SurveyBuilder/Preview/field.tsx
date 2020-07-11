@@ -15,10 +15,12 @@ import SortAnswer from '../../../components/ResearchFields/SortAnswers';
 import LongTextField from '../../../components/ResearchFields/TextAreaField';
 import NumberField from '../../../components/ResearchFields/NumericField';
 import MatrixField from '../../../components/ResearchFields/MatrixField';
+import Dropdown from '../../../components/ResearchFields/SelectField';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
 import FieldsTypes from '../../../utils/fieldsTypes';
+import SelectField from '../../../components/ResearchFields/SelectField';
 
 interface FieldProps {
   fieldId: string;
@@ -196,6 +198,16 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           description={config?.description}
           validatePattern={config?.validatePattern || false}
           mask="(99) 99999-9999"
+        />
+      );
+    case FieldsTypes.Dropdown:
+      return (
+        <SelectField
+          name={config?.name || ''}
+          label={config?.label}
+          description={config?.description}
+          listOptions={config?.listOptions}
+          randomSort={config?.randomSort}
         />
       );
     default:

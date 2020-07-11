@@ -1,13 +1,22 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { useField } from '@unform/core';
 import { components, Props as SelectProps, OptionTypeBase } from 'react-select';
 import { MdArrowDropDown } from 'react-icons/md';
 
 import { Container, CustomSelect } from './styles';
-
 interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   name: string;
   label?: string;
+  description?: string;
+  listOptions?: OptionsProps[];
+  randomSort?: boolean;
+}
+
+interface OptionsProps {
+  id: string;
+  content: string;
+  label?: string;
+  value?: string;
 }
 
 // I have to fix the type of this parameter later
@@ -17,9 +26,19 @@ const DropdownIndicator = (props: any): React.ReactNode => (
   </components.DropdownIndicator>
 );
 
-const SelectField: React.FC<SelectFieldProps> = ({ label, name, ...rest }) => {
+const SelectField: React.FC<SelectFieldProps> = ({
+  label,
+  name,
+  description,
+  listOptions,
+  randomSort,
+  ...rest
+}) => {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
+  const [options, setOptions] = useState<Array<OptionsProps>>(
+    listOptions || [],
+  );
 
   const noOptionsMessage = useCallback(() => 'Não há opções', []);
 
@@ -37,18 +56,52 @@ const SelectField: React.FC<SelectFieldProps> = ({ label, name, ...rest }) => {
     });
   }, [fieldName, inputRef, registerField]);
 
+  useEffect(() => {
+    console.log('foi');
+    if (listOptions) {
+      setOptions(listOptions);
+    } else if (listOptions && randomSort) {
+      setOptions(listOptions);
+      shuffle();
+    }
+  }, [listOptions, options, randomSort]);
+
+  const shuffle = useCallback(() => {
+    const list = options;
+    let currentIndex = list.length;
+    let temporaryValue;
+    let randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = list[currentIndex];
+      list[currentIndex] = list[randomIndex];
+      list[randomIndex] = temporaryValue;
+    }
+
+    setOptions(list);
+  }, [options, setOptions]);
+
   return (
     <Container>
       {label && <span>{label}</span>}
-      <CustomSelect
-        ref={inputRef}
-        defaultValue={defaultValue}
-        classNamePrefix="react-select"
-        placeholder="Escolha uma opção"
-        components={{ DropdownIndicator }}
-        noOptionsMessage={noOptionsMessage}
-        {...rest}
-      />
+      {description && <p>{description}</p>}
+      {options && (
+        <CustomSelect
+          ref={inputRef}
+          defaultValue={defaultValue}
+          classNamePrefix="react-select"
+          placeholder="Escolha uma opção"
+          components={{ DropdownIndicator }}
+          noOptionsMessage={noOptionsMessage}
+          options={options}
+          // isLoading={refresh}
+          // loadOptions={getOptions}
+          {...rest}
+        />
+      )}
     </Container>
   );
 };

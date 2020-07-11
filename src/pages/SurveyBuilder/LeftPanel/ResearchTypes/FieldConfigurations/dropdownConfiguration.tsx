@@ -25,6 +25,8 @@ interface DropdownConfigurarionProps {
 interface ListOptions {
   id: string;
   content: string;
+  label?: string;
+  value?: string;
 }
 
 const reorder = (
@@ -43,7 +45,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
   handleChange,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
-    { id: uuid(), content: '' },
+    { id: uuid(), content: '', label: '', value: '' },
   ]);
 
   const onDragEnd = useCallback(
@@ -62,13 +64,13 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
   );
 
   const handleAddOption = useCallback(() => {
-    const newOption = { id: uuid(), content: '' };
+    const newOption = { id: uuid(), content: '', label: '', value: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    handleChange([options], ['listOptions']);
+    handleChange([copyOptions], ['listOptions']);
   }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
@@ -76,8 +78,11 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
       const newArray = options;
 
       newArray[index].content = text;
+      newArray[index].value = text;
+      newArray[index].label = text;
       setOptions(newArray);
-      handleChange([options], ['listOptions']);
+
+      handleChange([newArray], ['listOptions']);
     },
     [options, setOptions, handleChange],
   );
