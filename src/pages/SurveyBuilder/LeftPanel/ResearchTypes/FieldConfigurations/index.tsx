@@ -34,13 +34,22 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
     state.questions.questions.find((question) => question.id === fieldId),
   );
 
+  const questions = useSelector<ApplicationState, Question[]>(
+    (state) => state.questions.questions,
+  );
+
   const handleChange = useCallback(
     (values: string[], attributes) => {
       if (field !== undefined) {
-        changeFieldConfiguration(dispatch, { attributes, values, field });
+        changeFieldConfiguration(dispatch, {
+          attributes,
+          values,
+          field,
+          questions,
+        });
       }
     },
-    [field, dispatch],
+    [field, questions, dispatch],
   );
 
   if (field === undefined) {
