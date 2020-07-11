@@ -4,6 +4,7 @@ import { components, Props as SelectProps, OptionTypeBase } from 'react-select';
 import { MdArrowDropDown } from 'react-icons/md';
 
 import { Container, CustomSelect } from './styles';
+
 interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   name: string;
   label?: string;
@@ -96,9 +97,9 @@ const SelectField: React.FC<SelectFieldProps> = ({
           placeholder="Escolha uma opção"
           components={{ DropdownIndicator }}
           noOptionsMessage={noOptionsMessage}
-          options={options}
+          options={listOptions}
           // isLoading={refresh}
-          // loadOptions={getOptions}
+          // loadOptions={optionsPromissed}
           {...rest}
         />
       )}
