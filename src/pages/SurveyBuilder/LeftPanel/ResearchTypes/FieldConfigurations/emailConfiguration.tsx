@@ -5,22 +5,26 @@ import ShortTextField from '../../../../../components/ResearchFields/ShortTextFi
 import TextAreaField from '../../../../../components/ResearchFields/TextAreaField';
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface EmailConfigutationProps {
   handleChange: Function;
+  field: Question;
 }
 
 const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
   handleChange,
+  field,
 }) => (
   <Container>
-    <Form onSubmit={() => null}>
+    <Form initialData={field} onSubmit={() => null}>
       <section>
         <ShortTextField
           label="Nome"
           placeholder="E-mail"
-          name="emailLabel"
+          name="label"
           id="emailLabelField"
           onChange={(event) => handleChange([event.target.value], ['label'])}
         />
@@ -29,7 +33,7 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
         <TextAreaField
           label="Descrição"
           placeholder="Coloque aqui sua descrição"
-          name="emailDescripion"
+          name="description"
           id="emailDescriptionField"
           onChange={(event) =>
             handleChange([event.target.value], ['description'])
@@ -40,18 +44,20 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
         <ToggleSwitch
           label="Obrigatório"
           helpHint="Caso o usuário seja obrigado a responder"
-          name="emailRequired"
+          name="required"
           onChange={(event) =>
-            handleChange([event.target.checked], ['required'])}
+            handleChange([event.target.checked], ['required'])
+          }
         />
       </section>
       <section>
         <ToggleSwitch
           label="Validação de e-mail"
           helpHint="Validar se o formato é um e-mail válido"
-          name="emailValidation"
+          name="validatePattern"
           onChange={(event) =>
-            handleChange([event.target.checked], ['validatePattern'])}
+            handleChange([event.target.checked], ['validatePattern'])
+          }
         />
       </section>
     </Form>

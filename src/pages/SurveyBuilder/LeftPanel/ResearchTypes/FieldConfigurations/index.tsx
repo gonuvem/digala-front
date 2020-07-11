@@ -46,9 +46,10 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
   if (field === undefined) {
     return <p>Não foi possível encontrar um campo correspondente</p>;
   }
+
   switch (field.alias) {
     case FieldsTypes.Email:
-      return <EmailConfiguration handleChange={handleChange} />;
+      return <EmailConfiguration field={field} handleChange={handleChange} />;
     case FieldsTypes.Link:
       return <LinkConfiguration handleChange={handleChange} />;
     case FieldsTypes.Nps:
