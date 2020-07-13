@@ -6,25 +6,29 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface NumericFieldConfigurationProps {
   handleChange: Function;
+  field: Question;
 }
 
 const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
   handleChange,
+  field,
 }) => {
-  const [showLimiters, setShowLimiters] = useState(false);
+  const [showLimiters, setShowLimiters] = useState(field?.limitMaxMin || false);
 
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Número"
-            name="numericLabel"
+            name="label"
             id="numericLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -33,7 +37,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="numericDescripion"
+            name="description"
             id="numericDescriptionField"
             onChange={(event) =>
               handleChange([event.target.value], ['description'])
@@ -44,7 +48,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="numericRequired"
+            name="required"
             onChange={(event) =>
               handleChange([event.target.checked], ['required'])
             }
@@ -68,7 +72,6 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
                 id="minValueField"
                 label="Número minímo"
                 name="minValue"
-                defaultValue={1}
                 onChange={(event) =>
                   handleChange([event.target.value], ['minValue'])
                 }
@@ -79,7 +82,6 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
                 label="Número máximo"
                 id="maxValueField"
                 name="maxValue"
-                defaultValue={10}
                 onChange={(event) =>
                   handleChange([event.target.value], ['maxValue'])
                 }
@@ -92,7 +94,6 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
             label="Valor do incrementador"
             id="stepSizeField"
             name="stepSize"
-            defaultValue={1}
             onChange={(event) =>
               handleChange([parseInt(event.target.value, 10)], ['stepSize'])
             }

@@ -16,10 +16,13 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 
 import SolidButton from '../../../../../components/Common/SolidButton';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container, DragContainer, Option, ViewButton } from './styles';
 
 interface SingleChoiceConfigurarionProps {
   handleChange: Function;
+  field: Question;
 }
 
 interface ListOptions {
@@ -41,6 +44,7 @@ const reorder = (
 
 const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
   handleChange,
+  field,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
     { id: uuid(), content: '' },
@@ -92,14 +96,20 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
     [options, setOptions, handleChange],
   );
 
+  useEffect(() => {
+    if (field.listOptions) {
+      setOptions([...field.listOptions]);
+    }
+  }, []);
+
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Nome"
-            name="singleChoiceLabel"
+            name="label"
             id="singleChoiceLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -108,7 +118,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="singleChoiceDescripion"
+            name="description"
             id="singleChoiceDescriptionField"
             onChange={(event) =>
               handleChange([event.target.value], ['description'])
@@ -119,7 +129,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="singleChoiceRequired"
+            name="required"
             onChange={(event) =>
               handleChange([event.target.checked], ['required'])
             }
@@ -149,7 +159,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="singleChoicerandomSort"
+            name="randomSort"
             onChange={(event) =>
               handleChange([event.target.checked], ['randomSort'])
             }
@@ -183,6 +193,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
                         >
                           <input
                             placeholder="Escreva a opção"
+                            defaultValue={item.content}
                             onChange={(event) =>
                               handleChangeInput(event.target.value, index)
                             }

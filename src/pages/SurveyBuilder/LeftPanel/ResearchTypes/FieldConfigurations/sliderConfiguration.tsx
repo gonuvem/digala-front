@@ -6,22 +6,26 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface SliderConfigurationProps {
   handleChange: Function;
+  field: Question;
 }
 
 const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
   handleChange,
+  field,
 }) => (
   <Container>
-    <Form onSubmit={() => null}>
+    <Form initialData={field} onSubmit={() => null}>
       <section>
         <ShortTextField
           label="Nome"
           placeholder="Slider"
-          name="sliderLabel"
+          name="label"
           id="sliderLabelField"
           onChange={(event) => handleChange([event.target.value], ['label'])}
         />
@@ -30,7 +34,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <TextAreaField
           label="Descrição"
           placeholder="Coloque aqui sua descrição"
-          name="sliderDescripion"
+          name="description"
           id="sliderDescriptionField"
           onChange={(event) =>
             handleChange([event.target.value], ['description'])
@@ -51,7 +55,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <ShortTextField
           label="Legenda ao lado esquerdo"
           placeholder="Legenda esquerda"
-          name="leftSubtitleLabel"
+          name="leftSubtitle"
           id="leftSubtitleLabelField"
           onChange={(event) =>
             handleChange([event.target.value], ['leftSubtitle'])
@@ -72,17 +76,18 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <ShortTextField
           label="Legenda ao lado direito"
           placeholder="Legenda direita"
-          name="rightSubtitleLabel"
+          name="rightSubtitle"
           id="rightSubtileLabelField"
           onChange={(event) =>
-            handleChange([event.target.value], ['rightSubtitle'])}
+            handleChange([event.target.value], ['rightSubtitle'])
+          }
         />
       </section>
       <section>
         <ToggleSwitch
           label="Obrigatório"
           helpHint="Caso o usuário seja obrigado a responder"
-          name="sliderRequired"
+          name="required"
           onChange={(event) => {
             handleChange([event.target.checked], ['required']);
           }}

@@ -25,32 +25,34 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
   return (
     <>
       <Container>
-        <Form onSubmit={() => null}>
+        <Form initialData={field} onSubmit={() => null}>
           <section>
             <ShortTextField
               label="Nome"
               placeholder="matrix"
-              name="matrixLabel"
+              name="label"
               id="matrixLabelField"
               onChange={(event) =>
-                handleChange([event.target.value], ['label'])}
+                handleChange([event.target.value], ['label'])
+              }
             />
           </section>
           <section>
             <TextAreaField
               label="Descrição"
               placeholder="Coloque aqui sua descrição"
-              name="matrixDescripion"
+              name="description"
               id="matrixDescriptionField"
               onChange={(event) =>
-                handleChange([event.target.value], ['description'])}
+                handleChange([event.target.value], ['description'])
+              }
             />
           </section>
           <section>
             <ToggleSwitch
               label="Obrigatório"
               helpHint="Caso o usuário seja obrigado a responder"
-              name="matrixRequired"
+              name="required"
               onChange={(event) =>
                 handleChange([event.target.checked], ['required'])
               }
@@ -60,7 +62,7 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
             <ToggleSwitch
               label="Escolha Múltipla por linha"
               helpHint="Caso o usuário possa escolher mais de uma opção por linha"
-              name="matrixMultipleChoice"
+              name="multipleChoice"
               onChange={(event) =>
                 handleChange([event.target.checked], ['multipleChoice'])
               }

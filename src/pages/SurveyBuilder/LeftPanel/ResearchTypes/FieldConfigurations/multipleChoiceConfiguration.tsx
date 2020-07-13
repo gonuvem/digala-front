@@ -16,10 +16,13 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 import SolidButton from '../../../../../components/Common/SolidButton';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container, DragContainer, Option, ViewButton } from './styles';
 
 interface MultipleChoiceConfigurarionProps {
   handleChange: Function;
+  field: Question;
 }
 
 interface ListOptions {
@@ -41,8 +44,11 @@ const reorder = (
 
 const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = ({
   handleChange,
+  field,
 }) => {
-  const [limitChoiceAmmount, setLimitChoiceAmmount] = useState(false);
+  const [limitChoiceAmmount, setLimitChoiceAmmount] = useState(
+    field.limitChoices || false,
+  );
   const [options, setOptions] = useState<Array<ListOptions>>([
     { id: uuid(), content: '' },
   ]);
@@ -93,14 +99,20 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
     [options, setOptions, handleChange],
   );
 
+  useEffect(() => {
+    if (field.listOptions) {
+      setOptions([...field.listOptions]);
+    }
+  }, []);
+
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Nome"
-            name="multipleChoiceLabel"
+            name="label"
             id="multipleChoiceLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -109,7 +121,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="multipleChoiceDescripion"
+            name="description"
             id="multipleChoiceDescriptionField"
             onChange={(event) =>
               handleChange([event.target.value], ['description'])
@@ -120,7 +132,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="multipleChoiceRequired"
+            name="required"
             onChange={(event) =>
               handleChange([event.target.checked], ['required'])
             }
@@ -150,7 +162,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="multipleChoicerandomSort"
+            name="randomSort"
             onChange={(event) =>
               handleChange([event.target.checked], ['randomSort'])
             }
@@ -211,6 +223,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
                         >
                           <input
                             placeholder="Escreva a opção"
+                            defaultValue={item.content}
                             onChange={(event) =>
                               handleChangeInput(event.target.value, index)
                             }

@@ -18,8 +18,11 @@ import SolidButton from '../../../../../components/Common/SolidButton';
 
 import { Container, DragContainer, Option, ViewButton } from './styles';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 interface DropdownConfigurarionProps {
   handleChange: Function;
+  field: Question;
 }
 
 interface ListOptions {
@@ -43,6 +46,7 @@ const reorder = (
 
 const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
   handleChange,
+  field,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
     { id: uuid(), content: '', label: '', value: '' },
@@ -60,7 +64,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
       setOptions(items);
       handleChange([items], ['listOptions']);
     },
-    [options, setOptions],
+    [options, setOptions, handleChange],
   );
 
   const handleAddOption = useCallback(() => {
@@ -97,14 +101,20 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
     [options, setOptions, handleChange],
   );
 
+  useEffect(() => {
+    if (field.listOptions) {
+      setOptions([...field.listOptions]);
+    }
+  }, []);
+
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Nome"
-            name="DropdownLabel"
+            name="label"
             id="DropdownLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -113,7 +123,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="DropdownDescripion"
+            name="description"
             id="DropdownDescriptionField"
             onChange={(event) =>
               handleChange([event.target.value], ['description'])
@@ -124,7 +134,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="DropdownRequired"
+            name="required"
             onChange={(event) =>
               handleChange([event.target.checked], ['required'])
             }
@@ -134,7 +144,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
           <ToggleSwitch
             label="Ordem das opções aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="DropdownrandomSort"
+            name="randomSort"
             onChange={(event) =>
               handleChange([event.target.checked], ['randomSort'])
             }
@@ -168,6 +178,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
                         >
                           <input
                             placeholder="Escreva a opção"
+                            defaultValue={item.content}
                             onChange={(event) =>
                               handleChangeInput(event.target.value, index)
                             }
