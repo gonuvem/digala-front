@@ -56,3 +56,18 @@ export const LIST_QUESTION_TYPES = gql`
     }
   }
 `;
+
+export const CREATE_OWN_QUESTION = gql`
+  mutation($input: CreateOwnQuestionInput!) {
+    data: createOwnQuestion(input: $input) {
+      question {
+        _id
+      }
+      error {
+        message
+        statusCode
+      }
+    ${errorFragment}
+    }
+  }
+`;
