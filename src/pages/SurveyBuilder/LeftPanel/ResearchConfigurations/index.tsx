@@ -88,9 +88,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="hasLimitedResponses"
             label="Quantidade de respostas limitada?"
             helpHint="Lorem ipsum sit dolor amet"
-            onChange={(event) =>
-              handleChange(event.target.checked);
-            }
+            onChange={(event) => handleChange(event.target.checked)}
           />
         </section>
         <section>
