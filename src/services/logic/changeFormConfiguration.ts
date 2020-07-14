@@ -13,6 +13,7 @@ interface FormDataDTO {
     canDisplayProgressBar: boolean;
     progressBarType?: { value?: string; label?: string };
     canAllowMultipleSubmissions: boolean;
+    researchExpireDate?: any;
   };
   style?: {
     background?: { value?: string; name?: string };
@@ -34,7 +35,6 @@ export default function changeFormConfiguration(
   let sendData = {};
 
   if (attribute === 'config') {
-    console.log(config);
     sendData = {
       ...config,
       hasLimitedResponses: config?.hasLimitedResponses,
@@ -43,6 +43,15 @@ export default function changeFormConfiguration(
       canAllowMultipleSubmissions: config?.canAllowMultipleSubmissions,
       maxResponses: parseInt(config?.maxResponses || '', 10),
     };
+
+    if (config?.researchExpireDate.length === 2) {
+      sendData = {
+        ...config,
+        beginDate: config?.researchExpireDate[0],
+        endDate: config?.researchExpireDate[1],
+      };
+    }
+    console.log(sendData);
   }
 
   if (attribute === 'style') {
