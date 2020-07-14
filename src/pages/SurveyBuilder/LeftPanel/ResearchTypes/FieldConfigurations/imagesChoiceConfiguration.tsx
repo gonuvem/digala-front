@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -40,32 +40,38 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
     }
   }, [randomSort]);
 
-  useEffect(() => {
-    if (addOtherOption) {
-      const otherOption: ImageChoice = {
-        label: '',
-        loading: false,
-        image:
-          'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-        id: 'other-option',
-      };
-      handleChange([[...imageChoices, otherOption]], ['imgChoices']);
-    } else {
-      const removedOtherOptionImageChoices = imageChoices.filter(
-        (imageChoice) => imageChoice.id !== 'other-option',
-      );
-      handleChange([removedOtherOptionImageChoices], ['imgChoices']);
-    }
-  }, [addOtherOption]);
+  const addDefaultOption = useCallback(
+    (toggleOtherOption) => {
+      if (toggleOtherOption) {
+        const otherOption: ImageChoice = {
+          label: '',
+          loading: false,
+          image:
+            'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+          id: 'other-option',
+        };
+        handleChange(
+          [[...imageChoices, otherOption], toggleOtherOption],
+          ['imgChoices', 'addOtherOption'],
+        );
+      } else {
+        const removedOtherOptionImageChoices = imageChoices.filter(
+          (imageChoice) => imageChoice.id !== 'other-option',
+        );
+        handleChange([removedOtherOptionImageChoices], ['imgChoices']);
+      }
+    },
+    [imageChoices, handleChange],
+  );
 
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Escolha de imagens"
-            name="imagesChoiceLabel"
+            name="label"
             id="imagesChoiceLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -74,26 +80,28 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="imagesChoiceDescripion"
+            name="description"
             id="imagesChoiceDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])}
+              handleChange([event.target.value], ['description'])
+            }
           />
         </section>
         <section>
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="imagesChoiceRequired"
+            name="required"
             onChange={(event) =>
-              handleChange([event.target.checked], ['required'])}
+              handleChange([event.target.checked], ['required'])
+            }
           />
         </section>
         <section>
           <ToggleSwitch
             label="Escolha Múltipla"
             helpHint="Caso o usuário possa escolhar mais de uma opção"
-            name="imagesChoiceMultiple"
+            name="multipleChoice"
             onChange={(event) =>
               handleChange([event.target.checked], ['multipleChoice'])
             }
@@ -112,7 +120,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
                       [parseInt(event.target.value, 10)],
                       ['choiceMaxAmmount'],
                     )
-                  : undefined}
+                  : undefined
+              }
             />
           </section>
         )}
@@ -121,16 +130,16 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             label="Adicionar opção outros(a)"
             helpHint="Adicionar uma opção genérica outros"
             name="addOtherOption"
-            onChange={(event) =>
-              handleChange([event.target.checked], ['addOtherOption'])
-            }
+            onChange={(event) => {
+              addDefaultOption(event.target.checked);
+            }}
           />
         </section>
         <section>
           <ToggleSwitch
             label="Ordem das respostas aleatória"
             helpHint="Toda vez que será gerado uma ordem aleatória para as opções"
-            name="randomOrder"
+            name="randomSort"
             onChange={(event) =>
               handleChange([event.target.checked], ['randomSort'])
             }

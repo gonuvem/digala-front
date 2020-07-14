@@ -18,13 +18,18 @@ import SolidButton from '../../../../../components/Common/SolidButton';
 
 import { Container, DragContainer, Option, ViewButton } from './styles';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 interface SortAnswerConfigurarionProps {
   handleChange: Function;
+  field: Question;
 }
 
 interface ListOptions {
   id: string;
   content: string;
+  value?: string;
+  label?: string;
 }
 
 const reorder = (
@@ -41,10 +46,17 @@ const reorder = (
 
 const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
   handleChange,
+  field,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
     { id: uuid(), content: '' },
   ]);
+
+  useEffect(() => {
+    if (field.listOptions) {
+      setOptions([...field.listOptions]);
+    }
+  }, []);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -58,7 +70,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
       setOptions(items);
       handleChange([items], ['listOptions']);
     },
-    [options, setOptions],
+    [options, setOptions, handleChange],
   );
 
   const handleAddOption = useCallback(() => {
@@ -94,12 +106,12 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
 
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Nome"
-            name="sortLabel"
+            name="label"
             id="sortLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -108,7 +120,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="sortDescripion"
+            name="description"
             id="sortDescriptionField"
             onChange={(event) =>
               handleChange([event.target.value], ['description'])
@@ -119,7 +131,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="sortRequired"
+            name="required"
             onChange={(event) =>
               handleChange([event.target.checked], ['required'])
             }
@@ -163,6 +175,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
                         >
                           <input
                             placeholder="Escreva a opção"
+                            defaultValue={item.content}
                             onChange={(event) =>
                               handleChangeInput(event.target.value, index)
                             }

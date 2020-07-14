@@ -6,6 +6,8 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import SelectField from '../../../../../components/ResearchFields/SelectField';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 const dateOptions = [
@@ -21,18 +23,20 @@ const timeOptions = [
 
 interface DateTimeConfigurationProps {
   handleChange: Function;
+  field: Question;
 }
 
 const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
   handleChange,
+  field,
 }) => (
   <Container>
-    <Form onSubmit={() => null}>
+    <Form initialData={field} onSubmit={() => null}>
       <section>
         <ShortTextField
           label="Nome"
           placeholder="Data e Hora"
-          name="dateTimeLabel"
+          name="label"
           id="dateTimeField"
           onChange={(event) => handleChange([event.target.value], ['label'])}
         />
@@ -41,7 +45,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
         <TextAreaField
           label="Descrição"
           placeholder="Coloque aqui sua descrição..."
-          name="dateTimeDescription"
+          name="description"
           id="dateTimeDescriptionField"
           onChange={(event) =>
             handleChange([event.target.value], ['description'])
@@ -52,7 +56,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
         <ToggleSwitch
           label="Obrigatório"
           helpHint="Campo é obrigatório responder"
-          name="dateTimeRequired"
+          name="required"
           onChange={(event) =>
             handleChange([event.target.checked], ['required'])
           }
@@ -62,7 +66,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
         <ToggleSwitch
           label="Exigir data"
           helpHint="Usuário será obrigado a colocar data"
-          name="dateTimeDateRequired"
+          name="dateRequired"
           onChange={(event) =>
             handleChange([event.target.checked], ['dateRequired'])
           }
@@ -70,9 +74,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
       </section>
       <section>
         <SelectField
-          name="dateTimeDateFormat"
+          name="dateFormat"
           label="Formato da data"
-          options={dateOptions}
+          listOptions={dateOptions}
           onChange={(value: any) =>
             handleChange([value?.value], ['dateFormat'])
           }
@@ -82,16 +86,17 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
         <ToggleSwitch
           label="Exigir hora"
           helpHint="Usuário será obrigado a colocar horário"
-          name="dateTimeTimeRequired"
+          name="timeRequired"
           onChange={(event) =>
-            handleChange([event.target.checked], ['timeRequired'])}
+            handleChange([event.target.checked], ['timeRequired'])
+          }
         />
       </section>
       <section>
         <SelectField
-          name="dateTimeTimeFormat"
+          name="timeFormat"
           label="Formato da hora"
-          options={timeOptions}
+          listOptions={timeOptions}
           onChange={(value: any) =>
             handleChange([value?.value], ['timeFormat'])
           }

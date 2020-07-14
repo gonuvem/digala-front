@@ -90,3 +90,16 @@ export const NavLink = styled.a<NavLinkProps>`
       color: ${Colors.primary};
     `}
 `;
+
+export const FieldWrapper = styled.div`
+  cursor: pointer;
+
+  transition: border 0.2s ease, padding 0.2s ease;
+
+  &:hover {
+    border: solid 3px ${Colors.primary};
+    border-radius: 4px;
+    padding: 0.5rem;
+    z-index: 9999;
+  }
+`;

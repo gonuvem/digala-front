@@ -5,22 +5,26 @@ import ShortTextField from '../../../../../components/ResearchFields/ShortTextFi
 import TextAreaField from '../../../../../components/ResearchFields/TextAreaField';
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface LinkFieldConfigurarionProps {
   handleChange: Function;
+  field: Question;
 }
 
 const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
   handleChange,
+  field,
 }) => (
   <Container>
-    <Form onSubmit={() => null}>
+    <Form initialData={field} onSubmit={() => null}>
       <section>
         <ShortTextField
           label="Nome"
           placeholder="Link"
-          name="linkLabel"
+          name="label"
           id="linkLabelField"
           onChange={(event) => handleChange([event.target.value], ['label'])}
         />
@@ -29,7 +33,7 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
         <TextAreaField
           label="Descrição"
           placeholder="Coloque aqui sua descrição"
-          name="linkDescripion"
+          name="description"
           id="linkDescriptionField"
           onChange={(event) =>
             handleChange([event.target.value], ['description'])
@@ -40,7 +44,7 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
         <ToggleSwitch
           label="Obrigatório"
           helpHint="Caso o usuário seja obrigado a responder"
-          name="linkRequired"
+          name="required"
           onChange={(event) =>
             handleChange([event.target.checked], ['required'])
           }
@@ -50,7 +54,7 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
         <ToggleSwitch
           label="Ativar validação de link"
           helpHint="O formato do link sera validado"
-          name="linkValidation"
+          name="validatePattern"
           onChange={(event) =>
             handleChange([event.target.checked], ['validatePattern'])
           }

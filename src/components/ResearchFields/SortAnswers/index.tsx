@@ -56,15 +56,6 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
     [options, setOptions],
   );
 
-  useEffect(() => {
-    if (listOptions && !randomSort) {
-      setOptions(listOptions);
-    } else if (listOptions && randomSort) {
-      setOptions(listOptions);
-      shuffle();
-    }
-  }, [listOptions, setOptions, randomSort]);
-
   const shuffle = useCallback(() => {
     const list = options;
     let currentIndex = list.length;
@@ -83,6 +74,15 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
     setOptions(list);
     setRefresh(!refresh);
   }, [options, setOptions, refresh]);
+
+  useEffect(() => {
+    if (listOptions && !randomSort) {
+      setOptions(listOptions);
+    } else if (listOptions && randomSort) {
+      setOptions(listOptions);
+      shuffle();
+    }
+  }, [listOptions, shuffle, setOptions, randomSort]);
 
   return (
     <Container>

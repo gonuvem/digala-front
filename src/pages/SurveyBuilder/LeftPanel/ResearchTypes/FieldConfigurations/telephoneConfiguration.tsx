@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
 import TextAreaField from '../../../../../components/ResearchFields/TextAreaField';
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface TelephoneConfigurationProps {
   handleChange(value: string[] | boolean[], attribute: string[]): void;
+  field: Question;
 }
 
 const TelephoneConfiguration: React.FC<TelephoneConfigurationProps> = ({
   handleChange,
+  field,
 }) => {
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Telefone"
-            name="phoneLabel"
+            name="label"
             id="phoneLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -30,17 +34,18 @@ const TelephoneConfiguration: React.FC<TelephoneConfigurationProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="phoneDescripion"
+            name="description"
             id="phoneDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])}
+              handleChange([event.target.value], ['description'])
+            }
           />
         </section>
         <section>
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="phoneRequired"
+            name="required"
             onChange={(event) =>
               handleChange([event.target.checked], ['required'])
             }
@@ -50,7 +55,7 @@ const TelephoneConfiguration: React.FC<TelephoneConfigurationProps> = ({
           <ToggleSwitch
             label="Ativar validação de telefone"
             helpHint="Formato do telefone será válidado antes da submissão"
-            name="phoneFormatValidation"
+            name="validatePattern"
             onChange={(event) =>
               handleChange([event.target.checked], ['validatePattern'])
             }

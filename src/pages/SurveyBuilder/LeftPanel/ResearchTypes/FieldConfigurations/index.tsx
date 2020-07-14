@@ -34,51 +34,80 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
     state.questions.questions.find((question) => question.id === fieldId),
   );
 
+  const questions = useSelector<ApplicationState, Question[]>(
+    (state) => state.questions.questions,
+  );
+
   const handleChange = useCallback(
     (values: string[], attributes) => {
       if (field !== undefined) {
-        changeFieldConfiguration(dispatch, { attributes, values, field });
+        changeFieldConfiguration(dispatch, {
+          attributes,
+          values,
+          field,
+          questions,
+        });
       }
     },
-    [field, dispatch],
+    [field, questions, dispatch],
   );
 
   if (field === undefined) {
     return <p>Não foi possível encontrar um campo correspondente</p>;
   }
+
   switch (field.alias) {
     case FieldsTypes.Email:
-      return <EmailConfiguration handleChange={handleChange} />;
+      return <EmailConfiguration field={field} handleChange={handleChange} />;
     case FieldsTypes.Link:
-      return <LinkConfiguration handleChange={handleChange} />;
+      return <LinkConfiguration field={field} handleChange={handleChange} />;
     case FieldsTypes.Nps:
-      return <NpsConfiguration handleChange={handleChange} />;
+      return <NpsConfiguration field={field} handleChange={handleChange} />;
     case FieldsTypes.Date:
-      return <DateTimeConfiguration handleChange={handleChange} />;
+      return (
+        <DateTimeConfiguration field={field} handleChange={handleChange} />
+      );
     case FieldsTypes.Slider:
-      return <SliderConfiguration handleChange={handleChange} />;
+      return <SliderConfiguration field={field} handleChange={handleChange} />;
     case FieldsTypes.SortList:
-      return <SortConfiguration handleChange={handleChange} />;
+      return <SortConfiguration field={field} handleChange={handleChange} />;
     case FieldsTypes.ImageChoice:
       return (
         <ImagesChoiceConfiguration field={field} handleChange={handleChange} />
       );
     case FieldsTypes.ShortText:
-      return <ShortTextConfiguration handleChange={handleChange} />;
+      return (
+        <ShortTextConfiguration field={field} handleChange={handleChange} />
+      );
     case FieldsTypes.LongText:
-      return <ShortTextConfiguration handleChange={handleChange} />;
+      return (
+        <ShortTextConfiguration field={field} handleChange={handleChange} />
+      );
     case FieldsTypes.Number:
-      return <NumericFieldConfiguration handleChange={handleChange} />;
+      return (
+        <NumericFieldConfiguration field={field} handleChange={handleChange} />
+      );
     case FieldsTypes.Matrix:
-      return <MatrixConfiguration handleChange={handleChange} field={field} />;
+      return <MatrixConfiguration field={field} handleChange={handleChange} />;
     case FieldsTypes.SingleChoice:
-      return <SingleChoiceConfiguration handleChange={handleChange} />;
+      return (
+        <SingleChoiceConfiguration field={field} handleChange={handleChange} />
+      );
     case FieldsTypes.MultipleChoice:
-      return <MultipleChoiceConfigurarion handleChange={handleChange} />;
+      return (
+        <MultipleChoiceConfigurarion
+          field={field}
+          handleChange={handleChange}
+        />
+      );
     case FieldsTypes.Phone:
-      return <TelephoneConfiguration handleChange={handleChange} />;
+      return (
+        <TelephoneConfiguration field={field} handleChange={handleChange} />
+      );
     case FieldsTypes.Dropdown:
-      return <DropdownConfigurarion handleChange={handleChange} />;
+      return (
+        <DropdownConfigurarion field={field} handleChange={handleChange} />
+      );
     default:
       return <p>Não foi possível encontrar um campo correspondente</p>;
   }
