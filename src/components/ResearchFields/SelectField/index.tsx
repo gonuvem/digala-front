@@ -57,7 +57,6 @@ const SelectField: React.FC<SelectFieldProps> = ({
   }, [fieldName, inputRef, registerField]);
 
   useEffect(() => {
-    console.log('foi');
     if (listOptions) {
       setOptions(listOptions);
     } else if (listOptions && randomSort) {

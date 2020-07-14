@@ -15,7 +15,6 @@ import { Container } from './styles';
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
 import useDebounce from '../../../../hooks/useDebounce';
-
 interface ResearchConfigurationsProps {
   formData: FormType | null;
 }
@@ -25,12 +24,12 @@ interface FormConfigDTO {
   description?: string;
   beginDate?: Date;
   endDate?: Date;
-  hasLimitedResponses: string;
+  hasLimitedResponses: boolean;
   maxResponses?: string;
-  isTotemMode: string;
-  canDisplayProgressBar: string;
+  isTotemMode: boolean;
+  canDisplayProgressBar: boolean;
   progressBarType?: { value?: string; label?: string };
-  canAllowMultipleSubmissions: string;
+  canAllowMultipleSubmissions: boolean;
 }
 
 const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
@@ -39,6 +38,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
   const [tempInformation, setTempInformation] = useState('');
   const formRef = useRef<FormHandles>(null);
   const dispatch = useDispatch();
+  // const [hasLimitedResponses, setHasLimitResponses] = useState(false);
 
   const debouncedTrigger = useDebounce(tempInformation, 500);
 
@@ -71,6 +71,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             label="Descrição da Pesquisa"
             name="description"
             id="researchDescriptionField"
+            onChange={(event) => handleChange(event.target.value)}
           />
         </section>
         <section>
@@ -87,6 +88,9 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="hasLimitedResponses"
             label="Quantidade de respostas limitada?"
             helpHint="Lorem ipsum sit dolor amet"
+            onChange={(event) =>
+              handleChange(event.target.checked);
+            }
           />
         </section>
         <section>
@@ -102,6 +106,10 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="isTotemMode"
             label="Modo Totem"
             helpHint="Lorem ipsum"
+            onChange={(event) => {
+              handleChange(event.target.checked);
+              console.log(event.target.value);
+            }}
           />
         </section>
         <section>
@@ -109,17 +117,18 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="canDisplayProgressBar"
             label="Mostrar barra de progresso"
             helpHint="Lorem ipsum"
+            onChange={(event) => handleChange(event.target.checked)}
           />
         </section>
         <section>
           <SelectField
             name="progressBarType"
             label="Tipo da barra de progresso"
-            // options={[
-            //   { value: 'Step', label: 'Step' },
-            //   { value: 'Linear', label: 'Linear' },
-            // ]}
-            onChange={handleChange}
+            options={[
+              { value: 'Step', label: 'Step' },
+              { value: 'Linear', label: 'Linear' },
+            ]}
+            onChange={(value) => handleChange(value)}
           />
         </section>
         <section>
@@ -127,6 +136,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="canAllowMultipleSubmissions"
             label="Permitir múltiplas submissões"
             helpHint="Lorem ipsum"
+            onChange={(event) => handleChange(event.target.checked)}
           />
         </section>
       </Form>

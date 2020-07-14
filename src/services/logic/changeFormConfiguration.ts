@@ -7,12 +7,12 @@ interface FormDataDTO {
     description?: string;
     beginDate?: Date;
     endDate?: Date;
-    hasLimitedResponses: string;
+    hasLimitedResponses: boolean;
     maxResponses?: string;
-    isTotemMode: string;
-    canDisplayProgressBar: string;
+    isTotemMode: boolean;
+    canDisplayProgressBar: boolean;
     progressBarType?: { value?: string; label?: string };
-    canAllowMultipleSubmissions: string;
+    canAllowMultipleSubmissions: boolean;
   };
   style?: {
     background?: { value?: string; name?: string };
@@ -34,12 +34,13 @@ export default function changeFormConfiguration(
   let sendData = {};
 
   if (attribute === 'config') {
+    console.log(config);
     sendData = {
       ...config,
-      hasLimitedResponses: config?.hasLimitedResponses === 'on',
-      isTotemMode: config?.isTotemMode === 'on',
-      canDisplayProgressBar: config?.canDisplayProgressBar === 'on',
-      canAllowMultipleSubmissions: config?.canAllowMultipleSubmissions === 'on',
+      hasLimitedResponses: config?.hasLimitedResponses,
+      isTotemMode: config?.isTotemMode,
+      canDisplayProgressBar: config?.canDisplayProgressBar,
+      canAllowMultipleSubmissions: config?.canAllowMultipleSubmissions,
       maxResponses: parseInt(config?.maxResponses || '', 10),
     };
   }
