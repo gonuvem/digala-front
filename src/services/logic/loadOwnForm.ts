@@ -36,6 +36,7 @@ export default function loadOwnForm(
   formData: FormDTO | undefined,
 ): void {
   if (formData !== undefined && formData.data.form !== null) {
+    // console.log(formData);
     dispatch(
       FormsActions.loadForm({
         id: formData.data.form._id,

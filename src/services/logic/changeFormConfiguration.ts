@@ -35,16 +35,25 @@ export default function changeFormConfiguration(
   let sendData = {};
 
   if (attribute === 'config') {
+    // console.log(config);
     sendData = {
       ...config,
       hasLimitedResponses: config?.hasLimitedResponses,
       isTotemMode: config?.isTotemMode,
       canDisplayProgressBar: config?.canDisplayProgressBar,
       canAllowMultipleSubmissions: config?.canAllowMultipleSubmissions,
-      beginDate: config?.researchExpireDate[0],
-      endDate: config?.researchExpireDate[1],
+      // beginDate: config?.beginDate,
+      // endDate: config?.endDate,
       maxResponses: parseInt(config?.maxResponses || '', 10),
     };
+
+    // if (config?.researchExpireDate.length === 2) {
+    //   sendData = {
+    //     ...config,
+    //     beginDate: config?.researchExpireDate[0],
+    //     endDate: config?.researchExpireDate[1],
+    //   };
+    // }
   }
 
   if (attribute === 'style') {

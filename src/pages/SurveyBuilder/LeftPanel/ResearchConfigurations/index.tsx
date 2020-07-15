@@ -30,6 +30,7 @@ interface FormConfigDTO {
   canDisplayProgressBar: boolean;
   progressBarType?: { value?: string; label?: string };
   canAllowMultipleSubmissions: boolean;
+  researchExpireDate?: any;
 }
 
 const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
@@ -48,15 +49,21 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
 
   useEffect(() => {
     const data = formRef.current?.getData();
+    console.log(data);
     changeFormConfiguration(dispatch, {
       attribute: 'config',
       config: data as FormConfigDTO,
     });
   }, [debouncedTrigger, dispatch]);
 
-  // console.log('form');
-  // console.log(formData);
+  // console.log(formData?.config);
 
+  const b = new Date(
+    'Wed Jul 15 2020 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
+  );
+  const e = new Date(
+    'Wed Jul 20 2020 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
+  );
   return (
     <Container>
       <span>Informações Básicas</span>
@@ -84,6 +91,12 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             view="month"
             next2Label={null}
             prev2Label={null}
+            // defaultValue={[b, e]}
+            onChange={(event) => {
+              handleChange(event);
+              // console.log(event);
+              // setDaterCalendar(event);
+            }}
           />
         </section>
         <section>
@@ -109,7 +122,6 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             helpHint="Lorem ipsum"
             onChange={(event) => {
               handleChange(event.target.checked);
-              console.log(event.target.value);
             }}
           />
         </section>

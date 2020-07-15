@@ -18,10 +18,11 @@ const Calendar: React.FC<CustomCalendarProps> = ({
   name,
   label,
   onParentChange,
+  defaultValue,
   ...rest
 }) => {
   const calendarRef = useRef(null);
-  const [value, setValue] = useState<Date | Date[]>(new Date());
+  const [value, setValue] = useState<Date | Date[]>();
 
   const { fieldName, registerField } = useField(name);
 
@@ -41,19 +42,19 @@ const Calendar: React.FC<CustomCalendarProps> = ({
     return dateFormated.slice(0, 1);
   }, []);
 
-  useEffect(() => {
-    registerField({
-      name: fieldName,
-      ref: calendarRef.current,
-      path: undefined,
-      getValue: () => {
-        return value;
-      },
-      clearValue: (ref: any) => {
-        ref.clear();
-      },
-    });
-  }, [fieldName, registerField, value]);
+  // useEffect(() => {
+  //   registerField({
+  //     name: fieldName,
+  //     ref: calendarRef.current,
+  //     path: undefined,
+  //     getValue: () => {
+  //       return value;
+  //     },
+  //     clearValue: (ref: any) => {
+  //       ref.clear();
+  //     },
+  //   });
+  // }, [fieldName, registerField, value]);
 
   return (
     <Container>
@@ -61,6 +62,7 @@ const Calendar: React.FC<CustomCalendarProps> = ({
         value={value}
         onChange={onChange}
         onClickMonth={onChange}
+        defaultValue={defaultValue}
         formatShortWeekday={formatShortWeekday}
         {...rest}
       />

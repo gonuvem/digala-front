@@ -49,7 +49,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
     }
   };
 
-  console.log(formData);
+  // console.log(formData);
 
   return (
     <Container>
