@@ -49,6 +49,8 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
     }
   };
 
+  console.log(formData);
+
   return (
     <Container>
       <h5>{formData?.config.name}</h5>

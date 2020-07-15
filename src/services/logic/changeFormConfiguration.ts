@@ -41,17 +41,10 @@ export default function changeFormConfiguration(
       isTotemMode: config?.isTotemMode,
       canDisplayProgressBar: config?.canDisplayProgressBar,
       canAllowMultipleSubmissions: config?.canAllowMultipleSubmissions,
+      beginDate: config?.researchExpireDate[0],
+      endDate: config?.researchExpireDate[1],
       maxResponses: parseInt(config?.maxResponses || '', 10),
     };
-
-    if (config?.researchExpireDate.length === 2) {
-      sendData = {
-        ...config,
-        beginDate: config?.researchExpireDate[0],
-        endDate: config?.researchExpireDate[1],
-      };
-    }
-    console.log(sendData);
   }
 
   if (attribute === 'style') {

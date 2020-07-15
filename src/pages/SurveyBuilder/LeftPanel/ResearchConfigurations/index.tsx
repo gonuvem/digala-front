@@ -54,6 +54,9 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
     });
   }, [debouncedTrigger, dispatch]);
 
+  // console.log('form');
+  // console.log(formData);
+
   return (
     <Container>
       <span>Informações Básicas</span>
