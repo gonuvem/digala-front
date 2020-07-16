@@ -10,7 +10,7 @@ import { Container, PanelArea } from './styles';
 
 import { ApplicationState } from '../../../store';
 import { Form } from '../../../store/ducks/forms/types';
-import { UPDATE_FORM } from '../../../services/requests/forms';
+import { UPDATE_FORM, CREATE_OWN_FORM } from '../../../services/requests/forms';
 import updateOwnFormData from '../../../services/logic/updateOwnFormData';
 
 const Pagination: React.FC = () => {
@@ -20,6 +20,9 @@ const Pagination: React.FC = () => {
   );
 
   const [updateForm, { loading: updateFormLoading }] = useMutation(UPDATE_FORM);
+  const [createForm, { loading: createFormLoading }] = useMutation(
+    CREATE_OWN_FORM,
+  );
 
   const handleCreatePage = useCallback(
     () => setPagesCount((state) => state + 1),
