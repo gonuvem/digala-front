@@ -45,25 +45,25 @@ interface QuestionProps {
     link?: {
       hasValidation: boolean;
     };
-    longText: {
+    longText?: {
       placeholder?: string;
       hasLimitedChars: boolean;
       maxChars?: number;
     };
-    matrix: {
+    matrix?: {
       isMultipleChoice: boolean;
       rowsLabels: string[];
       colsLabels: string[];
       answerOptions: AnswerOptions[];
     };
-    nps: {
+    nps?: {
       canDisplayLabels: boolean;
       leftLabel?: string;
       rightLabel?: string;
       canStartAtZero: boolean;
       escale: string;
     };
-    number: {
+    number?: {
       hasMaxMinLimit: boolean;
       maxValue?: number;
       minValue?: number;
@@ -77,12 +77,12 @@ interface QuestionProps {
       hasRandomResponsesOrder: boolean;
       answerOptions: AnswerOptions[];
     };
-    shorText: {
+    shorText?: {
       placeholder?: string;
       hasLimitedChars: boolean;
       maxChars?: number;
     };
-    slider: {
+    slider?: {
       minValue: number;
       minLabel?: string;
       maxValue: number;
@@ -90,7 +90,7 @@ interface QuestionProps {
       incValue: number;
       canHideValue: boolean;
     };
-    sortList: {
+    sortList?: {
       hasRandomResponsesOrder: boolean;
       answerOptions: AnswerOptions[];
     };

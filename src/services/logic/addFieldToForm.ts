@@ -19,6 +19,7 @@ export default function addFieldToForm(
       alias,
       id: localQuestionId,
       name: localFieldName,
+      required: false,
       ...defaultPayload,
     }),
   );

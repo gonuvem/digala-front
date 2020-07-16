@@ -24,7 +24,7 @@ export interface Question {
   name: string;
   label?: string;
   description?: string;
-  required?: boolean;
+  required: boolean;
   link?: {
     validation?: boolean;
   };
