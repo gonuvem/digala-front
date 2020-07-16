@@ -7,12 +7,19 @@ import { useTransition } from 'react-spring';
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from './field';
 
-import { Container, PanelArea, NavLink, QuestionsPanel } from './styles';
+import {
+  Container,
+  PanelArea,
+  NavLink,
+  QuestionsPanel,
+  FieldWrapper,
+} from './styles';
 
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
 import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
+import focusQuestion from '../../../services/logic/focusQuestion';
 
 interface QuestionDTO {
   name: string;
@@ -52,6 +59,13 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     [dispatch],
   );
 
+  const handleFocusQuestion = useCallback(
+    (questionId: string) => {
+      focusQuestion(dispatch, { questionId });
+    },
+    [dispatch],
+  );
+
   return (
     <Container>
       <nav>
@@ -63,7 +77,9 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
-            <Field key={field.id} fieldId={field.id} config={field} />
+            <FieldWrapper onClick={() => handleFocusQuestion(field.id)}>
+              <Field key={field.id} fieldId={field.id} config={field} />
+            </FieldWrapper>
           ))}
         </Form>
         <button

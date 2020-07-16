@@ -6,24 +6,30 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface ShortTextConfigurarionProps {
   handleChange: Function;
+  field: Question;
 }
 
 const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
   handleChange,
+  field,
 }) => {
-  const [limitCharacter, setLimitCharacter] = useState(false);
+  const [limitCharacter, setLimitCharacter] = useState(
+    field.limitCharacter || false,
+  );
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Texto Curto"
-            name="shortTextLabel"
+            name="label"
             id="shortTextLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
@@ -32,10 +38,11 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="shortTextDescripion"
+            name="description"
             id="shortTextDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])}
+              handleChange([event.target.value], ['description'])
+            }
           />
         </section>
         <section>
@@ -45,14 +52,15 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             name="shortTextPlaceholder"
             id="shortTextPlaceholderField"
             onChange={(event) =>
-              handleChange([event.target.value], ['shortTextPlaceholder'])}
+              handleChange([event.target.value], ['shortTextPlaceholder'])
+            }
           />
         </section>
         <section>
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="shortTextRequired"
+            name="required"
             onChange={(event) =>
               handleChange([event.target.checked], ['required'])
             }
@@ -79,7 +87,8 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
                 handleChange(
                   [parseInt(event.target.value, 10)],
                   ['shortTextMaxValue'],
-                )}
+                )
+              }
             />
           </section>
         )}

@@ -6,25 +6,31 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
+import { Question } from '../../../../../store/ducks/questions/types';
+
 import { Container } from './styles';
 
 interface NpsConfigurationProps {
   handleChange: Function;
+  field: Question;
 }
 
 const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
   handleChange,
+  field,
 }) => {
-  const [showSubtitles, setShowSubtitles] = useState(false);
+  const [showSubtitles, setShowSubtitles] = useState(
+    field.showSubtitles || false,
+  );
   return (
     <Container>
-      <Form onSubmit={() => null}>
+      <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
-            placeholder="Link"
-            name="linkLabel"
-            id="linkLabelField"
+            placeholder="NPS"
+            name="label"
+            id="npsLabelField"
             onChange={(event) => handleChange([event.target.value], ['label'])}
           />
         </section>
@@ -32,8 +38,8 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
           <TextAreaField
             label="Descrição"
             placeholder="Coloque aqui sua descrição"
-            name="linkDescripion"
-            id="linkDescriptionField"
+            name="description"
+            id="npsDescriptionField"
             onChange={(event) =>
               handleChange([event.target.value], ['description'])
             }
@@ -43,16 +49,17 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="linkRequired"
+            name="required"
             onChange={(event) =>
-              handleChange([event.target.checked], ['required'])}
+              handleChange([event.target.checked], ['required'])
+            }
           />
         </section>
         <section>
           <ToggleSwitch
             label="Mostrar Legendas"
             helpHint="Exibir legendas em cada extremidade"
-            name="linkShowSubtitle"
+            name="showSubtitles"
             onChange={(event) => {
               handleChange([event.target.checked], ['showSubtitles']);
               setShowSubtitles(event.target.checked);
@@ -65,8 +72,8 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
               <ShortTextField
                 label="Legenda ao lado esquerdo"
                 placeholder="Pouco provável"
-                name="linkLeftSubtitle"
-                id="linkLeftSubtitleField"
+                name="leftSubtitle"
+                id="npsLeftSubtitleField"
                 onChange={(event) =>
                   handleChange([event.target.value], ['leftSubtitle'])
                 }
@@ -76,8 +83,8 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
               <ShortTextField
                 label="Legenda ao lado direito "
                 placeholder="Muito provável"
-                name="linkRightSubtitle"
-                id="linkRightSubtitleField"
+                name="rightSubtitle"
+                id="npsRightSubtitleField"
                 onChange={(event) =>
                   handleChange([event.target.value], ['rightSubtitle'])
                 }
@@ -89,7 +96,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
           <ToggleSwitch
             label="Começar no zero"
             helpHint="Caso seja ativado o limite inferior será 0"
-            name="linkStartZero"
+            name="startZero"
             onChange={(event) =>
               handleChange([event.target.checked], ['startZero'])
             }

@@ -10,5 +10,5 @@ export const loadQuestions = (questions: Question[]): {} =>
 export const focusQuestion = (questionId: string): {} =>
   action(QuestionsTypes.FOCUS_QUESTION, questionId);
 
-export const replaceQuestion = (question: Question): {} =>
-  action(QuestionsTypes.REPLACE_QUESTION, question);
+export const replaceQuestion = (updatedQuestions: Question[]): {} =>
+  action(QuestionsTypes.REPLACE_QUESTION, updatedQuestions);
