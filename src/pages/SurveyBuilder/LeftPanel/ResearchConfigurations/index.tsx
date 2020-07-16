@@ -49,7 +49,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
 
   useEffect(() => {
     const data = formRef.current?.getData();
-    console.log(data);
+    // console.log(data);
     changeFormConfiguration(dispatch, {
       attribute: 'config',
       config: data as FormConfigDTO,
@@ -92,11 +92,11 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             next2Label={null}
             prev2Label={null}
             // defaultValue={[b, e]}
-            onChange={(event) => {
-              handleChange(event);
-              // console.log(event);
-              // setDaterCalendar(event);
-            }}
+            // onChange={(event) => {
+            //   handleChange(event);
+            // console.log(event);
+            // setDaterCalendar(event);
+            // }}
           />
         </section>
         <section>

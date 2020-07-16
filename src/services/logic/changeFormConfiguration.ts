@@ -47,13 +47,14 @@ export default function changeFormConfiguration(
       maxResponses: parseInt(config?.maxResponses || '', 10),
     };
 
-    // if (config?.researchExpireDate.length === 2) {
-    //   sendData = {
-    //     ...config,
-    //     beginDate: config?.researchExpireDate[0],
-    //     endDate: config?.researchExpireDate[1],
-    //   };
-    // }
+    if (config?.researchExpireDate.length === 2) {
+      sendData = {
+        ...config,
+        beginDate: config?.researchExpireDate[0],
+        endDate: config?.researchExpireDate[1],
+        maxResponses: parseInt(config?.maxResponses || '', 10),
+      };
+    }
   }
 
   if (attribute === 'style') {
