@@ -10,8 +10,11 @@ import { Container, PanelArea } from './styles';
 
 import { ApplicationState } from '../../../store';
 import { Form } from '../../../store/ducks/forms/types';
+import { Question } from '../../../store/ducks/questions/types';
 import { UPDATE_FORM, CREATE_OWN_FORM } from '../../../services/requests/forms';
+import { CREATE_OWN_QUESTIONS } from '../../../services/requests/questions';
 import updateOwnFormData from '../../../services/logic/updateOwnFormData';
+import createOwnQuestions from '../../../services/logic/createOwnQuestions';
 
 const Pagination: React.FC = () => {
   const [pagesCount, setPagesCount] = useState(1);
@@ -19,9 +22,14 @@ const Pagination: React.FC = () => {
     (state) => state.forms.form,
   );
 
+  const questionsData = useSelector<
+    ApplicationState,
+    [Question[], Form | null]
+  >((state) => [state.questions.questions, state.forms.form]);
+
   const [updateForm, { loading: updateFormLoading }] = useMutation(UPDATE_FORM);
-  const [createForm, { loading: createFormLoading }] = useMutation(
-    CREATE_OWN_FORM,
+  const [createQuestions, { loading: createQuestionsLoading }] = useMutation(
+    CREATE_OWN_QUESTIONS,
   );
 
   const handleCreatePage = useCallback(
@@ -30,8 +38,12 @@ const Pagination: React.FC = () => {
   );
 
   const handleUpdate = useCallback(() => {
-    updateOwnFormData(updateForm, formData);
-  }, [formData, updateForm]);
+    if (formData?.id) {
+      createOwnQuestions(createQuestions, questionsData[0], formData?.id);
+    }
+    // console.log(formData);
+    // updateOwnFormData(updateForm, formData);
+  }, [formData, updateForm, questionsData]);
 
   return (
     <Container>
