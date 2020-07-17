@@ -6,7 +6,7 @@ import UpdateFormSchema from '../../schemas/updateForm';
 
 interface QuestionDTO {
   form: string;
-  questions: QuestionProps[];
+  questions: QuestionProps[] | null;
 }
 
 interface QuestionProps {
@@ -102,6 +102,215 @@ interface AnswerOptions {
   image?: string;
 }
 
+function getTypeQuestion(question: any): any {
+  switch (question.alias) {
+    case 'checkBox': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        checkBox: {
+          hasHorizontalAlignment: question.rowDirection,
+          hasRandomResponsesOrder: question.randomSort,
+          answerOptions: question.listOptions,
+        },
+      };
+      return config;
+    }
+    case 'date': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        date: {
+          isDateRequired: question.dateRequired,
+          dateFormat: question?.dateFormat,
+          isTimeRequired: question.timeRequired,
+          timeFormat: question?.timeFormat,
+          canCaptureInterval: question.selectRange,
+        },
+      };
+      return config;
+    }
+    case 'dropDown': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        dropDown: {
+          hasRandomResponsesOrder: question.randomSort,
+          answerOptions: question.listOptions,
+        },
+      };
+      return config;
+    }
+    case 'email': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        email: {
+          hasValidation: question.validatePattern,
+        },
+      };
+      return config;
+    }
+    case 'imageChoice': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        imageChoice: {
+          isMultipleChoice: question.multipleChoice,
+          maxChoices: question?.choiceMaxAmmount,
+          hasRandomResponsesOrder: question.randomSort,
+          answerOptions: question.imgChoices,
+        },
+      };
+      return config;
+    }
+    case 'link': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        link: {
+          hasValidation: question.validatePattern,
+        },
+      };
+      return config;
+    }
+    case 'longText': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        longText: {
+          placeholder: question?.shortTextPlaceholder,
+          hasLimitedChars: question.limitCharacter,
+          maxChars: question?.shortTextMaxValue,
+        },
+      };
+      return config;
+    }
+
+    case 'matrix': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        matrix: {
+          isMultipleChoice: question.multipleChoice,
+          rowsLabels: question.lines,
+          colsLabels: question.columns,
+          answerOptions: null,
+        },
+      };
+      return config;
+    }
+
+    case 'nps': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        nps: {
+          canDisplayLabels: question.showSubtitles,
+          leftLabel: question?.leftSubtitle,
+          rightLabel: question?.rightSubtitle,
+          canStartAtZero: question.startZero,
+          escale: question.scale,
+        },
+      };
+      return config;
+    }
+
+    case 'number': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        number: {
+          hasMaxMinLimit: question.limitMaxMin,
+          maxValue: question?.maxValue,
+          minValue: question?.minValue,
+          incValue: question?.stepSize,
+        },
+      };
+      return config;
+    }
+    case 'phone': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        phone: {
+          hasValidation: question.validatePattern,
+        },
+      };
+      return config;
+    }
+
+    case 'radioButton': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        radioButton: {
+          hasHorizontalAlignment: question.rowDirection,
+          hasRandomResponsesOrder: question.randomSort,
+          answerOptions: question.listOptions,
+        },
+      };
+      return config;
+    }
+
+    case 'longText': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        longText: {
+          placeholder: question?.shortTextPlaceholder,
+          hasLimitedChars: question.limitCharacter,
+          maxChars: question?.shortTextMaxValue,
+        },
+      };
+      return config;
+    }
+
+    case 'slider': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        slider: {
+          minValue: question.lowerLimit,
+          minLabel: question?.leftSubtitle,
+          maxValue: question.upperLimit,
+          maxLabel: question?.rightSubtitle,
+          // incValue: question,
+          // canHideValue: boolean;
+        },
+      };
+      return config;
+    }
+
+    case 'sortList': {
+      const config = {
+        name: question.name,
+        isRequired: question.isRequired,
+        description: question?.description,
+        sortList: {
+          hasRandomResponsesOrder: question.randomSort,
+          answerOptions: question.listOptions,
+        },
+      };
+      return config;
+    }
+  }
+}
+
 export default async function createOwnQuestions(
   createsForm: Function,
   formData: Question[] | null,
@@ -111,11 +320,25 @@ export default async function createOwnQuestions(
     if (!formData || !formId) {
       throw new Error('Form Data not sended');
     }
-    console.log(formData);
-    // const sendData: QuestionDTO = {
-    //   form: formId,
-    //   questions:
-    // };
+
+    const questionsArray: Array<any> = [];
+    for (let i = 0; i < formData.length; i++) {
+      const config = await getTypeQuestion(formData[i]);
+
+      var questionConfig: QuestionProps = {
+        type: formData[i].id,
+        formPage: 1,
+        position: i,
+        config: config,
+      };
+      questionsArray.push(questionConfig);
+    }
+
+    console.log(questionsArray);
+    const sendData: QuestionDTO = {
+      form: formId,
+      questions: questionsArray,
+    };
 
     // if (formData.config.description) {
     //   sendData.description = formData?.config.description;
