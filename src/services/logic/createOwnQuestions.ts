@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 
 import { Question } from '../../store/ducks/questions/types';
 import UpdateFormSchema from '../../schemas/updateForm';
-
 interface QuestionDTO {
   form: string;
   questions: QuestionProps[] | null;
@@ -102,6 +101,21 @@ interface AnswerOptions {
   image?: string;
 }
 
+function formatList(list: any): any {
+  const listData: Array<any> = [];
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].content) {
+      const data: Object = { text: list[i].content };
+      listData.push(data);
+    } else if (list[i].label && list[i].image) {
+      const data: Object = { text: list[i].label, image: list[i].image };
+      listData.push(data);
+    }
+  }
+  // console.log(listData);
+  return listData;
+}
+
 function getTypeQuestion(question: any): any {
   switch (question.alias) {
     case 'checkBox': {
@@ -112,7 +126,7 @@ function getTypeQuestion(question: any): any {
         checkBox: {
           hasHorizontalAlignment: question.rowDirection,
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: question.listOptions,
+          answerOptions: formatList(question.listOptions),
         },
       };
       return config;
@@ -139,7 +153,7 @@ function getTypeQuestion(question: any): any {
         description: question?.description,
         dropDown: {
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: question.listOptions,
+          answerOptions: formatList(question.listOptions),
         },
       };
       return config;
@@ -164,7 +178,7 @@ function getTypeQuestion(question: any): any {
           isMultipleChoice: question.multipleChoice,
           maxChoices: question?.choiceMaxAmmount,
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: question.imgChoices,
+          answerOptions: formatList(question.imgChoices),
         },
       };
       return config;
@@ -203,7 +217,7 @@ function getTypeQuestion(question: any): any {
           isMultipleChoice: question.multipleChoice,
           rowsLabels: question.lines,
           colsLabels: question.columns,
-          answerOptions: null,
+          // answerOptions: null,
         },
       };
       return config;
@@ -259,7 +273,7 @@ function getTypeQuestion(question: any): any {
         radioButton: {
           hasHorizontalAlignment: question.rowDirection,
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: question.listOptions,
+          answerOptions: formatList(question.listOptions),
         },
       };
       return config;
@@ -303,7 +317,7 @@ function getTypeQuestion(question: any): any {
         description: question?.description,
         sortList: {
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: question.listOptions,
+          answerOptions: formatList(question.listOptions),
         },
       };
       return config;
@@ -339,18 +353,6 @@ export default async function createOwnQuestions(
       form: formId,
       questions: questionsArray,
     };
-
-    // if (formData.config.description) {
-    //   sendData.description = formData?.config.description;
-    // }
-
-    // if (formData.style.footerText) {
-    //   sendData.footerText = formData.style.footerText;
-    // }
-
-    // if (formData.style.headerText) {
-    //   sendData.headerText = formData.style.headerText;
-    // }
 
     // await UpdateFormSchema.validate(sendData, { abortEarly: false });
 

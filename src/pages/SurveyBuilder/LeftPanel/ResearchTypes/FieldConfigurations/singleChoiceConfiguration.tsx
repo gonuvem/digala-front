@@ -62,7 +62,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
       setOptions(items);
       handleChange([items], ['listOptions']);
     },
-    [options, setOptions],
+    [options, setOptions, handleChange],
   );
 
   const handleAddOption = useCallback(() => {
