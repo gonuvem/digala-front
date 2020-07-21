@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useMutation } from '@apollo/react-hooks';
 import { FiBookmark, FiPlusCircle } from 'react-icons/fi';
@@ -16,6 +16,9 @@ import { CREATE_OWN_QUESTIONS } from '../../../services/requests/questions';
 import updateOwnFormData from '../../../services/logic/updateOwnFormData';
 import createOwnQuestions from '../../../services/logic/createOwnQuestions';
 
+import { useQuery } from '@apollo/react-hooks';
+import { LIST_QUESTION_TYPES } from '../../../services/requests/questions';
+
 const Pagination: React.FC = () => {
   const [pagesCount, setPagesCount] = useState(1);
   const formData = useSelector<ApplicationState, Form | null>(
@@ -32,19 +35,35 @@ const Pagination: React.FC = () => {
     CREATE_OWN_QUESTIONS,
   );
 
+  const { data: questionsTypesData } = useQuery(LIST_QUESTION_TYPES, {
+    variables: { perPage: 20 },
+  });
+
+  const questionTypes = useMemo(
+    () =>
+      questionsTypesData?.data?.error === null
+        ? questionsTypesData?.data?.types
+        : [],
+    [questionsTypesData],
+  );
+
   const handleCreatePage = useCallback(
     () => setPagesCount((state) => state + 1),
     [],
   );
 
   const handleUpdate = useCallback(() => {
-    if (formData?.id) {
-      createOwnQuestions(createQuestions, questionsData[0], formData?.id);
+    if (formData?.id && questionTypes) {
+      createOwnQuestions(
+        createQuestions,
+        questionsData[0],
+        formData?.id,
+        questionTypes,
+      );
     }
     // console.log(formData);
     // updateOwnFormData(updateForm, formData);
   }, [formData, updateForm, questionsData]);
-
   return (
     <Container>
       <SolidButton onClick={handleUpdate}>

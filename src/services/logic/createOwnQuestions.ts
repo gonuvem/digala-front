@@ -325,10 +325,15 @@ function getTypeQuestion(question: any): any {
   }
 }
 
+// function getTypeByAlias(question: any, alias: any): any{
+//   return
+// }
+
 export default async function createOwnQuestions(
   createsForm: Function,
   formData: Question[] | null,
   formId: string | null,
+  questionTypes: any[],
 ): Promise<void> {
   try {
     if (!formData || !formId) {
@@ -338,35 +343,40 @@ export default async function createOwnQuestions(
     const questionsArray: Array<any> = [];
     for (let i = 0; i < formData.length; i++) {
       const config = await getTypeQuestion(formData[i]);
+      const questionType = questionTypes.filter((question) => {
+        return question.alias === formData[i].alias;
+      });
 
-      var questionConfig: QuestionProps = {
-        type: formData[i].id,
-        formPage: 1,
-        position: i,
-        config: config,
-      };
-      questionsArray.push(questionConfig);
+      if (questionType[0]?._id) {
+        var questionConfig: QuestionProps = {
+          type: questionType[0]?._id,
+          formPage: 1,
+          position: i,
+          config: config,
+        };
+        questionsArray.push(questionConfig);
+      }
     }
 
-    console.log(questionsArray);
     const sendData: QuestionDTO = {
       form: formId,
       questions: questionsArray,
     };
+    console.log(sendData);
 
     // await UpdateFormSchema.validate(sendData, { abortEarly: false });
 
-    // if (formData === null) {
-    //   throw new Error('Form data is null');
-    // }
+    if (formData === null) {
+      throw new Error('Form data is null');
+    }
 
-    // const response = await updateForm({ variables: { ...sendData } });
+    const response = await createsForm({ variables: { input: sendData } });
 
-    // if (response.data.data.error) {
-    //   throw new Error(response.data.data.error.message);
-    // }
+    if (response.data.data.error) {
+      throw new Error(response.data.data.error.message);
+    }
 
-    // toast.success('Formulário atualizado com sucesso');
+    toast.success('Pesquisa cadastrada com sucesso');
   } catch (err) {
     if (err instanceof Yup.ValidationError) {
       console.log(err);
