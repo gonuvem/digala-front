@@ -163,7 +163,7 @@ function getTypeQuestion(question: any): any {
       const config = {
         name: question.name,
         isRequired: question.isRequired,
-        description: question?.description,
+        description: question?.description ? question?.description : null,
         email: {
           hasValidation: question.validatePattern,
         },
@@ -206,6 +206,7 @@ function getTypeQuestion(question: any): any {
           maxChars: question?.shortTextMaxValue,
         },
       };
+
       return config;
     }
 
@@ -279,7 +280,7 @@ function getTypeQuestion(question: any): any {
       return config;
     }
 
-    case 'longText': {
+    case 'shortText': {
       const config = {
         name: question.name,
         isRequired: question.isRequired,
@@ -323,10 +324,6 @@ function getTypeQuestion(question: any): any {
     }
   }
 }
-
-// function getTypeByAlias(question: any, alias: any): any{
-//   return
-// }
 
 export default async function createOwnQuestions(
   createsForm: Function,

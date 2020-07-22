@@ -11,55 +11,55 @@ function getConfigByAlias(alias: string): any {
   switch (alias) {
     case 'checkBox': {
       return {
-        hasHorizontalAlignment: false,
-        hasRandomResponsesOrder: false,
-        hasLimitedChoices: false,
+        rowDirection: false,
+        randomSort: false,
+        limitChoices: false,
       };
     }
     case 'date': {
       return {
-        isDateRequired: false,
-        isTimeRequired: false,
-        canCaptureInterval: false,
+        dateRequired: false,
+        timeRequired: false,
+        selectRange: false,
       };
     }
     case 'dropDown': {
-      return { hasRandomResponsesOrder: false };
+      return { randomSort: false };
     }
     case 'email': {
-      return { hasValidation: false };
+      return { validatePattern: false };
     }
     case 'imageChoice': {
-      return { isMultipleChoice: false, hasRandomResponsesOrder: false };
+      return { multipleChoice: false, randomSort: false };
     }
     case 'link': {
-      return { hasValidation: false };
+      return { validatePattern: false };
     }
     case 'longText': {
-      return { hasLimitedChars: false };
+      return { limitCharacter: false };
     }
 
     case 'matrix': {
-      return { isMultipleChoice: false };
+      return { multipleChoice: false };
     }
 
     case 'nps': {
-      return { canDisplayLabels: false, canStartAtZero: false, escale: 10 };
+      return { showSubtitles: false, startZero: false, scale: 10 };
     }
 
     case 'number': {
-      return { hasMaxMinLimit: false };
+      return { limitMaxMin: false };
     }
     case 'phone': {
-      return { hasValidation: false };
+      return { validatePattern: false };
     }
 
     case 'radioButton': {
-      return { hasHorizontalAlignment: false, hasRandomResponsesOrder: false };
+      return { rowDirection: false, randomSort: false };
     }
 
-    case 'longText': {
-      return { hasLimitedChars: false };
+    case 'shortText': {
+      return { limitCharacter: false };
     }
 
     case 'slider': {
@@ -67,7 +67,7 @@ function getConfigByAlias(alias: string): any {
     }
 
     case 'sortList': {
-      return { hasRandomResponsesOrder: false };
+      return { randomSort: false };
     }
   }
 }
