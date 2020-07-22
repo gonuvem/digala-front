@@ -97,7 +97,10 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <ToggleSwitch
           label="Ocultar valor no seletor"
           helpHint="Quando ativado o valor selecionado não é exibido"
-          name="linkRequired"
+          name="hideValue"
+          onChange={(event) => {
+            handleChange([event.target.checked], ['hideValue']);
+          }}
         />
       </section>
     </Form>

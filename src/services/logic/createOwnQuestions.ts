@@ -19,6 +19,8 @@ interface QuestionProps {
     checkBox?: {
       hasHorizontalAlignment: boolean;
       hasRandomResponsesOrder: boolean;
+      hasLimitedChoices: boolean;
+      maxChoices?: number;
       answerOptions: AnswerOptions[];
     };
     date?: {
@@ -53,7 +55,6 @@ interface QuestionProps {
       isMultipleChoice: boolean;
       rowsLabels: string[];
       colsLabels: string[];
-      answerOptions: AnswerOptions[];
     };
     nps?: {
       canDisplayLabels: boolean;
@@ -86,7 +87,6 @@ interface QuestionProps {
       minLabel?: string;
       maxValue: number;
       maxLabel?: string;
-      incValue: number;
       canHideValue: boolean;
     };
     sortList?: {
@@ -112,7 +112,6 @@ function formatList(list: any): any {
       listData.push(data);
     }
   }
-  // console.log(listData);
   return listData;
 }
 
@@ -126,6 +125,8 @@ function getTypeQuestion(question: any): any {
         checkBox: {
           hasHorizontalAlignment: question.rowDirection,
           hasRandomResponsesOrder: question.randomSort,
+          hasLimitedChoices: question.limitChoices,
+          maxChoices: question?.choiceMaxAmmount,
           answerOptions: formatList(question.listOptions),
         },
       };
@@ -217,7 +218,6 @@ function getTypeQuestion(question: any): any {
           isMultipleChoice: question.multipleChoice,
           rowsLabels: question.lines,
           colsLabels: question.columns,
-          // answerOptions: null,
         },
       };
       return config;
@@ -303,8 +303,7 @@ function getTypeQuestion(question: any): any {
           minLabel: question?.leftSubtitle,
           maxValue: question.upperLimit,
           maxLabel: question?.rightSubtitle,
-          // incValue: question,
-          // canHideValue: boolean;
+          canHideValue: question?.hideValue,
         },
       };
       return config;
