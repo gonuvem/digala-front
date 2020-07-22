@@ -61,32 +61,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
     });
   }, [fieldName, inputRef, registerField]);
 
-  const shuffle = useCallback(() => {
-    const list = options;
-    let currentIndex = list.length;
-    let temporaryValue;
-    let randomIndex;
-
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      temporaryValue = list[currentIndex];
-      list[currentIndex] = list[randomIndex];
-      list[randomIndex] = temporaryValue;
-    }
-
-    setOptions(list);
-  }, [options, setOptions]);
-
   useEffect(() => {
     if (listOptions) {
       setOptions(listOptions);
-    } else if (listOptions && randomSort) {
-      setOptions(listOptions);
-      shuffle();
     }
-  }, [listOptions, options, randomSort]);
+  }, [listOptions, options]);
 
   const defaultSelectValue = useMemo(() => {
     const defaultOption = listOptions?.find(

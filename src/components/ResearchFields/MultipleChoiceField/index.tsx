@@ -45,33 +45,11 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   const [refresh, setRefresh] = useState(false);
   const another = { id: uuid(), content: 'outros(a)' };
 
-  const shuffle = useCallback(() => {
-    const list = listChoices;
-    let currentIndex = list.length;
-    let temporaryValue;
-    let randomIndex;
-
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      temporaryValue = list[currentIndex];
-      list[currentIndex] = list[randomIndex];
-      list[randomIndex] = temporaryValue;
-    }
-
-    setListChoices(list);
-    setRefresh(!refresh);
-  }, [listChoices, setListChoices, refresh]);
-
   useEffect(() => {
-    if (choices && !randomSort) {
+    if (choices) {
       setListChoices(choices);
-    } else if (choices && randomSort) {
-      setListChoices(choices);
-      shuffle();
     }
-  }, [choices, setListChoices, randomSort]);
+  }, [choices, setListChoices]);
 
   const handleOptionClick = useCallback(
     (event, choiceId: string) => {

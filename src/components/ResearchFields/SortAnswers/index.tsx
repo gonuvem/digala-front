@@ -56,33 +56,11 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
     [options, setOptions],
   );
 
-  const shuffle = useCallback(() => {
-    const list = options;
-    let currentIndex = list.length;
-    let temporaryValue;
-    let randomIndex;
-
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-
-      temporaryValue = list[currentIndex];
-      list[currentIndex] = list[randomIndex];
-      list[randomIndex] = temporaryValue;
-    }
-
-    setOptions(list);
-    setRefresh(!refresh);
-  }, [options, setOptions, refresh]);
-
   useEffect(() => {
-    if (listOptions && !randomSort) {
+    if (listOptions) {
       setOptions(listOptions);
-    } else if (listOptions && randomSort) {
-      setOptions(listOptions);
-      shuffle();
     }
-  }, [listOptions, shuffle, setOptions, randomSort]);
+  }, [listOptions, setOptions]);
 
   return (
     <Container>
