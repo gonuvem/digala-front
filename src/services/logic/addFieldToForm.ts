@@ -44,7 +44,7 @@ function getConfigByAlias(alias: string): any {
     }
 
     case 'nps': {
-      return { showSubtitles: false, startZero: false, scale: 10 };
+      return { showSubtitles: false, startZero: false, scale: '10' };
     }
 
     case 'number': {
@@ -63,7 +63,7 @@ function getConfigByAlias(alias: string): any {
     }
 
     case 'slider': {
-      return { hideValue: false };
+      return { hideValue: false, lowerLimit: 0, upperLimit: 10 };
     }
 
     case 'sortList': {

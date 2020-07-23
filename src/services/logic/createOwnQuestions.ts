@@ -126,7 +126,7 @@ function getTypeQuestion(question: any): any {
       }
       const config = {
         ...notRequiredConfig,
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         checkBox: {
           hasHorizontalAlignment: question.rowDirection,
@@ -140,7 +140,7 @@ function getTypeQuestion(question: any): any {
     }
     case 'date': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         date: {
@@ -155,7 +155,7 @@ function getTypeQuestion(question: any): any {
     }
     case 'dropDown': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         dropDown: {
@@ -167,9 +167,9 @@ function getTypeQuestion(question: any): any {
     }
     case 'email': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
-        description: question?.description ? question?.description : null,
+        description: question?.description,
         email: {
           hasValidation: question.validatePattern,
         },
@@ -178,7 +178,7 @@ function getTypeQuestion(question: any): any {
     }
     case 'imageChoice': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         imageChoice: {
@@ -192,7 +192,7 @@ function getTypeQuestion(question: any): any {
     }
     case 'link': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         link: {
@@ -203,7 +203,7 @@ function getTypeQuestion(question: any): any {
     }
     case 'longText': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         longText: {
@@ -218,7 +218,7 @@ function getTypeQuestion(question: any): any {
 
     case 'matrix': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         matrix: {
@@ -232,7 +232,7 @@ function getTypeQuestion(question: any): any {
 
     case 'nps': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         nps: {
@@ -248,7 +248,7 @@ function getTypeQuestion(question: any): any {
 
     case 'number': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         number: {
@@ -262,7 +262,7 @@ function getTypeQuestion(question: any): any {
     }
     case 'phone': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         phone: {
@@ -281,7 +281,7 @@ function getTypeQuestion(question: any): any {
       }
       const config = {
         ...notRequiredConfig,
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         radioButton: {
           hasHorizontalAlignment: question.rowDirection,
@@ -294,7 +294,7 @@ function getTypeQuestion(question: any): any {
 
     case 'shortText': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         longText: {
@@ -308,7 +308,7 @@ function getTypeQuestion(question: any): any {
 
     case 'slider': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         slider: {
@@ -324,7 +324,7 @@ function getTypeQuestion(question: any): any {
 
     case 'sortList': {
       const config = {
-        name: question.name,
+        name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         sortList: {
@@ -388,7 +388,7 @@ export default async function createOwnQuestions(
   } catch (err) {
     if (err instanceof Yup.ValidationError) {
       console.log(err);
-      toast.error('Você precisa preencher todos os campos das configurações');
+      toast.error('Você precisa preencher todos os campos obragatórios');
       return;
     }
 

@@ -45,6 +45,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <NumberField
           label="Limite inferior"
           id="lowerLimitField"
+          defaultValue={0}
           name="lowerLimit"
           onChange={(event) =>
             handleChange([event.target.value], ['lowerLimit'])
@@ -66,6 +67,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <NumberField
           label="Limite superior"
           id="upperLimitField"
+          defaultValue={10}
           name="upperLimit"
           onChange={(event) =>
             handleChange([event.target.value], ['upperLimit'])

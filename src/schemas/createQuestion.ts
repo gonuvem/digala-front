@@ -25,7 +25,8 @@ export default Yup.array().of(
                 })
                 .required(),
             )
-            .required(),
+            .required()
+            .typeError('Você precisa cadastrar pelo menos 1 opção na lista'),
         })
         .notRequired(),
       date: Yup.object()
