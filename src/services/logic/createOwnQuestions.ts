@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 import { Question } from '../../store/ducks/questions/types';
-import UpdateFormSchema from '../../schemas/updateForm';
+import CreateQuestion from '../../schemas/createQuestion';
 interface QuestionDTO {
   form: string;
   questions: QuestionProps[] | null;
@@ -118,10 +118,16 @@ function formatList(list: any): any {
 function getTypeQuestion(question: any): any {
   switch (question.alias) {
     case 'checkBox': {
+      let notRequiredConfig = {};
+      if (question.description) {
+        notRequiredConfig = {
+          description: question.description,
+        };
+      }
       const config = {
+        ...notRequiredConfig,
         name: question.name,
         isRequired: question.isRequired,
-        description: question?.description,
         checkBox: {
           hasHorizontalAlignment: question.rowDirection,
           hasRandomResponsesOrder: question.randomSort,
@@ -267,10 +273,16 @@ function getTypeQuestion(question: any): any {
     }
 
     case 'radioButton': {
+      let notRequiredConfig = {};
+      if (question.description) {
+        notRequiredConfig = {
+          description: question.description,
+        };
+      }
       const config = {
+        ...notRequiredConfig,
         name: question.name,
         isRequired: question.isRequired,
-        description: question?.description,
         radioButton: {
           hasHorizontalAlignment: question.rowDirection,
           hasRandomResponsesOrder: question.randomSort,
@@ -360,7 +372,7 @@ export default async function createOwnQuestions(
     };
     console.log(sendData);
 
-    // await UpdateFormSchema.validate(sendData, { abortEarly: false });
+    await CreateQuestion.validate(sendData.questions, { abortEarly: false });
 
     if (formData === null) {
       throw new Error('Form data is null');
