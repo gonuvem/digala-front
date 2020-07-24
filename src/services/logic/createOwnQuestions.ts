@@ -340,7 +340,7 @@ function getTypeQuestion(question: any): any {
 export default async function createOwnQuestions(
   createsForm: Function,
   formData: Question[] | null,
-  formId: string | null,
+  formId: string,
   questionTypes: any[],
 ): Promise<void> {
   try {
@@ -350,14 +350,14 @@ export default async function createOwnQuestions(
 
     const questionsArray: Array<any> = [];
     for (let i = 0; i < formData.length; i++) {
-      const config = await getTypeQuestion(formData[i]);
-      const questionType = questionTypes.filter((question) => {
+      const config = getTypeQuestion(formData[i]);
+      const questionType = questionTypes.find((question) => {
         return question.alias === formData[i].alias;
       });
 
-      if (questionType[0]?._id) {
-        var questionConfig: QuestionProps = {
-          type: questionType[0]?._id,
+      if (questionType?._id) {
+        let questionConfig: QuestionProps = {
+          type: questionType?._id,
           formPage: 1,
           position: i,
           config: config,

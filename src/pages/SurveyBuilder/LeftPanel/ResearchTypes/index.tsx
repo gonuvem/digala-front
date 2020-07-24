@@ -30,11 +30,7 @@ const ResearchTypes: React.FC<ResearchTypesProps> = ({ questions }) => {
 
   const handleQuestionBoxClick = useCallback(
     (alias) => {
-      let defaultPayload = {};
-      if (alias === 'matrix') {
-        defaultPayload = { lines: ['linha 01'], columns: ['coluna 01'] };
-      }
-      addFieldToForm(dispatch, { alias, defaultPayload });
+      addFieldToForm(dispatch, alias);
     },
     [dispatch],
   );

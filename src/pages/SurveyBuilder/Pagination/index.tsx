@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { FiBookmark, FiPlusCircle } from 'react-icons/fi';
 
 import SolidButton from '../../../components/Common/SolidButton';
@@ -16,16 +16,12 @@ import { CREATE_OWN_QUESTIONS } from '../../../services/requests/questions';
 import updateOwnFormData from '../../../services/logic/updateOwnFormData';
 import createOwnQuestions from '../../../services/logic/createOwnQuestions';
 
-import { useQuery } from '@apollo/react-hooks';
 import { LIST_QUESTION_TYPES } from '../../../services/requests/questions';
 
 const Pagination: React.FC = () => {
   const [pagesCount, setPagesCount] = useState(1);
-  const formData = useSelector<ApplicationState, Form | null>(
-    (state) => state.forms.form,
-  );
 
-  const questionsData = useSelector<
+  const [questionsData, formData] = useSelector<
     ApplicationState,
     [Question[], Form | null]
   >((state) => [state.questions.questions, state.forms.form]);
@@ -56,7 +52,7 @@ const Pagination: React.FC = () => {
     if (formData?.id && questionTypes) {
       createOwnQuestions(
         createQuestions,
-        questionsData[0],
+        questionsData,
         formData?.id,
         questionTypes,
       );

@@ -49,11 +49,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
 
   const handleQuestionBoxClick = useCallback(
     (alias: string) => {
-      let defaultPayload = {};
-      if (alias === 'matrix') {
-        defaultPayload = { lines: ['linha 01'], columns: ['coluna 01'] };
-      }
-      addFieldToForm(dispatch, { alias, defaultPayload });
+      addFieldToForm(dispatch, alias);
       setShowQuestionsPanel(false);
     },
     [dispatch],
