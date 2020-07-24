@@ -56,9 +56,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
         <ToggleSwitch
           label="Obrigatório"
           helpHint="Campo é obrigatório responder"
-          name="required"
+          name="isRequired"
           onChange={(event) =>
-            handleChange([event.target.checked], ['required'])
+            handleChange([event.target.checked], ['isRequired'])
           }
         />
       </section>

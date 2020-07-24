@@ -24,7 +24,7 @@ export interface Question {
   name: string;
   label?: string;
   description?: string;
-  required?: boolean;
+  isRequired: boolean;
   link?: {
     validation?: boolean;
   };
@@ -48,6 +48,7 @@ export interface Question {
   /* Slider */
   lowerLimit?: number;
   upperLimit?: number;
+  hideValue?: boolean;
   /* Images Choice */
   imgChoices?: ImageChoice[];
   randomSort?: boolean;

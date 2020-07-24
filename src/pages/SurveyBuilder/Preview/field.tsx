@@ -129,7 +129,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           rightSubtitle={config?.rightSubtitle}
           scale={config?.scale || 10}
           startZero={config?.startZero || false}
-          isRequired={config?.required || false}
+          isRequired={config?.isRequired || false}
         />
       );
     case FieldsTypes.Slider:

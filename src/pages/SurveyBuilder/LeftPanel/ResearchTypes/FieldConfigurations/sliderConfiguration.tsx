@@ -45,6 +45,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <NumberField
           label="Limite inferior"
           id="lowerLimitField"
+          defaultValue={0}
           name="lowerLimit"
           onChange={(event) =>
             handleChange([event.target.value], ['lowerLimit'])
@@ -66,6 +67,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <NumberField
           label="Limite superior"
           id="upperLimitField"
+          defaultValue={10}
           name="upperLimit"
           onChange={(event) =>
             handleChange([event.target.value], ['upperLimit'])
@@ -87,9 +89,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <ToggleSwitch
           label="Obrigatório"
           helpHint="Caso o usuário seja obrigado a responder"
-          name="required"
+          name="isRequired"
           onChange={(event) => {
-            handleChange([event.target.checked], ['required']);
+            handleChange([event.target.checked], ['isRequired']);
           }}
         />
       </section>
@@ -97,7 +99,10 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <ToggleSwitch
           label="Ocultar valor no seletor"
           helpHint="Quando ativado o valor selecionado não é exibido"
-          name="linkRequired"
+          name="hideValue"
+          onChange={(event) => {
+            handleChange([event.target.checked], ['hideValue']);
+          }}
         />
       </section>
     </Form>

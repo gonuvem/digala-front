@@ -62,7 +62,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
       setOptions(items);
       handleChange([items], ['listOptions']);
     },
-    [options, setOptions],
+    [options, setOptions, handleChange],
   );
 
   const handleAddOption = useCallback(() => {
@@ -129,9 +129,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Obrigatório"
             helpHint="Caso o usuário seja obrigado a responder"
-            name="required"
+            name="isRequired"
             onChange={(event) =>
-              handleChange([event.target.checked], ['required'])
+              handleChange([event.target.checked], ['isRequired'])
             }
           />
         </section>
