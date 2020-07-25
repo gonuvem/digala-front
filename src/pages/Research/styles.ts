@@ -1,7 +1,11 @@
 import styled from 'styled-components';
-import { transparentize } from 'polished';
+import { transparentize, lighten } from 'polished';
 
 import Colors from '../../utils/colors';
+
+interface ProgressBarProps {
+  pagesCount: number;
+}
 
 export const Container = styled.div`
   display: flex;
@@ -9,6 +13,60 @@ export const Container = styled.div`
   align-items: center;
 
   width: 100%;
+`;
+
+export const ProgressBar = styled.div<ProgressBarProps>`
+  padding: 1rem;
+  margin-left: 1rem;
+
+  background-color: ${Colors.white};
+  border-radius: 8px;
+
+  div {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 8px;
+    height: ${(props) => `${4.5 * props.pagesCount}rem`};
+
+    background-color: ${Colors.smokeWhite};
+    border-radius: 8px;
+
+    &:before {
+      content: '';
+
+      position: absolute;
+      width: 8px;
+      height: 4.5rem;
+      top: 0%;
+      z-index: 0;
+
+      background-color: ${lighten(0.15, Colors.primary)};
+      border-radius: 8px;
+    }
+
+    span {
+      display: flex;
+      z-index: 1;
+      justify-content: center;
+      align-items: center;
+
+      width: 24px;
+      height: 24px;
+
+      background-color: ${Colors.smokeWhite};
+      border-radius: 50%;
+
+      p {
+        font-weight: 500;
+        color: #a0a0a0;
+        text-align: center;
+      }
+    }
+  }
 `;
 
 export const ResearchBody = styled.div`

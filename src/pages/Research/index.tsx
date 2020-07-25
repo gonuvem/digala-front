@@ -11,6 +11,7 @@ import {
   ResearchBody,
   ResearchHeader,
   ResearchFooter,
+  ProgressBar,
 } from './styles';
 
 const Research: React.FC = () => {
@@ -35,6 +36,7 @@ const Research: React.FC = () => {
           <div id="form-separator" />
           <SolidButton hasShadow={false}>Enviar</SolidButton>
         </Form>
+
         <ResearchFooter>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -44,6 +46,16 @@ const Research: React.FC = () => {
         <div id="research-separator" />
         <img src={gonuvemLogo} alt="logo da gonuvem" />
       </ResearchBody>
+      <ProgressBar pagesCount={2}>
+        <div>
+          <span>
+            <p>1</p>
+          </span>
+          <span>
+            <p>1</p>
+          </span>
+        </div>
+      </ProgressBar>
     </Container>
   );
 };
