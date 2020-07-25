@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 
+import Layout from '../../layout';
+import PageHeader from '../../components/Common/Header';
+
 import { Container, Panels } from './styles';
 
 import LeftPanel from './LeftPanel';
@@ -51,13 +54,18 @@ const SurveyBuilder: React.FC = () => {
   );
 
   return (
-    <Container>
-      <Panels>
-        <LeftPanel questionsTypes={questionTypes} />
-        <Preview questionsTypes={questionTypes} />
-        <Pagination />
-      </Panels>
-    </Container>
+    <>
+      <PageHeader />
+      <Layout>
+        <Container>
+          <Panels>
+            <LeftPanel questionsTypes={questionTypes} />
+            <Preview questionsTypes={questionTypes} />
+            <Pagination />
+          </Panels>
+        </Container>
+      </Layout>
+    </>
   );
 };
 
