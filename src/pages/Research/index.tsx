@@ -4,6 +4,8 @@ import { Form } from '@unform/web';
 import ShortTextField from '../../components/ResearchFields/ShortTextField';
 import SolidButton from '../../components/Common/SolidButton';
 
+import gonuvemLogo from '../../assets/GONUVEM_HOR.png';
+
 import {
   Container,
   ResearchBody,
@@ -30,9 +32,17 @@ const Research: React.FC = () => {
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
             placeholder="Insira o nome aqui"
           />
-          <div id="separator" />
+          <div id="form-separator" />
           <SolidButton hasShadow={false}>Enviar</SolidButton>
         </Form>
+        <ResearchFooter>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </p>
+        </ResearchFooter>
+        <div id="research-separator" />
+        <img src={gonuvemLogo} alt="logo da gonuvem" />
       </ResearchBody>
     </Container>
   );
