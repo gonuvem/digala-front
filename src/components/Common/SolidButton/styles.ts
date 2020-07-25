@@ -1,9 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 
 import Colors from '../../../utils/colors';
 
-export const Container = styled.button`
+interface ButtonStyleProps {
+  hasShadow?: boolean;
+}
+
+export const Container = styled.button<ButtonStyleProps>`
   display: flex;
   justify-content: center;
   border: none;
@@ -13,13 +17,18 @@ export const Container = styled.button`
   background: ${Colors.primary};
   text-decoration: none;
   color: ${Colors.white};
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.16);
   border-radius: 4px;
 
   font-size: 1.125rem;
   font-weight: bold;
 
   transition: background-color 0.2s;
+
+  ${(props) =>
+    props.hasShadow &&
+    css`
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.16);
+    `}
 
   svg {
     margin-right: 0.5rem;

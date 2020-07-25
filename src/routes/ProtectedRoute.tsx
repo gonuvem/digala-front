@@ -10,7 +10,7 @@ interface RouteProps extends ReactDOMRouteProps {
   component: React.ComponentType;
 }
 
-const Route: React.FC<RouteProps> = ({
+const ProtectedRoute: React.FC<RouteProps> = ({
   isPrivate = false,
   component: Component,
   ...rest
@@ -36,4 +36,4 @@ const Route: React.FC<RouteProps> = ({
   );
 };
 
-export default Route;
+export default ProtectedRoute;

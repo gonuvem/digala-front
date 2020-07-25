@@ -1,7 +1,7 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
-import Route from './Route';
+import ProtectedRoute from './ProtectedRoute';
 
 import SignIn from '../pages/SignIn';
 import Forgot from '../pages/Forgot';
@@ -12,12 +12,17 @@ import Research from '../pages/Research';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" exact component={SignIn} />
-    <Route path="/forgot" component={Forgot} />
+    <ProtectedRoute path="/" exact component={SignIn} />
+    <ProtectedRoute path="/forgot" component={Forgot} />
+    <ProtectedRoute path="/my_researches" isPrivate component={MyResearches} />
+    <ProtectedRoute
+      path="/edit_survey/:id"
+      isPrivate
+      component={SurveyBuilder}
+    />
+    <ProtectedRoute path="/share" isPrivate component={ShareSurvey} />
+
     <Route path="/research/:id" component={Research} />
-    <Route path="/my_researches" isPrivate component={MyResearches} />
-    <Route path="/edit_survey/:id" isPrivate component={SurveyBuilder} />
-    <Route path="/share" isPrivate component={ShareSurvey} />
   </Switch>
 );
 
