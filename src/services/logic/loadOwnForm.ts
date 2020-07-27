@@ -45,7 +45,7 @@ export default function loadOwnForm(
 
           progressBarType: {
             value: formData.data.form.config.progressBarType,
-            label: 'Linear',
+            label: formData.data.form.config.progressBarType,
           },
         },
         style: {
