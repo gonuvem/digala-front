@@ -36,14 +36,16 @@ export default function loadOwnForm(
   formData: FormDTO | undefined,
 ): void {
   if (formData !== undefined && formData.data.form !== null) {
+    // console.log(formData);
     dispatch(
       FormsActions.loadForm({
         id: formData.data.form._id,
         config: {
           ...formData.data.form.config,
+
           progressBarType: {
             value: formData.data.form.config.progressBarType,
-            label: 'Linear',
+            label: formData.data.form.config.progressBarType,
           },
         },
         style: {

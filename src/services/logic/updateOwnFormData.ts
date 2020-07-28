@@ -71,7 +71,7 @@ export default async function updateOwnFormData(
     if (formData === null) {
       throw new Error('Form data is null');
     }
-
+    console.log(sendData);
     const response = await updateForm({ variables: { ...sendData } });
 
     if (response.data.data.error) {

@@ -24,7 +24,7 @@ const Switch: React.FC<ToggleSwitchProps> = ({
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value',
+      path: 'checked',
     });
   }, [fieldName, registerField]);
 

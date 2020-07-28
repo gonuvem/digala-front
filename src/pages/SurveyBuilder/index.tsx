@@ -31,7 +31,28 @@ const SurveyBuilder: React.FC = () => {
     variables: { perPage: 20 },
   });
 
-  useEffect(() => loadOwnForm(dispatch, formData), [formData, dispatch]);
+  useEffect(() => {
+    if (
+      formData?.data?.form?.config?.beginDate &&
+      formData?.data?.form?.config?.endDate
+    ) {
+      const year = formData?.data?.form?.config?.beginDate.substr(0, 4);
+      const month = formData?.data?.form?.config?.beginDate.substr(5, 2);
+      const day = formData?.data?.form?.config?.beginDate.substr(8, 2);
+      const beginDate = new Date(year, month - 1, day);
+      formData.data.form.config.beginDate = beginDate;
+
+      const year2 = formData?.data?.form?.config?.endDate.substr(0, 4);
+      const month2 = formData?.data?.form?.config?.endDate.substr(5, 2);
+      const day2 = formData?.data?.form?.config?.endDate.substr(8, 2);
+      const endDate = new Date(year2, month2 - 1, day2);
+      formData.data.form.config.endDate = endDate;
+
+      formData.data.form.config.researchExpireDate = [beginDate, endDate];
+    }
+
+    loadOwnForm(dispatch, formData);
+  }, [formData, dispatch]);
 
   useEffect(() => {
     if (questionsList?.data?.error !== null) {

@@ -8,8 +8,9 @@ const INITIAL_STATE: FormsState = {
 
 const reducer: Reducer<FormsState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FormsTypes.LOAD_FORM:
+    case FormsTypes.LOAD_FORM: {
       return { ...state, form: action.payload };
+    }
     case FormsTypes.UPDATE_FORM_CONFIG:
       return {
         ...state,

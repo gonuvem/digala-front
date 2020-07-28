@@ -7,12 +7,13 @@ interface FormDataDTO {
     description?: string;
     beginDate?: Date;
     endDate?: Date;
-    hasLimitedResponses: string;
+    hasLimitedResponses: boolean;
     maxResponses?: string;
-    isTotemMode: string;
-    canDisplayProgressBar: string;
+    isTotemMode: boolean;
+    canDisplayProgressBar: boolean;
     progressBarType?: { value?: string; label?: string };
-    canAllowMultipleSubmissions: string;
+    canAllowMultipleSubmissions: boolean;
+    researchExpireDate?: any;
   };
   style?: {
     background?: { value?: string; name?: string };
@@ -34,14 +35,26 @@ export default function changeFormConfiguration(
   let sendData = {};
 
   if (attribute === 'config') {
+    // console.log(config);
     sendData = {
       ...config,
-      hasLimitedResponses: config?.hasLimitedResponses === 'on',
-      isTotemMode: config?.isTotemMode === 'on',
-      canDisplayProgressBar: config?.canDisplayProgressBar === 'on',
-      canAllowMultipleSubmissions: config?.canAllowMultipleSubmissions === 'on',
+      hasLimitedResponses: config?.hasLimitedResponses,
+      isTotemMode: config?.isTotemMode,
+      canDisplayProgressBar: config?.canDisplayProgressBar,
+      canAllowMultipleSubmissions: config?.canAllowMultipleSubmissions,
+      // beginDate: config?.beginDate,
+      // endDate: config?.endDate,
       maxResponses: parseInt(config?.maxResponses || '', 10),
     };
+
+    if (config?.researchExpireDate.length === 2) {
+      sendData = {
+        ...config,
+        beginDate: config?.researchExpireDate[0],
+        endDate: config?.researchExpireDate[1],
+        maxResponses: parseInt(config?.maxResponses || '', 10),
+      };
+    }
   }
 
   if (attribute === 'style') {

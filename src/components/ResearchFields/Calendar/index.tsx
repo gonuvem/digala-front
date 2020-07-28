@@ -18,6 +18,7 @@ const Calendar: React.FC<CustomCalendarProps> = ({
   name,
   label,
   onParentChange,
+  defaultValue,
   ...rest
 }) => {
   const calendarRef = useRef(null);
@@ -61,6 +62,7 @@ const Calendar: React.FC<CustomCalendarProps> = ({
         value={value}
         onChange={onChange}
         onClickMonth={onChange}
+        defaultValue={defaultValue}
         formatShortWeekday={formatShortWeekday}
         {...rest}
       />
