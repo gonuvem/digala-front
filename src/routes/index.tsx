@@ -8,7 +8,7 @@ import Forgot from '../pages/Forgot';
 import MyResearches from '../pages/MyResearches';
 import SurveyBuilder from '../pages/SurveyBuilder';
 import ShareSurvey from '../pages/ShareSurvey';
-import Research from '../pages/Research';
+import Survey from '../pages/Survey';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -22,7 +22,7 @@ const Routes: React.FC = () => (
     />
     <ProtectedRoute path="/share" isPrivate component={ShareSurvey} />
 
-    <Route path="/research/:id" component={Research} />
+    <Route path="/survey/:id" component={Survey} />
   </Switch>
 );
 

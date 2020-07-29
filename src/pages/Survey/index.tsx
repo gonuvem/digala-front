@@ -10,9 +10,9 @@ import gonuvemLogo from '../../assets/GONUVEM_HOR.png';
 
 import {
   Container,
-  ResearchBody,
-  ResearchHeader,
-  ResearchFooter,
+  SurveyBody,
+  SurveyFooter,
+  SurveyHeader,
   ProgressBar,
   Step,
   FormArea,
@@ -24,7 +24,7 @@ const fakeResearchProps = {
   footerColor: '#8bcdcd',
 };
 
-const Research: React.FC = () => {
+const Survey: React.FC = () => {
   return (
     <Container>
       <Helmet>
@@ -36,14 +36,14 @@ const Research: React.FC = () => {
           `}
         </style>
       </Helmet>
-      <ResearchBody>
-        <ResearchHeader backgroundColor={fakeResearchProps.headerColor}>
+      <SurveyBody>
+        <SurveyHeader backgroundColor={fakeResearchProps.headerColor}>
           <h3>Pesquisa Eleitoral de Lagoa Alegre</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-        </ResearchHeader>
+        </SurveyHeader>
         <FormArea>
           <div id="progress-wrapper">
             <ProgressBar pagesCount={2}>
@@ -72,17 +72,17 @@ const Research: React.FC = () => {
             <SolidButton hasShadow={false}>Enviar</SolidButton>
           </Form>
         </FormArea>
-        <ResearchFooter backgroundColor={fakeResearchProps.footerColor}>
+        <SurveyFooter backgroundColor={fakeResearchProps.footerColor}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
-        </ResearchFooter>
+        </SurveyFooter>
         <div id="research-separator" />
         <img src={gonuvemLogo} alt="logo da gonuvem" />
-      </ResearchBody>
+      </SurveyBody>
     </Container>
   );
 };
 
-export default Research;
+export default Survey;

@@ -11,11 +11,11 @@ interface StepProps {
   filled?: boolean;
 }
 
-interface ResearchHeaderProps {
+interface SurveyHeaderProps {
   backgroundColor: string;
 }
 
-interface ResearchFooterProps {
+interface SurveyFooterProps {
   backgroundColor: string;
 }
 
@@ -31,7 +31,7 @@ export const Container = styled.div`
   }
 `;
 
-export const ResearchHeader = styled.div<ResearchHeaderProps>`
+export const SurveyHeader = styled.div<SurveyHeaderProps>`
   padding: 1.5rem;
   margin-bottom: 1rem;
 
@@ -152,7 +152,7 @@ export const Step = styled.span<StepProps>`
   }
 `;
 
-export const ResearchBody = styled.div`
+export const SurveyBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -181,7 +181,7 @@ export const ResearchBody = styled.div`
     }
   }
 
-  #research-separator {
+  #survey-separator {
     height: 2px;
     width: 25%;
 
@@ -207,7 +207,7 @@ export const ResearchBody = styled.div`
       }
     }
 
-    #research-separator {
+    #survey-separator {
       width: 80%;
     }
 
@@ -217,7 +217,7 @@ export const ResearchBody = styled.div`
   }
 `;
 
-export const ResearchFooter = styled.div<ResearchFooterProps>`
+export const SurveyFooter = styled.div<SurveyFooterProps>`
   padding: 2rem 1.5rem;
   margin-top: 1rem;
 
