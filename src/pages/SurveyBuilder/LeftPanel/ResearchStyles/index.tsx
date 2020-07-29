@@ -15,12 +15,12 @@ import changeFormConfiguration from '../../../../services/logic/changeFormConfig
 import useDebounce from '../../../../hooks/useDebounce';
 
 const colors = [
-  { name: 'Amarelo', value: '#FFA825' },
-  { name: 'Vermelho', value: '#EB1D63' },
-  { name: 'Bege', value: '#FFCD80' },
-  { name: 'Verde', value: '#0F5555' },
-  { name: 'Verde Claro', value: '#ADD681' },
-  { name: 'Azul', value: '#3FA4F6' },
+  '#FFA825',
+  '#EB1D63',
+  '#FFCD80',
+  '#0F5555',
+  '#ADD681',
+  '#3FA4F6',
 ];
 
 interface ResearchStylesProps {
@@ -28,13 +28,13 @@ interface ResearchStylesProps {
 }
 
 interface FormStyleDTO {
-  background?: { value?: string; name?: string };
+  background?: string;
   logo?: string;
   headerText?: string;
   hasLogoInHeader: boolean;
-  headerBackground?: { value?: string; name?: string };
+  headerBackground?: string;
   footerText?: string;
-  footerBackground?: { value?: string; name?: string };
+  footerBackground?: string;
 }
 
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
@@ -50,6 +50,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
 
   useEffect(() => {
     const data = formRef.current?.getData();
+    // console.log(data);
     changeFormConfiguration(dispatch, {
       attribute: 'style',
       style: data as FormStyleDTO,

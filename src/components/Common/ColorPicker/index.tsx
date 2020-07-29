@@ -9,7 +9,7 @@ interface Color {
 }
 
 interface ColorPickerProps {
-  colors: Color[];
+  colors: string[];
   name: string;
   onChange: Function;
 }
@@ -19,10 +19,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   name,
   onChange,
 }) => {
-  const [selectedColor, setSelectedColor] = useState<Color>({
-    name: 'white',
-    value: '#ffffff',
-  });
+  const [selectedColor, setSelectedColor] = useState<String>('#ffffff');
 
   const { fieldName, registerField, defaultValue } = useField(name);
 
@@ -40,7 +37,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     setSelectedColor(defaultValue);
   }, [defaultValue]);
 
-  const handleSelectColor = useCallback((color: Color) => {
+  const handleSelectColor = useCallback((color: string) => {
     setSelectedColor(color);
 
     onChange(color);
@@ -50,9 +47,9 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     <Container>
       {colors.map((color) => (
         <CardColor
-          isSelected={color.value === selectedColor.value}
+          isSelected={color === selectedColor}
           onClick={() => handleSelectColor(color)}
-          color={color.value}
+          color={color}
         />
       ))}
     </Container>

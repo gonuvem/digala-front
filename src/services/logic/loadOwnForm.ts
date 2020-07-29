@@ -50,18 +50,9 @@ export default function loadOwnForm(
         },
         style: {
           ...formData.data.form.style,
-          background: {
-            value: formData.data.form.style.background,
-            name: 'Azul',
-          },
-          headerBackground: {
-            value: formData.data.form.style.headerBackground,
-            name: 'Azul',
-          },
-          footerBackground: {
-            value: formData.data.form.style.footerBackground,
-            name: 'Azul',
-          },
+          background: formData.data.form.style.background,
+          headerBackground: formData.data.form.style.headerBackground,
+          footerBackground: formData.data.form.style.footerBackground,
         },
       }),
     );
