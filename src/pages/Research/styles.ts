@@ -50,6 +50,14 @@ export const FormArea = styled.div`
   #progress-wrapper {
     position: absolute;
   }
+
+  @media (max-width: 670px) {
+    flex-direction: column;
+
+    #progress-wrapper {
+      position: relative;
+    }
+  }
 `;
 
 export const ProgressBar = styled.div<ProgressBarProps>`
@@ -88,6 +96,29 @@ export const ProgressBar = styled.div<ProgressBarProps>`
 
     span:first-child {
       margin-top: 1rem;
+    }
+  }
+
+  @media (max-width: 670px) {
+    position: relative;
+    margin-left: 0;
+    margin-bottom: 1rem;
+
+    div {
+      flex-direction: row;
+      height: 8px;
+      width: 100%;
+
+      &:before {
+        position: absolute;
+        width: 100%;
+        height: auto;
+      }
+
+      span:first-child {
+        margin-top: 0rem;
+        margin-left: 2rem;
+      }
     }
   }
 `;
@@ -154,6 +185,26 @@ export const ResearchBody = styled.div`
   @media (max-width: 670px) {
     max-width: 100%;
     padding: 0 1rem;
+    margin-top: 2rem;
+
+    form {
+      button {
+        width: 100%;
+      }
+
+      #form-separator {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    #research-separator {
+      width: 80%;
+    }
+
+    img {
+      margin-bottom: 2rem;
+    }
   }
 `;
 
