@@ -31,7 +31,7 @@ interface FormStyleDTO {
   background?: { value?: string; name?: string };
   logo?: string;
   headerText?: string;
-  hasLogoInHeader: string;
+  hasLogoInHeader: boolean;
   headerBackground?: { value?: string; name?: string };
   footerText?: string;
   footerBackground?: { value?: string; name?: string };
@@ -44,8 +44,8 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
 
   const debouncedTrigger = useDebounce(tempInformation, 500);
 
-  const handleChange = useCallback((event) => {
-    setTempInformation(event.target.value);
+  const handleChange = useCallback((value) => {
+    setTempInformation(value);
   }, []);
 
   useEffect(() => {
@@ -62,7 +62,11 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
-            <ColorPicker name="background" colors={colors} />
+            <ColorPicker
+              name="background"
+              colors={colors}
+              onChange={handleChange}
+            />
           </div>
         </Section>
         <Section>
@@ -77,29 +81,43 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
             label="Texto no header"
             name="headerText"
             id="headerTextField"
-            onChange={handleChange}
+            onChange={(event) => handleChange(event.target.value)}
           />
         </Section>
         <Section>
-          <div>
-            <p>Logo no header</p>
-            <FiHelpCircle />
-          </div>
-          <SwitchToggle name="hasLogoInHeader" />
+          <SwitchToggle
+            name="hasLogoInHeader"
+            label="Logo no header"
+            helpHint="Lorem ipsum sit dolor amet"
+            onChange={(event) => handleChange(event.target.checked)}
+          />
         </Section>
         <Section>
           <p>Fundo no header</p>
           <div>
-            <ColorPicker name="headerBackground" colors={colors} />
+            <ColorPicker
+              name="headerBackground"
+              colors={colors}
+              onChange={handleChange}
+            />
           </div>
         </Section>
         <Section>
-          <ShortTextField label="Texto no rodapé" name="footerText" id="" />
+          <ShortTextField
+            label="Texto no rodapé"
+            name="footerText"
+            id="footerTextField"
+            onChange={(event) => handleChange(event.target.value)}
+          />
         </Section>
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
-            <ColorPicker name="headerBackground" colors={colors} />
+            <ColorPicker
+              name="footerBackground"
+              colors={colors}
+              onChange={handleChange}
+            />
           </div>
         </Section>
       </Form>

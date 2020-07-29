@@ -19,7 +19,7 @@ interface FormDataDTO {
     background?: { value?: string; name?: string };
     logo?: string;
     headerText?: string;
-    hasLogoInHeader: string;
+    hasLogoInHeader: boolean;
     headerBackground?: { value?: string; name?: string };
     footerText?: string;
     footerBackground?: { value?: string; name?: string };
@@ -60,7 +60,7 @@ export default function changeFormConfiguration(
   if (attribute === 'style') {
     sendData = {
       ...style,
-      hasLogoInHeader: style?.hasLogoInHeader === 'on',
+      hasLogoInHeader: style?.hasLogoInHeader,
     };
   }
 

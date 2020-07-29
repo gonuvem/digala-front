@@ -11,9 +11,14 @@ interface Color {
 interface ColorPickerProps {
   colors: Color[];
   name: string;
+  onChange: Function;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({ colors, name }) => {
+const ColorPicker: React.FC<ColorPickerProps> = ({
+  colors,
+  name,
+  onChange,
+}) => {
   const [selectedColor, setSelectedColor] = useState<Color>({
     name: 'white',
     value: '#ffffff',
@@ -37,6 +42,8 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ colors, name }) => {
 
   const handleSelectColor = useCallback((color: Color) => {
     setSelectedColor(color);
+
+    onChange(color);
   }, []);
 
   return (
