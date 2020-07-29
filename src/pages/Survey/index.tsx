@@ -22,6 +22,8 @@ const fakeResearchProps = {
   backgroundColor: '#faf0af',
   headerColor: '#f1c5c5',
   footerColor: '#8bcdcd',
+  headerLogo:
+    'https://www.freepnglogos.com/uploads/logo-adidas-vector-png-32.png',
 };
 
 const Survey: React.FC = () => {
@@ -38,11 +40,16 @@ const Survey: React.FC = () => {
       </Helmet>
       <SurveyBody>
         <SurveyHeader backgroundColor={fakeResearchProps.headerColor}>
-          <h3>Pesquisa Eleitoral de Lagoa Alegre</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua
-          </p>
+          {fakeResearchProps && (
+            <img src={fakeResearchProps.headerLogo} alt="logo da pesquisa" />
+          )}
+          <div>
+            <h3>Pesquisa Eleitoral de Lagoa Alegre</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua
+            </p>
+          </div>
         </SurveyHeader>
         <FormArea>
           <div id="progress-wrapper">
@@ -78,7 +85,7 @@ const Survey: React.FC = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
         </SurveyFooter>
-        <div id="research-separator" />
+        <div id="survey-separator" />
         <img src={gonuvemLogo} alt="logo da gonuvem" />
       </SurveyBody>
     </Container>

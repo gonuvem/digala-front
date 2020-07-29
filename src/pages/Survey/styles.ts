@@ -32,11 +32,17 @@ export const Container = styled.div`
 `;
 
 export const SurveyHeader = styled.div<SurveyHeaderProps>`
+  display: flex;
+  align-items: center;
   padding: 1.5rem;
   margin-bottom: 1rem;
 
   background-color: ${(props) => props.backgroundColor};
   border-radius: 4px;
+
+  div {
+    margin-left: 2rem;
+  }
 
   h3 {
     font-size: 1.5rem;
@@ -48,6 +54,23 @@ export const SurveyHeader = styled.div<SurveyHeaderProps>`
     margin-top: 1rem;
     opacity: 0.9;
     color: ${(props) => readableColor(props.backgroundColor)};
+  }
+
+  img {
+    max-width: 6rem;
+  }
+
+  @media (max-width: 670px) {
+    flex-direction: column;
+
+    div {
+      margin-left: 0rem;
+    }
+
+    h3,
+    p {
+      text-align: center;
+    }
   }
 `;
 
