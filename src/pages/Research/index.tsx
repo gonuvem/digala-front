@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from '@unform/web';
+import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
 
 import ShortTextField from '../../components/ResearchFields/ShortTextField';
@@ -17,11 +18,26 @@ import {
   FormArea,
 } from './styles';
 
+const fakeResearchProps = {
+  backgroundColor: '#faf0af',
+  headerColor: '#f1c5c5',
+  footerColor: '#8bcdcd',
+};
+
 const Research: React.FC = () => {
   return (
     <Container>
+      <Helmet>
+        <style type="text/css">
+          {`
+            body {
+              background-color: ${fakeResearchProps.backgroundColor}
+            }
+          `}
+        </style>
+      </Helmet>
       <ResearchBody>
-        <ResearchHeader>
+        <ResearchHeader backgroundColor={fakeResearchProps.headerColor}>
           <h3>Pesquisa Eleitoral de Lagoa Alegre</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -56,7 +72,7 @@ const Research: React.FC = () => {
             <SolidButton hasShadow={false}>Enviar</SolidButton>
           </Form>
         </FormArea>
-        <ResearchFooter>
+        <ResearchFooter backgroundColor={fakeResearchProps.footerColor}>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua

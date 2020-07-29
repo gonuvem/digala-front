@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { transparentize, lighten } from 'polished';
+import { transparentize, lighten, readableColor } from 'polished';
 
 import Colors from '../../utils/colors';
 
@@ -9,6 +9,14 @@ interface ProgressBarProps {
 
 interface StepProps {
   filled?: boolean;
+}
+
+interface ResearchHeaderProps {
+  backgroundColor: string;
+}
+
+interface ResearchFooterProps {
+  backgroundColor: string;
 }
 
 export const Container = styled.div`
@@ -23,11 +31,11 @@ export const Container = styled.div`
   }
 `;
 
-export const ResearchHeader = styled.div`
+export const ResearchHeader = styled.div<ResearchHeaderProps>`
   padding: 1.5rem;
   margin-bottom: 1rem;
 
-  background-color: ${Colors.white};
+  background-color: ${(props) => props.backgroundColor};
   border-radius: 4px;
 
   h3 {
@@ -39,6 +47,7 @@ export const ResearchHeader = styled.div`
   p {
     margin-top: 1rem;
     opacity: 0.9;
+    color: ${(props) => readableColor(props.backgroundColor)};
   }
 `;
 
@@ -208,15 +217,16 @@ export const ResearchBody = styled.div`
   }
 `;
 
-export const ResearchFooter = styled.div`
+export const ResearchFooter = styled.div<ResearchFooterProps>`
   padding: 2rem 1.5rem;
   margin-top: 1rem;
 
-  background-color: ${Colors.white};
+  background-color: ${(props) => props.backgroundColor};
   border-radius: 4px;
 
   p {
     opacity: 0.8;
     text-align: center;
+    color: ${(props) => readableColor(props.backgroundColor)};
   }
 `;
