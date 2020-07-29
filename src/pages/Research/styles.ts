@@ -1,10 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { transparentize, lighten } from 'polished';
 
 import Colors from '../../utils/colors';
 
 interface ProgressBarProps {
   pagesCount: number;
+}
+
+interface StepProps {
+  filled?: boolean;
 }
 
 export const Container = styled.div`
@@ -26,7 +30,7 @@ export const ProgressBar = styled.div<ProgressBarProps>`
     display: flex;
     position: relative;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
 
     width: 8px;
@@ -48,24 +52,29 @@ export const ProgressBar = styled.div<ProgressBarProps>`
       border-radius: 8px;
     }
 
-    span {
-      display: flex;
-      z-index: 1;
-      justify-content: center;
-      align-items: center;
-
-      width: 24px;
-      height: 24px;
-
-      background-color: ${Colors.smokeWhite};
-      border-radius: 50%;
-
-      p {
-        font-weight: 500;
-        color: #a0a0a0;
-        text-align: center;
-      }
+    span:first-child {
+      margin-top: 1rem;
     }
+  }
+`;
+
+export const Step = styled.span<StepProps>`
+  display: flex;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: ${(props) =>
+    props.filled ? lighten(0.15, Colors.primary) : Colors.smokeWhite};
+  border-radius: 50%;
+
+  p {
+    font-weight: 500;
+    color: ${(props) => (props.filled ? Colors.smokeWhite : '#a0a0a0')};
+    text-align: center;
   }
 `;
 

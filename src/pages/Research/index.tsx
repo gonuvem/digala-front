@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from '@unform/web';
+import { FiCheck } from 'react-icons/fi';
 
 import ShortTextField from '../../components/ResearchFields/ShortTextField';
 import SolidButton from '../../components/Common/SolidButton';
@@ -12,6 +13,7 @@ import {
   ResearchHeader,
   ResearchFooter,
   ProgressBar,
+  Step,
 } from './styles';
 
 const Research: React.FC = () => {
@@ -48,12 +50,15 @@ const Research: React.FC = () => {
       </ResearchBody>
       <ProgressBar pagesCount={2}>
         <div>
-          <span>
+          <Step filled>
             <p>1</p>
-          </span>
-          <span>
+          </Step>
+          <Step>
             <p>1</p>
-          </span>
+          </Step>
+          <Step>
+            <FiCheck size={16} />
+          </Step>
         </div>
       </ProgressBar>
     </Container>
