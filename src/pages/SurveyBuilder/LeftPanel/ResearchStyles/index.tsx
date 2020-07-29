@@ -48,6 +48,10 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
     setTempInformation(value);
   }, []);
 
+  // {
+  console.log(formData?.style);
+  // }
+
   useEffect(() => {
     const data = formRef.current?.getData();
     // console.log(data);
@@ -67,6 +71,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
               name="background"
               colors={colors}
               onChange={handleChange}
+              defaultVal={formData?.style?.background}
             />
           </div>
         </Section>
@@ -100,6 +105,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
               name="headerBackground"
               colors={colors}
               onChange={handleChange}
+              defaultVal={formData?.style?.headerBackground}
             />
           </div>
         </Section>
@@ -118,6 +124,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
               name="footerBackground"
               colors={colors}
               onChange={handleChange}
+              defaultVal={formData?.style?.footerBackground}
             />
           </div>
         </Section>

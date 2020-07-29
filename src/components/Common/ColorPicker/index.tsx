@@ -1,33 +1,34 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 
 import { Container, CardColor } from './styles';
-
-interface Color {
-  name: string;
-  value: string;
-}
 
 interface ColorPickerProps {
   colors: string[];
   name: string;
   onChange: Function;
+  defaultVal?: string;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
   colors,
   name,
   onChange,
+  defaultVal,
 }) => {
-  const [selectedColor, setSelectedColor] = useState<String>('#ffffff');
+  const [selectedColor, setSelectedColor] = useState<String>(() =>
+    defaultVal ? defaultVal : '#ffffff',
+  );
 
   const { fieldName, registerField, defaultValue } = useField(name);
+  const inputRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       path: undefined,
-      getValue: () => {
+      getValue: (color) => {
+        console.log(color);
         return selectedColor;
       },
     });
@@ -47,6 +48,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     <Container>
       {colors.map((color) => (
         <CardColor
+          ref={inputRef}
           isSelected={color === selectedColor}
           onClick={() => handleSelectColor(color)}
           color={color}
