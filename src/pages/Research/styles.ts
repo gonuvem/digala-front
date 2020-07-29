@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { transparentize, lighten } from 'polished';
 
 import Colors from '../../utils/colors';
@@ -17,9 +17,43 @@ export const Container = styled.div`
   align-items: center;
 
   width: 100%;
+
+  @media (max-width: 670px) {
+    flex-direction: column;
+  }
+`;
+
+export const ResearchHeader = styled.div`
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+
+  background-color: ${Colors.white};
+  border-radius: 4px;
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: ${Colors.primary};
+  }
+
+  p {
+    margin-top: 1rem;
+    opacity: 0.9;
+  }
+`;
+
+export const FormArea = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: row-reverse;
+
+  #progress-wrapper {
+    position: absolute;
+  }
 `;
 
 export const ProgressBar = styled.div<ProgressBarProps>`
+  position: fixed;
   padding: 1rem;
   margin-left: 1rem;
 
@@ -91,7 +125,6 @@ export const ResearchBody = styled.div`
     flex-direction: column;
     align-items: center;
 
-    margin-top: 1rem;
     padding: 1.5rem 2rem;
 
     background-color: ${Colors.white};
@@ -117,23 +150,10 @@ export const ResearchBody = styled.div`
 
     background-color: ${transparentize(0.75, Colors.primary)};
   }
-`;
 
-export const ResearchHeader = styled.div`
-  padding: 1.5rem;
-
-  background-color: ${Colors.white};
-  border-radius: 4px;
-
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: ${Colors.primary};
-  }
-
-  p {
-    margin-top: 1rem;
-    opacity: 0.9;
+  @media (max-width: 670px) {
+    max-width: 100%;
+    padding: 0 1rem;
   }
 `;
 

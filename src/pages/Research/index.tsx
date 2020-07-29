@@ -14,6 +14,7 @@ import {
   ResearchFooter,
   ProgressBar,
   Step,
+  FormArea,
 } from './styles';
 
 const Research: React.FC = () => {
@@ -27,18 +28,34 @@ const Research: React.FC = () => {
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </p>
         </ResearchHeader>
-        <Form onSubmit={() => null}>
-          <ShortTextField
-            name="fake-short-text"
-            id="fake-short-text-id"
-            label="Texto Curto"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-            placeholder="Insira o nome aqui"
-          />
-          <div id="form-separator" />
-          <SolidButton hasShadow={false}>Enviar</SolidButton>
-        </Form>
-
+        <FormArea>
+          <div id="progress-wrapper">
+            <ProgressBar pagesCount={2}>
+              <div>
+                <Step filled>
+                  <p>1</p>
+                </Step>
+                <Step>
+                  <p>1</p>
+                </Step>
+                <Step>
+                  <FiCheck size={16} />
+                </Step>
+              </div>
+            </ProgressBar>
+          </div>
+          <Form onSubmit={() => null}>
+            <ShortTextField
+              name="fake-short-text"
+              id="fake-short-text-id"
+              label="Texto Curto"
+              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+              placeholder="Insira o nome aqui"
+            />
+            <div id="form-separator" />
+            <SolidButton hasShadow={false}>Enviar</SolidButton>
+          </Form>
+        </FormArea>
         <ResearchFooter>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -48,19 +65,6 @@ const Research: React.FC = () => {
         <div id="research-separator" />
         <img src={gonuvemLogo} alt="logo da gonuvem" />
       </ResearchBody>
-      <ProgressBar pagesCount={2}>
-        <div>
-          <Step filled>
-            <p>1</p>
-          </Step>
-          <Step>
-            <p>1</p>
-          </Step>
-          <Step>
-            <FiCheck size={16} />
-          </Step>
-        </div>
-      </ProgressBar>
     </Container>
   );
 };
