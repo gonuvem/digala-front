@@ -52,6 +52,10 @@ export const Actions = styled.div`
     background: ${Colors.black};
     margin: 0 0.5rem;
   }
+
+  svg {
+    margin-right: 0.375rem;
+  }
 `;
 
 export const Name = styled.div`

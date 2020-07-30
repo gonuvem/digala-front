@@ -7,6 +7,9 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { FaPlus } from 'react-icons/fa';
 
+import Layout from '../../layout';
+import PageHeader from '../../components/Common/Header';
+
 import { Container, Header, ModalCreateResearch } from './styles';
 
 import Table from '../../components/MyResearches/Table';
@@ -69,38 +72,41 @@ const MyReasearches: React.FC = () => {
 
   return (
     <>
-      <Container>
-        <Header>
-          <h1>Minhas pesquisas</h1>
-          <SolidButton onClick={() => setOpenCreateModal(true)}>
-            <FaPlus size={20} />
-            Nova Pesquisa
-          </SolidButton>
-        </Header>
-        <Table forms={forms} />
-      </Container>
-      <ModalCreateResearch
-        isOpen={openCreateModal}
-        onRequestClose={() => setOpenCreateModal(false)}
-        closeTimeoutMS={300}
-      >
-        <h3>Criar nova pesquisa</h3>
-        <Form ref={formRef} onSubmit={handleCreateResearch}>
-          <ShortTextField
-            name="researchName"
-            id="research-name-field"
-            placeholder="Coloque um título para sua pesquisa"
-          />
-          <div>
-            <GhostButton onClick={() => setOpenCreateModal(false)}>
-              Voltar
-            </GhostButton>
-            <SolidButton type="submit">
-              {createFormLoading ? <LoadingSpinner /> : 'Continuar'}
+      <PageHeader />
+      <Layout>
+        <Container>
+          <Header>
+            <h1>Minhas pesquisas</h1>
+            <SolidButton onClick={() => setOpenCreateModal(true)}>
+              <FaPlus size={20} />
+              Nova Pesquisa
             </SolidButton>
-          </div>
-        </Form>
-      </ModalCreateResearch>
+          </Header>
+          <Table forms={forms} />
+        </Container>
+        <ModalCreateResearch
+          isOpen={openCreateModal}
+          onRequestClose={() => setOpenCreateModal(false)}
+          closeTimeoutMS={300}
+        >
+          <h3>Criar nova pesquisa</h3>
+          <Form ref={formRef} onSubmit={handleCreateResearch}>
+            <ShortTextField
+              name="researchName"
+              id="research-name-field"
+              placeholder="Coloque um título para sua pesquisa"
+            />
+            <div>
+              <GhostButton onClick={() => setOpenCreateModal(false)}>
+                Voltar
+              </GhostButton>
+              <SolidButton type="submit">
+                {createFormLoading ? <LoadingSpinner /> : 'Continuar'}
+              </SolidButton>
+            </div>
+          </Form>
+        </ModalCreateResearch>
+      </Layout>
     </>
   );
 };

@@ -1,21 +1,28 @@
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
-import Route from './Route';
+import ProtectedRoute from './ProtectedRoute';
 
 import SignIn from '../pages/SignIn';
 import Forgot from '../pages/Forgot';
 import MyResearches from '../pages/MyResearches';
 import SurveyBuilder from '../pages/SurveyBuilder';
 import ShareSurvey from '../pages/ShareSurvey';
+import Survey from '../pages/Survey';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" exact component={SignIn} />
-    <Route path="/forgot" component={Forgot} />
-    <Route path="/my_researches" isPrivate component={MyResearches} />
-    <Route path="/edit_survey/:id" isPrivate component={SurveyBuilder} />
-    <Route path="/share" isPrivate component={ShareSurvey} />
+    <ProtectedRoute path="/" exact component={SignIn} />
+    <ProtectedRoute path="/forgot" component={Forgot} />
+    <ProtectedRoute path="/my_researches" isPrivate component={MyResearches} />
+    <ProtectedRoute
+      path="/edit_survey/:id"
+      isPrivate
+      component={SurveyBuilder}
+    />
+    <ProtectedRoute path="/share" isPrivate component={ShareSurvey} />
+
+    <Route path="/survey/:id" component={Survey} />
   </Switch>
 );
 
