@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
+import { FiEye } from 'react-icons/fi';
 
 import { DELETE_FORM } from '../../../services/requests/forms';
 
@@ -77,6 +78,11 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <p>{form.isActive ? 'Ativa' : 'Finalizado'}</p>
         </Status>
         <Actions>
+          <Link to={`survey/${form._id}`}>
+            <FiEye size={20} color="#3475D2" />
+            <EditLabel>Ver</EditLabel>
+          </Link>
+          <div />
           <Link to={`edit_survey/${form._id}`}>
             <img src={edit} alt="Editar" />
             <EditLabel>Editar</EditLabel>
