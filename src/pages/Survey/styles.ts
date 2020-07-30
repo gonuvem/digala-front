@@ -197,8 +197,8 @@ export const SurveyBody = styled.div`
       width: 100%;
       height: 2px;
 
-      margin-top: 3.5rem;
-      margin-bottom: 3.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
 
       background-color: ${transparentize(0.88, Colors.black)};
     }
