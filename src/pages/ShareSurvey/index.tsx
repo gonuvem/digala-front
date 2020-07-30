@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { MdMail } from 'react-icons/md';
 import { RiQrCodeLine } from 'react-icons/ri';
 import { AiFillHtml5 } from 'react-icons/ai';
@@ -26,6 +26,13 @@ import telegram from '../../assets/telegram_icon.png';
 import twitter from '../../assets/twitter_icon.png';
 
 const ShareSurvey: React.FC = () => {
+  const surveyUrl = useMemo(() => {
+    if (window) {
+      return window.location.href;
+    }
+    return '';
+  }, []);
+
   return (
     <>
       <PageHeader />
@@ -46,10 +53,7 @@ const ShareSurvey: React.FC = () => {
               <div>
                 <p>Copie o link e envie-o para compartilhar a pesquisa</p>
                 <div>
-                  <input
-                    type="text"
-                    value="https://www.digalalink/lagoa-alegre"
-                  />
+                  <input type="text" value={surveyUrl} />
                   <ButtonCopy>COPIAR</ButtonCopy>
                 </div>
               </div>
