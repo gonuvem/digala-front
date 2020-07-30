@@ -28,7 +28,6 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       name: fieldName,
       path: undefined,
       getValue: (color) => {
-        console.log(color);
         return selectedColor;
       },
     });

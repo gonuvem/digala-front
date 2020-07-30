@@ -2,13 +2,13 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { FiHelpCircle } from 'react-icons/fi';
 import { Container, DashedContainer, Section } from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
-import uploadIcon from '../../../../assets/uploud_icon.png';
 import ColorPicker from '../../../../components/Common/ColorPicker';
+import ImageOption from '../../../../components/Common/ImageUpload/ImageOption';
+import LogoUpload from '../../../../components/Common/LogoUpload';
 
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
@@ -49,21 +49,22 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   }, []);
 
   // {
-  console.log(formData?.style);
+  // console.log(formData?.style);
   // }
 
   useEffect(() => {
     const data = formRef.current?.getData();
-    // console.log(data);
+    console.log(data);
     changeFormConfiguration(dispatch, {
       attribute: 'style',
       style: data as FormStyleDTO,
     });
   }, [debouncedTrigger, dispatch]);
-
+  // console.log(tempInformation);
   return (
     <Container>
       <Form ref={formRef} initialData={formData?.style} onSubmit={() => null}>
+        {/* {console.log(formData?.style)} */}
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
@@ -76,11 +77,24 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
           </div>
         </Section>
         <Section>
-          <p>Logo</p>
-          <DashedContainer>
-            <img src={uploadIcon} alt="Upload Logo" />
-            <p>Coloque sua marca aqui</p>
-          </DashedContainer>
+          <LogoUpload
+            name="logo"
+            label="Logo"
+            onChange={(value: any) => {
+              // console.log(value);
+              handleChange(value?.image);
+            }}
+            logo={''}
+          />
+        </Section>
+        <Section>
+          {/* <ImageOption
+            key={'option.id'}
+            id={'option.id'}
+            image={'option.image'}
+            loading={false}
+            onChange={handleLabelChange}
+          /> */}
         </Section>
         <Section>
           <ShortTextField

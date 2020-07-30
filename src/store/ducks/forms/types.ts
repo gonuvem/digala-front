@@ -35,6 +35,11 @@ export interface Form {
   id: string;
 }
 
+export interface ImageLogo {
+  image: string;
+  loading: boolean;
+}
+
 /**
  * State Type
  */
