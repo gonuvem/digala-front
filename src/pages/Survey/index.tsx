@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { useParams } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
@@ -18,6 +20,10 @@ import {
   FormArea,
 } from './styles';
 
+import Colors from '../../utils/colors';
+
+import { SHOW_FORM } from '../../services/requests/survey';
+
 const fakeResearchProps = {
   backgroundColor: '#faf0af',
   headerColor: '#f1c5c5',
@@ -26,47 +32,93 @@ const fakeResearchProps = {
     'https://www.freepnglogos.com/uploads/logo-adidas-vector-png-32.png',
 };
 
+interface ISurvey {
+  _id: string;
+  config: {
+    name: string;
+    description?: string;
+    beginDate?: Date;
+    endDate?: Date;
+    hasLimitedResponses: boolean;
+    maxResponses?: number;
+    isTotemMode: boolean;
+    canDisplayProgressBar: boolean;
+    progressBarType?: string;
+    canAllowMultipleSubmissions: boolean;
+  };
+  style: {
+    background?: string;
+    logo?: string;
+    headerText?: string;
+    hasLogoInHeader: boolean;
+    headerBackground?: string;
+    footerText?: string;
+    footerBackground?: string;
+  };
+  numResponses?: number;
+}
+
 const Survey: React.FC = () => {
+  const { id } = useParams();
+
+  const { data: surveyData, loading: surveyLoading } = useQuery(SHOW_FORM, {
+    variables: { id },
+  });
+
+  const survey: ISurvey = useMemo(() => {
+    if (!surveyLoading && surveyData.showForm.form) {
+      return surveyData.showForm.form;
+    }
+    return {};
+  }, [surveyLoading, surveyData]);
+
+  if (surveyLoading) {
+    return <h1>Loading survey...</h1>;
+  }
+
+  console.log('Survey Data >> ', survey);
+
   return (
     <Container>
       <Helmet>
         <style type="text/css">
           {`
             body {
-              background-color: ${fakeResearchProps.backgroundColor}
+              background-color: ${survey.style.background || Colors.white}
             }
           `}
         </style>
       </Helmet>
       <SurveyBody>
-        <SurveyHeader backgroundColor={fakeResearchProps.headerColor}>
+        <SurveyHeader
+          backgroundColor={survey.style.headerBackground || Colors.smokeWhite}
+        >
           {fakeResearchProps && (
             <img src={fakeResearchProps.headerLogo} alt="logo da pesquisa" />
           )}
           <div>
-            <h3>Pesquisa Eleitoral de Lagoa Alegre</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua
-            </p>
+            <h3>{survey.config.name}</h3>
+            {survey.config.description && <p>{survey.config.description}</p>}
           </div>
         </SurveyHeader>
         <FormArea>
-          <div id="progress-wrapper">
-            <ProgressBar pagesCount={2}>
-              <div>
-                <Step filled>
-                  <p>1</p>
-                </Step>
-                <Step>
-                  <p>1</p>
-                </Step>
-                <Step>
-                  <FiCheck size={16} />
-                </Step>
-              </div>
-            </ProgressBar>
-          </div>
+          {survey.config.canDisplayProgressBar && (
+            <div id="progress-wrapper">
+              <ProgressBar pagesCount={2}>
+                <div>
+                  <Step filled>
+                    <p>1</p>
+                  </Step>
+                  <Step>
+                    <p>1</p>
+                  </Step>
+                  <Step>
+                    <FiCheck size={16} />
+                  </Step>
+                </div>
+              </ProgressBar>
+            </div>
+          )}
           <Form onSubmit={() => null}>
             <ShortTextField
               name="fake-short-text"
@@ -79,12 +131,13 @@ const Survey: React.FC = () => {
             <SolidButton hasShadow={false}>Enviar</SolidButton>
           </Form>
         </FormArea>
-        <SurveyFooter backgroundColor={fakeResearchProps.footerColor}>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua
-          </p>
-        </SurveyFooter>
+        {survey.style.footerText && (
+          <SurveyFooter
+            backgroundColor={survey.style.footerBackground || Colors.white}
+          >
+            <p>{survey.style.footerText}</p>
+          </SurveyFooter>
+        )}
         <div id="survey-separator" />
         <img src={gonuvemLogo} alt="logo da gonuvem" />
       </SurveyBody>

@@ -34,13 +34,16 @@ export const Container = styled.div`
 export const SurveyHeader = styled.div<SurveyHeaderProps>`
   display: flex;
   align-items: center;
-  padding: 1.5rem;
+  width: 100%;
+  padding: 1.5rem 0rem;
   margin-bottom: 1rem;
 
   background-color: ${(props) => props.backgroundColor};
   border-radius: 4px;
 
   div {
+    width: 100%;
+    margin-right: 2rem;
     margin-left: 2rem;
   }
 
@@ -58,6 +61,7 @@ export const SurveyHeader = styled.div<SurveyHeaderProps>`
 
   img {
     max-width: 6rem;
+    margin-left: 1.5rem;
   }
 
   @media (max-width: 670px) {
@@ -65,6 +69,7 @@ export const SurveyHeader = styled.div<SurveyHeaderProps>`
 
     div {
       margin-left: 0rem;
+      margin-right: 0rem;
     }
 
     h3,
@@ -241,13 +246,16 @@ export const SurveyBody = styled.div`
 `;
 
 export const SurveyFooter = styled.div<SurveyFooterProps>`
-  padding: 2rem 1.5rem;
+  width: 100%;
+
+  padding: 2rem 0rem;
   margin-top: 1rem;
 
   background-color: ${(props) => props.backgroundColor};
   border-radius: 4px;
 
   p {
+    margin: 0rem 1.5rem;
     opacity: 0.8;
     text-align: center;
     color: ${(props) => readableColor(props.backgroundColor)};
