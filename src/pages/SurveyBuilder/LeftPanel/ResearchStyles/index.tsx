@@ -7,7 +7,6 @@ import { Container, DashedContainer, Section } from './styles';
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
 import ColorPicker from '../../../../components/Common/ColorPicker';
-import ImageOption from '../../../../components/Common/ImageUpload/ImageOption';
 import LogoUpload from '../../../../components/Common/LogoUpload';
 
 import { Form as FormType } from '../../../../store/ducks/forms/types';
@@ -39,6 +38,9 @@ interface FormStyleDTO {
 
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   const [tempInformation, setTempInformation] = useState('');
+  const [defaultLogo, setDefaultLogo] = useState<string>(() =>
+    formData?.style?.logo ? formData.style.logo : '',
+  );
   const formRef = useRef<FormHandles>(null);
   const dispatch = useDispatch();
 
@@ -48,23 +50,31 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
     setTempInformation(value);
   }, []);
 
-  // {
-  // console.log(formData?.style);
-  // }
-
   useEffect(() => {
     const data = formRef.current?.getData();
-    console.log(data);
     changeFormConfiguration(dispatch, {
       attribute: 'style',
       style: data as FormStyleDTO,
     });
   }, [debouncedTrigger, dispatch]);
-  // console.log(tempInformation);
+
+  const handleUploadLogo = useCallback(
+    (url: string) => {
+      const data = formRef.current?.getData();
+      const dataUrl = {
+        ...data,
+        logo: url,
+      };
+      changeFormConfiguration(dispatch, {
+        attribute: 'style',
+        style: dataUrl as FormStyleDTO,
+      });
+    },
+    [debouncedTrigger, dispatch],
+  );
   return (
     <Container>
       <Form ref={formRef} initialData={formData?.style} onSubmit={() => null}>
-        {/* {console.log(formData?.style)} */}
         <Section>
           <p>Fundo da pesquisa</p>
           <div>
@@ -81,20 +91,10 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
             name="logo"
             label="Logo"
             onChange={(value: any) => {
-              // console.log(value);
-              handleChange(value?.image);
+              handleUploadLogo(value?.image);
             }}
-            logo={''}
+            logo={formData?.style?.logo || defaultLogo}
           />
-        </Section>
-        <Section>
-          {/* <ImageOption
-            key={'option.id'}
-            id={'option.id'}
-            image={'option.image'}
-            loading={false}
-            onChange={handleLabelChange}
-          /> */}
         </Section>
         <Section>
           <ShortTextField

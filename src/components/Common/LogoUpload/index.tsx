@@ -1,12 +1,13 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 
+import { useField } from '@unform/core';
 import uploadImage from '../../../services/logic/uploadImage';
 import { ImageLogo } from '../../../store/ducks/forms/types';
 
+import ImageOption from '../../Common/ImageUpload/ImageOption';
 import uploadIcon from '../../../assets/uploud_icon.png';
 
-import { DashedContainer } from './styles';
-
+import { DashedContainer, ImgLogo, IconLogoUpload } from './styles';
 interface LogoUploadProps {
   label?: string;
   onChange: Function;
@@ -48,10 +49,17 @@ const LogoUpload: React.FC<LogoUploadProps> = ({
 
   return (
     <>
+      {/* {console.log(defaultValue)} */}
       <p>Logo</p>
-      <DashedContainer onClick={handleClick}>
-        <img src={uploadIcon} alt="Upload Logo" />
-        <p>Coloque sua marca aqui</p>
+      <DashedContainer onClick={handleClick} hasLogo={!!logo}>
+        {logo ? (
+          <ImgLogo alt="logo" src={logo} />
+        ) : (
+          <div>
+            <IconLogoUpload src={uploadIcon} alt="Upload Logo" />
+            <p>Coloque sua marca aqui</p>
+          </div>
+        )}
       </DashedContainer>
       <input
         ref={fileInputRef}

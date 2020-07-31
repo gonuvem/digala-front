@@ -53,6 +53,7 @@ export default function loadOwnForm(
           background: formData.data.form.style.background,
           headerBackground: formData.data.form.style.headerBackground,
           footerBackground: formData.data.form.style.footerBackground,
+          logo: formData.data.form.style.logo,
         },
       }),
     );

@@ -56,7 +56,7 @@ export default function changeFormConfiguration(
       };
     }
   }
-  console.log(style);
+
   if (attribute === 'style') {
     sendData = {
       ...style,
@@ -70,7 +70,7 @@ export default function changeFormConfiguration(
         ? FormActions.updateFormConfig
         : FormActions.updateFormStyle;
 
-    // console.log(sendData);
+    // console.log(style);
     dispatch(action(sendData));
   }
 }
