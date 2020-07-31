@@ -52,9 +52,13 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
 
   useEffect(() => {
     const data = formRef.current?.getData();
+    const dataUrl = {
+      ...data,
+      logo: defaultLogo,
+    };
     changeFormConfiguration(dispatch, {
       attribute: 'style',
-      style: data as FormStyleDTO,
+      style: dataUrl as FormStyleDTO,
     });
   }, [debouncedTrigger, dispatch]);
 
