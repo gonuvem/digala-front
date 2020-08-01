@@ -32,7 +32,6 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   label,
   description,
   anotherOption,
-  randomSort,
   rowDirection = false,
   limitChoices,
   choiceMaxAmmount = 2,
@@ -42,7 +41,6 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   );
   const [checkeds, setCheckeds] = useState<string[]>([]);
 
-  const [refresh, setRefresh] = useState(false);
   const another = { id: uuid(), content: 'outros(a)' };
 
   useEffect(() => {
@@ -54,6 +52,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   const handleOptionClick = useCallback(
     (event, choiceId: string) => {
       const { checked } = event.target;
+
       if (limitChoices && checkeds.length >= choiceMaxAmmount && checked) {
         return;
       }

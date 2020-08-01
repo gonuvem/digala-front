@@ -8,6 +8,9 @@
 * Não está implementado o debounce nos paines de configuração dos inputs
 * No componente de SingleChoice ele está apenas mostrando a opção outros mas não envia ela para a api
 * Não está recuperando da api corretamente o valor do select field do tipo da barra de progresso
+* Está dando erro 400 quando o usuário tentar publicar novamente após já ter publicado
+* Respostas de erro durante o cadastro não estão sendo tratadas devidamente, está sendo mostrado no toast a menssagem que vem da api
+* No campo de Multipla Escolha, está dando erro ao enviar para a api a quantidade de opções selecionaveis
 
 # Survey Builder
 
@@ -61,3 +64,13 @@
 **RN**
 
 - Validar se o link é um formato válido, caso a opção de validar estiver ativa
+
+## Multiple Choice Field
+
+**RF**
+
+- O usuário poderá selecionar somente a quentidade permitida, quando a configuração correspondente estiver ativa
+
+**RN**
+
+- O campo deve estar conectado com o unform para enviar seu valor para o formulário

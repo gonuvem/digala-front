@@ -5,6 +5,7 @@ import DateTimeField from '../../components/ResearchFields/DateTimeField';
 import ImagesChoice from '../../components/ResearchFields/ImagesChoice';
 import SingleChoiceField from '../../components/ResearchFields/SingleChoiceField';
 import SelectField from '../../components/ResearchFields/SelectField';
+import MultipleChoiceField from '../../components/ResearchFields/MultipleChoiceField';
 
 import { SurveyQuestion } from './ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
@@ -34,6 +35,8 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <IconTextField {...questionPayload} />;
     case FieldsTypes.Dropdown:
       return <SelectField {...questionPayload} />;
+    case FieldsTypes.MultipleChoice:
+      return <MultipleChoiceField {...questionPayload} />;
     default:
       return null;
   }

@@ -66,29 +66,29 @@ function buildOptions(
 }
 
 export default function mountQuestionPayload(question: SurveyQuestion): any {
+  const defaultPayload = {
+    name: question._id,
+    label: question.config.name,
+    description: question.config.description,
+  };
+
   switch (question.type.alias) {
     case FieldsTypes.Email:
       return {
-        name: question.config.name,
+        ...defaultPayload,
         id: question._id,
         icon: FiMail,
-        label: question.config.name,
-        description: question.config.description,
       };
     case FieldsTypes.Date:
       return {
-        name: question._id,
-        label: question.config.name,
-        description: question.config.description,
+        ...defaultPayload,
         dateFormat: question.config.date.dateFormat || 'monthYear',
         timeFormat: question.config.date.timeFormat || 'hourMinute',
         selectRange: question.config.date.canCaptureInterval,
       };
     case FieldsTypes.ImageChoice:
       return {
-        name: question._id,
-        label: question.config.name,
-        description: question.config.description,
+        ...defaultPayload,
         id: question._id,
         multipleChoice: question.config.imageChoice.isMultipleChoice,
         choiceMaxAmmount: question.config.imageChoice.maxChoices || 1,
@@ -99,9 +99,7 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
       };
     case FieldsTypes.SingleChoice:
       return {
-        name: question._id,
-        label: question.config.name,
-        description: question.config.description,
+        ...defaultPayload,
         id: question._id,
         rowDirection: question.config.radioButton.hasHorizontalAlignment,
         choices: buildChoices(
@@ -111,20 +109,27 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
       };
     case FieldsTypes.Link:
       return {
-        name: question._id,
+        ...defaultPayload,
         id: question._id,
         icon: FiLink,
-        label: question.config.name,
-        description: question.config.description,
       };
     case FieldsTypes.Dropdown:
       return {
-        name: question._id,
-        label: question.config.name,
-        description: question.config.description,
+        ...defaultPayload,
         listOptions: buildOptions(
           question.config.dropDown.answerOptions,
           question.config.dropDown.hasRandomResponsesOrder,
+        ),
+      };
+    case FieldsTypes.MultipleChoice:
+      return {
+        ...defaultPayload,
+        limitChoices: question.config.checkBox.hasLimitedChoices,
+        choiceMaxAmmount: question.config.checkBox.maxChoices,
+        rowDirection: question.config.checkBox.hasHorizontalAlignment,
+        choices: buildChoices(
+          question.config.checkBox.answerOptions,
+          question.config.checkBox.hasRandomResponsesOrder,
         ),
       };
     default:

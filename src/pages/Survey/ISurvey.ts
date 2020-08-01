@@ -43,6 +43,13 @@ export interface SurveyQuestion {
       hasRandomResponsesOrder: boolean;
       answerOptions: AnswerOption[];
     };
+    checkBox: {
+      hasHorizontalAlignment: boolean;
+      hasRandomResponsesOrder: boolean;
+      hasLimitedChoices: boolean;
+      maxChoices: number;
+      answerOptions: AnswerOption[];
+    };
   };
 }
 
