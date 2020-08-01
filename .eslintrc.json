@@ -35,6 +35,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
     "import/prefer-default-export": "off",
     "react/jsx-one-expression-per-line": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "error",
       {

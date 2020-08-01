@@ -24,14 +24,6 @@ import Colors from '../../utils/colors';
 
 import { SHOW_FORM } from '../../services/requests/survey';
 
-const fakeResearchProps = {
-  backgroundColor: '#faf0af',
-  headerColor: '#f1c5c5',
-  footerColor: '#8bcdcd',
-  headerLogo:
-    'https://www.freepnglogos.com/uploads/logo-adidas-vector-png-32.png',
-};
-
 interface ISurvey {
   _id: string;
   config: {
@@ -93,8 +85,8 @@ const Survey: React.FC = () => {
         <SurveyHeader
           backgroundColor={survey.style.headerBackground || Colors.smokeWhite}
         >
-          {fakeResearchProps && (
-            <img src={fakeResearchProps.headerLogo} alt="logo da pesquisa" />
+          {survey.style.hasLogoInHeader && (
+            <img src={survey.style.logo} alt="logo da pesquisa" />
           )}
           <div>
             <h3>{survey.config.name}</h3>
