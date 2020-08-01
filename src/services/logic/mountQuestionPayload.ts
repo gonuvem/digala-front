@@ -1,4 +1,4 @@
-import { FiMail } from 'react-icons/fi';
+import { FiMail, FiLink } from 'react-icons/fi';
 
 import { SurveyQuestion, AnswerOption } from '../../pages/Survey/ISurvey';
 import { ImageChoice } from '../../store/ducks/questions/types';
@@ -87,6 +87,14 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
           question.config.radioButton.answerOptions,
           question.config.radioButton.hasRandomResponsesOrder,
         ),
+      };
+    case FieldsTypes.Link:
+      return {
+        name: question.config.name,
+        id: question._id,
+        icon: FiLink,
+        label: question.config.name,
+        description: question.config.description,
       };
     default:
       return {};

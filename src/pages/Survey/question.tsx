@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { config } from 'process';
-import EmailQuestion from '../../components/ResearchFields/IconTextField';
+import IconTextField from '../../components/ResearchFields/IconTextField';
 import DateTimeField from '../../components/ResearchFields/DateTimeField';
 import ImagesChoice from '../../components/ResearchFields/ImagesChoice';
 import SingleChoiceField from '../../components/ResearchFields/SingleChoiceField';
@@ -23,13 +23,15 @@ const Question: React.FC<FieldProps> = ({ question }) => {
 
   switch (question.type.alias) {
     case FieldsTypes.Email:
-      return <EmailQuestion {...questionPayload} />;
+      return <IconTextField {...questionPayload} />;
     case FieldsTypes.Date:
       return <DateTimeField {...questionPayload} />;
     case FieldsTypes.ImageChoice:
       return <ImagesChoice {...questionPayload} />;
     case FieldsTypes.SingleChoice:
       return <SingleChoiceField {...questionPayload} />;
+    case FieldsTypes.Link:
+      return <IconTextField {...questionPayload} />;
     default:
       return null;
   }

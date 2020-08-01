@@ -18,6 +18,9 @@ export interface SurveyQuestion {
     email: {
       hasValidation: boolean;
     };
+    link: {
+      hasValidation: boolean;
+    };
     date: {
       isDateRequired: boolean;
       isTimeRequired: string;
