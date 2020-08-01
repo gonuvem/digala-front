@@ -24,15 +24,20 @@ export interface Form {
     canAllowMultipleSubmissions: boolean;
   };
   style: {
-    background?: { value?: string; name?: string };
+    background?: string;
     logo?: string;
     headerText?: string;
     hasLogoInHeader: boolean;
-    headerBackground?: { value?: string; name?: string };
+    headerBackground?: string;
     footerText?: string;
-    footerBackground?: { value?: string; name?: string };
+    footerBackground?: string;
   };
   id: string;
+}
+
+export interface ImageLogo {
+  image: string;
+  loading: boolean;
 }
 
 /**

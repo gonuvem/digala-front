@@ -49,16 +49,16 @@ const Pagination: React.FC = () => {
   );
 
   const handleUpdate = useCallback(() => {
-    if (formData?.id && questionTypes) {
-      createOwnQuestions(
-        createQuestions,
-        questionsData,
-        formData?.id,
-        questionTypes,
-      );
-    }
+    // if (formData?.id && questionTypes) {
+    //   createOwnQuestions(
+    //     createQuestions,
+    //     questionsData,
+    //     formData?.id,
+    //     questionTypes,
+    //   );
+    // }
     // console.log(formData);
-    // updateOwnFormData(updateForm, formData);
+    updateOwnFormData(updateForm, formData);
   }, [formData, updateForm, questionsData]);
   return (
     <Container>
