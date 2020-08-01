@@ -5,6 +5,11 @@ import { ImageChoice } from '../../store/ducks/questions/types';
 import FieldsTypes from '../../utils/fieldsTypes';
 import randomSortArray from '../../utils/randomSortArray';
 
+interface ChoicesProps {
+  id: string;
+  content: string;
+}
+
 function buildImageChoices(
   options: AnswerOption[],
   randomSort: boolean,
@@ -21,6 +26,22 @@ function buildImageChoices(
   }
 
   return imageChoices;
+}
+
+function buildChoices(
+  options: AnswerOption[],
+  randomSort: boolean,
+): ChoicesProps[] {
+  let choices: ChoicesProps[] = options.map((option) => ({
+    content: option.text,
+    id: option._id,
+  }));
+
+  if (randomSort) {
+    choices = randomSortArray(choices);
+  }
+
+  return choices;
 }
 
 export default function mountQuestionPayload(question: SurveyQuestion): any {
@@ -53,6 +74,18 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
         choices: buildImageChoices(
           question.config.imageChoice.answerOptions,
           question.config.imageChoice.hasRandomResponsesOrder,
+        ),
+      };
+    case FieldsTypes.SingleChoice:
+      return {
+        name: question._id,
+        label: question.config.name,
+        description: question.config.description,
+        id: question._id,
+        rowDirection: question.config.radioButton.hasHorizontalAlignment,
+        choices: buildChoices(
+          question.config.radioButton.answerOptions,
+          question.config.radioButton.hasRandomResponsesOrder,
         ),
       };
     default:

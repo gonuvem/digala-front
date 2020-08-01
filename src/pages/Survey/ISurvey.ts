@@ -31,6 +31,11 @@ export interface SurveyQuestion {
       hasRandomResponsesOrder: boolean;
       answerOptions: AnswerOption[];
     };
+    radioButton: {
+      hasHorizontalAlignment: boolean;
+      hasRandomResponsesOrder: boolean;
+      answerOptions: AnswerOption[];
+    };
   };
 }
 

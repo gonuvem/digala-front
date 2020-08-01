@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { FiLink, FiMail } from 'react-icons/fi';
-import { FaPhoneAlt } from 'react-icons/fa';
 
+import { config } from 'process';
 import EmailQuestion from '../../components/ResearchFields/IconTextField';
 import DateTimeField from '../../components/ResearchFields/DateTimeField';
 import ImagesChoice from '../../components/ResearchFields/ImagesChoice';
+import SingleChoiceField from '../../components/ResearchFields/SingleChoiceField';
 
 import { SurveyQuestion } from './ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
@@ -28,6 +28,8 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <DateTimeField {...questionPayload} />;
     case FieldsTypes.ImageChoice:
       return <ImagesChoice {...questionPayload} />;
+    case FieldsTypes.SingleChoice:
+      return <SingleChoiceField {...questionPayload} />;
     default:
       return null;
   }

@@ -5,6 +5,7 @@
 * Campo de data está sempre pedindo o tempo também
 * O componente de imagem do escolha de imagens está ficando esticado com imagens longas
 * O usuário não pode deselecionar uma opção no componente de ImageChoice
+* Não está implementado o debounce nos paines de configuração dos inputs
 
 
 # Survey Page
@@ -29,6 +30,12 @@
 - O campo deve estar conectado com o unform para enviar seu valor para o formulário
 
 ## Image Choice Field
+
+**RN**
+
+- O campo deve estar conectado com o unform para enviar seu valor para o formulário
+
+## Single Choice Field
 
 **RN**
 
