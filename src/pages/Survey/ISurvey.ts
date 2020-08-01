@@ -39,6 +39,10 @@ export interface SurveyQuestion {
       hasRandomResponsesOrder: boolean;
       answerOptions: AnswerOption[];
     };
+    dropDown: {
+      hasRandomResponsesOrder: boolean;
+      answerOptions: AnswerOption[];
+    };
   };
 }
 

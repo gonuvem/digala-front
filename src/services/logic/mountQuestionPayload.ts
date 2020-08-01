@@ -10,6 +10,11 @@ interface ChoicesProps {
   content: string;
 }
 
+interface OptionsProps {
+  label?: string;
+  value?: string;
+}
+
 function buildImageChoices(
   options: AnswerOption[],
   randomSort: boolean,
@@ -42,6 +47,22 @@ function buildChoices(
   }
 
   return choices;
+}
+
+function buildOptions(
+  options: AnswerOption[],
+  randomSort: boolean,
+): OptionsProps[] {
+  let optionsBuilded: OptionsProps[] = options.map((option) => ({
+    label: option.text,
+    value: option._id,
+  }));
+
+  if (randomSort) {
+    optionsBuilded = randomSortArray(optionsBuilded);
+  }
+
+  return optionsBuilded;
 }
 
 export default function mountQuestionPayload(question: SurveyQuestion): any {
@@ -90,11 +111,21 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
       };
     case FieldsTypes.Link:
       return {
-        name: question.config.name,
+        name: question._id,
         id: question._id,
         icon: FiLink,
         label: question.config.name,
         description: question.config.description,
+      };
+    case FieldsTypes.Dropdown:
+      return {
+        name: question._id,
+        label: question.config.name,
+        description: question.config.description,
+        listOptions: buildOptions(
+          question.config.dropDown.answerOptions,
+          question.config.dropDown.hasRandomResponsesOrder,
+        ),
       };
     default:
       return {};

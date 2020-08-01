@@ -37,7 +37,6 @@
 
 - Validar se o e-mail é um formato válido, caso a opção de validar estiver ativa
 
-
 ## Datetime Field
 
 **RN**
@@ -56,3 +55,9 @@
 **RN**
 
 - O campo deve estar conectado com o unform para enviar seu valor para o formulário
+
+## Link Field
+
+**RN**
+
+- Validar se o link é um formato válido, caso a opção de validar estiver ativa
