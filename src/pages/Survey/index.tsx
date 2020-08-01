@@ -20,6 +20,7 @@ import {
   ProgressBar,
   Step,
   FormArea,
+  QuestionWrapper,
 } from './styles';
 
 import Colors from '../../utils/colors';
@@ -90,7 +91,9 @@ const Survey: React.FC = () => {
           )}
           <Form onSubmit={onSubmit}>
             {survey.questions.map((question) => (
-              <Question question={question} />
+              <QuestionWrapper>
+                <Question question={question} />
+              </QuestionWrapper>
             ))}
             <div id="form-separator" />
             <SolidButton hasShadow={false}>Enviar</SolidButton>

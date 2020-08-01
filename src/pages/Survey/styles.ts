@@ -91,10 +91,6 @@ export const FormArea = styled.div`
 
   form {
     width: 100%;
-
-    div + div {
-      margin-top: 2.5rem;
-    }
   }
 
   @media (max-width: 670px) {
@@ -103,6 +99,14 @@ export const FormArea = styled.div`
     #progress-wrapper {
       position: relative;
     }
+  }
+`;
+
+export const QuestionWrapper = styled.div`
+  width: 100%;
+
+  & + div {
+    margin-top: 2.5rem;
   }
 `;
 

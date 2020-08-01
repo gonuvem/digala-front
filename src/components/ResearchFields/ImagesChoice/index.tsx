@@ -4,6 +4,7 @@ import { Container, CardImage } from './styles';
 import { ImageChoice } from '../../../store/ducks/questions/types';
 
 interface ImagesChoiceProps {
+  name: string;
   description?: string;
   multipleChoice: boolean;
   choiceMaxAmmount: number;
@@ -13,6 +14,7 @@ interface ImagesChoiceProps {
 }
 
 const ImagesChoice: React.FC<ImagesChoiceProps> = ({
+  name,
   label,
   description,
   multipleChoice,

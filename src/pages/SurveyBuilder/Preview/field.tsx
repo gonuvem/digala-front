@@ -146,6 +146,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     case FieldsTypes.ImageChoice:
       return (
         <ImagesChoice
+          name={config?.name || 'images-choice-field-name'}
           label={config?.label || ''}
           description={config?.description || ''}
           id={config?.id || ''}

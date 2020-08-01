@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FiLink, FiMail } from 'react-icons/fi';
 import { FaPhoneAlt } from 'react-icons/fa';
 
 import EmailQuestion from '../../components/ResearchFields/IconTextField';
 import DateTimeField from '../../components/ResearchFields/DateTimeField';
+import ImagesChoice from '../../components/ResearchFields/ImagesChoice';
 
 import { SurveyQuestion } from './ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
+import mountQuestionPayload from '../../services/logic/mountQuestionPayload';
 
 interface FieldProps {
   question: SurveyQuestion;
@@ -15,28 +17,17 @@ interface FieldProps {
 const Question: React.FC<FieldProps> = ({ question }) => {
   console.log('Question >> ', question);
 
+  const questionPayload = useMemo(() => {
+    return mountQuestionPayload(question);
+  }, [question]);
+
   switch (question.type.alias) {
     case FieldsTypes.Email:
-      return (
-        <EmailQuestion
-          name={question._id}
-          id={question._id}
-          icon={FiMail}
-          label={question.config.name}
-          description={question.config.description}
-        />
-      );
+      return <EmailQuestion {...questionPayload} />;
     case FieldsTypes.Date:
-      return (
-        <DateTimeField
-          name={question._id}
-          label={question.config.name}
-          description={question.config.description}
-          dateFormat={question.config.date.dateFormat || 'monthYear'}
-          timeFormat={question.config.date.timeFormat || 'hourMinute'}
-          selectRange={question.config.date.canCaptureInterval}
-        />
-      );
+      return <DateTimeField {...questionPayload} />;
+    case FieldsTypes.ImageChoice:
+      return <ImagesChoice {...questionPayload} />;
     default:
       return null;
   }

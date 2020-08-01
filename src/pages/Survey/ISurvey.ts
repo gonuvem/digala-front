@@ -1,3 +1,9 @@
+export interface AnswerOption {
+  _id: string;
+  text: string;
+  image?: string;
+}
+
 export interface SurveyQuestion {
   _id: string;
   formPage: number;
@@ -18,6 +24,12 @@ export interface SurveyQuestion {
       canCaptureInterval: boolean;
       dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
       timeFormat?: 'hourMinute' | 'hourMinuteSecond';
+    };
+    imageChoice: {
+      isMultipleChoice: boolean;
+      maxChoices?: number;
+      hasRandomResponsesOrder: boolean;
+      answerOptions: AnswerOption[];
     };
   };
 }
