@@ -3,14 +3,22 @@ import { FiMail } from 'react-icons/fi';
 import { SurveyQuestion, AnswerOption } from '../../pages/Survey/ISurvey';
 import { ImageChoice } from '../../store/ducks/questions/types';
 import FieldsTypes from '../../utils/fieldsTypes';
+import randomSortArray from '../../utils/randomSortArray';
 
-function buildImageChoices(options: AnswerOption[]): ImageChoice[] {
-  const imageChoices: ImageChoice[] = options.map((option) => ({
+function buildImageChoices(
+  options: AnswerOption[],
+  randomSort: boolean,
+): ImageChoice[] {
+  let imageChoices: ImageChoice[] = options.map((option) => ({
     id: option._id,
     loading: false,
     label: option.text,
     image: option.image || '',
   }));
+
+  if (randomSort) {
+    imageChoices = randomSortArray(imageChoices);
+  }
 
   return imageChoices;
 }
@@ -42,7 +50,10 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
         id: question._id,
         multipleChoice: question.config.imageChoice.isMultipleChoice,
         choiceMaxAmmount: question.config.imageChoice.maxChoices || 1,
-        choices: buildImageChoices(question.config.imageChoice.answerOptions),
+        choices: buildImageChoices(
+          question.config.imageChoice.answerOptions,
+          question.config.imageChoice.hasRandomResponsesOrder,
+        ),
       };
     default:
       return {};

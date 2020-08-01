@@ -32,4 +32,4 @@
 
 **RN**
 
-- As opções terão que ser embaralhadas no caso da variavél sortRandom estar ativada
+- O campo deve estar conectado com o unform para enviar seu valor para o formulário
