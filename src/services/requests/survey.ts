@@ -27,8 +27,8 @@ export const SHOW_FORM = gql`
           footerBackground
         }
         questions {
+          _id
           type {
-            kind,
             alias
           }
           formPage

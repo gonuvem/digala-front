@@ -5,6 +5,8 @@ import { Form } from '@unform/web';
 import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
 
+import { ISurvey } from './ISurvey';
+
 import SolidButton from '../../components/Common/SolidButton';
 import Question from './question';
 
@@ -22,33 +24,6 @@ import {
 
 import Colors from '../../utils/colors';
 import { SHOW_FORM } from '../../services/requests/survey';
-
-interface ISurvey {
-  _id: string;
-  config: {
-    name: string;
-    description?: string;
-    beginDate?: Date;
-    endDate?: Date;
-    hasLimitedResponses: boolean;
-    maxResponses?: number;
-    isTotemMode: boolean;
-    canDisplayProgressBar: boolean;
-    progressBarType?: string;
-    canAllowMultipleSubmissions: boolean;
-  };
-  style: {
-    background?: string;
-    logo?: string;
-    headerText?: string;
-    hasLogoInHeader: boolean;
-    headerBackground?: string;
-    footerText?: string;
-    footerBackground?: string;
-  };
-  questions: [];
-  numResponses?: number;
-}
 
 const Survey: React.FC = () => {
   const { id } = useParams();

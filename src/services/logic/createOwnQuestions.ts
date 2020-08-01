@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 
 import { Question } from '../../store/ducks/questions/types';
 import CreateQuestion from '../../schemas/createQuestion';
+
 interface QuestionDTO {
   form: string;
   questions: QuestionProps[] | null;
@@ -103,12 +104,15 @@ interface AnswerOptions {
 
 function formatList(list: any): any {
   const listData: Array<any> = [];
-  for (var i = 0; i < list.length; i++) {
+  for (let i = 0; i < list.length; i++) {
     if (list[i].content) {
-      const data: Object = { text: list[i].content };
+      const data: Record<string, any> = { text: list[i].content };
       listData.push(data);
     } else if (list[i].label && list[i].image) {
-      const data: Object = { text: list[i].label, image: list[i].image };
+      const data: Record<string, any> = {
+        text: list[i].label,
+        image: list[i].image,
+      };
       listData.push(data);
     }
   }
@@ -334,6 +338,9 @@ function getTypeQuestion(question: any): any {
       };
       return config;
     }
+
+    default:
+      return {};
   }
 }
 
@@ -356,11 +363,11 @@ export default async function createOwnQuestions(
       });
 
       if (questionType?._id) {
-        let questionConfig: QuestionProps = {
+        const questionConfig: QuestionProps = {
           type: questionType?._id,
           formPage: 1,
           position: i,
-          config: config,
+          config,
         };
         questionsArray.push(questionConfig);
       }
@@ -370,7 +377,6 @@ export default async function createOwnQuestions(
       form: formId,
       questions: questionsArray,
     };
-    console.log(sendData);
 
     await CreateQuestion.validate(sendData.questions, { abortEarly: false });
 
