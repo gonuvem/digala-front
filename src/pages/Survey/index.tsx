@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 import { Form } from '@unform/web';
@@ -38,6 +38,10 @@ const Survey: React.FC = () => {
     }
     return {};
   }, [surveyLoading, surveyData]);
+
+  const onSubmit = useCallback((formData) => {
+    console.log('Form Data >> ', formData);
+  }, []);
 
   if (surveyLoading) {
     return <h1>Loading survey...</h1>;
@@ -84,7 +88,7 @@ const Survey: React.FC = () => {
               </ProgressBar>
             </div>
           )}
-          <Form onSubmit={() => null}>
+          <Form onSubmit={onSubmit}>
             {survey.questions.map((question) => (
               <Question question={question} />
             ))}

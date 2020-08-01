@@ -91,6 +91,10 @@ export const FormArea = styled.div`
 
   form {
     width: 100%;
+
+    div + div {
+      margin-top: 2.5rem;
+    }
   }
 
   @media (max-width: 670px) {

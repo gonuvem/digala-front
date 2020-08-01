@@ -12,6 +12,13 @@ export interface SurveyQuestion {
     email: {
       hasValidation: boolean;
     };
+    date: {
+      isDateRequired: boolean;
+      isTimeRequired: string;
+      canCaptureInterval: boolean;
+      dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
+      timeFormat?: 'hourMinute' | 'hourMinuteSecond';
+    };
   };
 }
 

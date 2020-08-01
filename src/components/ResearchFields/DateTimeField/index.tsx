@@ -7,7 +7,7 @@ import { Container } from './styles';
 
 interface DateTimeFieldProps {
   label: string;
-  description: string;
+  description?: string;
   name: string;
   selectRange?: boolean;
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
