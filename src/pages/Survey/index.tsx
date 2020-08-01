@@ -5,8 +5,8 @@ import { Form } from '@unform/web';
 import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
 
-import ShortTextField from '../../components/ResearchFields/ShortTextField';
 import SolidButton from '../../components/Common/SolidButton';
+import Question from './question';
 
 import gonuvemLogo from '../../assets/GONUVEM_HOR.png';
 
@@ -21,7 +21,6 @@ import {
 } from './styles';
 
 import Colors from '../../utils/colors';
-
 import { SHOW_FORM } from '../../services/requests/survey';
 
 interface ISurvey {
@@ -47,6 +46,7 @@ interface ISurvey {
     footerText?: string;
     footerBackground?: string;
   };
+  questions: [];
   numResponses?: number;
 }
 
@@ -67,8 +67,6 @@ const Survey: React.FC = () => {
   if (surveyLoading) {
     return <h1>Loading survey...</h1>;
   }
-
-  console.log('Survey Data >> ', survey);
 
   return (
     <Container>
@@ -112,13 +110,9 @@ const Survey: React.FC = () => {
             </div>
           )}
           <Form onSubmit={() => null}>
-            <ShortTextField
-              name="fake-short-text"
-              id="fake-short-text-id"
-              label="Texto Curto"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-              placeholder="Insira o nome aqui"
-            />
+            {survey.questions.map((question) => (
+              <Question question={question} />
+            ))}
             <div id="form-separator" />
             <SolidButton hasShadow={false}>Enviar</SolidButton>
           </Form>

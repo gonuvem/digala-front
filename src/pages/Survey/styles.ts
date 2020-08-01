@@ -81,11 +81,16 @@ export const SurveyHeader = styled.div<SurveyHeaderProps>`
 
 export const FormArea = styled.div`
   display: flex;
-  position: relative;
   flex-direction: row-reverse;
+  position: relative;
+  width: 100%;
 
   #progress-wrapper {
     position: absolute;
+  }
+
+  form {
+    width: 100%;
   }
 
   @media (max-width: 670px) {
