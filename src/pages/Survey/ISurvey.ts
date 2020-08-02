@@ -63,6 +63,10 @@ export interface SurveyQuestion {
       minValue?: number;
       incValue?: number;
     };
+    sortList: {
+      hasRandomResponsesOrder: boolean;
+      answerOptions: AnswerOption[];
+    };
   };
 }
 

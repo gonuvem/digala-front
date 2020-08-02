@@ -14,6 +14,7 @@
 * No campo do NPS ao usar os botões de incrementar e decrementar, está sendo possível ir além dos limites inferior e superior
 * No campo numérico está dando erro ao enviar para API os campos de maxValue e minValue, eles estão no formato string e a api espera um inteiro
 * Ao desabilitar o limitador, mesmo assim ele continua enviando o maxValue e o minValue para a api.
+* O campo de reodernar as opções está dando um warning e isso está afetando a performance do componente
 
 
 # Survey Builder
@@ -90,4 +91,11 @@
 
 **RN**
 
+- Quando no estado de erro, o input deve sinalizar para o usuário seu estado e auxiliar na correção do erro.
+
+## Sort Field
+
+**RN**
+
+- O campo deve estar conectado com o unform para enviar seu valor para o formulário
 - Quando no estado de erro, o input deve sinalizar para o usuário seu estado e auxiliar na correção do erro.

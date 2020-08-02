@@ -160,7 +160,6 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label || ''}
           description={config?.description}
           listOptions={config?.listOptions}
-          randomSort={config?.randomSort}
         />
       );
     case FieldsTypes.Number:

@@ -149,6 +149,14 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
         maxValue: question.config.number.maxValue,
         stepSize: question.config.number.incValue || 1,
       };
+    case FieldsTypes.SortList:
+      return {
+        ...defaultPayload,
+        listOptions: buildChoices(
+          question.config.sortList.answerOptions,
+          question.config.sortList.hasRandomResponsesOrder,
+        ),
+      };
     default:
       return {};
   }
