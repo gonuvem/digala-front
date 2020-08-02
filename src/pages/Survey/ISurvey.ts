@@ -50,6 +50,13 @@ export interface SurveyQuestion {
       maxChoices: number;
       answerOptions: AnswerOption[];
     };
+    nps: {
+      canDisplayLabels: boolean;
+      leftLabel?: string;
+      rightLabel?: string;
+      canStartAtZero: boolean;
+      escale: string;
+    };
   };
 }
 

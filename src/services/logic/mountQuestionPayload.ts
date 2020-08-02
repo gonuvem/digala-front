@@ -132,6 +132,15 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
           question.config.checkBox.hasRandomResponsesOrder,
         ),
       };
+    case FieldsTypes.Nps:
+      return {
+        ...defaultPayload,
+        showSubtitles: question.config.nps.canDisplayLabels,
+        leftSubtitle: question.config.nps.leftLabel,
+        rightSubtitle: question.config.nps.rightLabel,
+        scale: question.config.nps.escale,
+        startZero: question.config.nps.canStartAtZero,
+      };
     default:
       return {};
   }
