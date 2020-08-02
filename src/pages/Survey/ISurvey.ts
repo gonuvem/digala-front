@@ -74,6 +74,11 @@ export interface SurveyQuestion {
       maxLabel?: string;
       canHideValue: boolean;
     };
+    matrix: {
+      isMultipleChoice: boolean;
+      rowsLabels: string[];
+      colsLabels: string[];
+    };
   };
 }
 

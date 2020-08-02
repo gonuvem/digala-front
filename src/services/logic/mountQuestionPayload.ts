@@ -165,6 +165,13 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
         leftSubtitle: question.config.slider.minLabel,
         rightSubtitle: question.config.slider.maxLabel,
       };
+    case FieldsTypes.Matrix:
+      return {
+        ...defaultPayload,
+        multipleChoice: question.config.matrix.isMultipleChoice,
+        columns: question.config.matrix.colsLabels,
+        lines: question.config.matrix.rowsLabels,
+      };
     default:
       return {};
   }

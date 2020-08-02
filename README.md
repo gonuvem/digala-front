@@ -16,7 +16,8 @@
 * Ao desabilitar o limitador, mesmo assim ele continua enviando o maxValue e o minValue para a api.
 * O campo de reodernar as opções está dando um warning e isso está afetando a performance do componente
 * O campo de slider está dando erro ao enviar para api os valores de minimo e máximo após alteração. Eles estão sendo enviados como uma string enquanto a api espera um número.
-
+* O espaçamento da tabela de Matriz está muito pequeno
+* Ao remover uma linha ou coluna durante a edição da matriz está ocorrendo um erro onde valores são substituidos e a impressão que dar é que você está apagando o elemento errado.
 
 # Survey Builder
 
@@ -108,6 +109,15 @@
 - O campo deve estar conectado com o unform para enviar seu valor para o formulário
 - O valor no seletor deve ficar oculto quando a configuração correspondente estiver ativada
 
+## Matrix Field
+
+**RF**
+
+- O usuário deve poder marcar mais de um elemento por linha quando a configuração correspondente estiver ativa.
+
+**RN**
+
+- O campo deve estar conectado com o unform para enviar seu valor para o formulário
 
 ### OBS:
 

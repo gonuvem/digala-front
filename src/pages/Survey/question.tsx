@@ -10,6 +10,7 @@ import NpsField from '../../components/ResearchFields/NpsField';
 import NumericField from '../../components/ResearchFields/NumericField';
 import SortAnswers from '../../components/ResearchFields/SortAnswers';
 import SliderField from '../../components/ResearchFields/SliderField';
+import MatrixField from '../../components/ResearchFields/MatrixField';
 
 import { SurveyQuestion } from './ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
@@ -49,6 +50,8 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <SortAnswers {...questionPayload} />;
     case FieldsTypes.Slider:
       return <SliderField {...questionPayload} />;
+    case FieldsTypes.Matrix:
+      return <MatrixField {...questionPayload} />;
     default:
       return null;
   }
