@@ -180,6 +180,24 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
         validatePattern: question.config.phone.hasValidation,
         mask: '(99) 99999-9999',
       };
+    case FieldsTypes.LongText:
+      return {
+        ...defaultPayload,
+        id: question._id,
+        placeholder: question.config.longText.placeholder,
+        maxLength: question.config.longText.hasLimitedChars
+          ? question.config.longText.maxChars
+          : undefined,
+      };
+    // case FieldsTypes.ShortText:
+    //   return {
+    //     ...defaultPayload,
+    //     id: question._id,
+    //     placeholder: question.config.shortText.placeholder,
+    //     maxLength: question.config.shortText.hasLimitedChars
+    //       ? question.config.shortText.maxChars
+    //       : undefined,
+    //   };
     default:
       return {};
   }

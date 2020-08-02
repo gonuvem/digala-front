@@ -18,6 +18,7 @@
 * O campo de slider está dando erro ao enviar para api os valores de minimo e máximo após alteração. Eles estão sendo enviados como uma string enquanto a api espera um número.
 * O espaçamento da tabela de Matriz está muito pequeno
 * Ao remover uma linha ou coluna durante a edição da matriz está ocorrendo um erro onde valores são substituidos e a impressão que dar é que você está apagando o elemento errado.
+* O espaçamento no campo de texto longo entre a descrição e o input está maior que os outros.
 
 # Survey Builder
 
@@ -125,3 +126,5 @@
 * Seria bom organizar as interfaces dos componentes para elas serem utilizadas em outros arquivos, como na função ***mountQuestionPayload***;
 
 * Temos que gerenciar melhor a memória no front, atualmente temos dados duplicados em três lugares: Redux, Apollo e Estado Local. A priori eu penso logo em não usara cache do Apollo mais.
+
+* Tem que revisar o projeto para corrigir os renders que estão ocorrendo mais do que o necessário.

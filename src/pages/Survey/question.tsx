@@ -11,6 +11,8 @@ import NumericField from '../../components/ResearchFields/NumericField';
 import SortAnswers from '../../components/ResearchFields/SortAnswers';
 import SliderField from '../../components/ResearchFields/SliderField';
 import MatrixField from '../../components/ResearchFields/MatrixField';
+import ShortText from '../../components/ResearchFields/ShortTextField';
+import TextArea from '../../components/ResearchFields/TextAreaField';
 
 import { SurveyQuestion } from './ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
@@ -54,6 +56,10 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <MatrixField {...questionPayload} />;
     case FieldsTypes.Phone:
       return <IconTextField {...questionPayload} />;
+    case FieldsTypes.LongText:
+      return <TextArea {...questionPayload} />;
+    // case FieldsTypes.ShortText:
+    //   return <ShortText {...questionPayload} />;
     default:
       return null;
   }

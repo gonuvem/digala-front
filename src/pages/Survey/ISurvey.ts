@@ -82,6 +82,16 @@ export interface SurveyQuestion {
     phone: {
       hasValidation: boolean;
     };
+    shortText: {
+      placeholder?: string;
+      hasLimitedChars: boolean;
+      maxChars?: number;
+    };
+    longText: {
+      placeholder?: string;
+      hasLimitedChars: boolean;
+      maxChars?: number;
+    };
   };
 }
 
