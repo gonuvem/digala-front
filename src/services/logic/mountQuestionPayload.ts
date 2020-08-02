@@ -141,6 +141,14 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
         scale: question.config.nps.escale,
         startZero: question.config.nps.canStartAtZero,
       };
+    case FieldsTypes.Number:
+      return {
+        ...defaultPayload,
+        limitMaxMin: question.config.number.hasMaxMinLimit,
+        minValue: question.config.number.minValue,
+        maxValue: question.config.number.maxValue,
+        stepSize: question.config.number.incValue || 1,
+      };
     default:
       return {};
   }

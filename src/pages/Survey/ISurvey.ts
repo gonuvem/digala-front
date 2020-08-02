@@ -57,6 +57,12 @@ export interface SurveyQuestion {
       canStartAtZero: boolean;
       escale: string;
     };
+    number: {
+      hasMaxMinLimit: boolean;
+      maxValue?: number;
+      minValue?: number;
+      incValue?: number;
+    };
   };
 }
 

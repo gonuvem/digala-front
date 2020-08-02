@@ -12,6 +12,8 @@
 * Respostas de erro durante o cadastro não estão sendo tratadas devidamente, está sendo mostrado no toast a menssagem que vem da api
 * No campo de Multipla Escolha, está dando erro ao enviar para a api a quantidade de opções selecionaveis
 * No campo do NPS ao usar os botões de incrementar e decrementar, está sendo possível ir além dos limites inferior e superior
+* No campo numérico está dando erro ao enviar para API os campos de maxValue e minValue, eles estão no formato string e a api espera um inteiro
+* Ao desabilitar o limitador, mesmo assim ele continua enviando o maxValue e o minValue para a api.
 
 
 # Survey Builder
@@ -83,3 +85,9 @@
 
 - Ao passar o mouse por cima de uma opção, uma animação de hover deve acontecer
 - O campo deve estar conectado com o unform para enviar seu valor para o formulário
+
+## Numeric Field
+
+**RN**
+
+- Quando no estado de erro, o input deve sinalizar para o usuário seu estado e auxiliar na correção do erro.

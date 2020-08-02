@@ -7,6 +7,7 @@ import SingleChoiceField from '../../components/ResearchFields/SingleChoiceField
 import SelectField from '../../components/ResearchFields/SelectField';
 import MultipleChoiceField from '../../components/ResearchFields/MultipleChoiceField';
 import NpsField from '../../components/ResearchFields/NpsField';
+import NumericField from '../../components/ResearchFields/NumericField';
 
 import { SurveyQuestion } from './ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
@@ -40,6 +41,8 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <MultipleChoiceField {...questionPayload} />;
     case FieldsTypes.Nps:
       return <NpsField {...questionPayload} />;
+    case FieldsTypes.Number:
+      return <NumericField {...questionPayload} />;
     default:
       return null;
   }
