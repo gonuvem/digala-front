@@ -67,6 +67,13 @@ export interface SurveyQuestion {
       hasRandomResponsesOrder: boolean;
       answerOptions: AnswerOption[];
     };
+    slider: {
+      minValue: number;
+      minLabel?: string;
+      maxValue: number;
+      maxLabel?: string;
+      canHideValue: boolean;
+    };
   };
 }
 

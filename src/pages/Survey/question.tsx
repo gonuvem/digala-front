@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 
-import Field from 'pages/SurveyBuilder/Preview/field';
 import IconTextField from '../../components/ResearchFields/IconTextField';
 import DateTimeField from '../../components/ResearchFields/DateTimeField';
 import ImagesChoice from '../../components/ResearchFields/ImagesChoice';
@@ -10,6 +9,7 @@ import MultipleChoiceField from '../../components/ResearchFields/MultipleChoiceF
 import NpsField from '../../components/ResearchFields/NpsField';
 import NumericField from '../../components/ResearchFields/NumericField';
 import SortAnswers from '../../components/ResearchFields/SortAnswers';
+import SliderField from '../../components/ResearchFields/SliderField';
 
 import { SurveyQuestion } from './ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
@@ -47,6 +47,8 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <NumericField {...questionPayload} />;
     case FieldsTypes.SortList:
       return <SortAnswers {...questionPayload} />;
+    case FieldsTypes.Slider:
+      return <SliderField {...questionPayload} />;
     default:
       return null;
   }

@@ -157,6 +157,14 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
           question.config.sortList.hasRandomResponsesOrder,
         ),
       };
+    case FieldsTypes.Slider:
+      return {
+        ...defaultPayload,
+        minValue: question.config.slider.minValue,
+        maxValue: question.config.slider.maxValue,
+        leftSubtitle: question.config.slider.minLabel,
+        rightSubtitle: question.config.slider.maxLabel,
+      };
     default:
       return {};
   }

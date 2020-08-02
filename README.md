@@ -15,6 +15,7 @@
 * No campo numérico está dando erro ao enviar para API os campos de maxValue e minValue, eles estão no formato string e a api espera um inteiro
 * Ao desabilitar o limitador, mesmo assim ele continua enviando o maxValue e o minValue para a api.
 * O campo de reodernar as opções está dando um warning e isso está afetando a performance do componente
+* O campo de slider está dando erro ao enviar para api os valores de minimo e máximo após alteração. Eles estão sendo enviados como uma string enquanto a api espera um número.
 
 
 # Survey Builder
@@ -99,3 +100,16 @@
 
 - O campo deve estar conectado com o unform para enviar seu valor para o formulário
 - Quando no estado de erro, o input deve sinalizar para o usuário seu estado e auxiliar na correção do erro.
+
+## Slider Field
+
+**RN**
+
+- O campo deve estar conectado com o unform para enviar seu valor para o formulário
+- O valor no seletor deve ficar oculto quando a configuração correspondente estiver ativada
+
+
+### OBS:
+
+* Seria bom organizar as interfaces dos componentes para elas serem utilizadas em outros arquivos, como na função ***mountQuestionPayload***;
+
