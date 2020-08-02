@@ -52,6 +52,8 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <SliderField {...questionPayload} />;
     case FieldsTypes.Matrix:
       return <MatrixField {...questionPayload} />;
+    case FieldsTypes.Phone:
+      return <IconTextField {...questionPayload} />;
     default:
       return null;
   }

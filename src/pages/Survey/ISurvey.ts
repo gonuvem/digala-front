@@ -79,6 +79,9 @@ export interface SurveyQuestion {
       rowsLabels: string[];
       colsLabels: string[];
     };
+    phone: {
+      hasValidation: boolean;
+    };
   };
 }
 

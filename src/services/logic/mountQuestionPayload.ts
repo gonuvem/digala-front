@@ -1,4 +1,5 @@
 import { FiMail, FiLink } from 'react-icons/fi';
+import { FaPhoneAlt } from 'react-icons/fa';
 
 import { SurveyQuestion, AnswerOption } from '../../pages/Survey/ISurvey';
 import { ImageChoice } from '../../store/ducks/questions/types';
@@ -171,6 +172,13 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
         multipleChoice: question.config.matrix.isMultipleChoice,
         columns: question.config.matrix.colsLabels,
         lines: question.config.matrix.rowsLabels,
+      };
+    case FieldsTypes.Phone:
+      return {
+        ...defaultPayload,
+        icon: FaPhoneAlt,
+        validatePattern: question.config.phone.hasValidation,
+        mask: '(99) 99999-9999',
       };
     default:
       return {};

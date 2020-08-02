@@ -119,7 +119,9 @@
 
 - O campo deve estar conectado com o unform para enviar seu valor para o formulário
 
+
 ### OBS:
 
 * Seria bom organizar as interfaces dos componentes para elas serem utilizadas em outros arquivos, como na função ***mountQuestionPayload***;
 
+* Temos que gerenciar melhor a memória no front, atualmente temos dados duplicados em três lugares: Redux, Apollo e Estado Local. A priori eu penso logo em não usara cache do Apollo mais.
