@@ -17,10 +17,7 @@ interface FormDataDTO {
   };
   style?: {
     background?: string;
-    logo?: {
-      image: string;
-      loading: boolean;
-    };
+    logo?: string;
     headerText?: string;
     hasLogoInHeader: boolean;
     headerBackground?: string;

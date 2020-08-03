@@ -1,7 +1,6 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 
 import uploadImage from '../../../services/logic/uploadImage';
-import { ImageLogo } from '../../../store/ducks/forms/types';
 
 import LoadingSpinner from '../../Common/LoadingSpinner';
 import uploadIcon from '../../../assets/uploud_icon.png';
@@ -10,23 +9,17 @@ import { DashedContainer, ImgLogo, IconLogoUpload } from './styles';
 interface LogoUploadProps {
   label?: string;
   onChange: Function;
-  logo: LogoProps;
-}
-
-interface LogoProps {
-  image: string;
-  loading: boolean;
+  logo: string;
 }
 
 const LogoUpload: React.FC<LogoUploadProps> = ({ label, onChange, logo }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onPhotoUploaded = useCallback(
     (imageData) => {
-      const newImageOption: ImageLogo = {
-        image: imageData.secure_url,
-        loading: false,
-      };
+      const newImageOption = imageData.secure_url;
+      setIsLoading(false);
       onChange(newImageOption);
     },
     [onChange],
@@ -37,10 +30,8 @@ const LogoUpload: React.FC<LogoUploadProps> = ({ label, onChange, logo }) => {
   }, []);
 
   const handleUploadPhoto = useCallback((event) => {
-    const preImageOption: ImageLogo = {
-      image: '',
-      loading: true,
-    };
+    const preImageOption = '';
+    setIsLoading(true);
     onChange(preImageOption);
     uploadImage(event, onPhotoUploaded);
   }, []);
@@ -48,13 +39,13 @@ const LogoUpload: React.FC<LogoUploadProps> = ({ label, onChange, logo }) => {
   return (
     <>
       <p>{label}</p>
-      <DashedContainer onClick={handleClick} hasLogo={!!logo.image}>
-        {logo?.image ? (
-          <ImgLogo alt="logo" src={logo.image} />
+      <DashedContainer onClick={handleClick} hasLogo={!!logo}>
+        {isLoading ? (
+          <LoadingSpinner />
         ) : (
           <>
-            {logo.loading ? (
-              <LoadingSpinner />
+            {logo ? (
+              <ImgLogo alt="logo" src={logo} />
             ) : (
               <div>
                 <IconLogoUpload src={uploadIcon} alt="Upload Logo" />

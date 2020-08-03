@@ -12,7 +12,6 @@ import LogoUpload from '../../../../components/Common/LogoUpload';
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
 import useDebounce from '../../../../hooks/useDebounce';
-
 const colors = [
   '#FFA825',
   '#EB1D63',
@@ -28,7 +27,7 @@ interface ResearchStylesProps {
 
 interface FormStyleDTO {
   background?: string;
-  logo?: LogoProps;
+  logo?: string;
   headerText?: string;
   hasLogoInHeader: boolean;
   headerBackground?: string;
@@ -36,15 +35,10 @@ interface FormStyleDTO {
   footerBackground?: string;
 }
 
-interface LogoProps {
-  image: string;
-  loading: boolean;
-}
-
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   const [tempInformation, setTempInformation] = useState('');
-  const [defaultLogo, setDefaultLogo] = useState<LogoProps>(() =>
-    formData?.style?.logo ? formData.style.logo : { image: '', loading: false },
+  const [defaultLogo, setDefaultLogo] = useState<string>(() =>
+    formData?.style?.logo ? formData.style.logo : '',
   );
   const formRef = useRef<FormHandles>(null);
   const dispatch = useDispatch();
@@ -68,14 +62,11 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   }, [debouncedTrigger, dispatch]);
 
   const handleUploadLogo = useCallback(
-    (image: LogoProps) => {
+    (image: string) => {
       const data = formRef.current?.getData();
       const dataUrl = {
         ...data,
-        logo: {
-          image: image.image,
-          loading: image.loading,
-        },
+        logo: image,
       };
       changeFormConfiguration(dispatch, {
         attribute: 'style',
@@ -86,7 +77,6 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   );
   return (
     <Container>
-      {console.log(formData?.style?.logo)}
       <Form ref={formRef} initialData={formData?.style} onSubmit={() => null}>
         <Section>
           <p>Fundo da pesquisa</p>
