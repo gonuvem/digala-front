@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { Container, DashedContainer, Section } from './styles';
+import { Container, Section } from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
@@ -101,7 +101,6 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         </Section>
         <Section>
           <LogoUpload
-            name="logo"
             label="Logo"
             onChange={(value: any) => {
               handleUploadLogo(value);

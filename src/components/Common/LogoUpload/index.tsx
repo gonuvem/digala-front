@@ -1,10 +1,8 @@
-import React, { useRef, useCallback, useEffect } from 'react';
+import React, { useRef, useCallback } from 'react';
 
-import { useField } from '@unform/core';
 import uploadImage from '../../../services/logic/uploadImage';
 import { ImageLogo } from '../../../store/ducks/forms/types';
 
-import ImageOption from '../../Common/ImageUpload/ImageOption';
 import LoadingSpinner from '../../Common/LoadingSpinner';
 import uploadIcon from '../../../assets/uploud_icon.png';
 
@@ -13,7 +11,6 @@ interface LogoUploadProps {
   label?: string;
   onChange: Function;
   logo: LogoProps;
-  name: string;
 }
 
 interface LogoProps {
@@ -21,12 +18,7 @@ interface LogoProps {
   loading: boolean;
 }
 
-const LogoUpload: React.FC<LogoUploadProps> = ({
-  label,
-  onChange,
-  logo,
-  name,
-}) => {
+const LogoUpload: React.FC<LogoUploadProps> = ({ label, onChange, logo }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onPhotoUploaded = useCallback(
@@ -55,7 +47,7 @@ const LogoUpload: React.FC<LogoUploadProps> = ({
 
   return (
     <>
-      <p>Logo</p>
+      <p>{label}</p>
       <DashedContainer onClick={handleClick} hasLogo={!!logo.image}>
         {logo?.image ? (
           <ImgLogo alt="logo" src={logo.image} />
