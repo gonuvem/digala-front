@@ -131,7 +131,7 @@ export const ProgressBar = styled.div<ProgressBarProps>`
     align-items: center;
 
     width: 8px;
-    height: ${(props) => `${4.5 * props.pagesCount}rem`};
+    height: ${(props) => `${8.5 * props.pagesCount}rem`};
 
     background-color: ${Colors.smokeWhite};
     border-radius: 8px;
@@ -229,7 +229,7 @@ export const SurveyBody = styled.div`
 
   #survey-separator {
     height: 2px;
-    width: 25%;
+    width: 50%;
 
     margin-top: 3rem;
     margin-bottom: 2rem;

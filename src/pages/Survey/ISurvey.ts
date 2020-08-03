@@ -120,4 +120,5 @@ export interface ISurvey {
   };
   questions: SurveyQuestion[];
   numResponses?: number;
+  numPages: number;
 }

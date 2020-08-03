@@ -75,7 +75,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   return (
     <Container hasFocus={hasFocus} isInvalid={!!error} isFilled={isFilled}>
       <label htmlFor={id}>
-        {label && <span>label</span>}
+        {label && <span>{label}</span>}
         {description && <p>{description}</p>}
         <div>
           <Icon color="#000000" size={24} />

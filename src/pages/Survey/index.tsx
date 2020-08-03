@@ -48,6 +48,8 @@ const Survey: React.FC = () => {
     return <h1>Loading survey...</h1>;
   }
 
+  console.log('Survey >> ', survey);
+
   return (
     <Container>
       <Helmet>
@@ -74,14 +76,13 @@ const Survey: React.FC = () => {
         <FormArea>
           {survey.config.canDisplayProgressBar && (
             <div id="progress-wrapper">
-              <ProgressBar pagesCount={2}>
+              <ProgressBar pagesCount={survey.numPages}>
                 <div>
-                  <Step filled>
-                    <p>1</p>
-                  </Step>
-                  <Step>
-                    <p>1</p>
-                  </Step>
+                  {Array.from({ length: survey.numPages }, (_, number) => (
+                    <Step filled>
+                      <p>{number + 1}</p>
+                    </Step>
+                  ))}
                   <Step>
                     <FiCheck size={16} />
                   </Step>

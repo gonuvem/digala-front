@@ -23,8 +23,6 @@ interface FieldProps {
 }
 
 const Question: React.FC<FieldProps> = ({ question }) => {
-  console.log('Question >> ', question);
-
   const questionPayload = useMemo(() => {
     return mountQuestionPayload(question);
   }, [question]);

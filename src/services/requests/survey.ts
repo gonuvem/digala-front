@@ -17,6 +17,7 @@ export const SHOW_FORM = gql`
           canAllowMultipleSubmissions
         }
         numResponses
+        numPages
         style {
           background
           logo
