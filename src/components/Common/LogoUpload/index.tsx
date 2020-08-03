@@ -5,14 +5,20 @@ import uploadImage from '../../../services/logic/uploadImage';
 import { ImageLogo } from '../../../store/ducks/forms/types';
 
 import ImageOption from '../../Common/ImageUpload/ImageOption';
+import LoadingSpinner from '../../Common/LoadingSpinner';
 import uploadIcon from '../../../assets/uploud_icon.png';
 
 import { DashedContainer, ImgLogo, IconLogoUpload } from './styles';
 interface LogoUploadProps {
   label?: string;
   onChange: Function;
-  logo: string;
+  logo: LogoProps;
   name: string;
+}
+
+interface LogoProps {
+  image: string;
+  loading: boolean;
 }
 
 const LogoUpload: React.FC<LogoUploadProps> = ({
@@ -49,16 +55,21 @@ const LogoUpload: React.FC<LogoUploadProps> = ({
 
   return (
     <>
-      {/* {console.log(defaultValue)} */}
       <p>Logo</p>
-      <DashedContainer onClick={handleClick} hasLogo={!!logo}>
-        {logo ? (
-          <ImgLogo alt="logo" src={logo} />
+      <DashedContainer onClick={handleClick} hasLogo={!!logo.image}>
+        {logo?.image ? (
+          <ImgLogo alt="logo" src={logo.image} />
         ) : (
-          <div>
-            <IconLogoUpload src={uploadIcon} alt="Upload Logo" />
-            <p>Coloque sua marca aqui</p>
-          </div>
+          <>
+            {logo.loading ? (
+              <LoadingSpinner />
+            ) : (
+              <div>
+                <IconLogoUpload src={uploadIcon} alt="Upload Logo" />
+                <p>Coloque sua marca aqui</p>
+              </div>
+            )}
+          </>
         )}
       </DashedContainer>
       <input

@@ -28,7 +28,7 @@ interface ResearchStylesProps {
 
 interface FormStyleDTO {
   background?: string;
-  logo?: string;
+  logo?: LogoProps;
   headerText?: string;
   hasLogoInHeader: boolean;
   headerBackground?: string;
@@ -36,10 +36,15 @@ interface FormStyleDTO {
   footerBackground?: string;
 }
 
+interface LogoProps {
+  image: string;
+  loading: boolean;
+}
+
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   const [tempInformation, setTempInformation] = useState('');
-  const [defaultLogo, setDefaultLogo] = useState<string>(() =>
-    formData?.style?.logo ? formData.style.logo : '',
+  const [defaultLogo, setDefaultLogo] = useState<LogoProps>(() =>
+    formData?.style?.logo ? formData.style.logo : { image: '', loading: false },
   );
   const formRef = useRef<FormHandles>(null);
   const dispatch = useDispatch();
@@ -63,11 +68,14 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   }, [debouncedTrigger, dispatch]);
 
   const handleUploadLogo = useCallback(
-    (url: string) => {
+    (image: LogoProps) => {
       const data = formRef.current?.getData();
       const dataUrl = {
         ...data,
-        logo: url,
+        logo: {
+          image: image.image,
+          loading: image.loading,
+        },
       };
       changeFormConfiguration(dispatch, {
         attribute: 'style',
@@ -78,6 +86,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   );
   return (
     <Container>
+      {console.log(formData?.style?.logo)}
       <Form ref={formRef} initialData={formData?.style} onSubmit={() => null}>
         <Section>
           <p>Fundo da pesquisa</p>
@@ -95,7 +104,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
             name="logo"
             label="Logo"
             onChange={(value: any) => {
-              handleUploadLogo(value?.image);
+              handleUploadLogo(value);
             }}
             logo={formData?.style?.logo || defaultLogo}
           />

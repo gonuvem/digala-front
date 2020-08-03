@@ -48,7 +48,6 @@ export default async function updateOwnFormData(
       progressBarType: formData.config.progressBarType?.value,
       canAllowMultipleSubmissions: formData.config.canAllowMultipleSubmissions,
       background: formData.style.background,
-      logo: formData.style.logo,
       hasLogoInHeader: formData.style.hasLogoInHeader,
       headerBackground: formData.style.headerBackground,
       footerBackground: formData.style.footerBackground,
@@ -64,6 +63,10 @@ export default async function updateOwnFormData(
 
     if (formData.style.headerText) {
       sendData.headerText = formData.style.headerText;
+    }
+
+    if (formData.style.logo?.image) {
+      sendData.logo = formData.style.logo?.image;
     }
 
     await UpdateFormSchema.validate(sendData, { abortEarly: false });

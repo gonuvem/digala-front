@@ -25,7 +25,10 @@ export interface Form {
   };
   style: {
     background?: string;
-    logo?: string;
+    logo?: {
+      image: string;
+      loading: boolean;
+    };
     headerText?: string;
     hasLogoInHeader: boolean;
     headerBackground?: string;
