@@ -108,6 +108,11 @@ export const QuestionWrapper = styled.div`
   & + div {
     margin-top: 2.5rem;
   }
+
+  & > div label:first-child span {
+    font-size: 1.3rem;
+    color: ${Colors.darkPrimary};
+  }
 `;
 
 export const ProgressBar = styled.div<ProgressBarProps>`

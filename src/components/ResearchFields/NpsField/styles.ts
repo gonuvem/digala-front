@@ -8,6 +8,21 @@ interface NumberProps {
 export const Container = styled.div`
   line-height: 1.1875rem;
 
+  label {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-weight: 500;
+      color: ${Colors.black};
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-weight: 400;
+    }
+  }
+
   div {
     div {
       display: flex;

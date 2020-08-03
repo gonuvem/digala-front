@@ -61,7 +61,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   return (
     <Container>
       <label htmlFor="id">
-        {label}
+        <span>{label}</span>
         {description && <p>{description}</p>}
         {options && (
           <DragDropContext onDragEnd={(result) => onDragEnd(result)}>

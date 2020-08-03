@@ -36,8 +36,10 @@ const NpsField: React.FC<NpsProps> = ({
 
   return (
     <Container>
-      <Title>{label}</Title>
-      <p>{description}</p>
+      <label htmlFor="">
+        <span>{label}</span>
+        <p>{description}</p>
+      </label>
       <div>
         {showSubtitles && (
           <div>

@@ -46,7 +46,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   return (
     <Container>
       <label htmlFor={id}>
-        {label}
+        <span>{label}</span>
         {description && <p>{description}</p>}
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&

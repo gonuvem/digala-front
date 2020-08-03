@@ -60,7 +60,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
   return (
     <Container hasFocus={hasFocus} isInvalid={!!error} isFilled={isFilled}>
       <label htmlFor={id}>
-        {label && label}
+        {label && <span>label</span>}
         {description && <p>{description}</p>}
         <textarea
           ref={inputRef}

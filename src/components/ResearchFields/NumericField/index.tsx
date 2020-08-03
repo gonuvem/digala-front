@@ -60,8 +60,10 @@ const NumericField: React.FC<NumericFieldProps> = ({
 
   return (
     <Container>
-      {label && <span>{label}</span>}
-      {description && <p>{description}</p>}
+      <label htmlFor="">
+        {label && <span>{label}</span>}
+        {description && <p>{description}</p>}
+      </label>
       <InputContainer>
         <div>
           <input

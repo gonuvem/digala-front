@@ -43,7 +43,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
   return (
     <Container>
       <label htmlFor={id}>
-        {label}
+        <span>{label}</span>
         {description && <p>{description}</p>}
         <div>
           {choices.map((option, index) => (

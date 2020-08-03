@@ -75,8 +75,10 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   return (
     <Container>
-      {label && <span>{label}</span>}
-      {description && <p>{description}</p>}
+      <label>
+        {label && <span>{label}</span>}
+        {description && <p>{description}</p>}
+      </label>
       {options && (
         <CustomSelect
           ref={inputRef}

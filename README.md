@@ -19,6 +19,8 @@
 * O espaçamento da tabela de Matriz está muito pequeno
 * Ao remover uma linha ou coluna durante a edição da matriz está ocorrendo um erro onde valores são substituidos e a impressão que dar é que você está apagando o elemento errado.
 * O espaçamento no campo de texto longo entre a descrição e o input está maior que os outros.
+* Possível bug durante o primeira carregamento da página da pesquisa gerada, está acessando um valor de uma variável undefined
+* Existe uma regra de margin para corrigir o espaçamento das opções no componente de multipla escolha quando ele está em seu formato horizontal, que está interferindo no seu display vertical
 
 # Survey Builder
 
@@ -128,3 +130,5 @@
 * Temos que gerenciar melhor a memória no front, atualmente temos dados duplicados em três lugares: Redux, Apollo e Estado Local. A priori eu penso logo em não usara cache do Apollo mais.
 
 * Tem que revisar o projeto para corrigir os renders que estão ocorrendo mais do que o necessário.
+
+* Os campos tem que ter uma estrutura mais padronizada para funcionarem em melhor harmonia

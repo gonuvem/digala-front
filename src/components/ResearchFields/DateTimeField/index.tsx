@@ -25,7 +25,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   return (
     <Container selectRange={selectRange}>
       <label htmlFor="">
-        {label}
+        <span>{label}</span>
         <p>{description}</p>
       </label>
       <div id="inputs">

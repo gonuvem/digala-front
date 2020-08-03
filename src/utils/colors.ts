@@ -7,6 +7,7 @@ export default {
   smokeWhite: '#F4F4F4',
   smokeWhiteSecondary: '#FAFAFA',
   primary: '#3475D2',
+  darkPrimary: '#20477F',
   primaryOpacity: 'rgba(52, 117, 210, 0.7)',
   option: '#5C8CD1',
   secondary: '#C85C83',

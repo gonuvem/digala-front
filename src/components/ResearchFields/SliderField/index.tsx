@@ -27,8 +27,8 @@ const SliderField: React.FC<SliderFieldProps> = ({
 
   return (
     <Container>
-      <label>
-        {label && label}
+      <label htmlFor="">
+        {label && <span>{label}</span>}
         {description && <p>{description}</p>}
       </label>
       <div>

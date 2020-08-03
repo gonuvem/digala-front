@@ -10,11 +10,14 @@ export const Container = styled.div`
   flex-direction: column;
 
   label {
-    font-weight: 500;
-    color: ${Colors.black};
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
+
+    span {
+      font-weight: 500;
+      color: ${Colors.black};
+    }
 
     p {
       font-weight: 400;
