@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useField } from '@unform/core';
 import { Container, CardImage } from './styles';
 
 import { ImageChoice } from '../../../store/ducks/questions/types';
@@ -22,23 +23,18 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
   choices,
   id,
 }) => {
-  const [selectedImages, setSelectedImages] = useState<number[]>([]);
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+  const { fieldName, registerField, error, defaultValue } = useField(name);
 
-  const handleSelectImage = useCallback(
-    (index: number) => {
-      if (multipleChoice) {
-        setSelectedImages((state) => {
-          if (state.includes(index)) {
-            return state;
-          }
-          return [...state.slice(-1 * (choiceMaxAmmount - 1)), index];
-        });
-        return;
-      }
-      setSelectedImages([index]);
-    },
-    [multipleChoice, choiceMaxAmmount],
-  );
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRefs.current,
+      getValue: (refs: HTMLInputElement[]) => {
+        return refs.filter((ref) => ref.checked).map((ref) => ref.value);
+      },
+    });
+  }, [fieldName, registerField]);
 
   return (
     <Container>
@@ -47,15 +43,19 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
         {description && <p>{description}</p>}
         <div>
           {choices.map((option, index) => (
-            <CardImage
-              image={option.image}
-              isSelected={selectedImages.includes(index)}
-              onClick={() => handleSelectImage(index)}
-            >
-              <div>
-                <button type="button" />
-                <p>{option.label}</p>
-              </div>
+            <CardImage image={option.image}>
+              <label htmlFor={option.id}>
+                <input
+                  ref={(ref) => {
+                    inputRefs.current[index] = ref as HTMLInputElement;
+                  }}
+                  type="checkbox"
+                  value={option.id}
+                  id={option.id}
+                />
+                <span />
+                {option.label}
+              </label>
             </CardImage>
           ))}
         </div>
