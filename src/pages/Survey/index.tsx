@@ -48,8 +48,6 @@ const Survey: React.FC = () => {
     return <h1>Loading survey...</h1>;
   }
 
-  console.log('Survey >> ', survey);
-
   return (
     <Container>
       <Helmet>

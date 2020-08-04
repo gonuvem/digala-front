@@ -26,6 +26,7 @@
 * No painel de configuração do Texto Longo o campo Placeholder está como 'label'
 * O fluxo de atualizar não está deixando publicar a pesquisa com nenhuma questão
 
+
 # Survey Builder
 
 **RF**
