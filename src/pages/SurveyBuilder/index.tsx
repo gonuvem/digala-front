@@ -19,7 +19,6 @@ import {
   LIST_QUESTION_TYPES,
 } from '../../services/requests/questions';
 import loadOwnForm from '../../services/logic/loadOwnForm';
-
 const SurveyBuilder: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -35,6 +34,7 @@ const SurveyBuilder: React.FC = () => {
   });
 
   useEffect(() => {
+    console.log(formData);
     if (
       formData?.data?.form?.config?.beginDate &&
       formData?.data?.form?.config?.endDate
