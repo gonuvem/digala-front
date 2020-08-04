@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { uuid } from 'uuidv4';
 
 import Option from '../../Common/Option';
@@ -30,13 +30,11 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   label,
   description,
   anotherOption,
-  randomSort,
   rowDirection = false,
 }) => {
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
-  const [refresh, setRefresh] = useState(false);
   const another = { id: uuid(), content: 'outros(a)' };
 
   useEffect(() => {
@@ -48,7 +46,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   return (
     <Container>
       <label htmlFor={id}>
-        {label}
+        <span>{label}</span>
         {description && <p>{description}</p>}
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&

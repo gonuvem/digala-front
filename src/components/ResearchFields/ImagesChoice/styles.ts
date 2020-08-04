@@ -9,10 +9,14 @@ interface CardImage {
 
 export const Container = styled.div`
   > label {
-    font-weight: 500;
-    color: ${Colors.black};
     display: flex;
     flex-direction: column;
+
+    span {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: ${Colors.black};
+    }
 
     label + label {
       margin-top: 1rem;
@@ -20,7 +24,7 @@ export const Container = styled.div`
 
     > p {
       font-weight: 400;
-      margin: 0.5rem 0 1rem 0;
+      margin-bottom: 1rem;
     }
 
     div {

@@ -7,7 +7,7 @@ import { Container } from './styles';
 
 interface DateTimeFieldProps {
   label: string;
-  description: string;
+  description?: string;
   name: string;
   selectRange?: boolean;
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
@@ -25,7 +25,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   return (
     <Container selectRange={selectRange}>
       <label htmlFor="">
-        {label}
+        <span>{label}</span>
         <p>{description}</p>
       </label>
       <div id="inputs">

@@ -9,7 +9,6 @@ interface SliderFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   maxValue: number;
   leftSubtitle?: string;
   rightSubtitle?: string;
-  isRequired?: boolean;
 }
 
 const SliderField: React.FC<SliderFieldProps> = ({
@@ -19,7 +18,6 @@ const SliderField: React.FC<SliderFieldProps> = ({
   maxValue,
   leftSubtitle,
   rightSubtitle,
-  isRequired,
 }) => {
   const [valueRange, setValueRange] = useState(0);
 
@@ -29,8 +27,8 @@ const SliderField: React.FC<SliderFieldProps> = ({
 
   return (
     <Container>
-      <label>
-        {label && label}
+      <label htmlFor="">
+        {label && <span>{label}</span>}
         {description && <p>{description}</p>}
       </label>
       <div>

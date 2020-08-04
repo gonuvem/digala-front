@@ -75,6 +75,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
     },
     [debouncedTrigger, dispatch],
   );
+
   return (
     <Container>
       <Form ref={formRef} initialData={formData?.style} onSubmit={() => null}>

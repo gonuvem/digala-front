@@ -7,6 +7,7 @@ export const Container = styled.div`
   span {
     display: inline-block;
     font-weight: 500;
+    margin-bottom: 0.5rem;
   }
 
   > p {

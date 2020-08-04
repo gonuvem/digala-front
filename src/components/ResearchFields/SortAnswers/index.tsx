@@ -12,7 +12,6 @@ interface SortAnswersProps {
   label: string;
   description?: string;
   listOptions?: ListOptions[];
-  randomSort?: boolean;
 }
 
 interface ListOptions {
@@ -36,11 +35,8 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   label,
   description,
   listOptions,
-  randomSort = false,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>(listOptions || []);
-
-  const [refresh, setRefresh] = useState(false);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -65,7 +61,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   return (
     <Container>
       <label htmlFor="id">
-        {label}
+        <span>{label}</span>
         {description && <p>{description}</p>}
         {options && (
           <DragDropContext onDragEnd={(result) => onDragEnd(result)}>

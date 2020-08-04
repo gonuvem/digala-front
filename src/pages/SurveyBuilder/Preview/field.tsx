@@ -129,7 +129,6 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           rightSubtitle={config?.rightSubtitle}
           scale={config?.scale || 10}
           startZero={config?.startZero || false}
-          isRequired={config?.isRequired || false}
         />
       );
     case FieldsTypes.Slider:
@@ -146,6 +145,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     case FieldsTypes.ImageChoice:
       return (
         <ImagesChoice
+          name={config?.name || 'images-choice-field-name'}
           label={config?.label || ''}
           description={config?.description || ''}
           id={config?.id || ''}
@@ -160,7 +160,6 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label || ''}
           description={config?.description}
           listOptions={config?.listOptions}
-          randomSort={config?.randomSort}
         />
       );
     case FieldsTypes.Number:
@@ -206,7 +205,6 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label}
           description={config?.description}
           listOptions={config?.listOptions}
-          randomSort={config?.randomSort}
         />
       );
     default:
