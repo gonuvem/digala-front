@@ -239,11 +239,13 @@ export const SurveyBody = styled.div`
   }
 
   @media (max-width: 670px) {
-    max-width: 100%;
+    max-width: 95%;
     padding: 0 1rem;
     margin-top: 2rem;
 
     form {
+      width: auto;
+
       button {
         width: 100%;
       }
