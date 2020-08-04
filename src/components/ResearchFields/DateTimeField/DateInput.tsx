@@ -12,9 +12,13 @@ import { InputContainer, CalendarContainer } from './styles';
 
 interface DateInputProps {
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
+  childrenCalendarRef: any;
 }
 
-const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
+const DateInput: React.FC<DateInputProps> = ({
+  dateFormat,
+  childrenCalendarRef,
+}) => {
   const calendarRef = useRef(null);
   const [dateValue, setDateValue] = useState('');
   const [showCalendar, setShowCalendar] = useState(false);
@@ -44,6 +48,7 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
   return (
     <InputContainer>
       <InputMask
+        ref={childrenCalendarRef}
         onClick={() => setShowCalendar((state) => !state)}
         onChange={handleChangeDate}
         mask={dateFormats[dateFormat].mask}
