@@ -21,7 +21,6 @@ interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   label?: string;
   description?: string;
   listOptions?: OptionsProps[];
-  randomSort?: boolean;
 }
 
 // I have to fix the type of this parameter later
@@ -36,7 +35,6 @@ const SelectField: React.FC<SelectFieldProps> = ({
   name,
   description,
   listOptions,
-  randomSort,
   ...rest
 }) => {
   const inputRef = useRef(null);
@@ -77,8 +75,10 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   return (
     <Container>
-      {label && <span>{label}</span>}
-      {description && <p>{description}</p>}
+      <label>
+        {label && <span>{label}</span>}
+        {description && <p>{description}</p>}
+      </label>
       {options && (
         <CustomSelect
           ref={inputRef}

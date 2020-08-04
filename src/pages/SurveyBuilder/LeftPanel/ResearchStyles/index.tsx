@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
-import { Container, DashedContainer, Section } from './styles';
+import { Container, Section } from './styles';
 
 import SwitchToggle from '../../../../components/Common/ToggleSwitch';
 import ShortTextField from '../../../../components/ResearchFields/ShortTextField';
@@ -12,7 +12,6 @@ import LogoUpload from '../../../../components/Common/LogoUpload';
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
 import useDebounce from '../../../../hooks/useDebounce';
-
 const colors = [
   '#FFA825',
   '#EB1D63',
@@ -63,11 +62,11 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   }, [debouncedTrigger, dispatch]);
 
   const handleUploadLogo = useCallback(
-    (url: string) => {
+    (image: string) => {
       const data = formRef.current?.getData();
       const dataUrl = {
         ...data,
-        logo: url,
+        logo: image,
       };
       changeFormConfiguration(dispatch, {
         attribute: 'style',
@@ -76,6 +75,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
     },
     [debouncedTrigger, dispatch],
   );
+
   return (
     <Container>
       <Form ref={formRef} initialData={formData?.style} onSubmit={() => null}>
@@ -92,10 +92,9 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         </Section>
         <Section>
           <LogoUpload
-            name="logo"
             label="Logo"
             onChange={(value: any) => {
-              handleUploadLogo(value?.image);
+              handleUploadLogo(value);
             }}
             logo={formData?.style?.logo || defaultLogo}
           />

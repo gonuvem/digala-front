@@ -1,12 +1,14 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
 
-import ShortTextField from '../../components/ResearchFields/ShortTextField';
+import { ISurvey } from './ISurvey';
+
 import SolidButton from '../../components/Common/SolidButton';
+import Question from './question';
 
 import gonuvemLogo from '../../assets/GONUVEM_HOR.png';
 
@@ -18,45 +20,11 @@ import {
   ProgressBar,
   Step,
   FormArea,
+  QuestionWrapper,
 } from './styles';
 
 import Colors from '../../utils/colors';
-
 import { SHOW_FORM } from '../../services/requests/survey';
-
-const fakeResearchProps = {
-  backgroundColor: '#faf0af',
-  headerColor: '#f1c5c5',
-  footerColor: '#8bcdcd',
-  headerLogo:
-    'https://www.freepnglogos.com/uploads/logo-adidas-vector-png-32.png',
-};
-
-interface ISurvey {
-  _id: string;
-  config: {
-    name: string;
-    description?: string;
-    beginDate?: Date;
-    endDate?: Date;
-    hasLimitedResponses: boolean;
-    maxResponses?: number;
-    isTotemMode: boolean;
-    canDisplayProgressBar: boolean;
-    progressBarType?: string;
-    canAllowMultipleSubmissions: boolean;
-  };
-  style: {
-    background?: string;
-    logo?: string;
-    headerText?: string;
-    hasLogoInHeader: boolean;
-    headerBackground?: string;
-    footerText?: string;
-    footerBackground?: string;
-  };
-  numResponses?: number;
-}
 
 const Survey: React.FC = () => {
   const { id } = useParams();
@@ -72,11 +40,13 @@ const Survey: React.FC = () => {
     return {};
   }, [surveyLoading, surveyData]);
 
+  const onSubmit = useCallback((formData) => {
+    console.log('Form Data >> ', formData);
+  }, []);
+
   if (surveyLoading) {
     return <h1>Loading survey...</h1>;
   }
-
-  console.log('Survey Data >> ', survey);
 
   return (
     <Container>
@@ -93,8 +63,8 @@ const Survey: React.FC = () => {
         <SurveyHeader
           backgroundColor={survey.style.headerBackground || Colors.smokeWhite}
         >
-          {fakeResearchProps && (
-            <img src={fakeResearchProps.headerLogo} alt="logo da pesquisa" />
+          {survey.style.hasLogoInHeader && (
+            <img src={survey.style.logo} alt="logo da pesquisa" />
           )}
           <div>
             <h3>{survey.config.name}</h3>
@@ -104,14 +74,13 @@ const Survey: React.FC = () => {
         <FormArea>
           {survey.config.canDisplayProgressBar && (
             <div id="progress-wrapper">
-              <ProgressBar pagesCount={2}>
+              <ProgressBar pagesCount={survey.numPages}>
                 <div>
-                  <Step filled>
-                    <p>1</p>
-                  </Step>
-                  <Step>
-                    <p>1</p>
-                  </Step>
+                  {Array.from({ length: survey.numPages }, (_, number) => (
+                    <Step filled>
+                      <p>{number + 1}</p>
+                    </Step>
+                  ))}
                   <Step>
                     <FiCheck size={16} />
                   </Step>
@@ -119,14 +88,12 @@ const Survey: React.FC = () => {
               </ProgressBar>
             </div>
           )}
-          <Form onSubmit={() => null}>
-            <ShortTextField
-              name="fake-short-text"
-              id="fake-short-text-id"
-              label="Texto Curto"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
-              placeholder="Insira o nome aqui"
-            />
+          <Form onSubmit={onSubmit}>
+            {survey.questions.map((question) => (
+              <QuestionWrapper>
+                <Question question={question} />
+              </QuestionWrapper>
+            ))}
             <div id="form-separator" />
             <SolidButton hasShadow={false}>Enviar</SolidButton>
           </Form>

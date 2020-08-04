@@ -8,10 +8,13 @@ interface ViewOptionsProps {
 
 export const Container = styled.div`
   > label {
-    font-weight: 500;
-    color: ${Colors.black};
     display: flex;
     flex-direction: column;
+
+    span {
+      font-weight: 500;
+      color: ${Colors.black};
+    }
 
     p {
       font-weight: 400;

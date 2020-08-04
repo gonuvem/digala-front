@@ -9,10 +9,13 @@ interface DragContainerProps {
 
 export const Container = styled.div`
   > label {
-    font-weight: 500;
-    color: ${Colors.black};
     display: flex;
     flex-direction: column;
+
+    span {
+      font-weight: 500;
+      color: ${Colors.black};
+    }
 
     label + label {
       margin-top: 1rem;

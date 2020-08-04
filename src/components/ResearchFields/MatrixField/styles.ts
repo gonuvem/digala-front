@@ -8,14 +8,17 @@ export const Container = styled.div`
   flex-direction: column;
 
   label {
-    font-weight: 500;
-    color: ${Colors.black};
     display: flex;
     flex-direction: column;
 
+    span {
+      font-weight: 500;
+      color: ${Colors.black};
+      margin-bottom: 0.5rem;
+    }
+
     p {
       font-weight: 400;
-      margin-top: 0.5rem;
       margin-bottom: 1rem;
     }
   }

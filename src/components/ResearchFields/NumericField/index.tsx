@@ -34,7 +34,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField, error, defaultValue = 1 } = useField(name);
 
   const handleChangeInValue = useCallback(
     (signal: number) => {
@@ -60,8 +60,10 @@ const NumericField: React.FC<NumericFieldProps> = ({
 
   return (
     <Container>
-      {label && <span>{label}</span>}
-      {description && <p>{description}</p>}
+      <label htmlFor="">
+        {label && <span>{label}</span>}
+        {description && <p>{description}</p>}
+      </label>
       <InputContainer>
         <div>
           <input

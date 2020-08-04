@@ -81,11 +81,16 @@ export const SurveyHeader = styled.div<SurveyHeaderProps>`
 
 export const FormArea = styled.div`
   display: flex;
-  position: relative;
   flex-direction: row-reverse;
+  position: relative;
+  width: 100%;
 
   #progress-wrapper {
     position: absolute;
+  }
+
+  form {
+    width: 100%;
   }
 
   @media (max-width: 670px) {
@@ -94,6 +99,19 @@ export const FormArea = styled.div`
     #progress-wrapper {
       position: relative;
     }
+  }
+`;
+
+export const QuestionWrapper = styled.div`
+  width: 100%;
+
+  & + div {
+    margin-top: 2.5rem;
+  }
+
+  & > div label:first-child span {
+    font-size: 1.3rem;
+    color: ${Colors.darkPrimary};
   }
 `;
 
@@ -113,7 +131,7 @@ export const ProgressBar = styled.div<ProgressBarProps>`
     align-items: center;
 
     width: 8px;
-    height: ${(props) => `${4.5 * props.pagesCount}rem`};
+    height: ${(props) => `${8.5 * props.pagesCount}rem`};
 
     background-color: ${Colors.smokeWhite};
     border-radius: 8px;
@@ -193,6 +211,7 @@ export const SurveyBody = styled.div`
     flex-direction: column;
     align-items: center;
 
+    min-width: 0;
     padding: 1.5rem 2rem;
 
     background-color: ${Colors.white};
@@ -211,7 +230,7 @@ export const SurveyBody = styled.div`
 
   #survey-separator {
     height: 2px;
-    width: 25%;
+    width: 50%;
 
     margin-top: 3rem;
     margin-bottom: 2rem;
@@ -220,11 +239,13 @@ export const SurveyBody = styled.div`
   }
 
   @media (max-width: 670px) {
-    max-width: 100%;
+    max-width: 95%;
     padding: 0 1rem;
     margin-top: 2rem;
 
     form {
+      width: auto;
+
       button {
         width: 100%;
       }

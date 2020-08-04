@@ -12,11 +12,12 @@ import { ApplicationState } from '../../../store';
 import { Form } from '../../../store/ducks/forms/types';
 import { Question } from '../../../store/ducks/questions/types';
 import { UPDATE_FORM, CREATE_OWN_FORM } from '../../../services/requests/forms';
-import { CREATE_OWN_QUESTIONS } from '../../../services/requests/questions';
+import {
+  CREATE_OWN_QUESTIONS,
+  LIST_QUESTION_TYPES,
+} from '../../../services/requests/questions';
 import updateOwnFormData from '../../../services/logic/updateOwnFormData';
 import createOwnQuestions from '../../../services/logic/createOwnQuestions';
-
-import { LIST_QUESTION_TYPES } from '../../../services/requests/questions';
 
 const Pagination: React.FC = () => {
   const [pagesCount, setPagesCount] = useState(1);
@@ -49,17 +50,17 @@ const Pagination: React.FC = () => {
   );
 
   const handleUpdate = useCallback(() => {
-    // if (formData?.id && questionTypes) {
-    //   createOwnQuestions(
-    //     createQuestions,
-    //     questionsData,
-    //     formData?.id,
-    //     questionTypes,
-    //   );
-    // }
-    // console.log(formData);
+    if (formData?.id && questionTypes) {
+      createOwnQuestions(
+        createQuestions,
+        questionsData,
+        formData?.id,
+        questionTypes,
+      );
+    }
     updateOwnFormData(updateForm, formData);
   }, [formData, updateForm, questionsData]);
+
   return (
     <Container>
       <SolidButton onClick={handleUpdate}>
