@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
 
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
@@ -22,6 +23,31 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   dateFormat,
   timeFormat,
 }) => {
+  const childrenCalendarRef = useRef<HTMLInputElement>(null);
+  const endDateCalendarRef = useRef<HTMLInputElement>(null);
+  const childrenTimeInputRef = useRef<HTMLInputElement>(null);
+
+  const { fieldName, registerField, error, defaultValue } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: undefined,
+      getValue: (ref: any) => {
+        if (!selectRange) {
+          return {
+            date: childrenCalendarRef.current?.value,
+            time: childrenTimeInputRef.current?.value,
+          };
+        }
+        return {
+          beginDate: childrenCalendarRef.current?.value,
+          endDate: endDateCalendarRef.current?.value,
+        };
+      },
+    });
+  }, [fieldName, registerField, selectRange]);
+
   return (
     <Container selectRange={selectRange}>
       <label htmlFor="">
@@ -30,12 +56,21 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
       </label>
       <div id="inputs">
         {selectRange && <span>De</span>}
-        <DateInput dateFormat={dateFormat} />
+        <DateInput
+          childrenCalendarRef={childrenCalendarRef}
+          dateFormat={dateFormat}
+        />
         <span>{selectRange ? 'Até' : ':'}</span>
         {selectRange ? (
-          <DateInput dateFormat={dateFormat} />
+          <DateInput
+            childrenCalendarRef={endDateCalendarRef}
+            dateFormat={dateFormat}
+          />
         ) : (
-          <TimeInput timeFormat={timeFormat} />
+          <TimeInput
+            childrenTimeInputRef={childrenTimeInputRef}
+            timeFormat={timeFormat}
+          />
         )}
       </div>
     </Container>

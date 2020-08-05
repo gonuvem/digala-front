@@ -4,7 +4,6 @@ import Colors from '../../../utils/colors';
 
 interface CardImage {
   image: string;
-  isSelected: boolean;
 }
 
 export const Container = styled.div`
@@ -45,29 +44,37 @@ export const CardImage = styled.div<CardImage>`
   align-items: flex-end;
   cursor: pointer;
 
-  button {
-    height: 1.2rem;
-    width: 1.2rem;
-    border: none;
-    border-radius: 3px;
-    background: ${(props) =>
-      props.isSelected ? Colors.primary : Colors.white};
-    margin-right: 0.4rem;
+  span {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+    margin-bottom: 0rem !important;
+    background-color: ${Colors.smokeWhite};
+    transition: background-color 0.3s;
   }
 
-  div {
+  input {
+    opacity: 0;
+    position: absolute;
+
+    &:checked ~ span {
+      background-color: ${Colors.primary};
+      border-color: ${Colors.primary};
+    }
+  }
+
+  label {
     display: flex;
     height: 2.1rem;
+    cursor: pointer;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     width: 100%;
     padding: 0 0.6rem;
     align-items: center;
     background-color: ${Colors.secondary};
-    /* mix-blend-mode: multiply; */
-  }
-
-  p {
     font-weight: 500;
     font-size: 0.875rem;
     color: ${Colors.white};
