@@ -19,7 +19,7 @@ const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {
 
   useOutsider(timeSelectorRef, () => setShowTimeSelect(false));
 
-  const timeSelectorTransitions = useTransition(showTimeSelector, null, {
+  const timeSelectorTransitions = useTransition(showTimeSelector, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -60,13 +60,12 @@ const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {
         type="text"
         placeholder={timeFormats[timeFormat].placeholder}
       />
-      {timeSelectorTransitions.map(
-        ({ item, key, props }) =>
+      {timeSelectorTransitions(
+        (props, item) =>
           item && (
             <animated.div
               ref={timeSelectorRef}
               id="time-selector"
-              key={key}
               style={props}
             >
               {hours.map((hour) => (

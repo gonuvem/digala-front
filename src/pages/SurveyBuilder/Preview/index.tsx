@@ -41,7 +41,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     [Question[], FormType | null]
   >((state) => [state.questions.questions, state.forms.form]);
 
-  const transitions = useTransition(showQuestionsPanel, null, {
+  const transitions = useTransition(showQuestionsPanel, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
     enter: { opacity: 1, transform: 'translateY(0)' },
     leave: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -86,10 +86,10 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
           pergunta
           <FiPlusCircle size={24} />
         </button>
-        {transitions.map(
-          ({ item, key, props }) =>
+        {transitions(
+          (props, item) =>
             item && (
-              <QuestionsPanel show={showQuestionsPanel} key={key} style={props}>
+              <QuestionsPanel show={showQuestionsPanel} style={props}>
                 {questionsTypes.map((question) => (
                   <QuestionBox
                     icon={FiSliders}

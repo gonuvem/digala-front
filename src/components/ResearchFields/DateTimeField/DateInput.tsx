@@ -21,7 +21,7 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
 
   useOutsider(calendarRef, () => setShowCalendar(false));
 
-  const calendarTransitions = useTransition(showCalendar, null, {
+  const calendarTransitions = useTransition(showCalendar, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -51,10 +51,10 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
         type="text"
         placeholder={dateFormats[dateFormat].placeholder}
       />
-      {calendarTransitions.map(
-        ({ item, key, props }) =>
+      {calendarTransitions((props, item) => {
+        return (
           item && (
-            <CalendarContainer ref={calendarRef} key={key} style={props}>
+            <CalendarContainer ref={calendarRef} style={props}>
               <Calendar
                 name="dateSelect"
                 onParentChange={handleCalendarChange}
@@ -63,8 +63,9 @@ const DateInput: React.FC<DateInputProps> = ({ dateFormat }) => {
                 prev2Label={null}
               />
             </CalendarContainer>
-          ),
-      )}
+          )
+        );
+      })}
     </InputContainer>
   );
 };
