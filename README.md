@@ -61,12 +61,6 @@
 
 - O input de tempo só poderá aparecer se o usuário explicitar isso na configuração do campo
 
-## Image Choice Field
-
-**RN**
-
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
-
 ## Single Choice Field
 
 **RN**
