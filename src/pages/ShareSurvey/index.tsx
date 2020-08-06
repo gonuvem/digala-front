@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useCallback } from 'react';
+import { toast } from 'react-toastify';
 import { MdMail } from 'react-icons/md';
 import { RiQrCodeLine } from 'react-icons/ri';
 import { AiFillHtml5 } from 'react-icons/ai';
@@ -26,12 +27,27 @@ import telegram from '../../assets/telegram_icon.png';
 import twitter from '../../assets/twitter_icon.png';
 
 const ShareSurvey: React.FC = () => {
+  const surveyUrlFieldRef = useRef<HTMLInputElement>(null);
+
   const surveyUrl = useMemo(() => {
     if (window) {
       const url = window.location.href.replace('share', 'survey');
       return url;
     }
     return '';
+  }, []);
+
+  const copySurveyUrlToClipboard = useCallback(() => {
+    try {
+      if (!document.queryCommandSupported('copy')) {
+        throw new Error();
+      }
+      surveyUrlFieldRef.current?.select();
+      document.execCommand('copy');
+      toast.info('Link copiado com sucesso!');
+    } catch (err) {
+      toast.error('Ocorreu um erro ao tentar copiar a url');
+    }
   }, []);
 
   return (
@@ -54,8 +70,14 @@ const ShareSurvey: React.FC = () => {
               <div>
                 <p>Copie o link e envie-o para compartilhar a pesquisa</p>
                 <div>
-                  <input type="text" value={surveyUrl} />
-                  <ButtonCopy>COPIAR</ButtonCopy>
+                  <input
+                    ref={surveyUrlFieldRef}
+                    type="text"
+                    value={surveyUrl}
+                  />
+                  <ButtonCopy onClick={copySurveyUrlToClipboard}>
+                    COPIAR
+                  </ButtonCopy>
                 </div>
               </div>
               <Separator />
