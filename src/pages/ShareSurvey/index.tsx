@@ -28,7 +28,8 @@ import twitter from '../../assets/twitter_icon.png';
 const ShareSurvey: React.FC = () => {
   const surveyUrl = useMemo(() => {
     if (window) {
-      return window.location.href;
+      const url = window.location.href.replace('share', 'survey');
+      return url;
     }
     return '';
   }, []);

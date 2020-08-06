@@ -20,7 +20,7 @@ const Routes: React.FC = () => (
       isPrivate
       component={SurveyBuilder}
     />
-    <ProtectedRoute path="/share" isPrivate component={ShareSurvey} />
+    <ProtectedRoute path="/share/:id" isPrivate component={ShareSurvey} />
 
     <Route path="/survey/:id" component={Survey} />
   </Switch>
