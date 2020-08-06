@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
+import Modal from 'react-modal';
 
 import Colors from '../../utils/colors';
 
@@ -117,6 +118,16 @@ export const ShareOptions = styled.div`
     text-decoration: none;
     text-align: left;
     background: ${Colors.smokeWhite};
+
+    div {
+      transition: border 0.3s ease;
+    }
+
+    &:hover {
+      > div {
+        border: solid 5px ${Colors.white};
+      }
+    }
   }
 
   button + button {
@@ -171,5 +182,48 @@ export const ButtonCopy = styled.button`
 
   &:hover {
     background: ${shade(0.2, Colors.primary)};
+  }
+`;
+
+export const ModalShareSurvey = styled(Modal).attrs({
+  style: { overlay: { background: Colors.blackOpacity } },
+})`
+  display: flex;
+  position: static;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  max-width: 30rem;
+  transform: translateY(50%);
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+
+  background-color: ${Colors.white};
+  border-radius: 4px;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    text-align: justify;
+  }
+
+  button {
+    margin-top: 1.5rem;
+
+    background: transparent;
+    border: none;
+
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: ${Colors.darkPrimary};
+    text-decoration: none;
+  }
+
+  a {
+    visibility: hidden;
   }
 `;

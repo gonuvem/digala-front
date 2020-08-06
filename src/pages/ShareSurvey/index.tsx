@@ -1,5 +1,12 @@
-import React, { useMemo, useRef, useCallback } from 'react';
+import React, {
+  useState,
+  useMemo,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react';
 import { toast } from 'react-toastify';
+import QRCode from 'qrcode.react';
 import { MdMail } from 'react-icons/md';
 import { RiQrCodeLine } from 'react-icons/ri';
 import { AiFillHtml5 } from 'react-icons/ai';
@@ -19,6 +26,7 @@ import {
   NavLink,
   ButtonMedia,
   ButtonCopy,
+  ModalShareSurvey,
 } from './styles';
 
 import whatsapp from '../../assets/whatsapp_icon.png';
@@ -28,6 +36,8 @@ import twitter from '../../assets/twitter_icon.png';
 
 const ShareSurvey: React.FC = () => {
   const surveyUrlFieldRef = useRef<HTMLInputElement>(null);
+  const downloadQrCodeAnchorRef = useRef<HTMLAnchorElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const surveyUrl = useMemo(() => {
     if (window) {
@@ -48,6 +58,29 @@ const ShareSurvey: React.FC = () => {
     } catch (err) {
       toast.error('Ocorreu um erro ao tentar copiar a url');
     }
+  }, []);
+
+  const handleShareByQRCode = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const handleDownloadQRCode = useCallback(() => {
+    const canvas = document.getElementById(
+      'qr-code-canvas',
+    ) as HTMLCanvasElement;
+    canvas.toBlob(
+      (blob) => {
+        if (downloadQrCodeAnchorRef.current) {
+          downloadQrCodeAnchorRef.current.href = URL.createObjectURL(blob);
+          downloadQrCodeAnchorRef.current.download = 'QRCode.jpg';
+          downloadQrCodeAnchorRef.current.click();
+
+          URL.revokeObjectURL(downloadQrCodeAnchorRef.current.href);
+        }
+      },
+      'image/jpeg',
+      0.9,
+    );
   }, []);
 
   return (
@@ -114,7 +147,7 @@ const ShareSurvey: React.FC = () => {
                 eiusmod tempor incididunt ut labore et dolore magna aliqua
               </p>
             </button>
-            <button type="button">
+            <button onClick={handleShareByQRCode} type="button">
               <CardOption gradientColor="180deg, #C85C83 0%, #FF75A7 100%">
                 <RiQrCodeLine />
               </CardOption>
@@ -136,6 +169,25 @@ const ShareSurvey: React.FC = () => {
             </button>
           </ShareOptions>
         </Container>
+        <ModalShareSurvey
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+          closeTimeoutMS={300}
+        >
+          <h2>QR Code</h2>
+          <p>
+            Você pode colocar esse QRCode em suas redes sociais, campanhas
+            publicitarias entre outros vários locais. Qualquer pessoa com um
+            celular smartphone pode ler e irá direto para sua pesquisa
+          </p>
+          <QRCode id="qr-code-canvas" value={surveyUrl} size={256} />
+          <button type="button" onClick={handleDownloadQRCode}>
+            Baixar QRCode
+          </button>
+          <a ref={downloadQrCodeAnchorRef} href="/share">
+            Link
+          </a>
+        </ModalShareSurvey>
       </Layout>
     </>
   );
