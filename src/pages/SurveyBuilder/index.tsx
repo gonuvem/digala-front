@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
@@ -19,42 +19,34 @@ import {
   LIST_QUESTION_TYPES,
 } from '../../services/requests/questions';
 import loadOwnForm from '../../services/logic/loadOwnForm';
+
 const SurveyBuilder: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const { data: formData } = useQuery(READ_FORM, { variables: { id } });
+  const { data: form, loading: formLoading } = useQuery(READ_FORM, {
+    variables: { id },
+  });
 
   const { data: questionsList } = useQuery(LIST_OWN_QUESTIONS, {
-    variables: { form: id },
+    variables: { form: id, perPage: 100 },
   });
 
   const { data: questionsTypesData } = useQuery(LIST_QUESTION_TYPES, {
     variables: { perPage: 20 },
   });
 
-  useEffect(() => {
-    console.log(formData);
-    if (
-      formData?.data?.form?.config?.beginDate &&
-      formData?.data?.form?.config?.endDate
-    ) {
-      const year = formData?.data?.form?.config?.beginDate.substr(0, 4);
-      const month = formData?.data?.form?.config?.beginDate.substr(5, 2);
-      const day = formData?.data?.form?.config?.beginDate.substr(8, 2);
-      const beginDate = new Date(year, month - 1, day);
-      formData.data.form.config.beginDate = beginDate;
-
-      const year2 = formData?.data?.form?.config?.endDate.substr(0, 4);
-      const month2 = formData?.data?.form?.config?.endDate.substr(5, 2);
-      const day2 = formData?.data?.form?.config?.endDate.substr(8, 2);
-      const endDate = new Date(year2, month2 - 1, day2);
-      formData.data.form.config.endDate = endDate;
-
-      formData.data.form.config.researchExpireDate = [beginDate, endDate];
+  const formData: any = useMemo(() => {
+    if (!formLoading && form?.data) {
+      return form;
     }
+    return null;
+  }, [formLoading, form]);
 
-    loadOwnForm(dispatch, formData);
+  useEffect(() => {
+    if (formData) {
+      loadOwnForm(dispatch, formData);
+    }
   }, [formData, dispatch]);
 
   useEffect(() => {
@@ -63,7 +55,21 @@ const SurveyBuilder: React.FC = () => {
       return;
     }
     const questions = questionsList?.data?.questions;
-    dispatch(QuestionsActions.loadQuestions(questions));
+    const questionsFormated = [];
+    for (let i = 0; i < questions.length; i++) {
+      const newConfig = questions[i].config;
+      Object.keys(newConfig).forEach(
+        (key) => newConfig[key] == null && delete newConfig[key],
+      );
+      const newQuestion = {
+        ...newConfig,
+        id: questions[i]?._id,
+        alias: questions[i]?.type?.alias,
+      };
+      questionsFormated.push(newQuestion);
+    }
+    console.log(questionsFormated);
+    dispatch(QuestionsActions.loadQuestions(questionsFormated));
   }, [questionsList, dispatch]);
 
   const questionTypes = useMemo(
@@ -74,7 +80,7 @@ const SurveyBuilder: React.FC = () => {
     [questionsTypesData],
   );
 
-  return (
+  return !formLoading ? (
     <>
       <PageHeader />
       <Layout>
@@ -87,6 +93,8 @@ const SurveyBuilder: React.FC = () => {
         </Container>
       </Layout>
     </>
+  ) : (
+    <h3>Carregando</h3>
   );
 };
 
