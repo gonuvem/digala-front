@@ -39,7 +39,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || 'id'}
           label={config?.label}
           description={config?.description}
-          placeholder={config?.shortTextPlaceholder}
+          placeholder={config?.placeholder}
           maxLength={
             config?.limitCharacter ? config?.shortTextMaxValue : undefined
           }
@@ -52,7 +52,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || 'id'}
           label={config?.label}
           description={config?.description}
-          placeholder={config?.shortTextPlaceholder}
+          placeholder={config?.placeholder}
           maxLength={
             config?.limitCharacter ? config?.shortTextMaxValue : undefined
           }

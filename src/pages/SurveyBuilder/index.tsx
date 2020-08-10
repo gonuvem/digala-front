@@ -61,10 +61,15 @@ const SurveyBuilder: React.FC = () => {
       Object.keys(newConfig).forEach(
         (key) => newConfig[key] == null && delete newConfig[key],
       );
+
       const newQuestion = {
-        ...newConfig,
+        ...newConfig[questions[i]?.type?.alias],
+        label: newConfig?.name,
         id: questions[i]?._id,
         alias: questions[i]?.type?.alias,
+        name: newConfig?.name,
+        isRequired: newConfig?.isRequired,
+        description: newConfig?.description,
       };
       questionsFormated.push(newQuestion);
     }

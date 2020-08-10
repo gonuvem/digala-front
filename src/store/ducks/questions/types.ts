@@ -55,7 +55,7 @@ export interface Question {
   /* SortAnswers */
   listOptions?: ListOptionsProps[];
   /* ShortText */
-  shortTextPlaceholder?: string;
+  placeholder?: string;
   limitCharacter?: boolean;
   shortTextMaxValue?: number;
   /* Numeric */

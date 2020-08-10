@@ -49,10 +49,10 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
           <ShortTextField
             label="Texto de exemplo"
             placeholder="Insira o nome aqui"
-            name="shortTextPlaceholder"
+            name="placeholder"
             id="shortTextPlaceholderField"
             onChange={(event) =>
-              handleChange([event.target.value], ['shortTextPlaceholder'])
+              handleChange([event.target.value], ['placeholder'])
             }
           />
         </section>

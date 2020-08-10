@@ -211,7 +211,7 @@ function getTypeQuestion(question: any): any {
         isRequired: question.isRequired,
         description: question?.description,
         longText: {
-          placeholder: question?.shortTextPlaceholder,
+          placeholder: question?.placeholder,
           hasLimitedChars: question.limitCharacter,
           maxChars: question?.shortTextMaxValue,
         },
@@ -302,7 +302,7 @@ function getTypeQuestion(question: any): any {
         isRequired: question.isRequired,
         description: question?.description,
         longText: {
-          placeholder: question?.shortTextPlaceholder,
+          placeholder: question?.placeholder,
           hasLimitedChars: question.limitCharacter,
           maxChars: question?.shortTextMaxValue,
         },
