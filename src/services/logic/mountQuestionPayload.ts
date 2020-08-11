@@ -117,7 +117,7 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
     case FieldsTypes.Dropdown:
       return {
         ...defaultPayload,
-        listOptions: buildOptions(
+        answerOptions: buildOptions(
           question.config.dropDown.answerOptions,
           question.config.dropDown.hasRandomResponsesOrder,
         ),
@@ -153,7 +153,7 @@ export default function mountQuestionPayload(question: SurveyQuestion): any {
     case FieldsTypes.SortList:
       return {
         ...defaultPayload,
-        listOptions: buildChoices(
+        answerOptions: buildChoices(
           question.config.sortList.answerOptions,
           question.config.sortList.hasRandomResponsesOrder,
         ),

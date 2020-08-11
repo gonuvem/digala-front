@@ -76,7 +76,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           id={config?.id || ''}
           description={config?.description || ''}
-          choices={config?.listOptions}
+          choices={config?.answerOptions}
           anotherOption={config?.anotherOption}
           randomSort={config?.randomSort}
           rowDirection={config?.rowDirection}
@@ -89,7 +89,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           id={config?.id || ''}
           description={config?.description || ''}
-          choices={config?.listOptions}
+          choices={config?.answerOptions}
           anotherOption={config?.anotherOption}
           randomSort={config?.randomSort}
           rowDirection={config?.rowDirection}
@@ -159,7 +159,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
         <SortAnswer
           label={config?.label || ''}
           description={config?.description}
-          listOptions={config?.listOptions}
+          answerOptions={config?.answerOptions}
         />
       );
     case FieldsTypes.Number:
@@ -204,7 +204,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           label={config?.label}
           description={config?.description}
-          listOptions={config?.listOptions}
+          answerOptions={config?.answerOptions}
         />
       );
     default:

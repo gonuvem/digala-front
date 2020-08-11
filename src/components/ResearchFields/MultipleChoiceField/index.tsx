@@ -7,7 +7,7 @@ import { Container, ViewOptions } from './styles';
 
 interface ChoicesProps {
   id: string;
-  content: string;
+  text: string;
 }
 
 interface SingleChoiceFieldProps {
@@ -41,7 +41,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   );
   const [checkeds, setCheckeds] = useState<string[]>([]);
 
-  const another = { id: uuid(), content: 'outros(a)' };
+  const another = { id: uuid(), text: 'outros(a)' };
 
   useEffect(() => {
     if (choices) {
@@ -79,7 +79,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 type="checkbox"
                 id={choice.id}
                 fieldName={name}
-                label={choice.content}
+                label={choice.text}
                 checked={checkeds.includes(choice.id)}
                 onChange={(event: any) => handleOptionClick(event, choice.id)}
               />
@@ -89,7 +89,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
               type="checkbox"
               id={another.id}
               fieldName={name}
-              label={another.content}
+              label={another.text}
             />
           )}
         </ViewOptions>

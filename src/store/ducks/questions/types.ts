@@ -53,7 +53,7 @@ export interface Question {
   imgChoices?: ImageChoice[];
   randomSort?: boolean;
   /* SortAnswers */
-  listOptions?: ListOptionsProps[];
+  answerOptions?: ListOptionsProps[];
   /* ShortText */
   placeholder?: string;
   limitCharacter?: boolean;
@@ -75,7 +75,7 @@ export interface Question {
 
 interface ListOptionsProps {
   id: string;
-  content: string;
+  text: string;
   value?: string;
   label?: string;
 }

@@ -11,7 +11,7 @@ import { Container, DragContainer, Option } from './styles';
 interface SortAnswersProps {
   label: string;
   description?: string;
-  listOptions?: ListOptions[];
+  answerOptions?: ListOptions[];
 }
 
 interface ListOptions {
@@ -34,9 +34,11 @@ const reorder = (
 const SortAnswers: React.FC<SortAnswersProps> = ({
   label,
   description,
-  listOptions,
+  answerOptions,
 }) => {
-  const [options, setOptions] = useState<Array<ListOptions>>(listOptions || []);
+  const [options, setOptions] = useState<Array<ListOptions>>(
+    answerOptions || [],
+  );
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -53,10 +55,10 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   );
 
   useEffect(() => {
-    if (listOptions) {
-      setOptions(listOptions);
+    if (answerOptions) {
+      setOptions(answerOptions);
     }
-  }, [listOptions, setOptions]);
+  }, [answerOptions, setOptions]);
 
   return (
     <Container>

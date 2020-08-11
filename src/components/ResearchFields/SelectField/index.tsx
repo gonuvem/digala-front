@@ -12,15 +12,16 @@ import { MdArrowDropDown } from 'react-icons/md';
 import { Container, CustomSelect } from './styles';
 
 interface OptionsProps {
-  label?: string;
+  // label?: string;
   value?: string;
+  text?: string;
 }
 
 interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   name: string;
   label?: string;
   description?: string;
-  listOptions?: OptionsProps[];
+  answerOptions?: OptionsProps[];
 }
 
 // I have to fix the type of this parameter later
@@ -34,13 +35,13 @@ const SelectField: React.FC<SelectFieldProps> = ({
   label,
   name,
   description,
-  listOptions,
+  answerOptions,
   ...rest
 }) => {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [options, setOptions] = useState<Array<OptionsProps>>(
-    listOptions || [],
+    answerOptions || [],
   );
 
   const noOptionsMessage = useCallback(() => 'Não há opções', []);
@@ -60,19 +61,28 @@ const SelectField: React.FC<SelectFieldProps> = ({
   }, [fieldName, inputRef, registerField]);
 
   useEffect(() => {
-    if (listOptions) {
-      setOptions(listOptions);
+    if (answerOptions) {
+      const newArray = [];
+      for (let i = 0; i < answerOptions.length; i++) {
+        const option = {
+          label: answerOptions[i].text,
+          value: answerOptions[i].text,
+        };
+        newArray.push(option);
+      }
+      // console.log(newArray);
+      setOptions(newArray);
     }
-  }, [listOptions, options]);
+  }, [answerOptions]);
 
   const defaultSelectValue = useMemo(() => {
-    const defaultOption = listOptions?.find(
-      (option) => option.value === defaultValue,
+    const defaultOption = answerOptions?.find(
+      (option) => option.text === defaultValue,
     );
 
     return defaultOption;
-  }, [defaultValue, listOptions]);
-
+  }, [defaultValue, answerOptions]);
+  console.log(options);
   return (
     <Container>
       <label>
