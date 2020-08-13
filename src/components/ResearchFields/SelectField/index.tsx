@@ -82,7 +82,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
     return defaultOption;
   }, [defaultValue, answerOptions]);
-  console.log(options);
+
   return (
     <Container>
       <label>

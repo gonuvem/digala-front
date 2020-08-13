@@ -15,8 +15,8 @@ interface SortAnswersProps {
 }
 
 interface ListOptions {
-  id?: string;
-  content?: string;
+  _id?: string;
+  text?: string;
 }
 
 const reorder = (
@@ -59,7 +59,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
       setOptions(answerOptions);
     }
   }, [answerOptions, setOptions]);
-
+  console.log(options);
   return (
     <Container>
       <label htmlFor="id">
@@ -77,8 +77,8 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id ? item.id : ''}
+                      key={item._id}
+                      draggableId={item._id ? item._id : ''}
                       index={index}
                     >
                       {(provided) => (
@@ -90,7 +90,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
                             ...provided.draggableProps.style,
                           }}
                         >
-                          {item.content}
+                          {item.text}
                           <FiMove />
                         </Option>
                       )}
