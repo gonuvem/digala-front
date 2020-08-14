@@ -6,7 +6,7 @@ import Option from '../../Common/Option';
 import { Container, ViewOptions } from './styles';
 
 interface ChoicesProps {
-  id: string;
+  _id: string;
   text: string;
 }
 
@@ -77,11 +77,11 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
             listChoices.map((choice) => (
               <Option
                 type="checkbox"
-                id={choice.id}
+                id={choice._id}
                 fieldName={name}
                 label={choice.text}
-                checked={checkeds.includes(choice.id)}
-                onChange={(event: any) => handleOptionClick(event, choice.id)}
+                checked={checkeds.includes(choice._id)}
+                onChange={(event: any) => handleOptionClick(event, choice._id)}
               />
             ))}
           {anotherOption && (

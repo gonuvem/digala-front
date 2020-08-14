@@ -26,7 +26,7 @@ interface DropdownConfigurarionProps {
 }
 
 interface ListOptions {
-  id: string;
+  _id: string;
   text: string;
   label?: string;
   value?: string;
@@ -49,7 +49,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
   field,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
-    { id: uuid(), text: '', label: '', value: '' },
+    { _id: uuid(), text: '', label: '', value: '' },
   ]);
 
   const onDragEnd = useCallback(
@@ -68,7 +68,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
   );
 
   const handleAddOption = useCallback(() => {
-    const newOption = { id: uuid(), text: '', label: '', value: '' };
+    const newOption = { _id: uuid(), text: '', label: '', value: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
@@ -163,8 +163,8 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id}
+                      key={item._id}
+                      draggableId={item._id}
                       index={index}
                     >
                       {(provided) => (

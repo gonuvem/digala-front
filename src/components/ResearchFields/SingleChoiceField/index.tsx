@@ -18,7 +18,7 @@ interface SingleChoiceFieldProps {
 }
 
 interface ChoicesProps {
-  id: string;
+  _id: string;
   text: string;
 }
 
@@ -51,7 +51,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&
             listChoices.map((choice) => (
-              <Option id={choice.id} fieldName={name} label={choice.text} />
+              <Option id={choice._id} fieldName={name} label={choice.text} />
             ))}
           {anotherOption && (
             <Option id={another.id} fieldName={name} label={another.text} />

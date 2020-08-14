@@ -26,7 +26,7 @@ interface SortAnswerConfigurarionProps {
 }
 
 interface ListOptions {
-  id: string;
+  _id: string;
   text: string;
   value?: string;
   label?: string;
@@ -49,7 +49,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
   field,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
-    { id: uuid(), text: '' },
+    { _id: uuid(), text: '' },
   ]);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
   );
 
   const handleAddOption = useCallback(() => {
-    const newOption = { id: uuid(), text: '' };
+    const newOption = { _id: uuid(), text: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
@@ -160,8 +160,8 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id}
+                      key={item._id}
+                      draggableId={item._id}
                       index={index}
                     >
                       {(provided) => (

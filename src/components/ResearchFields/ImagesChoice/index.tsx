@@ -15,7 +15,7 @@ interface ImagesChoiceProps {
 }
 
 interface ListOptionsProps {
-  id: string;
+  _id: string;
   text: string;
   value?: string;
   label?: string;
@@ -52,15 +52,15 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
         <div>
           {choices.map((option, index) => (
             <CardImage image={option?.image || ''}>
-              <label htmlFor={option?.id}>
+              <label htmlFor={option?._id}>
                 {console.log(option)}
                 <input
                   ref={(ref) => {
                     inputRefs.current[index] = ref as HTMLInputElement;
                   }}
                   type="checkbox"
-                  value={option?.id}
-                  id={option?.id}
+                  value={option?._id}
+                  id={option?._id}
                 />
                 <span />
                 {option.text}
