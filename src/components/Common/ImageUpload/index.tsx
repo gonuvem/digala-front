@@ -46,7 +46,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     (imageData) => {
       const newImageOption: ImageChoice = {
         image: imageData.secure_url,
-        label: '',
+        text: '',
         loading: false,
         id: uuid(),
       };
@@ -59,7 +59,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     (event) => {
       const preImageOption: ImageChoice = {
         image: '',
-        label: '',
+        text: '',
         id: '',
         loading: true,
       };

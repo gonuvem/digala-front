@@ -13,7 +13,7 @@ export enum QuestionsTypes {
  */
 export interface ImageChoice {
   image: string;
-  label?: string;
+  text?: string;
   loading: boolean;
   id: string;
 }
@@ -78,6 +78,7 @@ interface ListOptionsProps {
   text: string;
   value?: string;
   label?: string;
+  image?: string;
 }
 
 /**

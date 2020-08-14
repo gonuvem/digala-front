@@ -142,18 +142,20 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           rightSubtitle={config?.rightSubtitle}
         />
       );
-    case FieldsTypes.ImageChoice:
+    case FieldsTypes.ImageChoice: {
+      console.log(config);
       return (
         <ImagesChoice
           name={config?.name || 'images-choice-field-name'}
           label={config?.label || ''}
           description={config?.description || ''}
           id={config?.id || ''}
-          choices={config?.imgChoices || []}
+          choices={config?.answerOptions || []}
           multipleChoice={config?.multipleChoice || false}
           choiceMaxAmmount={config?.choiceMaxAmmount || 2}
         />
       );
+    }
     case FieldsTypes.SortList:
       return (
         <SortAnswer

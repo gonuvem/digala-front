@@ -59,7 +59,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
       setOptions(answerOptions);
     }
   }, [answerOptions, setOptions]);
-  console.log(options);
+
   return (
     <Container>
       <label htmlFor="id">
