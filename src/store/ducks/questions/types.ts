@@ -50,7 +50,7 @@ export interface Question {
   upperLimit?: number;
   hideValue?: boolean;
   /* Images Choice */
-  imgChoices?: ImageChoice[];
+  imgChoices?: ListOptionsProps[];
   randomSort?: boolean;
   /* SortAnswers */
   answerOptions?: ListOptionsProps[];
@@ -79,6 +79,7 @@ interface ListOptionsProps {
   value?: string;
   label?: string;
   image?: string;
+  loading?: boolean;
 }
 
 /**

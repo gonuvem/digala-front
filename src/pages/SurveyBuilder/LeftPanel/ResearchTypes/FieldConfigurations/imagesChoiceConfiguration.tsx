@@ -20,6 +20,15 @@ interface ImagesChoiceConfigurationProps {
   field: Question | undefined;
 }
 
+interface ListOptionsProps {
+  _id: string;
+  text: string;
+  value?: string;
+  label?: string;
+  image?: string;
+  loading?: boolean;
+}
+
 const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   handleChange,
   field,
@@ -27,7 +36,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   const randomSort = useMemo(() => field?.randomSort, [field]);
   const imageChoices = useMemo(() => {
     if (field?.imgChoices) {
-      return field.imgChoices;
+      return field?.imgChoices;
     }
     return [];
   }, [field]);
@@ -43,12 +52,12 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   const addDefaultOption = useCallback(
     (toggleOtherOption) => {
       if (toggleOtherOption) {
-        const otherOption: ImageChoice = {
+        const otherOption: ListOptionsProps = {
           text: '',
           loading: false,
           image:
             'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-          id: 'other-option',
+          _id: 'other-option',
         };
         handleChange(
           [[...imageChoices, otherOption], toggleOtherOption],
@@ -56,7 +65,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
         );
       } else {
         const removedOtherOptionImageChoices = imageChoices.filter(
-          (imageChoice) => imageChoice.id !== 'other-option',
+          (imageChoice) => imageChoice._id !== 'other-option',
         );
         handleChange([removedOtherOptionImageChoices], ['imgChoices']);
       }
@@ -66,6 +75,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
 
   return (
     <Container>
+      {console.log(field?.answerOptions)}
       <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField
@@ -148,7 +158,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
         <section>
           <ImageUpload
             label="Opções"
-            imageOptions={field?.imgChoices || []}
+            imageOptions={field?.answerOptions || []}
             onChange={(value: any) => handleChange([value], ['imgChoices'])}
           />
         </section>

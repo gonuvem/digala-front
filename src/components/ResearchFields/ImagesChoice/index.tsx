@@ -43,7 +43,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
       },
     });
   }, [fieldName, registerField]);
-
+  // console.log(choices);
   return (
     <Container>
       <label htmlFor={id}>
@@ -53,7 +53,6 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
           {choices.map((option, index) => (
             <CardImage image={option?.image || ''}>
               <label htmlFor={option?._id}>
-                {console.log(option)}
                 <input
                   ref={(ref) => {
                     inputRefs.current[index] = ref as HTMLInputElement;

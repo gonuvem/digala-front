@@ -6,14 +6,15 @@ import useDebounce from '../../../../hooks/useDebounce';
 
 import { Container } from './styles';
 
-interface ImageOptionProps {
-  image: string;
+interface ListOptionsProps {
   id: string;
   onChange: Function;
+  text?: string;
+  image?: string;
   loading?: boolean;
 }
 
-const ImageOption: React.FC<ImageOptionProps> = ({
+const ImageOption: React.FC<ListOptionsProps> = ({
   image,
   loading,
   onChange,
@@ -26,7 +27,7 @@ const ImageOption: React.FC<ImageOptionProps> = ({
 
   useEffect(() => {
     if (id !== '') {
-      onChange({ id, label: inputRef.current?.value });
+      onChange({ id, text: inputRef.current?.value });
     }
   }, [debouncedTrigger]);
 

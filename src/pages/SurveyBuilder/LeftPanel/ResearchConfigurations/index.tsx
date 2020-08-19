@@ -68,7 +68,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
     <Container>
       <span>Informações Básicas</span>
       <Form ref={formRef} initialData={formData?.config} onSubmit={() => null}>
-        {console.log(formData)}
+        {/* {console.log(formData)} */}
         <section>
           <ShortTextField
             name="name"

@@ -73,7 +73,7 @@ const SurveyBuilder: React.FC = () => {
       };
       questionsFormated.push(newQuestion);
     }
-    console.log(questionsFormated);
+    // console.log(questionsFormated);
     dispatch(QuestionsActions.loadQuestions(questionsFormated));
   }, [questionsList, dispatch]);
 
