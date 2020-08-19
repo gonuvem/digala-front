@@ -75,7 +75,6 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
 
   return (
     <Container>
-      {console.log(field?.answerOptions)}
       <Form initialData={field} onSubmit={() => null}>
         <section>
           <ShortTextField

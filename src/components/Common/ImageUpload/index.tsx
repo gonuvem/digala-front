@@ -86,6 +86,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           <ImageOption
             key={option._id}
             id={option._id}
+            text={option?.text}
             image={option.image || ''}
             loading={option.loading}
             onChange={handleLabelChange}

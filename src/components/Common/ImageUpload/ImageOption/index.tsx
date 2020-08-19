@@ -18,6 +18,7 @@ const ImageOption: React.FC<ListOptionsProps> = ({
   image,
   loading,
   onChange,
+  text,
   id,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -30,6 +31,12 @@ const ImageOption: React.FC<ListOptionsProps> = ({
       onChange({ id, text: inputRef.current?.value });
     }
   }, [debouncedTrigger]);
+
+  useEffect(() => {
+    if (text) {
+      setInputValue(text);
+    }
+  }, [text]);
 
   return (
     <Container>
