@@ -22,7 +22,7 @@ interface TextAreaFieldProps
 
 const TextAreaField: React.FC<TextAreaFieldProps> = ({
   readOnly = false,
-  placeholder = '',
+  placeholder,
   description,
   name,
   id,

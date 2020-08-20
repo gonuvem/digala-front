@@ -39,7 +39,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || 'id'}
           label={config?.label}
           description={config?.description}
-          placeholder={config?.shortTextPlaceholder}
+          placeholder={config?.placeholder}
           maxLength={
             config?.limitCharacter ? config?.shortTextMaxValue : undefined
           }
@@ -52,7 +52,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || 'id'}
           label={config?.label}
           description={config?.description}
-          placeholder={config?.shortTextPlaceholder}
+          placeholder={config?.placeholder}
           maxLength={
             config?.limitCharacter ? config?.shortTextMaxValue : undefined
           }
@@ -76,7 +76,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           id={config?.id || ''}
           description={config?.description || ''}
-          choices={config?.listOptions}
+          choices={config?.answerOptions}
           anotherOption={config?.anotherOption}
           randomSort={config?.randomSort}
           rowDirection={config?.rowDirection}
@@ -89,7 +89,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           id={config?.id || ''}
           description={config?.description || ''}
-          choices={config?.listOptions}
+          choices={config?.answerOptions}
           anotherOption={config?.anotherOption}
           randomSort={config?.randomSort}
           rowDirection={config?.rowDirection}
@@ -142,24 +142,26 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           rightSubtitle={config?.rightSubtitle}
         />
       );
-    case FieldsTypes.ImageChoice:
+    case FieldsTypes.ImageChoice: {
+      // console.log(config);
       return (
         <ImagesChoice
           name={config?.name || 'images-choice-field-name'}
           label={config?.label || ''}
           description={config?.description || ''}
           id={config?.id || ''}
-          choices={config?.imgChoices || []}
+          choices={config?.answerOptions || []}
           multipleChoice={config?.multipleChoice || false}
           choiceMaxAmmount={config?.choiceMaxAmmount || 2}
         />
       );
+    }
     case FieldsTypes.SortList:
       return (
         <SortAnswer
           label={config?.label || ''}
           description={config?.description}
-          listOptions={config?.listOptions}
+          answerOptions={config?.answerOptions}
         />
       );
     case FieldsTypes.Number:
@@ -204,7 +206,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           label={config?.label}
           description={config?.description}
-          listOptions={config?.listOptions}
+          answerOptions={config?.answerOptions}
         />
       );
     default:

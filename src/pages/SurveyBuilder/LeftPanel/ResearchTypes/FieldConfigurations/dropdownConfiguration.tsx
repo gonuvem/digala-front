@@ -26,8 +26,8 @@ interface DropdownConfigurarionProps {
 }
 
 interface ListOptions {
-  id: string;
-  content: string;
+  _id: string;
+  text: string;
   label?: string;
   value?: string;
 }
@@ -49,7 +49,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
   field,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
-    { id: uuid(), content: '', label: '', value: '' },
+    { _id: uuid(), text: '', label: '', value: '' },
   ]);
 
   const onDragEnd = useCallback(
@@ -62,31 +62,31 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
         result.destination.index,
       );
       setOptions(items);
-      handleChange([items], ['listOptions']);
+      handleChange([items], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
 
   const handleAddOption = useCallback(() => {
-    const newOption = { id: uuid(), content: '', label: '', value: '' };
+    const newOption = { _id: uuid(), text: '', label: '', value: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    handleChange([copyOptions], ['listOptions']);
+    handleChange([copyOptions], ['answerOptions']);
   }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
     (text: string, index: number) => {
       const newArray = options;
 
-      newArray[index].content = text;
+      newArray[index].text = text;
       newArray[index].value = text;
       newArray[index].label = text;
       setOptions(newArray);
 
-      handleChange([newArray], ['listOptions']);
+      handleChange([newArray], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
@@ -96,14 +96,14 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
       const newArray = options;
       newArray.splice(index, 1);
       setOptions(newArray);
-      handleChange([options], ['listOptions']);
+      handleChange([options], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
 
   useEffect(() => {
-    if (field.listOptions) {
-      setOptions([...field.listOptions]);
+    if (field.answerOptions) {
+      setOptions([...field.answerOptions]);
     }
   }, []);
 
@@ -163,8 +163,8 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id}
+                      key={item._id}
+                      draggableId={item._id}
                       index={index}
                     >
                       {(provided) => (
@@ -178,7 +178,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
                         >
                           <input
                             placeholder="Escreva a opção"
-                            defaultValue={item.content}
+                            defaultValue={item.text}
                             onChange={(event) =>
                               handleChangeInput(event.target.value, index)
                             }

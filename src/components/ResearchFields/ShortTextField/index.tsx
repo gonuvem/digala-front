@@ -21,7 +21,7 @@ interface ShortTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const ShortTextField: React.FC<ShortTextFieldProps> = ({
   readOnly = false,
-  placeholder = '',
+  placeholder,
   description,
   name,
   id,
@@ -59,7 +59,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
   return (
     <Container hasFocus={hasFocus} isInvalid={!!error} isFilled={isFilled}>
       <label htmlFor={id}>
-        {label && <span>label</span>}
+        {label && <span>{label}</span>}
         {description && <p>{description}</p>}
         <input
           ref={inputRef}

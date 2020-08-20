@@ -12,7 +12,16 @@ import { ImageChoice } from '../../../store/ducks/questions/types';
 interface ImageUploadProps {
   label?: string;
   onChange: Function;
-  imageOptions: ImageChoice[];
+  imageOptions: ListOptionsProps[];
+}
+
+interface ListOptionsProps {
+  _id: string;
+  text: string;
+  value?: string;
+  label?: string;
+  image?: string;
+  loading?: boolean;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
@@ -27,12 +36,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   }, []);
 
   const handleLabelChange = useCallback(
-    (newData: { id: string; label: string }) => {
+    (newData: { _id: string; text: string }) => {
       const updatedImageOptions = imageOptions.map((imageOption) => {
-        if (imageOption.id === newData.id) {
+        if (imageOption._id === newData._id) {
           return {
             ...imageOption,
-            label: newData.label,
+            text: newData.text,
           };
         }
         return imageOption;
@@ -44,11 +53,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   const onPhotoUploaded = useCallback(
     (imageData) => {
-      const newImageOption: ImageChoice = {
+      const newImageOption: ListOptionsProps = {
         image: imageData.secure_url,
-        label: '',
+        text: '',
         loading: false,
-        id: uuid(),
+        _id: uuid(),
       };
       onChange([...imageOptions, newImageOption]);
     },
@@ -57,10 +66,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
   const handleUploadPhoto = useCallback(
     (event) => {
-      const preImageOption: ImageChoice = {
+      const preImageOption: ListOptionsProps = {
         image: '',
-        label: '',
-        id: '',
+        text: '',
+        _id: '',
         loading: true,
       };
       onChange([...imageOptions, preImageOption]);
@@ -75,9 +84,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       <OptionsContainer>
         {imageOptions.map((option) => (
           <ImageOption
-            key={option.id}
-            id={option.id}
-            image={option.image}
+            key={option._id}
+            id={option._id}
+            text={option?.text}
+            image={option.image || ''}
             loading={option.loading}
             onChange={handleLabelChange}
           />

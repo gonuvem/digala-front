@@ -10,9 +10,13 @@ import useOutsider from '../../../hooks/useOutsider';
 
 interface TimeInputProps {
   timeFormat: 'hourMinute' | 'hourMinuteSecond';
+  childrenTimeInputRef: any;
 }
 
-const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {
+const TimeInput: React.FC<TimeInputProps> = ({
+  timeFormat,
+  childrenTimeInputRef,
+}) => {
   const timeSelectorRef = useRef(null);
   const [timeValue, setTimeValue] = useState('');
   const [showTimeSelector, setShowTimeSelect] = useState(false);
@@ -53,6 +57,7 @@ const TimeInput: React.FC<TimeInputProps> = ({ timeFormat }) => {
   return (
     <InputContainer>
       <InputMask
+        ref={childrenTimeInputRef}
         onClick={() => setShowTimeSelect((state) => !state)}
         onChange={handleChangeTime}
         mask={timeFormats[timeFormat].mask}

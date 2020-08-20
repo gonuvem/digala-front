@@ -13,7 +13,7 @@ export enum QuestionsTypes {
  */
 export interface ImageChoice {
   image: string;
-  label?: string;
+  text?: string;
   loading: boolean;
   id: string;
 }
@@ -50,12 +50,12 @@ export interface Question {
   upperLimit?: number;
   hideValue?: boolean;
   /* Images Choice */
-  imgChoices?: ImageChoice[];
+  imgChoices?: ListOptionsProps[];
   randomSort?: boolean;
   /* SortAnswers */
-  listOptions?: ListOptionsProps[];
+  answerOptions?: ListOptionsProps[];
   /* ShortText */
-  shortTextPlaceholder?: string;
+  placeholder?: string;
   limitCharacter?: boolean;
   shortTextMaxValue?: number;
   /* Numeric */
@@ -74,10 +74,12 @@ export interface Question {
 }
 
 interface ListOptionsProps {
-  id: string;
-  content: string;
+  _id: string;
+  text: string;
   value?: string;
   label?: string;
+  image?: string;
+  loading?: boolean;
 }
 
 /**
