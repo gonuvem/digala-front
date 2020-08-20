@@ -33,7 +33,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   handleChange,
   field,
 }) => {
-  const randomSort = useMemo(() => field?.randomSort, [field]);
+  const randomSort = useMemo(() => field?.hasRandomResponsesOrder, [field]);
   const imageChoices = useMemo(() => {
     if (field?.imgChoices) {
       return field?.imgChoices;
@@ -110,24 +110,24 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ToggleSwitch
             label="Escolha Múltipla"
             helpHint="Caso o usuário possa escolhar mais de uma opção"
-            name="multipleChoice"
+            name="isMultipleChoice"
             onChange={(event) =>
-              handleChange([event.target.checked], ['multipleChoice'])
+              handleChange([event.target.checked], ['isMultipleChoice'])
             }
           />
         </section>
-        {field?.multipleChoice && (
+        {field?.isMultipleChoice && (
           <section>
             <NumberField
               label="Limite de Escolhas"
-              name="choiceMaxAmmount"
+              name="maxChoices"
               id="choiceMaxAmmountField"
               // defaultValue={2}
               onChange={(event) =>
                 parseInt(event.target.value, 10) <= 10
                   ? handleChange(
                       [parseInt(event.target.value, 10)],
-                      ['choiceMaxAmmount'],
+                      ['maxChoices'],
                     )
                   : undefined
               }
@@ -148,9 +148,9 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ToggleSwitch
             label="Ordem das respostas aleatória"
             helpHint="Toda vez que será gerado uma ordem aleatória para as opções"
-            name="randomSort"
+            name="hasRandomResponsesOrder"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])
+              handleChange([event.target.checked], ['hasRandomResponsesOrder'])
             }
           />
         </section>

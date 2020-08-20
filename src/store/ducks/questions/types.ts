@@ -28,8 +28,8 @@ export interface Question {
   link?: {
     validation?: boolean;
   };
-  multipleChoice?: boolean;
-  choiceMaxAmmount?: number;
+  isMultipleChoice?: boolean;
+  maxChoices?: number;
   addOtherOption?: boolean;
   /* Icon Inputs */
   validatePattern?: boolean;
@@ -51,7 +51,7 @@ export interface Question {
   hideValue?: boolean;
   /* Images Choice */
   imgChoices?: ListOptionsProps[];
-  randomSort?: boolean;
+  hasRandomResponsesOrder?: boolean;
   /* SortAnswers */
   answerOptions?: ListOptionsProps[];
   /* ShortText */
@@ -65,7 +65,7 @@ export interface Question {
   maxValue?: number;
   /* SingleChoices */
   anotherOption?: boolean;
-  rowDirection?: boolean;
+  hasHorizontalAlignment?: boolean;
   /* Matrix */
   columns?: string[];
   lines?: string[];

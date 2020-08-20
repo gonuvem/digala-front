@@ -31,6 +31,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     state.questions.questions.find((question) => question.id === fieldId),
   );
 
+  console.log(config);
+
   switch (field?.alias) {
     case FieldsTypes.ShortText:
       return (
@@ -78,8 +80,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           description={config?.description || ''}
           choices={config?.answerOptions}
           anotherOption={config?.anotherOption}
-          randomSort={config?.randomSort}
-          rowDirection={config?.rowDirection}
+          hasRandomResponsesOrder={config?.hasRandomResponsesOrder}
+          rowDirection={config?.hasHorizontalAlignment}
         />
       );
     case FieldsTypes.MultipleChoice:
@@ -91,10 +93,10 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           description={config?.description || ''}
           choices={config?.answerOptions}
           anotherOption={config?.anotherOption}
-          randomSort={config?.randomSort}
-          rowDirection={config?.rowDirection}
-          limitChoices={config?.limitChoices || false}
-          choiceMaxAmmount={config?.choiceMaxAmmount || 2}
+          hasRandomResponsesOrder={config?.hasRandomResponsesOrder}
+          rowDirection={config?.hasHorizontalAlignment}
+          limitChoices={config?.isMultipleChoice || false}
+          choiceMaxAmmount={config?.maxChoices || 2}
         />
       );
     case FieldsTypes.Link:
@@ -151,8 +153,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           description={config?.description || ''}
           id={config?.id || ''}
           choices={config?.answerOptions || []}
-          multipleChoice={config?.multipleChoice || false}
-          choiceMaxAmmount={config?.choiceMaxAmmount || 2}
+          multipleChoice={config?.isMultipleChoice || false}
+          choiceMaxAmmount={config?.maxChoices || 2}
         />
       );
     }
@@ -185,7 +187,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || ''}
           lines={config?.lines || ['']}
           columns={config?.columns || ['']}
-          multipleChoice={config?.multipleChoice || false}
+          multipleChoice={config?.isMultipleChoice || false}
         />
       );
     case FieldsTypes.Phone:
