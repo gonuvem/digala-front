@@ -54,9 +54,9 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
         <ToggleSwitch
           label="Validação de e-mail"
           helpHint="Validar se o formato é um e-mail válido"
-          name="validatePattern"
+          name="hasValidation"
           onChange={(event) =>
-            handleChange([event.target.checked], ['validatePattern'])
+            handleChange([event.target.checked], ['hasValidation'])
           }
         />
       </section>

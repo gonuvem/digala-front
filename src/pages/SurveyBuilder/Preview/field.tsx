@@ -31,7 +31,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
     state.questions.questions.find((question) => question.id === fieldId),
   );
 
-  console.log(config);
+  // console.log(config);
 
   switch (field?.alias) {
     case FieldsTypes.ShortText:
@@ -42,9 +42,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label}
           description={config?.description}
           placeholder={config?.placeholder}
-          maxLength={
-            config?.limitCharacter ? config?.shortTextMaxValue : undefined
-          }
+          maxLength={config?.hasLimitedChars ? config?.maxChars : undefined}
         />
       );
     case FieldsTypes.LongText:
@@ -55,9 +53,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label}
           description={config?.description}
           placeholder={config?.placeholder}
-          maxLength={
-            config?.limitCharacter ? config?.shortTextMaxValue : undefined
-          }
+          maxLength={config?.hasLimitedChars ? config?.maxChars : undefined}
         />
       );
     case FieldsTypes.Email:
@@ -68,7 +64,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || ''}
           label={config?.label || ''}
           description={config?.description || ''}
-          validatePattern={config?.validatePattern || false}
+          validatePattern={config?.hasValidation || false}
         />
       );
     case FieldsTypes.SingleChoice:
@@ -107,7 +103,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || 'id'}
           label={config?.label}
           description={config?.description}
-          validatePattern={config?.validatePattern}
+          validatePattern={config?.hasValidation}
         />
       );
     case FieldsTypes.Date:
@@ -118,7 +114,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           name={config?.name || 'date-time-field-name'}
           dateFormat={config?.dateFormat || 'dayMonthYear'}
           timeFormat={config?.timeFormat || 'hourMinute'}
-          selectRange={config?.selectRange || false}
+          selectRange={config?.canCaptureInterval || false}
         />
       );
     case FieldsTypes.Nps:
@@ -126,11 +122,11 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
         <NpsField
           label={config?.label || ''}
           description={config?.description || ''}
-          showSubtitles={config?.showSubtitles || false}
-          leftSubtitle={config?.leftSubtitle}
-          rightSubtitle={config?.rightSubtitle}
-          scale={config?.scale || 10}
-          startZero={config?.startZero || false}
+          showSubtitles={config?.canDisplayLabels || false}
+          leftSubtitle={config?.leftLabel}
+          rightSubtitle={config?.rightLabel}
+          scale={config?.escale || 10}
+          startZero={config?.canStartAtZero || false}
         />
       );
     case FieldsTypes.Slider:
@@ -138,10 +134,10 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
         <SliderField
           label={config?.label || ''}
           description={config?.description || ''}
-          minValue={config?.lowerLimit || 0}
-          maxValue={config?.upperLimit || 10}
-          leftSubtitle={config?.leftSubtitle}
-          rightSubtitle={config?.rightSubtitle}
+          minValue={config?.minValue || 0}
+          maxValue={config?.maxValue || 10}
+          leftSubtitle={config?.minLabel}
+          rightSubtitle={config?.maxLabel}
         />
       );
     case FieldsTypes.ImageChoice: {
@@ -173,8 +169,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label || ''}
           description={config?.description || ''}
           id={config?.id || ''}
-          stepSize={config?.stepSize || 1}
-          limitMaxMin={config?.limitMaxMin || false}
+          stepSize={config?.incValue || 1}
+          limitMaxMin={config?.hasMaxMinLimit || false}
           maxValue={config?.maxValue}
           minValue={config?.minValue}
         />
@@ -185,8 +181,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           label={config?.label}
           description={config?.description}
           name={config?.name || ''}
-          lines={config?.lines || ['']}
-          columns={config?.columns || ['']}
+          lines={config?.rowsLabels || ['']}
+          columns={config?.colsLabels || ['']}
           multipleChoice={config?.isMultipleChoice || false}
         />
       );
@@ -198,7 +194,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           id={config?.id || ''}
           label={config?.label}
           description={config?.description}
-          validatePattern={config?.validatePattern || false}
+          validatePattern={config?.hasValidation || false}
           mask="(99) 99999-9999"
         />
       );

@@ -20,6 +20,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
   field,
 }) => (
   <Container>
+    {console.log(field)}
     <Form initialData={field} onSubmit={() => null}>
       <section>
         <ShortTextField
@@ -46,21 +47,17 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           label="Limite inferior"
           id="lowerLimitField"
           defaultValue={0}
-          name="lowerLimit"
-          onChange={(event) =>
-            handleChange([event.target.value], ['lowerLimit'])
-          }
+          name="minValue"
+          onChange={(event) => handleChange([event.target.value], ['minValue'])}
         />
       </section>
       <section>
         <ShortTextField
           label="Legenda ao lado esquerdo"
           placeholder="Legenda esquerda"
-          name="leftSubtitle"
+          name="minLabel"
           id="leftSubtitleLabelField"
-          onChange={(event) =>
-            handleChange([event.target.value], ['leftSubtitle'])
-          }
+          onChange={(event) => handleChange([event.target.value], ['minLabel'])}
         />
       </section>
       <section>
@@ -68,21 +65,17 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
           label="Limite superior"
           id="upperLimitField"
           defaultValue={10}
-          name="upperLimit"
-          onChange={(event) =>
-            handleChange([event.target.value], ['upperLimit'])
-          }
+          name="maxValue"
+          onChange={(event) => handleChange([event.target.value], ['maxValue'])}
         />
       </section>
       <section>
         <ShortTextField
           label="Legenda ao lado direito"
           placeholder="Legenda direita"
-          name="rightSubtitle"
+          name="maxLabel"
           id="rightSubtileLabelField"
-          onChange={(event) =>
-            handleChange([event.target.value], ['rightSubtitle'])
-          }
+          onChange={(event) => handleChange([event.target.value], ['maxLabel'])}
         />
       </section>
       <section>
@@ -99,9 +92,9 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
         <ToggleSwitch
           label="Ocultar valor no seletor"
           helpHint="Quando ativado o valor selecionado não é exibido"
-          name="hideValue"
+          name="canHideValue"
           onChange={(event) => {
-            handleChange([event.target.checked], ['hideValue']);
+            handleChange([event.target.checked], ['canHideValue']);
           }}
         />
       </section>

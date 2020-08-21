@@ -19,7 +19,9 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
   handleChange,
   field,
 }) => {
-  const [showLimiters, setShowLimiters] = useState(field?.limitMaxMin || false);
+  const [showLimiters, setShowLimiters] = useState(
+    field?.hasMaxMinLimit || false,
+  );
 
   return (
     <Container>
@@ -58,9 +60,9 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
           <ToggleSwitch
             label="Limitar máximo e mínimo"
             helpHint="Limitar valores máximos e minímos"
-            name="limitMaxMin"
+            name="hasMaxMinLimit"
             onChange={(event) => {
-              handleChange([event.target.checked], ['limitMaxMin']);
+              handleChange([event.target.checked], ['hasMaxMinLimit']);
               setShowLimiters(event.target.checked);
             }}
           />
@@ -93,9 +95,9 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
           <NumberField
             label="Valor do incrementador"
             id="stepSizeField"
-            name="stepSize"
+            name="incValue"
             onChange={(event) =>
-              handleChange([parseInt(event.target.value, 10)], ['stepSize'])
+              handleChange([parseInt(event.target.value, 10)], ['incValue'])
             }
           />
         </section>

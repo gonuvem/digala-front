@@ -20,7 +20,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
   field,
 }) => {
   const [showSubtitles, setShowSubtitles] = useState(
-    field.showSubtitles || false,
+    field.canDisplayLabels || false,
   );
   return (
     <Container>
@@ -59,9 +59,9 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
           <ToggleSwitch
             label="Mostrar Legendas"
             helpHint="Exibir legendas em cada extremidade"
-            name="showSubtitles"
+            name="canDisplayLabels"
             onChange={(event) => {
-              handleChange([event.target.checked], ['showSubtitles']);
+              handleChange([event.target.checked], ['canDisplayLabels']);
               setShowSubtitles(event.target.checked);
             }}
           />
@@ -72,10 +72,10 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
               <ShortTextField
                 label="Legenda ao lado esquerdo"
                 placeholder="Pouco provável"
-                name="leftSubtitle"
+                name="leftLabel"
                 id="npsLeftSubtitleField"
                 onChange={(event) =>
-                  handleChange([event.target.value], ['leftSubtitle'])
+                  handleChange([event.target.value], ['leftLabel'])
                 }
               />
             </section>
@@ -83,10 +83,10 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
               <ShortTextField
                 label="Legenda ao lado direito "
                 placeholder="Muito provável"
-                name="rightSubtitle"
+                name="rightLabel"
                 id="npsRightSubtitleField"
                 onChange={(event) =>
-                  handleChange([event.target.value], ['rightSubtitle'])
+                  handleChange([event.target.value], ['rightLabel'])
                 }
               />
             </section>
@@ -96,22 +96,22 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
           <ToggleSwitch
             label="Começar no zero"
             helpHint="Caso seja ativado o limite inferior será 0"
-            name="startZero"
+            name="canStartAtZero"
             onChange={(event) =>
-              handleChange([event.target.checked], ['startZero'])
+              handleChange([event.target.checked], ['canStartAtZero'])
             }
           />
         </section>
         <section>
           <NumberField
             label="Escala"
-            name="scale"
+            name="escale"
             id="scaleFieldId"
             measurement="unidades"
             defaultValue={10}
             onChange={(event) =>
               parseInt(event.target.value, 10) <= 10
-                ? handleChange([event.target.value], ['scale'])
+                ? handleChange([event.target.value], ['escale'])
                 : undefined
             }
           />
