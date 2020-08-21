@@ -76,6 +76,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
+        {console.log(field)}
         <section>
           <ShortTextField
             label="Nome"
@@ -158,7 +159,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ImageUpload
             label="Opções"
             imageOptions={field?.answerOptions || []}
-            onChange={(value: any) => handleChange([value], ['imgChoices'])}
+            onChange={(value: any) => handleChange([value], ['answerOptions'])}
           />
         </section>
       </Form>

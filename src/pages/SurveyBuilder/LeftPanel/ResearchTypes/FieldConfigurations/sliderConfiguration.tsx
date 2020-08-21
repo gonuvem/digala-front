@@ -20,7 +20,6 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
   field,
 }) => (
   <Container>
-    {console.log(field)}
     <Form initialData={field} onSubmit={() => null}>
       <section>
         <ShortTextField
