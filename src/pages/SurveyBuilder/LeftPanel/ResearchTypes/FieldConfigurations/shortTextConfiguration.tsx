@@ -25,6 +25,7 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
+        {/* {console.log(field)} */}
         <section>
           <ShortTextField
             label="Nome"

@@ -20,7 +20,6 @@ import SelectField from '../../../components/ResearchFields/SelectField';
 import { ApplicationState } from '../../../store';
 import { Question } from '../../../store/ducks/questions/types';
 import FieldsTypes from '../../../utils/fieldsTypes';
-
 interface FieldProps {
   fieldId: string;
   config?: Question;
@@ -45,7 +44,8 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           maxLength={config?.hasLimitedChars ? config?.maxChars : undefined}
         />
       );
-    case FieldsTypes.LongText:
+    case FieldsTypes.LongText: {
+      // console.log(config);
       return (
         <LongTextField
           name={config?.name || 'name'}
@@ -56,6 +56,7 @@ const Field: React.FC<FieldProps> = ({ fieldId, config }) => {
           maxLength={config?.hasLimitedChars ? config?.maxChars : undefined}
         />
       );
+    }
     case FieldsTypes.Email:
       return (
         <IconTextField

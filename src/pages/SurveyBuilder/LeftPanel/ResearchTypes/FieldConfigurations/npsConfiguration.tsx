@@ -25,6 +25,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
+        {console.log(field)}
         <section>
           <ShortTextField
             label="Nome"
@@ -108,7 +109,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             name="escale"
             id="scaleFieldId"
             measurement="unidades"
-            defaultValue={10}
+            defaultValue={field?.escale ? field.escale : 10}
             onChange={(event) =>
               parseInt(event.target.value, 10) <= 10
                 ? handleChange([event.target.value], ['escale'])
