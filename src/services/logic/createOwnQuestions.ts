@@ -301,7 +301,7 @@ function getTypeQuestion(question: any): any {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
-        longText: {
+        shorText: {
           placeholder: question?.placeholder,
           hasLimitedChars: question.limitCharacter,
           maxChars: question?.shortTextMaxValue,
