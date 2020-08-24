@@ -73,7 +73,7 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
       const newLines = lineFieldsNames.map((line) => data[line]);
       const newColumns = columnFieldsNames.map((col) => data[col]);
 
-      handleChange([newLines, newColumns], ['lines', 'columns']);
+      handleChange([newLines, newColumns], ['rowsLabels', 'colsLabels']);
       onClose();
     },
     [handleChange],
