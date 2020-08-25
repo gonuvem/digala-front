@@ -62,9 +62,9 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
             <ToggleSwitch
               label="Escolha Múltipla por linha"
               helpHint="Caso o usuário possa escolher mais de uma opção por linha"
-              name="multipleChoice"
+              name="isMultipleChoice"
               onChange={(event) =>
-                handleChange([event.target.checked], ['multipleChoice'])
+                handleChange([event.target.checked], ['isMultipleChoice'])
               }
             />
           </section>
@@ -80,8 +80,8 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
         isOpen={isEditModalOpen}
         handleChange={handleChange}
         onClose={() => setIsEditModalOpen(false)}
-        columns={field?.columns || []}
-        lines={field?.lines || []}
+        columns={field?.colsLabels || []}
+        lines={field?.rowsLabels || []}
       />
     </>
   );

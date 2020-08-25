@@ -144,9 +144,9 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
           <ToggleSwitch
             label="Ordem das opções aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="randomSort"
+            name="hasRandomResponsesOrder"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])
+              handleChange([event.target.checked], ['hasRandomResponsesOrder'])
             }
           />
         </section>

@@ -36,9 +36,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   }, []);
 
   const handleLabelChange = useCallback(
-    (newData: { _id: string; text: string }) => {
+    (newData: { id: string; text: string }) => {
       const updatedImageOptions = imageOptions.map((imageOption) => {
-        if (imageOption._id === newData._id) {
+        if (imageOption._id === newData.id) {
           return {
             ...imageOption,
             text: newData.text,
@@ -77,7 +77,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     },
     [imageOptions, onChange],
   );
-
   return (
     <Container>
       <div>{label && <span>{label}</span>}</div>

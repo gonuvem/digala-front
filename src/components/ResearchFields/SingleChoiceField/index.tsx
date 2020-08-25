@@ -13,7 +13,7 @@ interface SingleChoiceFieldProps {
   name: string;
   id: string;
   anotherOption?: boolean;
-  randomSort?: boolean;
+  hasRandomResponsesOrder?: boolean;
   rowDirection?: boolean;
 }
 

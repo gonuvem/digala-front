@@ -149,9 +149,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Alinhamento horizontal"
             helpHint="Alinha as opções de forma horizontal no formulário"
-            name="rowDirection"
+            name="hasHorizontalAlignment"
             onChange={(event) =>
-              handleChange([event.target.checked], ['rowDirection'])
+              handleChange([event.target.checked], ['hasHorizontalAlignment'])
             }
           />
         </section>
@@ -159,9 +159,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="randomSort"
+            name="hasRandomResponsesOrder"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])
+              handleChange([event.target.checked], ['hasRandomResponsesOrder'])
             }
           />
         </section>

@@ -21,6 +21,7 @@ interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   name: string;
   label?: string;
   description?: string;
+  isTimeFormat?: boolean;
   answerOptions?: OptionsProps[];
 }
 
@@ -36,6 +37,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   name,
   description,
   answerOptions,
+  isTimeFormat,
   ...rest
 }) => {
   const inputRef = useRef(null);
@@ -61,7 +63,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   }, [fieldName, inputRef, registerField]);
 
   useEffect(() => {
-    if (answerOptions) {
+    if (!isTimeFormat && answerOptions) {
       const newArray = [];
       for (let i = 0; i < answerOptions.length; i++) {
         const option = {
@@ -92,7 +94,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
       {options && (
         <CustomSelect
           ref={inputRef}
-          defaultValue={defaultSelectValue}
+          // defaultValue={defaultSelectValue}
           classNamePrefix="react-select"
           placeholder="Escolha uma opção"
           components={{ DropdownIndicator }}

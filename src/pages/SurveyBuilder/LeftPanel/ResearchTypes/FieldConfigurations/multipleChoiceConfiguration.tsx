@@ -152,9 +152,9 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Alinhamento horizontal"
             helpHint="Alinha as opções de forma horizontal no formulário"
-            name="rowDirection"
+            name="hasHorizontalAlignment"
             onChange={(event) =>
-              handleChange([event.target.checked], ['rowDirection'])
+              handleChange([event.target.checked], ['hasHorizontalAlignment'])
             }
           />
         </section>
@@ -162,9 +162,9 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="randomSort"
+            name="hasRandomResponsesOrder"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])
+              handleChange([event.target.checked], ['hasRandomResponsesOrder'])
             }
           />
         </section>
@@ -172,9 +172,9 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Limite de escolhas"
             helpHint="Isso irá permitir que o usuário marque de uma opção na pergunta"
-            name="limitChoices"
+            name="isMultipleChoice"
             onChange={(event) => {
-              handleChange([event.target.checked], ['limitChoices']);
+              handleChange([event.target.checked], ['isMultipleChoice']);
               setLimitChoiceAmmount(event.target.checked);
             }}
           />
@@ -184,13 +184,13 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
             <NumberField
               id="choiceMaxAmmountField"
               label="Quantidade de opções selecionaveis"
-              name="choiceMaxAmmount"
+              name="maxChoices"
               defaultValue={2}
               limitMaxMin
               minValue={2}
               maxValue={Number.MAX_SAFE_INTEGER}
               onChange={(event) =>
-                handleChange([event.target.value], ['choiceMaxAmmount'])
+                handleChange([event.target.value], ['maxChoices'])
               }
             />
           </section>
