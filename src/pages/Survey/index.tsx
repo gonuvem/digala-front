@@ -7,6 +7,7 @@ import { FiCheck } from 'react-icons/fi';
 
 import { ISurvey } from './ISurvey';
 
+import Loading from '../../components/Common/LoadingAnimation';
 import SolidButton from '../../components/Common/SolidButton';
 import Question from './question';
 
@@ -45,7 +46,7 @@ const Survey: React.FC = () => {
   }, []);
 
   if (surveyLoading) {
-    return <h1>Loading survey...</h1>;
+    return <Loading isLoading={surveyLoading} />;
   }
 
   return (

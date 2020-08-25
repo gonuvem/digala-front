@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
-import { FiPlusCircle, FiSliders } from 'react-icons/fi';
+import { useParams } from 'react-router-dom';
 import { useTransition } from 'react-spring';
+import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from './field';
@@ -34,6 +35,7 @@ interface PreviewProps {
 
 const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const [fieldsRegistered, formData] = useSelector<
@@ -41,7 +43,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     [Question[], FormType | null]
   >((state) => [state.questions.questions, state.forms.form]);
 
-  const transitions = useTransition(showQuestionsPanel, null, {
+  const transitions = useTransition(showQuestionsPanel, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
     enter: { opacity: 1, transform: 'translateY(0)' },
     leave: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -66,7 +68,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     <Container>
       <nav>
         <NavLink href="/">Editar</NavLink>
-        <NavLink href="/share">Compartilhar</NavLink>
+        <NavLink href={`/share/${id}`}>Compartilhar</NavLink>
         <NavLink href="/">Resultados</NavLink>
       </nav>
       <PanelArea>
@@ -86,10 +88,10 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
           pergunta
           <FiPlusCircle size={24} />
         </button>
-        {transitions.map(
-          ({ item, key, props }) =>
+        {transitions(
+          (props, item) =>
             item && (
-              <QuestionsPanel show={showQuestionsPanel} key={key} style={props}>
+              <QuestionsPanel show={showQuestionsPanel} style={props}>
                 {questionsTypes.map((question) => (
                   <QuestionBox
                     icon={FiSliders}
