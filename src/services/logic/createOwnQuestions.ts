@@ -363,6 +363,8 @@ export default async function createOwnQuestions(
         return type.alias === questions[i].alias;
       });
 
+      console.log('Question:: ', questions[i]);
+
       if (questionType?._id) {
         const questionConfig: QuestionProps = {
           type: questionType?._id,

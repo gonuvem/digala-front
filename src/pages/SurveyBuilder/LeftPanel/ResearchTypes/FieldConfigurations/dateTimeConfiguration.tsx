@@ -80,7 +80,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
           defaultValue={dateOptions?.find(
             (option) => option.value === field?.dateFormat,
           )}
-          isTimeFormat={true}
+          isTimeFormat
           onChange={(value: any) =>
             handleChange([value?.value], ['dateFormat'])
           }
@@ -100,7 +100,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
         <SelectField
           name="timeFormat"
           label="Formato da hora"
-          isTimeFormat={true}
+          isTimeFormat
           answerOptions={timeOptions}
           defaultValue={timeOptions?.find(
             (option) => option.value === field?.timeFormat,

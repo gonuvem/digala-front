@@ -1,72 +1,68 @@
+import { Question } from '../store/ducks/questions/types';
 import fields from './fieldsTypes';
-export default function getDefaultConfigByAlias(alias: string): any {
+
+export default function getDefaultConfigByAlias(
+  alias: string,
+): Partial<Question> {
   switch (alias) {
     case fields.MultipleChoice: {
       return {
-        rowDirection: false,
-        randomSort: false,
+        hasHorizontalAlignment: false,
+        hasRandomResponsesOrder: false,
         limitChoices: false,
       };
     }
     case fields.Date: {
       return {
-        dateRequired: false,
-        timeRequired: false,
-        selectRange: false,
+        isDateRequired: false,
+        isTimeRequired: false,
+        canCaptureInterval: false,
       };
     }
     case fields.Dropdown: {
-      return { randomSort: false };
+      return { hasRandomResponsesOrder: false };
     }
     case fields.Email: {
-      return { validatePattern: false };
+      return { hasValidation: false };
     }
     case fields.ImageChoice: {
-      return { multipleChoice: false, randomSort: false };
+      return { isMultipleChoice: false, hasRandomResponsesOrder: false };
     }
     case fields.Link: {
-      return { validatePattern: false };
+      return { hasValidation: false };
     }
     case fields.LongText: {
-      return { limitCharacter: false };
+      return { hasLimitedChars: false };
     }
-
     case fields.Matrix: {
       return {
-        multipleChoice: false,
-        lines: ['linha 01'],
-        columns: ['coluna 01'],
+        isMultipleChoice: false,
+        rowsLabels: ['linha 01'],
+        colsLabels: ['coluna 01'],
       };
     }
-
     case fields.Nps: {
-      return { showSubtitles: false, startZero: false, scale: '10' };
+      return { canDisplayLabels: false, canStartAtZero: false, escale: 10 };
     }
-
     case fields.Number: {
-      return { limitMaxMin: false };
+      return { hasMaxMinLimit: false };
     }
     case fields.Phone: {
-      return { validatePattern: false };
+      return { hasValidation: false };
     }
-
     case fields.SingleChoice: {
-      return { rowDirection: false, randomSort: false };
+      return { hasHorizontalAlignment: false, hasRandomResponsesOrder: false };
     }
-
     case fields.ShortText: {
-      return { limitCharacter: false };
+      return { hasLimitedChars: false };
     }
-
     case fields.Slider: {
-      return { hideValue: false, lowerLimit: 0, upperLimit: 10 };
+      return { canHideValue: false, minValue: 0, maxValue: 10 };
     }
-
     case fields.SortList: {
-      return { randomSort: false };
+      return { hasRandomResponsesOrder: false };
     }
-
     default:
-      return null;
+      return {};
   }
 }
