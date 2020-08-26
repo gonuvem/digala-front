@@ -12,6 +12,7 @@ import LogoUpload from '../../../../components/Common/LogoUpload';
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
 import useDebounce from '../../../../hooks/useDebounce';
+
 const colors = [
   '#FFA825',
   '#EB1D63',

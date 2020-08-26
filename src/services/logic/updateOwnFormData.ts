@@ -66,12 +66,19 @@ export default async function updateOwnFormData(
       sendData.headerText = formData.style.headerText;
     }
 
-    await UpdateFormSchema.validate(sendData, { abortEarly: false });
+    const sendDataWithoutNullProperties = Object.fromEntries(
+      Object.entries(sendData).filter(([_, value]) => value !== null),
+    );
 
-    if (formData === null) {
-      throw new Error('Form data is null');
-    }
-    const response = await updateForm({ variables: { ...sendData } });
+    await UpdateFormSchema.validate(sendDataWithoutNullProperties, {
+      abortEarly: false,
+    });
+
+    console.log('Data sended to api >> ', sendDataWithoutNullProperties);
+
+    const response = await updateForm({
+      variables: { ...sendDataWithoutNullProperties },
+    });
 
     if (response.data.data.error) {
       throw new Error(response.data.data.error.message);
