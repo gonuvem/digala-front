@@ -11,7 +11,7 @@ import { Container, PanelArea } from './styles';
 import { ApplicationState } from '../../../store';
 import { Form } from '../../../store/ducks/forms/types';
 import { Question } from '../../../store/ducks/questions/types';
-import { UPDATE_FORM, CREATE_OWN_FORM } from '../../../services/requests/forms';
+import { UPDATE_FORM } from '../../../services/requests/forms';
 import {
   CREATE_OWN_QUESTIONS,
   LIST_QUESTION_TYPES,
@@ -74,11 +74,12 @@ const Pagination: React.FC = () => {
       </SolidButton>
       <PanelArea>
         {[...Array(pagesCount)].map((e, i) => (
-          <>
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={`page-${i}`}>
             <FiBookmark size={32} />
             <span>{`Página ${i + 1}`}</span>
             <div id="divisor" />
-          </>
+          </div>
         ))}
         <FiPlusCircle size={24} onClick={handleCreatePage} />
       </PanelArea>

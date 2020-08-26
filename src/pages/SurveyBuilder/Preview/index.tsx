@@ -94,9 +94,10 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         {transitions(
           (props, item) =>
             item && (
-              <QuestionsPanel show={showQuestionsPanel} style={props}>
+              <QuestionsPanel style={props}>
                 {questionsTypes.map((question) => (
                   <QuestionBox
+                    key={question.alias}
                     icon={FiSliders}
                     name={question.name}
                     description={question.description}
