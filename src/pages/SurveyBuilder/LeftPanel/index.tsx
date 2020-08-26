@@ -61,6 +61,7 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
         <nav>
           {TabLinks.map((tabLink, index) => (
             <PanelTabLink
+              key={`panelLink-${tabLink}`}
               id={`panellink-${index}`}
               isActive={activePanelNumber === index}
               onClick={() => handleTabChange(index)}

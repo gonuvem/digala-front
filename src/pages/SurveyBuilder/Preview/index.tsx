@@ -75,8 +75,11 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
-            <FieldWrapper onClick={() => handleFocusQuestion(field.id)}>
-              <Field key={field.id} fieldId={field.id} config={field} />
+            <FieldWrapper
+              key={field.id}
+              onClick={() => handleFocusQuestion(field.id)}
+            >
+              <Field fieldId={field.id} config={field} />
             </FieldWrapper>
           ))}
         </Form>

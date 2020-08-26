@@ -1,6 +1,8 @@
 import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
+import FieldTypes from '../../utils/fieldsTypes';
+
 import { Question } from '../../store/ducks/questions/types';
 import CreateQuestion from '../../schemas/createQuestion';
 
@@ -102,26 +104,30 @@ interface AnswerOptions {
   image?: string;
 }
 
-function formatList(list: any): any {
+function formatList(list: AnswerOptions[] | undefined): any {
   const listData: Array<any> = [];
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].content) {
-      const data: Record<string, any> = { text: list[i].content };
-      listData.push(data);
-    } else if (list[i].label && list[i].image) {
-      const data: Record<string, any> = {
-        text: list[i].label,
-        image: list[i].image,
-      };
-      listData.push(data);
+
+  if (list) {
+    for (let i = 0; i < list.length; i += 1) {
+      if (list[i].image) {
+        const data: Record<string, any> = {
+          text: list[i].text,
+          image: list[i].image,
+        };
+        listData.push(data);
+      } else {
+        const data: Record<string, any> = { text: list[i].text };
+        listData.push(data);
+      }
     }
   }
+
   return listData;
 }
 
-function getTypeQuestion(question: any): any {
+function getTypeQuestion(question: Question): any {
   switch (question.alias) {
-    case 'checkBox': {
+    case FieldTypes.MultipleChoice: {
       let notRequiredConfig = {};
       if (question.description) {
         notRequiredConfig = {
@@ -133,150 +139,148 @@ function getTypeQuestion(question: any): any {
         name: question.label,
         isRequired: question.isRequired,
         checkBox: {
-          hasHorizontalAlignment: question.rowDirection,
-          hasRandomResponsesOrder: question.randomSort,
+          hasHorizontalAlignment: question.hasHorizontalAlignment,
+          hasRandomResponsesOrder: question.hasRandomResponsesOrder,
           hasLimitedChoices: question.limitChoices,
-          maxChoices: question?.choiceMaxAmmount,
+          maxChoices: question?.maxChoices,
           answerOptions: formatList(question.answerOptions),
         },
       };
       return config;
     }
-    case 'date': {
+    case FieldTypes.Date: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         date: {
-          isDateRequired: question.dateRequired,
+          isDateRequired: question.isDateRequired,
           dateFormat: question?.dateFormat,
-          isTimeRequired: question.timeRequired,
+          isTimeRequired: question.isTimeRequired,
           timeFormat: question?.timeFormat,
-          canCaptureInterval: question.selectRange,
+          canCaptureInterval: question.canCaptureInterval,
         },
       };
       return config;
     }
-    case 'dropDown': {
+    case FieldTypes.Dropdown: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         dropDown: {
-          hasRandomResponsesOrder: question.randomSort,
+          hasRandomResponsesOrder: question.hasRandomResponsesOrder,
           answerOptions: formatList(question.answerOptions),
         },
       };
       return config;
     }
-    case 'email': {
+    case FieldTypes.Email: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         email: {
-          hasValidation: question.validatePattern,
+          hasValidation: question.hasValidation,
         },
       };
       return config;
     }
-    case 'imageChoice': {
+    case FieldTypes.ImageChoice: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         imageChoice: {
-          isMultipleChoice: question.multipleChoice,
-          maxChoices: question?.choiceMaxAmmount,
-          hasRandomResponsesOrder: question.randomSort,
-          answerOptions: formatList(question.imgChoices),
+          isMultipleChoice: question.isMultipleChoice,
+          hasRandomResponsesOrder: question.hasRandomResponsesOrder,
+          answerOptions: formatList(question.answerOptions),
+          ...(question.isMultipleChoice
+            ? { maxChoices: question?.maxChoices }
+            : {}),
         },
       };
       return config;
     }
-    case 'link': {
+    case FieldTypes.Link: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         link: {
-          hasValidation: question.validatePattern,
+          hasValidation: question.hasValidation,
         },
       };
       return config;
     }
-    case 'longText': {
+    case FieldTypes.LongText: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         longText: {
           placeholder: question?.placeholder,
-          hasLimitedChars: question.limitCharacter,
-          maxChars: question?.shortTextMaxValue,
+          hasLimitedChars: question.hasLimitedChars,
+          maxChars: question?.maxChars,
         },
       };
 
       return config;
     }
-
-    case 'matrix': {
+    case FieldTypes.Matrix: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         matrix: {
-          isMultipleChoice: question.multipleChoice,
-          rowsLabels: question.lines,
-          colsLabels: question.columns,
+          isMultipleChoice: question.isMultipleChoice,
+          rowsLabels: question.rowsLabels,
+          colsLabels: question.colsLabels,
         },
       };
       return config;
     }
-
-    case 'nps': {
+    case FieldTypes.Nps: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         nps: {
-          canDisplayLabels: question.showSubtitles,
-          leftLabel: question?.leftSubtitle,
-          rightLabel: question?.rightSubtitle,
-          canStartAtZero: question.startZero,
-          escale: question.scale,
+          canDisplayLabels: question.canDisplayLabels,
+          leftLabel: question?.leftLabel,
+          rightLabel: question?.rightLabel,
+          canStartAtZero: question.canStartAtZero,
+          escale: question.escale,
         },
       };
       return config;
     }
-
-    case 'number': {
+    case FieldTypes.Number: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         number: {
-          hasMaxMinLimit: question.limitMaxMin,
+          hasMaxMinLimit: question.hasMaxMinLimit,
           maxValue: question?.maxValue,
           minValue: question?.minValue,
-          incValue: question?.stepSize,
+          incValue: question?.incValue,
         },
       };
       return config;
     }
-    case 'phone': {
+    case FieldTypes.Phone: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         phone: {
-          hasValidation: question.validatePattern,
+          hasValidation: question.hasValidation,
         },
       };
       return config;
     }
-
-    case 'radioButton': {
+    case FieldTypes.SingleChoice: {
       let notRequiredConfig = {};
       if (question.description) {
         notRequiredConfig = {
@@ -288,78 +292,75 @@ function getTypeQuestion(question: any): any {
         name: question.label,
         isRequired: question.isRequired,
         radioButton: {
-          hasHorizontalAlignment: question.rowDirection,
-          hasRandomResponsesOrder: question.randomSort,
+          hasHorizontalAlignment: question.hasHorizontalAlignment,
+          hasRandomResponsesOrder: question.hasRandomResponsesOrder,
           answerOptions: formatList(question.answerOptions),
         },
       };
       return config;
     }
-
-    case 'shortText': {
+    case FieldTypes.ShortText: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         shorText: {
           placeholder: question?.placeholder,
-          hasLimitedChars: question.limitCharacter,
-          maxChars: question?.shortTextMaxValue,
+          hasLimitedChars: question.hasLimitedChars,
+          maxChars: question?.maxChars,
         },
       };
       return config;
     }
-
-    case 'slider': {
+    case FieldTypes.Slider: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         slider: {
-          minValue: question.lowerLimit,
-          minLabel: question?.leftSubtitle,
-          maxValue: question.upperLimit,
-          maxLabel: question?.rightSubtitle,
-          canHideValue: question?.hideValue,
+          minValue: question.minValue,
+          minLabel: question?.minLabel,
+          maxValue: question.maxValue,
+          maxLabel: question?.maxLabel,
+          canHideValue: question?.canHideValue,
         },
       };
       return config;
     }
-
-    case 'sortList': {
+    case FieldTypes.SortList: {
       const config = {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
         sortList: {
-          hasRandomResponsesOrder: question.randomSort,
+          hasRandomResponsesOrder: question.hasRandomResponsesOrder,
           answerOptions: formatList(question.answerOptions),
         },
       };
       return config;
     }
-
     default:
       return {};
   }
 }
 
 export default async function createOwnQuestions(
-  createsForm: Function,
-  formData: Question[] | null,
+  createQuestions: Function,
+  questions: Question[] | null,
   formId: string,
   questionTypes: any[],
 ): Promise<void> {
   try {
-    if (!formData || !formId) {
+    if (!questions || !formId) {
       throw new Error('Form Data not sended');
     }
 
     const questionsArray: Array<any> = [];
-    for (let i = 0; i < formData.length; i++) {
-      const config = getTypeQuestion(formData[i]);
-      const questionType = questionTypes.find((question) => {
-        return question.alias === formData[i].alias;
+
+    for (let i = 0; i < questions.length; i += 1) {
+      const config = getTypeQuestion(questions[i]);
+      const questionType = questionTypes.find((type) => {
+        return type.alias === questions[i].alias;
       });
 
       if (questionType?._id) {
@@ -380,11 +381,11 @@ export default async function createOwnQuestions(
 
     await CreateQuestion.validate(sendData.questions, { abortEarly: false });
 
-    if (formData === null) {
+    if (questions === null) {
       throw new Error('Form data is null');
     }
 
-    const response = await createsForm({ variables: { input: sendData } });
+    const response = await createQuestions({ variables: { input: sendData } });
 
     if (response.data.data.error) {
       throw new Error(response.data.data.error.message);

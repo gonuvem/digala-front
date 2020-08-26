@@ -59,7 +59,7 @@ const Pagination: React.FC = () => {
       );
     }
     updateOwnFormData(updateForm, formData);
-  }, [formData, updateForm, questionsData]);
+  }, [formData, updateForm, questionsData, questionTypes, createQuestions]);
 
   return (
     <Container>
