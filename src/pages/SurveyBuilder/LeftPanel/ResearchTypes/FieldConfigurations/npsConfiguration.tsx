@@ -25,7 +25,6 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
-        {console.log(field)}
         <section>
           <ShortTextField
             label="Nome"

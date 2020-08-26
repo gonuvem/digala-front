@@ -64,7 +64,7 @@ interface QuestionProps {
       leftLabel?: string;
       rightLabel?: string;
       canStartAtZero: boolean;
-      escale: string;
+      escale: number;
     };
     number?: {
       hasMaxMinLimit: boolean;
@@ -250,7 +250,10 @@ function getTypeQuestion(question: Question): any {
           leftLabel: question?.leftLabel,
           rightLabel: question?.rightLabel,
           canStartAtZero: question.canStartAtZero,
-          escale: question.escale,
+          escale: parseInt(
+            question.escale ? question.escale.toString() : '10',
+            10,
+          ),
         },
       };
       return config;
@@ -304,7 +307,7 @@ function getTypeQuestion(question: Question): any {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
-        shorText: {
+        shortText: {
           placeholder: question?.placeholder,
           hasLimitedChars: question.hasLimitedChars,
           maxChars: question?.maxChars,
@@ -362,8 +365,6 @@ export default async function createOwnQuestions(
       const questionType = questionTypes.find((type) => {
         return type.alias === questions[i].alias;
       });
-
-      console.log('Question:: ', questions[i]);
 
       if (questionType?._id) {
         const questionConfig: QuestionProps = {

@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { isUuid } from 'uuidv4';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { FiBookmark, FiPlusCircle } from 'react-icons/fi';
 
@@ -51,9 +52,13 @@ const Pagination: React.FC = () => {
 
   const handleUpdate = useCallback(() => {
     if (formData?.id && questionTypes) {
+      const questionsToCreate = questionsData.filter((question) =>
+        isUuid(question.id),
+      );
+
       createOwnQuestions(
         createQuestions,
-        questionsData,
+        questionsToCreate,
         formData?.id,
         questionTypes,
       );
