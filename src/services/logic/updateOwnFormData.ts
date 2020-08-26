@@ -42,7 +42,6 @@ export default async function updateOwnFormData(
       beginDate: formData.config.beginDate,
       endDate: formData.config.endDate,
       hasLimitedResponses: formData.config.hasLimitedResponses,
-      maxResponses: formData.config.maxResponses,
       isTotemMode: formData.config.isTotemMode,
       canDisplayProgressBar: formData.config.canDisplayProgressBar,
       progressBarType: formData.config.progressBarType?.value,
@@ -66,6 +65,10 @@ export default async function updateOwnFormData(
       sendData.headerText = formData.style.headerText;
     }
 
+    if (formData.config.hasLimitedResponses) {
+      sendData.maxResponses = formData.config.maxResponses;
+    }
+
     const sendDataWithoutNullProperties = Object.fromEntries(
       Object.entries(sendData).filter(([_, value]) => value !== null),
     );
@@ -73,8 +76,6 @@ export default async function updateOwnFormData(
     await UpdateFormSchema.validate(sendDataWithoutNullProperties, {
       abortEarly: false,
     });
-
-    console.log('Data sended to api >> ', sendDataWithoutNullProperties);
 
     const response = await updateForm({
       variables: { ...sendDataWithoutNullProperties },
