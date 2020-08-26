@@ -54,9 +54,9 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
         <ToggleSwitch
           label="Ativar validação de link"
           helpHint="O formato do link sera validado"
-          name="validatePattern"
+          name="hasValidation"
           onChange={(event) =>
-            handleChange([event.target.checked], ['validatePattern'])
+            handleChange([event.target.checked], ['hasValidation'])
           }
         />
       </section>

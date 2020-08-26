@@ -26,8 +26,8 @@ interface MultipleChoiceConfigurarionProps {
 }
 
 interface ListOptions {
-  id: string;
-  content: string;
+  _id: string;
+  text: string;
 }
 
 const reorder = (
@@ -50,7 +50,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
     field.limitChoices || false,
   );
   const [options, setOptions] = useState<Array<ListOptions>>([
-    { id: uuid(), content: '' },
+    { _id: uuid(), text: '' },
   ]);
 
   const onDragEnd = useCallback(
@@ -63,28 +63,28 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
         result.destination.index,
       );
       setOptions(items);
-      handleChange([items], ['listOptions']);
+      handleChange([items], ['answerOptions']);
     },
     [options, setOptions],
   );
 
   const handleAddOption = useCallback(() => {
-    const newOption = { id: uuid(), content: '' };
+    const newOption = { _id: uuid(), text: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    handleChange([options], ['listOptions']);
+    handleChange([options], ['answerOptions']);
   }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
     (text: string, index: number) => {
       const newArray = options;
 
-      newArray[index].content = text;
+      newArray[index].text = text;
       setOptions(newArray);
-      handleChange([options], ['listOptions']);
+      handleChange([options], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
@@ -94,14 +94,14 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
       const newArray = options;
       newArray.splice(index, 1);
       setOptions(newArray);
-      handleChange([options], ['listOptions']);
+      handleChange([options], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
 
   useEffect(() => {
-    if (field.listOptions) {
-      setOptions([...field.listOptions]);
+    if (field.answerOptions) {
+      setOptions([...field.answerOptions]);
     }
   }, []);
 
@@ -152,9 +152,9 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Alinhamento horizontal"
             helpHint="Alinha as opções de forma horizontal no formulário"
-            name="rowDirection"
+            name="hasHorizontalAlignment"
             onChange={(event) =>
-              handleChange([event.target.checked], ['rowDirection'])
+              handleChange([event.target.checked], ['hasHorizontalAlignment'])
             }
           />
         </section>
@@ -162,9 +162,9 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="randomSort"
+            name="hasRandomResponsesOrder"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])
+              handleChange([event.target.checked], ['hasRandomResponsesOrder'])
             }
           />
         </section>
@@ -172,9 +172,9 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <ToggleSwitch
             label="Limite de escolhas"
             helpHint="Isso irá permitir que o usuário marque de uma opção na pergunta"
-            name="limitChoices"
+            name="isMultipleChoice"
             onChange={(event) => {
-              handleChange([event.target.checked], ['limitChoices']);
+              handleChange([event.target.checked], ['isMultipleChoice']);
               setLimitChoiceAmmount(event.target.checked);
             }}
           />
@@ -184,13 +184,13 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
             <NumberField
               id="choiceMaxAmmountField"
               label="Quantidade de opções selecionaveis"
-              name="choiceMaxAmmount"
+              name="maxChoices"
               defaultValue={2}
               limitMaxMin
               minValue={2}
               maxValue={Number.MAX_SAFE_INTEGER}
               onChange={(event) =>
-                handleChange([event.target.value], ['choiceMaxAmmount'])
+                handleChange([event.target.value], ['maxChoices'])
               }
             />
           </section>
@@ -208,8 +208,8 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
                 >
                   {options.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id}
+                      key={item._id}
+                      draggableId={item._id}
                       index={index}
                     >
                       {(provided) => (
@@ -223,7 +223,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
                         >
                           <input
                             placeholder="Escreva a opção"
-                            defaultValue={item.content}
+                            defaultValue={item.text}
                             onChange={(event) =>
                               handleChangeInput(event.target.value, index)
                             }

@@ -22,7 +22,7 @@ interface TextAreaFieldProps
 
 const TextAreaField: React.FC<TextAreaFieldProps> = ({
   readOnly = false,
-  placeholder = '',
+  placeholder,
   description,
   name,
   id,
@@ -34,7 +34,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
   const [isFilled, setIsFilled] = useState(false);
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
-  const transitions = useTransition(!!error, null, {
+  const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
     leave: { opacity: 0, transform: 'translateX(-50px)' },
@@ -74,13 +74,9 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
           {...rest}
         />
       </label>
-      {transitions.map(
-        ({ item, key, props }) =>
-          item && (
-            <animated.span key={key} style={props}>
-              {error}
-            </animated.span>
-          ),
+      {transitions(
+        (props, item) =>
+          item && <animated.span style={props}>{error}</animated.span>,
       )}
     </Container>
   );

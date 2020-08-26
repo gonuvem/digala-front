@@ -56,8 +56,8 @@ const Question: React.FC<FieldProps> = ({ question }) => {
       return <IconTextField {...questionPayload} />;
     case FieldsTypes.LongText:
       return <TextArea {...questionPayload} />;
-    // case FieldsTypes.ShortText:
-    //   return <ShortText {...questionPayload} />;
+    case FieldsTypes.ShortText:
+      return <ShortText {...questionPayload} />;
     default:
       return null;
   }

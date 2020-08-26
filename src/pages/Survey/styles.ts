@@ -20,11 +20,22 @@ interface SurveyFooterProps {
 }
 
 export const Container = styled.div`
+  @keyframes entering {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 100%;
+
+  animation: 1s linear entering;
 
   @media (max-width: 670px) {
     flex-direction: column;

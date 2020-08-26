@@ -21,7 +21,7 @@ interface ShortTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const ShortTextField: React.FC<ShortTextFieldProps> = ({
   readOnly = false,
-  placeholder = '',
+  placeholder,
   description,
   name,
   id,
@@ -33,7 +33,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
   const [isFilled, setIsFilled] = useState(false);
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
-  const transitions = useTransition(!!error, null, {
+  const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
     leave: { opacity: 0, transform: 'translateX(-50px)' },
@@ -59,7 +59,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
   return (
     <Container hasFocus={hasFocus} isInvalid={!!error} isFilled={isFilled}>
       <label htmlFor={id}>
-        {label && <span>label</span>}
+        {label && <span>{label}</span>}
         {description && <p>{description}</p>}
         <input
           ref={inputRef}
@@ -74,13 +74,9 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
           {...rest}
         />
       </label>
-      {transitions.map(
-        ({ item, key, props }) =>
-          item && (
-            <animated.span key={key} style={props}>
-              {error}
-            </animated.span>
-          ),
+      {transitions(
+        (props, item) =>
+          item && <animated.span style={props}>{error}</animated.span>,
       )}
     </Container>
   );

@@ -20,11 +20,12 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
   field,
 }) => {
   const [limitCharacter, setLimitCharacter] = useState(
-    field.limitCharacter || false,
+    field.hasLimitedChars || false,
   );
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
+        {/* {console.log(field)} */}
         <section>
           <ShortTextField
             label="Nome"
@@ -49,10 +50,10 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
           <ShortTextField
             label="Texto de exemplo"
             placeholder="Insira o nome aqui"
-            name="shortTextPlaceholder"
+            name="placeholder"
             id="shortTextPlaceholderField"
             onChange={(event) =>
-              handleChange([event.target.value], ['shortTextPlaceholder'])
+              handleChange([event.target.value], ['placeholder'])
             }
           />
         </section>
@@ -70,10 +71,10 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
           <ToggleSwitch
             label="Limitar caracteres"
             helpHint="Limitar o número de caracteres permitido na resposta"
-            name="limitCharacter"
+            name="hasLimitedChars"
             onChange={(event) => {
               setLimitCharacter(event.target.checked);
-              handleChange([event.target.checked], ['limitCharacter']);
+              handleChange([event.target.checked], ['hasLimitedChars']);
             }}
           />
         </section>
@@ -82,12 +83,9 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             <NumberField
               label="Limite de caracteres"
               id="shortTextMaxValueField"
-              name="shortTextMaxValue"
+              name="maxChars"
               onChange={(event) =>
-                handleChange(
-                  [parseInt(event.target.value, 10)],
-                  ['shortTextMaxValue'],
-                )
+                handleChange([parseInt(event.target.value, 10)], ['maxChars'])
               }
             />
           </section>

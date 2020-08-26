@@ -13,7 +13,7 @@ export enum QuestionsTypes {
  */
 export interface ImageChoice {
   image: string;
-  label?: string;
+  text?: string;
   loading: boolean;
   id: string;
 }
@@ -26,58 +26,60 @@ export interface Question {
   description?: string;
   isRequired: boolean;
   link?: {
-    validation?: boolean;
+    hasValidation?: boolean;
   };
-  multipleChoice?: boolean;
-  choiceMaxAmmount?: number;
+  isMultipleChoice?: boolean;
+  maxChoices?: number;
   addOtherOption?: boolean;
   /* Icon Inputs */
-  validatePattern?: boolean;
+  hasValidation?: boolean;
   /* DateTime */
   dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat?: 'hourMinute' | 'hourMinuteSecond';
-  dateRequired?: boolean;
-  timeRequired?: boolean;
-  selectRange?: boolean;
+  isDateRequired?: boolean;
+  isTimeRequired?: boolean;
+  canCaptureInterval?: boolean;
   /* Nps */
-  startZero?: boolean;
-  scale?: number;
-  showSubtitles?: boolean;
-  leftSubtitle?: string;
-  rightSubtitle?: string;
+  canStartAtZero?: boolean;
+  escale?: number;
+  canDisplayLabels?: boolean;
+  leftLabel?: string;
+  rightLabel?: string;
   /* Slider */
-  lowerLimit?: number;
-  upperLimit?: number;
-  hideValue?: boolean;
+  minLabel?: string;
+  maxLabel?: string;
+  canHideValue?: boolean;
   /* Images Choice */
-  imgChoices?: ImageChoice[];
-  randomSort?: boolean;
+  imgChoices?: ListOptionsProps[];
+  hasRandomResponsesOrder?: boolean;
   /* SortAnswers */
-  listOptions?: ListOptionsProps[];
+  answerOptions?: ListOptionsProps[];
   /* ShortText */
-  shortTextPlaceholder?: string;
-  limitCharacter?: boolean;
-  shortTextMaxValue?: number;
+  placeholder?: string;
+  hasLimitedChars?: boolean;
+  maxChars?: number;
   /* Numeric */
-  stepSize?: number;
-  limitMaxMin?: boolean;
+  incValue?: number;
+  hasMaxMinLimit?: boolean;
   minValue?: number;
   maxValue?: number;
   /* SingleChoices */
   anotherOption?: boolean;
-  rowDirection?: boolean;
+  hasHorizontalAlignment?: boolean;
   /* Matrix */
-  columns?: string[];
-  lines?: string[];
+  colsLabels?: string[];
+  rowsLabels?: string[];
   /* Limit Choices */
   limitChoices?: boolean;
 }
 
 interface ListOptionsProps {
-  id: string;
-  content: string;
+  _id: string;
+  text: string;
   value?: string;
   label?: string;
+  image?: string;
+  loading?: boolean;
 }
 
 /**

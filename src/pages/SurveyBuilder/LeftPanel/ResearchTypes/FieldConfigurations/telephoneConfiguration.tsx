@@ -55,9 +55,9 @@ const TelephoneConfiguration: React.FC<TelephoneConfigurationProps> = ({
           <ToggleSwitch
             label="Ativar validação de telefone"
             helpHint="Formato do telefone será válidado antes da submissão"
-            name="validatePattern"
+            name="hasValidation"
             onChange={(event) =>
-              handleChange([event.target.checked], ['validatePattern'])
+              handleChange([event.target.checked], ['hasValidation'])
             }
           />
         </section>

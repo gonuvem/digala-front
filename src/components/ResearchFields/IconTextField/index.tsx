@@ -45,11 +45,11 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   const [value, setValue] = useState('');
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
-  const transitions = useTransition(!!error, null, {
-    from: { opacity: 0, transform: 'translateX(-50px)' },
-    enter: { opacity: 1, transform: 'translateX(0px)' },
-    leave: { opacity: 0, transform: 'translateX(-50px)' },
-  });
+  // const transitions = useTransition(!!error, null, {
+  //   from: { opacity: 0, transform: 'translateX(-50px)' },
+  //   enter: { opacity: 1, transform: 'translateX(0px)' },
+  //   leave: { opacity: 0, transform: 'translateX(-50px)' },
+  // });
 
   const handleOnFocus = useCallback(() => {
     setHasFocus(true);
@@ -94,14 +94,14 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
           />
         </div>
       </label>
-      {transitions.map(
+      {/* {transitions.map(
         ({ item, key, props }) =>
           item && (
             <animated.span key={key} style={props}>
               {error}
             </animated.span>
           ),
-      )}
+      )} */}
     </Container>
   );
 };

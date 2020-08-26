@@ -137,7 +137,7 @@ function getTypeQuestion(question: any): any {
           hasRandomResponsesOrder: question.randomSort,
           hasLimitedChoices: question.limitChoices,
           maxChoices: question?.choiceMaxAmmount,
-          answerOptions: formatList(question.listOptions),
+          answerOptions: formatList(question.answerOptions),
         },
       };
       return config;
@@ -164,7 +164,7 @@ function getTypeQuestion(question: any): any {
         description: question?.description,
         dropDown: {
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: formatList(question.listOptions),
+          answerOptions: formatList(question.answerOptions),
         },
       };
       return config;
@@ -211,7 +211,7 @@ function getTypeQuestion(question: any): any {
         isRequired: question.isRequired,
         description: question?.description,
         longText: {
-          placeholder: question?.shortTextPlaceholder,
+          placeholder: question?.placeholder,
           hasLimitedChars: question.limitCharacter,
           maxChars: question?.shortTextMaxValue,
         },
@@ -290,7 +290,7 @@ function getTypeQuestion(question: any): any {
         radioButton: {
           hasHorizontalAlignment: question.rowDirection,
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: formatList(question.listOptions),
+          answerOptions: formatList(question.answerOptions),
         },
       };
       return config;
@@ -301,8 +301,8 @@ function getTypeQuestion(question: any): any {
         name: question.label,
         isRequired: question.isRequired,
         description: question?.description,
-        longText: {
-          placeholder: question?.shortTextPlaceholder,
+        shorText: {
+          placeholder: question?.placeholder,
           hasLimitedChars: question.limitCharacter,
           maxChars: question?.shortTextMaxValue,
         },
@@ -333,7 +333,7 @@ function getTypeQuestion(question: any): any {
         description: question?.description,
         sortList: {
           hasRandomResponsesOrder: question.randomSort,
-          answerOptions: formatList(question.listOptions),
+          answerOptions: formatList(question.answerOptions),
         },
       };
       return config;

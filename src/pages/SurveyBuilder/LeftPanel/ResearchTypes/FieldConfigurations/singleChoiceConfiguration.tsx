@@ -26,8 +26,8 @@ interface SingleChoiceConfigurarionProps {
 }
 
 interface ListOptions {
-  id: string;
-  content: string;
+  _id: string;
+  text: string;
 }
 
 const reorder = (
@@ -47,7 +47,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
   field,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>([
-    { id: uuid(), content: '' },
+    { _id: uuid(), text: '' },
   ]);
 
   const onDragEnd = useCallback(
@@ -60,28 +60,28 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
         result.destination.index,
       );
       setOptions(items);
-      handleChange([items], ['listOptions']);
+      handleChange([items], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
 
   const handleAddOption = useCallback(() => {
-    const newOption = { id: uuid(), content: '' };
+    const newOption = { _id: uuid(), text: '' };
     const copyOptions = options;
 
     copyOptions.push(newOption);
 
     setOptions(copyOptions);
-    handleChange([options], ['listOptions']);
+    handleChange([options], ['answerOptions']);
   }, [options, setOptions, handleChange]);
 
   const handleChangeInput = useCallback(
     (text: string, index: number) => {
       const newArray = options;
 
-      newArray[index].content = text;
+      newArray[index].text = text;
       setOptions(newArray);
-      handleChange([options], ['listOptions']);
+      handleChange([options], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
@@ -91,14 +91,14 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
       const newArray = options;
       newArray.splice(index, 1);
       setOptions(newArray);
-      handleChange([options], ['listOptions']);
+      handleChange([options], ['answerOptions']);
     },
     [options, setOptions, handleChange],
   );
 
   useEffect(() => {
-    if (field.listOptions) {
-      setOptions([...field.listOptions]);
+    if (field.answerOptions) {
+      setOptions([...field.answerOptions]);
     }
   }, []);
 
@@ -149,9 +149,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Alinhamento horizontal"
             helpHint="Alinha as opções de forma horizontal no formulário"
-            name="rowDirection"
+            name="hasHorizontalAlignment"
             onChange={(event) =>
-              handleChange([event.target.checked], ['rowDirection'])
+              handleChange([event.target.checked], ['hasHorizontalAlignment'])
             }
           />
         </section>
@@ -159,9 +159,9 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
           <ToggleSwitch
             label="Ordem das respostas aleatórias"
             helpHint="As opções serão exibidas em ordem aleatória para o usuário"
-            name="randomSort"
+            name="hasRandomResponsesOrder"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])
+              handleChange([event.target.checked], ['hasRandomResponsesOrder'])
             }
           />
         </section>
@@ -178,8 +178,8 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id}
+                      key={item._id}
+                      draggableId={item._id}
                       index={index}
                     >
                       {(provided) => (
@@ -193,7 +193,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
                         >
                           <input
                             placeholder="Escreva a opção"
-                            defaultValue={item.content}
+                            defaultValue={item.text}
                             onChange={(event) =>
                               handleChangeInput(event.target.value, index)
                             }

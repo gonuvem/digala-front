@@ -6,8 +6,8 @@ import Option from '../../Common/Option';
 import { Container, ViewOptions } from './styles';
 
 interface ChoicesProps {
-  id: string;
-  content: string;
+  _id: string;
+  text: string;
 }
 
 interface SingleChoiceFieldProps {
@@ -18,7 +18,7 @@ interface SingleChoiceFieldProps {
   name: string;
   id: string;
   anotherOption?: boolean;
-  randomSort?: boolean;
+  hasRandomResponsesOrder?: boolean;
   rowDirection?: boolean;
   limitChoices?: boolean;
   choiceMaxAmmount?: number;
@@ -41,7 +41,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   );
   const [checkeds, setCheckeds] = useState<string[]>([]);
 
-  const another = { id: uuid(), content: 'outros(a)' };
+  const another = { id: uuid(), text: 'outros(a)' };
 
   useEffect(() => {
     if (choices) {
@@ -77,11 +77,11 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
             listChoices.map((choice) => (
               <Option
                 type="checkbox"
-                id={choice.id}
+                id={choice._id}
                 fieldName={name}
-                label={choice.content}
-                checked={checkeds.includes(choice.id)}
-                onChange={(event: any) => handleOptionClick(event, choice.id)}
+                label={choice.text}
+                checked={checkeds.includes(choice._id)}
+                onChange={(event: any) => handleOptionClick(event, choice._id)}
               />
             ))}
           {anotherOption && (
@@ -89,7 +89,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
               type="checkbox"
               id={another.id}
               fieldName={name}
-              label={another.content}
+              label={another.text}
             />
           )}
         </ViewOptions>

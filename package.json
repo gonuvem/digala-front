@@ -23,6 +23,7 @@
     "graphql": "^15.0.0",
     "loadsh": "^0.0.4",
     "polished": "^3.6.3",
+    "qrcode.react": "^1.0.0",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-calendar": "^3.1.0",
@@ -35,7 +36,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0",
-    "react-spring": "^8.0.27",
+    "react-spring": "^9.0.0-rc.3",
     "react-toastify": "^6.0.5",
     "react-tooltip": "^4.2.6",
     "redux": "^4.0.5",
@@ -65,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@types/qrcode.react": "^1.0.1",
     "@types/react-calendar": "^3.0.1",
     "@types/react-helmet": "^6.0.0",
     "@types/react-input-mask": "^2.0.5",

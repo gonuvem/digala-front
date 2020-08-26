@@ -11,12 +11,12 @@ import { Container, DragContainer, Option } from './styles';
 interface SortAnswersProps {
   label: string;
   description?: string;
-  listOptions?: ListOptions[];
+  answerOptions?: ListOptions[];
 }
 
 interface ListOptions {
-  id?: string;
-  content?: string;
+  _id?: string;
+  text?: string;
 }
 
 const reorder = (
@@ -34,9 +34,11 @@ const reorder = (
 const SortAnswers: React.FC<SortAnswersProps> = ({
   label,
   description,
-  listOptions,
+  answerOptions,
 }) => {
-  const [options, setOptions] = useState<Array<ListOptions>>(listOptions || []);
+  const [options, setOptions] = useState<Array<ListOptions>>(
+    answerOptions || [],
+  );
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -53,10 +55,10 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   );
 
   useEffect(() => {
-    if (listOptions) {
-      setOptions(listOptions);
+    if (answerOptions) {
+      setOptions(answerOptions);
     }
-  }, [listOptions, setOptions]);
+  }, [answerOptions, setOptions]);
 
   return (
     <Container>
@@ -75,8 +77,8 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
-                      key={item.id}
-                      draggableId={item.id ? item.id : ''}
+                      key={item._id}
+                      draggableId={item._id ? item._id : ''}
                       index={index}
                     >
                       {(provided) => (
@@ -88,7 +90,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
                             ...provided.draggableProps.style,
                           }}
                         >
-                          {item.content}
+                          {item.text}
                           <FiMove />
                         </Option>
                       )}

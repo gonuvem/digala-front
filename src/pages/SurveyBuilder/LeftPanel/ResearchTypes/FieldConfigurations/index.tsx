@@ -75,6 +75,7 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return (
         <ImagesChoiceConfiguration field={field} handleChange={handleChange} />
       );
+
     case FieldsTypes.ShortText:
       return (
         <ShortTextConfiguration field={field} handleChange={handleChange} />

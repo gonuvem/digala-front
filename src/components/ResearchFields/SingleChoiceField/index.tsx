@@ -13,13 +13,13 @@ interface SingleChoiceFieldProps {
   name: string;
   id: string;
   anotherOption?: boolean;
-  randomSort?: boolean;
+  hasRandomResponsesOrder?: boolean;
   rowDirection?: boolean;
 }
 
 interface ChoicesProps {
-  id: string;
-  content: string;
+  _id: string;
+  text: string;
 }
 
 const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
@@ -35,7 +35,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
-  const another = { id: uuid(), content: 'outros(a)' };
+  const another = { id: uuid(), text: 'outros(a)' };
 
   useEffect(() => {
     if (choices) {
@@ -51,10 +51,10 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&
             listChoices.map((choice) => (
-              <Option id={choice.id} fieldName={name} label={choice.content} />
+              <Option id={choice._id} fieldName={name} label={choice.text} />
             ))}
           {anotherOption && (
-            <Option id={another.id} fieldName={name} label={another.content} />
+            <Option id={another.id} fieldName={name} label={another.text} />
           )}
         </ViewOptions>
       </label>

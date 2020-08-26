@@ -20,14 +20,23 @@ interface ImagesChoiceConfigurationProps {
   field: Question | undefined;
 }
 
+interface ListOptionsProps {
+  _id: string;
+  text: string;
+  value?: string;
+  label?: string;
+  image?: string;
+  loading?: boolean;
+}
+
 const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   handleChange,
   field,
 }) => {
-  const randomSort = useMemo(() => field?.randomSort, [field]);
+  const randomSort = useMemo(() => field?.hasRandomResponsesOrder, [field]);
   const imageChoices = useMemo(() => {
     if (field?.imgChoices) {
-      return field.imgChoices;
+      return field?.imgChoices;
     }
     return [];
   }, [field]);
@@ -43,12 +52,12 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   const addDefaultOption = useCallback(
     (toggleOtherOption) => {
       if (toggleOtherOption) {
-        const otherOption: ImageChoice = {
-          label: '',
+        const otherOption: ListOptionsProps = {
+          text: '',
           loading: false,
           image:
             'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
-          id: 'other-option',
+          _id: 'other-option',
         };
         handleChange(
           [[...imageChoices, otherOption], toggleOtherOption],
@@ -56,7 +65,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
         );
       } else {
         const removedOtherOptionImageChoices = imageChoices.filter(
-          (imageChoice) => imageChoice.id !== 'other-option',
+          (imageChoice) => imageChoice._id !== 'other-option',
         );
         handleChange([removedOtherOptionImageChoices], ['imgChoices']);
       }
@@ -67,6 +76,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
+        {console.log(field)}
         <section>
           <ShortTextField
             label="Nome"
@@ -101,24 +111,24 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ToggleSwitch
             label="Escolha Múltipla"
             helpHint="Caso o usuário possa escolhar mais de uma opção"
-            name="multipleChoice"
+            name="isMultipleChoice"
             onChange={(event) =>
-              handleChange([event.target.checked], ['multipleChoice'])
+              handleChange([event.target.checked], ['isMultipleChoice'])
             }
           />
         </section>
-        {field?.multipleChoice && (
+        {field?.isMultipleChoice && (
           <section>
             <NumberField
               label="Limite de Escolhas"
-              name="choiceMaxAmmount"
+              name="maxChoices"
               id="choiceMaxAmmountField"
               // defaultValue={2}
               onChange={(event) =>
                 parseInt(event.target.value, 10) <= 10
                   ? handleChange(
                       [parseInt(event.target.value, 10)],
-                      ['choiceMaxAmmount'],
+                      ['maxChoices'],
                     )
                   : undefined
               }
@@ -139,17 +149,17 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ToggleSwitch
             label="Ordem das respostas aleatória"
             helpHint="Toda vez que será gerado uma ordem aleatória para as opções"
-            name="randomSort"
+            name="hasRandomResponsesOrder"
             onChange={(event) =>
-              handleChange([event.target.checked], ['randomSort'])
+              handleChange([event.target.checked], ['hasRandomResponsesOrder'])
             }
           />
         </section>
         <section>
           <ImageUpload
             label="Opções"
-            imageOptions={field?.imgChoices || []}
-            onChange={(value: any) => handleChange([value], ['imgChoices'])}
+            imageOptions={field?.answerOptions || []}
+            onChange={(value: any) => handleChange([value], ['answerOptions'])}
           />
         </section>
       </Form>
