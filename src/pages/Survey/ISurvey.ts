@@ -23,7 +23,7 @@ export interface QuestionResponse {
     };
     date: {
       isDateRequired: boolean;
-      isTimeRequired: string;
+      isTimeRequired: boolean;
       canCaptureInterval: boolean;
       dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
       timeFormat?: 'hourMinute' | 'hourMinuteSecond';

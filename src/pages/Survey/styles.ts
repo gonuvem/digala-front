@@ -213,6 +213,7 @@ export const SurveyBody = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 
   margin-top: 5rem;
   max-width: 45%;

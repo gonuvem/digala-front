@@ -58,8 +58,6 @@ const Survey: React.FC = () => {
     return <Loading isLoading={surveyLoading} />;
   }
 
-  console.log('Survey: ', survey);
-
   return (
     <Container>
       <Helmet>

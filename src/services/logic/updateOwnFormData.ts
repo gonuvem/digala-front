@@ -47,10 +47,10 @@ export default async function updateOwnFormData(
       progressBarType: formData.config.progressBarType?.value,
       canAllowMultipleSubmissions: formData.config.canAllowMultipleSubmissions,
       background: formData.style.background,
-      logo: formData.style.logo,
       hasLogoInHeader: formData.style.hasLogoInHeader,
       headerBackground: formData.style.headerBackground,
       footerBackground: formData.style.footerBackground,
+      ...(formData.style.hasLogoInHeader ? { logo: formData.style.logo } : {}),
     };
 
     if (formData.config.description) {
