@@ -1,10 +1,10 @@
-export interface AnswerOption {
+interface AnswerOption {
   _id: string;
   text: string;
   image?: string;
 }
 
-export interface SurveyQuestion {
+export interface QuestionResponse {
   _id: string;
   formPage: number;
   position: number;
@@ -118,7 +118,7 @@ export interface ISurvey {
     footerText?: string;
     footerBackground?: string;
   };
-  questions: SurveyQuestion[];
+  questions: QuestionResponse[];
   numResponses?: number;
   numPages: number;
 }

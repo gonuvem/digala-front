@@ -6,10 +6,11 @@ import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
 
 import { ISurvey } from './ISurvey';
+import { Question } from '../../store/ducks/questions/types';
 
 import Loading from '../../components/Common/LoadingAnimation';
 import SolidButton from '../../components/Common/SolidButton';
-import Question from './question';
+import Field from '../../components/Common/Field';
 
 import gonuvemLogo from '../../assets/GONUVEM_HOR.png';
 
@@ -26,6 +27,7 @@ import {
 
 import Colors from '../../utils/colors';
 import { SHOW_FORM } from '../../services/requests/survey';
+import formatQuestionResponse from '../../services/logic/formatQuestionResponse';
 
 const Survey: React.FC = () => {
   const { id } = useParams();
@@ -41,6 +43,13 @@ const Survey: React.FC = () => {
     return {};
   }, [surveyLoading, surveyData]);
 
+  const questions: Question[] = useMemo(() => {
+    if (survey.questions) {
+      return formatQuestionResponse(survey.questions);
+    }
+    return [];
+  }, [survey.questions]);
+
   const onSubmit = useCallback((formData) => {
     console.log('Form Data >> ', formData);
   }, []);
@@ -48,6 +57,8 @@ const Survey: React.FC = () => {
   if (surveyLoading) {
     return <Loading isLoading={surveyLoading} />;
   }
+
+  console.log('Survey: ', survey);
 
   return (
     <Container>
@@ -90,9 +101,9 @@ const Survey: React.FC = () => {
             </div>
           )}
           <Form onSubmit={onSubmit}>
-            {survey.questions.map((question) => (
-              <QuestionWrapper>
-                <Question question={question} />
+            {questions.map((question) => (
+              <QuestionWrapper key={question.id}>
+                <Field question={question} />
               </QuestionWrapper>
             ))}
             <div id="form-separator" />
