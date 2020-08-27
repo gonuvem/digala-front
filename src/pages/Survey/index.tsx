@@ -28,6 +28,11 @@ import {
 import Colors from '../../utils/colors';
 import { SHOW_FORM } from '../../services/requests/survey';
 import formatQuestionResponse from '../../services/logic/formatQuestionResponse';
+import sendAnswer from '../../services/logic/sendAnswer';
+
+interface IFormData {
+  [key: string]: string;
+}
 
 const Survey: React.FC = () => {
   const { id } = useParams();
@@ -50,9 +55,12 @@ const Survey: React.FC = () => {
     return [];
   }, [survey.questions]);
 
-  const onSubmit = useCallback((formData) => {
-    console.log('Form Data >> ', formData);
-  }, []);
+  const onSubmit = useCallback(
+    (formData: IFormData) => {
+      sendAnswer(formData, questions);
+    },
+    [questions],
+  );
 
   if (surveyLoading) {
     return <Loading isLoading={surveyLoading} />;
