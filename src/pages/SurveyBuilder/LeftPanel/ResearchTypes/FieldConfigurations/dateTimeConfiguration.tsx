@@ -11,14 +11,18 @@ import { Question } from '../../../../../store/ducks/questions/types';
 import { Container } from './styles';
 
 const dateOptions = [
-  { value: 'monthYear', label: 'Mês / Ano' },
-  { value: 'dayMonthYear', label: 'Dia / Mês / Ano' },
-  { value: 'dayMonth', label: 'Dia / Mês' },
+  { value: 'monthYear', label: 'Mês / Ano', _id: 'date-format-my' },
+  { value: 'dayMonthYear', label: 'Dia / Mês / Ano', _id: 'date-format-dmy' },
+  { value: 'dayMonth', label: 'Dia / Mês', _id: 'date-format-dm' },
 ];
 
 const timeOptions = [
-  { value: 'hourMinute', label: 'Hora : Minuto' },
-  { value: 'hourMinuteSecond', label: 'Hora : Minuto : Segundo' },
+  { value: 'hourMinute', label: 'Hora : Minuto', _id: 'time-format-hm' },
+  {
+    value: 'hourMinuteSecond',
+    label: 'Hora : Minuto : Segundo',
+    _id: 'time-format-hms',
+  },
 ];
 
 interface DateTimeConfigurationProps {

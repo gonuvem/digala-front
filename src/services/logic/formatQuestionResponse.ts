@@ -1,7 +1,17 @@
-import { QuestionResponse } from '../../pages/Survey/ISurvey';
-import { Question } from '../../store/ducks/questions/types';
+import { QuestionResponse, AnswerOption } from '../../pages/Survey/ISurvey';
+import { Question, ListOptionsProps } from '../../store/ducks/questions/types';
 
 import FieldTypes from '../../utils/fieldsTypes';
+
+function buildAnswersOptions(options: AnswerOption[]): ListOptionsProps[] {
+  const formattedAnswerOptions: ListOptionsProps[] = options.map((option) => ({
+    _id: option._id,
+    text: option.text,
+    value: option._id,
+  }));
+
+  return formattedAnswerOptions;
+}
 
 function extractFromConfig(question: QuestionResponse): Partial<Question> {
   switch (question.type.alias) {
@@ -16,7 +26,12 @@ function extractFromConfig(question: QuestionResponse): Partial<Question> {
     case FieldTypes.Link:
       return { ...question.config.link };
     case FieldTypes.Dropdown:
-      return { ...question.config.dropDown };
+      return {
+        ...question.config.dropDown,
+        answerOptions: buildAnswersOptions(
+          question.config.dropDown.answerOptions,
+        ),
+      };
     case FieldTypes.MultipleChoice:
       return { ...question.config.checkBox };
     case FieldTypes.Number:

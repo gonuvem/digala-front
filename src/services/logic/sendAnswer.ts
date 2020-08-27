@@ -1,22 +1,22 @@
-import { Question } from '../../store/ducks/questions/types';
+import { Question, ListOptionsProps } from '../../store/ducks/questions/types';
 import FieldTypes from '../../utils/fieldsTypes';
 
 interface IFormData {
   [key: string]: string;
 }
 
-type Answer = string;
+type Answer = ListOptionsProps | string;
 
 type Alias = 'shortText' | 'longText';
 
-function formatAnswer(alias: Alias, answer: Answer): any {
+function formatAnswer(alias: Alias, answer: any): any {
   switch (alias) {
     case FieldTypes.ShortText:
       return answer;
     case FieldTypes.LongText:
       return answer;
     case FieldTypes.Dropdown:
-      return answer;
+      return [answer.value];
     default:
       return '';
   }

@@ -1,4 +1,4 @@
-interface AnswerOption {
+export interface AnswerOption {
   _id: string;
   text: string;
   image?: string;

@@ -12,7 +12,6 @@ import { MdArrowDropDown } from 'react-icons/md';
 import { Container, CustomSelect } from './styles';
 
 interface OptionsProps {
-  // label?: string;
   value?: string;
   text?: string;
 }
@@ -65,10 +64,10 @@ const SelectField: React.FC<SelectFieldProps> = ({
   useEffect(() => {
     if (!isTimeFormat && answerOptions) {
       const newArray = [];
-      for (let i = 0; i < answerOptions.length; i++) {
+      for (let i = 0; i < answerOptions.length; i += 1) {
         const option = {
           label: answerOptions[i].text,
-          value: answerOptions[i].text,
+          value: answerOptions[i].value,
         };
         newArray.push(option);
       }
@@ -87,7 +86,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   return (
     <Container>
-      <label>
+      <label htmlFor={name}>
         {label && <span>{label}</span>}
         {description && <p>{description}</p>}
       </label>
