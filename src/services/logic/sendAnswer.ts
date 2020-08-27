@@ -7,9 +7,11 @@ interface IFormData {
 
 type Answer = ListOptionsProps | string;
 
+type AnswerFormatted = string | string[] | Date[] | number;
+
 type Alias = 'shortText' | 'longText';
 
-function formatAnswer(alias: Alias, answer: any): any {
+function formatAnswer(alias: Alias, answer: any): AnswerFormatted {
   switch (alias) {
     case FieldTypes.ShortText:
       return answer;
@@ -17,6 +19,14 @@ function formatAnswer(alias: Alias, answer: any): any {
       return answer;
     case FieldTypes.Dropdown:
       return [answer.value];
+    case FieldTypes.Phone:
+      return answer;
+    case FieldTypes.Link:
+      return answer;
+    case FieldTypes.Email:
+      return answer;
+    case FieldTypes.ImageChoice:
+      return answer;
     default:
       return '';
   }
