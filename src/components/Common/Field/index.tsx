@@ -148,6 +148,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
     case FieldsTypes.SortList:
       return (
         <SortAnswer
+          name={question?.name || 'sort-answer-field-name'}
           label={question?.label || ''}
           description={question?.description}
           answerOptions={question?.answerOptions}

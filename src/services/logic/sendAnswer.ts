@@ -14,20 +14,8 @@ type Alias = 'shortText' | 'longText';
 
 function formatAnswer(question: Question, answer: any): AnswerFormatted {
   switch (question.alias) {
-    case FieldTypes.ShortText:
-      return answer;
-    case FieldTypes.LongText:
-      return answer;
     case FieldTypes.Dropdown:
       return [answer.value];
-    case FieldTypes.Phone:
-      return answer;
-    case FieldTypes.Link:
-      return answer;
-    case FieldTypes.Email:
-      return answer;
-    case FieldTypes.ImageChoice:
-      return answer;
     case FieldTypes.Date:
       return [
         parseToDate({
@@ -37,12 +25,10 @@ function formatAnswer(question: Question, answer: any): AnswerFormatted {
           timeFormat: question.timeFormat || 'hourMinute',
         }),
       ];
-    case FieldTypes.SingleChoice:
-      return answer;
-    case FieldTypes.MultipleChoice:
-      return answer;
+    case FieldTypes.SortList:
+      return answer.map((option: any) => option._id);
     default:
-      return '';
+      return answer;
   }
 }
 
