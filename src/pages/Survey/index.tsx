@@ -1,7 +1,9 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useRef } from 'react';
+import * as Yup from 'yup';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
 import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
 
@@ -27,8 +29,10 @@ import {
 
 import Colors from '../../utils/colors';
 import { SHOW_FORM } from '../../services/requests/survey';
+import getValidationErrors from '../../utils/getValidationErrors';
 import formatQuestionResponse from '../../services/logic/formatQuestionResponse';
 import sendAnswer from '../../services/logic/sendAnswer';
+import generateSchema from '../../services/logic/generateSchema';
 
 interface IFormData {
   [key: string]: string;
@@ -36,6 +40,7 @@ interface IFormData {
 
 const Survey: React.FC = () => {
   const { id } = useParams();
+  const formRef = useRef<FormHandles>(null);
 
   const { data: surveyData, loading: surveyLoading } = useQuery(SHOW_FORM, {
     variables: { id },
@@ -55,11 +60,27 @@ const Survey: React.FC = () => {
     return [];
   }, [survey.questions]);
 
+  const schema: Yup.ObjectSchema = useMemo(() => {
+    if (survey.questions) {
+      return generateSchema(survey.questions);
+    }
+    return Yup.object().shape({});
+  }, [survey.questions]);
+
   const onSubmit = useCallback(
-    (formData: IFormData) => {
-      sendAnswer(formData, questions);
+    async (formData: IFormData) => {
+      try {
+        await schema.validate(formData, { abortEarly: false });
+        sendAnswer(formData, questions);
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
+          console.log('Errors: ', errors);
+          formRef.current?.setErrors(errors);
+        }
+      }
     },
-    [questions],
+    [questions, schema],
   );
 
   if (surveyLoading) {
@@ -106,7 +127,7 @@ const Survey: React.FC = () => {
               </ProgressBar>
             </div>
           )}
-          <Form onSubmit={onSubmit}>
+          <Form ref={formRef} onSubmit={onSubmit}>
             {questions.map((question) => (
               <QuestionWrapper key={question.id}>
                 <Field question={question} />

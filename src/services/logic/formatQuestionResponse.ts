@@ -13,7 +13,7 @@ function buildAnswersOptions(options: AnswerOption[]): ListOptionsProps[] {
   return formattedAnswerOptions;
 }
 
-function extractFromConfig(question: QuestionResponse): Partial<Question> {
+function extractFromConfig(question: QuestionResponse): any {
   switch (question.type.alias) {
     case FieldTypes.Date:
       return { ...question.config.date };
@@ -45,7 +45,7 @@ function extractFromConfig(question: QuestionResponse): Partial<Question> {
     case FieldTypes.Nps:
       return {
         ...question.config.nps,
-        escale: parseInt(question.config.nps.escale, 10),
+        escale: question.config.nps.escale.toString(),
       };
     case FieldTypes.Phone:
       return { ...question.config.phone };
