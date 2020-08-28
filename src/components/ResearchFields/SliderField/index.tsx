@@ -1,9 +1,11 @@
-import React, { InputHTMLAttributes, useState, useCallback } from 'react';
+import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
 
-import { Container, Slider, Tooltip } from './styles';
+import { Container, Slider } from './styles';
 
 interface SliderFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
+  name: string;
   description?: string;
   minValue: number;
   maxValue: number;
@@ -13,21 +15,30 @@ interface SliderFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const SliderField: React.FC<SliderFieldProps> = ({
   label,
+  name,
   description,
   minValue,
   maxValue,
   leftSubtitle,
   rightSubtitle,
 }) => {
-  const [valueRange, setValueRange] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleChangeSlider = useCallback((e) => {
-    setValueRange(parseInt(e.target.value, 10));
-  }, []);
+  const { fieldName, registerField, error, defaultValue } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      getValue: () => {
+        return inputRef.current?.value;
+      },
+    });
+  }, [fieldName, registerField]);
 
   return (
     <Container>
-      <label htmlFor="">
+      <label htmlFor={name}>
         {label && <span>{label}</span>}
         {description && <p>{description}</p>}
       </label>
@@ -39,17 +50,14 @@ const SliderField: React.FC<SliderFieldProps> = ({
           </div>
         )}
         <Slider
+          ref={inputRef}
+          id={name}
           type="range"
           min={minValue}
           max={maxValue}
-          value={valueRange}
-          onChange={handleChangeSlider}
           data-tip
           data-for="rangeSlider"
         />
-        {/* <Tooltip id="rangeSlider" effect="solid" place="top" type="dark">
-          <p>{valueRange}</p>
-        </Tooltip> */}
         <div>
           <p>{minValue}</p>
           <p>{maxValue}</p>

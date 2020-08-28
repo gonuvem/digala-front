@@ -124,6 +124,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
     case FieldsTypes.Slider:
       return (
         <SliderField
+          name={question.name}
           label={question?.label || ''}
           description={question?.description || ''}
           minValue={question?.minValue || 0}
