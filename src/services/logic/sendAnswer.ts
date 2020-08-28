@@ -37,6 +37,10 @@ function formatAnswer(question: Question, answer: any): AnswerFormatted {
           timeFormat: question.timeFormat || 'hourMinute',
         }),
       ];
+    case FieldTypes.SingleChoice:
+      return answer;
+    case FieldTypes.MultipleChoice:
+      return answer;
     default:
       return '';
   }

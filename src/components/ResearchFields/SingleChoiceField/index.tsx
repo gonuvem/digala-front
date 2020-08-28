@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useField } from '@unform/core';
 import { uuid } from 'uuidv4';
 
 import Option from '../../Common/Option';
@@ -32,10 +33,23 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   anotherOption,
   rowDirection = false,
 }) => {
+  const inputRefs = useRef<HTMLInputElement[]>([]);
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
+  const { fieldName, registerField, error, defaultValue } = useField(name);
+
   const another = { id: uuid(), text: 'outros(a)' };
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRefs.current,
+      getValue: (refs: HTMLInputElement[]) => {
+        return refs.filter((ref) => ref.checked).map((ref) => ref.value);
+      },
+    });
+  }, [registerField, fieldName]);
 
   useEffect(() => {
     if (choices) {
@@ -50,11 +64,27 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
         {description && <p>{description}</p>}
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&
-            listChoices.map((choice) => (
-              <Option id={choice._id} fieldName={name} label={choice.text} />
+            listChoices.map((choice, index) => (
+              <Option
+                inputRef={(ref) => {
+                  inputRefs.current[index] = ref as HTMLInputElement;
+                }}
+                id={choice._id}
+                value={choice._id}
+                fieldName={name}
+                label={choice.text}
+              />
             ))}
           {anotherOption && (
-            <Option id={another.id} fieldName={name} label={another.text} />
+            <Option
+              inputRef={(ref) => {
+                inputRefs.current[listChoices.length] = ref as HTMLInputElement;
+              }}
+              id={another.id}
+              value="another-option"
+              fieldName={name}
+              label={another.text}
+            />
           )}
         </ViewOptions>
       </label>

@@ -1,4 +1,5 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState, useRef } from 'react';
+import { useField } from '@unform/core';
 import { uuid } from 'uuidv4';
 
 import Option from '../../Common/Option';
@@ -36,12 +37,24 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   limitChoices,
   choiceMaxAmmount = 2,
 }) => {
+  const inputRefs = useRef<HTMLInputElement[]>([]);
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
   const [checkeds, setCheckeds] = useState<string[]>([]);
+  const { fieldName, registerField, error, defaultValue } = useField(name);
 
   const another = { id: uuid(), text: 'outros(a)' };
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRefs.current,
+      getValue: (refs: HTMLInputElement[]) => {
+        return refs.filter((ref) => ref.checked).map((ref) => ref.value);
+      },
+    });
+  }, [fieldName, registerField]);
 
   useEffect(() => {
     if (choices) {
@@ -74,18 +87,24 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
         {description && <p>{description}</p>}
         <ViewOptions rowDirection={rowDirection}>
           {listChoices &&
-            listChoices.map((choice) => (
+            listChoices.map((choice, index) => (
               <Option
+                inputRef={(ref) => {
+                  inputRefs.current[index] = ref as HTMLInputElement;
+                }}
                 type="checkbox"
                 id={choice._id}
+                value={choice._id}
                 fieldName={name}
                 label={choice.text}
-                checked={checkeds.includes(choice._id)}
-                onChange={(event: any) => handleOptionClick(event, choice._id)}
               />
             ))}
           {anotherOption && (
             <Option
+              inputRef={(ref) => {
+                inputRefs.current[listChoices.length] = ref as HTMLInputElement;
+              }}
+              value="another"
               type="checkbox"
               id={another.id}
               fieldName={name}

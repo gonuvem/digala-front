@@ -2,8 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { useField } from '@unform/core';
 import { Container, CardImage } from './styles';
 
-import { ImageChoice } from '../../../store/ducks/questions/types';
-
 interface ImagesChoiceProps {
   name: string;
   description?: string;
@@ -43,7 +41,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
       },
     });
   }, [fieldName, registerField]);
-  // console.log(choices);
+
   return (
     <Container>
       <label htmlFor={id}>
