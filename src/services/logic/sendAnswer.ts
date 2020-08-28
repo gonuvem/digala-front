@@ -27,6 +27,10 @@ function formatAnswer(question: Question, answer: any): AnswerFormatted {
       ];
     case FieldTypes.SortList:
       return answer.map((option: any) => option._id);
+    case FieldTypes.Number:
+      return parseInt(answer, 10);
+    case FieldTypes.Slider:
+      return parseInt(answer, 10);
     default:
       return answer;
   }
