@@ -12,6 +12,11 @@ type AnswerFormatted = string | string[] | Date[] | number;
 
 type Alias = 'shortText' | 'longText';
 
+interface AnswerObject {
+  question: string;
+  answer: Record<string, any>;
+}
+
 function formatAnswer(question: Question, answer: any): AnswerFormatted {
   switch (question.alias) {
     case FieldTypes.Dropdown:
@@ -42,29 +47,22 @@ export default async function sendAnswer(
   questions: Question[],
   submitResponse: Function,
 ): Promise<void> {
-  const answersFormatted = Object.entries(formData).map(
-    ([questionId, answer]) => {
-      const questionWithSameId = questions.find(
-        (question) => question.id === questionId,
-      );
+  const answersFormatted: AnswerObject[] = [];
 
-      console.log('Question: ', questionWithSameId);
+  Object.entries(formData).forEach(([questionId, answer]) => {
+    const questionWithSameId = questions.find(
+      (question) => question.id === questionId,
+    );
 
-      if (questionWithSameId) {
-        return {
-          question: questionId,
-          answer: {
-            [questionWithSameId.alias]: formatAnswer(
-              questionWithSameId,
-              answer,
-            ),
-          },
-        };
-      }
-
-      return {};
-    },
-  );
+    if (questionWithSameId) {
+      answersFormatted.push({
+        question: questionId,
+        answer: {
+          [questionWithSameId.alias]: formatAnswer(questionWithSameId, answer),
+        },
+      });
+    }
+  });
 
   const payload = {
     form: formId,
