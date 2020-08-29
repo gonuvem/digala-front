@@ -25,7 +25,7 @@ export default function generateSchema(
 
     if (question.type.alias === FieldsTypes.ImageChoice) {
       Object.assign(rules, {
-        [question._id]: Yup.array().min(1),
+        [question._id]: Yup.array().min(1, 'Selecione no mínimo uma opção'),
       });
       return;
     }

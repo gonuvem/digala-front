@@ -1,5 +1,8 @@
 import React, { useRef, useEffect } from 'react';
+import { useTransition } from 'react-spring';
 import { useField } from '@unform/core';
+
+import ErrorMessage from '../../Common/ErrorMessage';
 import { Container, CardImage } from './styles';
 
 interface ImagesChoiceProps {
@@ -30,7 +33,13 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
   id,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
+
   const { fieldName, registerField, error, defaultValue } = useField(name);
+  const transitions = useTransition(!!error, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   useEffect(() => {
     registerField({
@@ -66,6 +75,9 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
           ))}
         </div>
       </label>
+      {transitions(
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
+      )}
     </Container>
   );
 };
