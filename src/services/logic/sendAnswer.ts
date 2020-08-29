@@ -36,20 +36,29 @@ function formatAnswer(question: Question, answer: any): AnswerFormatted {
   }
 }
 
-export default function sendAnswer(
+export default async function sendAnswer(
+  formId: string,
   formData: IFormData,
   questions: Question[],
-): void {
+  submitResponse: Function,
+): Promise<void> {
   const answersFormatted = Object.entries(formData).map(
     ([questionId, answer]) => {
       const questionWithSameId = questions.find(
         (question) => question.id === questionId,
       );
 
+      console.log('Question: ', questionWithSameId);
+
       if (questionWithSameId) {
         return {
           question: questionId,
-          [questionWithSameId.alias]: formatAnswer(questionWithSameId, answer),
+          answer: {
+            [questionWithSameId.alias]: formatAnswer(
+              questionWithSameId,
+              answer,
+            ),
+          },
         };
       }
 
@@ -57,5 +66,18 @@ export default function sendAnswer(
     },
   );
 
-  console.log('Answer Formatted: ', answersFormatted);
+  const payload = {
+    form: formId,
+    answersAndQuestions: answersFormatted,
+  };
+
+  try {
+    const response = await submitResponse({ variables: { input: payload } });
+
+    if (response.data.data.error) {
+      throw new Error(response.data.data.error.message);
+    }
+  } catch (err) {
+    throw new Error('Erro durante o envio dos dados');
+  }
 }

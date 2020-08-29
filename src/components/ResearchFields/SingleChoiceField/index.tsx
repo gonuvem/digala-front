@@ -73,6 +73,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
           {listChoices &&
             listChoices.map((choice, index) => (
               <Option
+                key={choice._id}
                 inputRef={(ref) => {
                   inputRefs.current[index] = ref as HTMLInputElement;
                 }}
@@ -84,6 +85,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
             ))}
           {anotherOption && (
             <Option
+              key={`another-option-${name}`}
               inputRef={(ref) => {
                 inputRefs.current[listChoices.length] = ref as HTMLInputElement;
               }}

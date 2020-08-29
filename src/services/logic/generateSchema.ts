@@ -40,12 +40,9 @@ export default function generateSchema(
 
   questions.forEach((question) => {
     if (question.config.isRequired) {
-      console.log('Question: ', question.type.alias);
+      const rule = mountRule(question);
+      Object.assign(rules, rule);
     }
-
-    const rule = mountRule(question);
-
-    Object.assign(rules, rule);
   });
 
   return Yup.object().shape(rules);

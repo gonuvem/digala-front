@@ -1,11 +1,12 @@
 import React, { useMemo, useCallback, useRef } from 'react';
 import * as Yup from 'yup';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { Helmet } from 'react-helmet';
 import { FiCheck } from 'react-icons/fi';
+import { toast } from 'react-toastify';
 
 import { ISurvey } from './ISurvey';
 import { Question } from '../../store/ducks/questions/types';
@@ -29,6 +30,7 @@ import {
 
 import Colors from '../../utils/colors';
 import { SHOW_FORM } from '../../services/requests/survey';
+import { SUBMIT_RESPONSE } from '../../services/requests/answers';
 import getValidationErrors from '../../utils/getValidationErrors';
 import formatQuestionResponse from '../../services/logic/formatQuestionResponse';
 import sendAnswer from '../../services/logic/sendAnswer';
@@ -45,6 +47,10 @@ const Survey: React.FC = () => {
   const { data: surveyData, loading: surveyLoading } = useQuery(SHOW_FORM, {
     variables: { id },
   });
+
+  const [submitResponse, { loading: submitResponseLoading }] = useMutation(
+    SUBMIT_RESPONSE,
+  );
 
   const survey: ISurvey = useMemo(() => {
     if (!surveyLoading && surveyData.showForm.form) {
@@ -70,17 +76,24 @@ const Survey: React.FC = () => {
   const onSubmit = useCallback(
     async (formData: IFormData) => {
       try {
-        console.log('FormData: ', formData);
         await schema.validate(formData, { abortEarly: false });
-        sendAnswer(formData, questions);
+        await sendAnswer(id, formData, questions, submitResponse);
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
           formRef.current?.setErrors(errors);
+          toast.error(
+            'Verifique o formulário, existem campos obrigatórios vazio',
+          );
+          return;
         }
+
+        toast.error(
+          'Ocorreu um erro durante o envio dos dados, por favor tente novamente',
+        );
       }
     },
-    [questions, schema],
+    [id, questions, schema, submitResponse],
   );
 
   if (surveyLoading) {

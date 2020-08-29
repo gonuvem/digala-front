@@ -58,7 +58,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
         {description && <p>{description}</p>}
         <div>
           {choices.map((option, index) => (
-            <CardImage image={option?.image || ''}>
+            <CardImage key={option._id} image={option?.image || ''}>
               <label htmlFor={option?._id}>
                 <input
                   ref={(ref) => {
