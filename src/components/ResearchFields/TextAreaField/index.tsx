@@ -8,7 +8,8 @@ import React, {
 import { useField } from '@unform/core';
 import { useTransition } from 'react-spring';
 
-import { Container, ErrorMessage } from './styles';
+import ErrorMessage from '../../Common/ErrorMessage';
+import { Container } from './styles';
 
 interface TextAreaFieldProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -75,8 +76,7 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
         />
       </label>
       {transitions(
-        (props, item) =>
-          item && <ErrorMessage style={props}>{error}</ErrorMessage>,
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
       )}
     </Container>
   );

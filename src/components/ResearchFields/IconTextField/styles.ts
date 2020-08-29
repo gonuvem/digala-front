@@ -10,6 +10,8 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   width: 100%;
+  display: flex;
+  flex-direction: column;
 
   label {
     display: flex;

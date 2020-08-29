@@ -8,7 +8,9 @@ import React, {
 import { useField } from '@unform/core';
 import { useTransition } from 'react-spring';
 
-import { Container, ErrorMessage } from './styles';
+import ErrorMessage from '../../Common/ErrorMessage';
+
+import { Container } from './styles';
 
 interface ShortTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   readOnly?: boolean;
@@ -75,8 +77,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
         />
       </label>
       {transitions(
-        (props, item) =>
-          item && <ErrorMessage style={props}>{error}</ErrorMessage>,
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
       )}
     </Container>
   );

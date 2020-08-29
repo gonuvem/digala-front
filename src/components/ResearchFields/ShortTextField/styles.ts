@@ -65,9 +65,3 @@ export const Container = styled.div<ContainerProps>`
     }
   }
 `;
-
-export const ErrorMessage = styled(animated.span)`
-  align-self: flex-end;
-  color: ${Colors.negative};
-  margin-top: 0.5rem !important;
-`;

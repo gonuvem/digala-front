@@ -70,6 +70,7 @@ const Survey: React.FC = () => {
   const onSubmit = useCallback(
     async (formData: IFormData) => {
       try {
+        // console.log('FormData: ', formData);
         await schema.validate(formData, { abortEarly: false });
         sendAnswer(formData, questions);
       } catch (error) {
