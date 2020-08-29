@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useRef } from 'react';
+import React, { useMemo, useCallback, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
@@ -16,6 +16,7 @@ import SolidButton from '../../components/Common/SolidButton';
 import Field from '../../components/Common/Field';
 
 import gonuvemLogo from '../../assets/GONUVEM_HOR.png';
+import surveyCompleted from '../../assets/survey_completed.svg';
 
 import {
   Container,
@@ -26,6 +27,7 @@ import {
   Step,
   FormArea,
   QuestionWrapper,
+  ModalCompleteSurvey,
 } from './styles';
 
 import Colors from '../../utils/colors';
@@ -43,6 +45,7 @@ interface IFormData {
 const Survey: React.FC = () => {
   const { id } = useParams();
   const formRef = useRef<FormHandles>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: surveyData, loading: surveyLoading } = useQuery(SHOW_FORM, {
     variables: { id },
@@ -78,6 +81,7 @@ const Survey: React.FC = () => {
       try {
         await schema.validate(formData, { abortEarly: false });
         await sendAnswer(id, formData, questions, submitResponse);
+        setIsModalOpen(true);
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
@@ -160,6 +164,11 @@ const Survey: React.FC = () => {
         <div id="survey-separator" />
         <img src={gonuvemLogo} alt="logo da gonuvem" />
       </SurveyBody>
+      <ModalCompleteSurvey isOpen={isModalOpen} closeTimeoutMS={300}>
+        <img src={surveyCompleted} alt="resposta enviada" />
+        <h2>Resposta enviada com sucesso!</h2>
+        <p>Muito obrigado por responder a pesquisa.</p>
+      </ModalCompleteSurvey>
     </Container>
   );
 };

@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useMemo,
-  useEffect,
-  useRef,
-  useCallback,
-} from 'react';
+import React, { useState, useMemo, useRef, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import QRCode from 'qrcode.react';
 import { MdMail } from 'react-icons/md';

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { transparentize, lighten, readableColor } from 'polished';
+import Modal from 'react-modal';
 
 import Colors from '../../utils/colors';
 
@@ -292,5 +293,34 @@ export const SurveyFooter = styled.div<SurveyFooterProps>`
     opacity: 0.8;
     text-align: center;
     color: ${(props) => readableColor(props.backgroundColor)};
+  }
+`;
+
+export const ModalCompleteSurvey = styled(Modal).attrs({
+  style: { overlay: { background: Colors.blackOpacity } },
+})`
+  display: flex;
+  position: static;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+
+  background-color: ${Colors.white};
+  border-radius: 4px;
+
+  img {
+    max-width: 80%;
+  }
+
+  h2 {
+    margin-top: 1.5rem;
+  }
+
+  p {
+    margin-top: 1rem;
   }
 `;
