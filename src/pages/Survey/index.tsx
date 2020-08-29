@@ -70,13 +70,12 @@ const Survey: React.FC = () => {
   const onSubmit = useCallback(
     async (formData: IFormData) => {
       try {
-        // console.log('FormData: ', formData);
+        console.log('FormData: ', formData);
         await schema.validate(formData, { abortEarly: false });
         sendAnswer(formData, questions);
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
-          console.log('Errors: ', errors);
           formRef.current?.setErrors(errors);
         }
       }

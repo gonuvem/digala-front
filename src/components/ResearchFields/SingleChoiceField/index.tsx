@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useTransition } from 'react-spring';
 import { useField } from '@unform/core';
 import { uuid } from 'uuidv4';
 
 import Option from '../../Common/Option';
+import ErrorMessage from '../../Common/ErrorMessage';
 
 import { Container, ViewOptions } from './styles';
 
@@ -38,6 +40,11 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
     choices || [],
   );
   const { fieldName, registerField, error, defaultValue } = useField(name);
+  const transitions = useTransition(!!error, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   const another = { id: uuid(), text: 'outros(a)' };
 
@@ -88,6 +95,9 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
           )}
         </ViewOptions>
       </label>
+      {transitions(
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
+      )}
     </Container>
   );
 };
