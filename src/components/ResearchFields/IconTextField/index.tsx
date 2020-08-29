@@ -10,8 +10,6 @@ import { IconType } from 'react-icons';
 import { useField } from '@unform/core';
 import { useTransition } from 'react-spring';
 
-import { urlValidation } from '../../../utils/validations';
-
 import ErrorMessage from '../../Common/ErrorMessage';
 import { Container } from './styles';
 

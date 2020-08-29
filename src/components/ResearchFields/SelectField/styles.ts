@@ -4,6 +4,9 @@ import Select from 'react-select';
 import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+
   label {
     span {
       display: inline-block;
