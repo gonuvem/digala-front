@@ -89,8 +89,6 @@ export default async function sendAnswer(
 ): Promise<void> {
   const answersFormatted: AnswerObject[] = [];
 
-  console.log('Form Data: ', formData);
-
   Object.entries(formData).forEach(([questionId, answer]) => {
     const questionWithSameId = questions.find(
       (question) => question.id === questionId,

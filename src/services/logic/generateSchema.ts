@@ -7,6 +7,7 @@ function mountRule(question: QuestionResponse): Record<string, any> {
     case FieldsTypes.ImageChoice:
     case FieldsTypes.SingleChoice:
     case FieldsTypes.MultipleChoice:
+    case FieldsTypes.Matrix:
       return {
         [question._id]: Yup.array().min(1, 'Selecione no mínimo uma opção'),
       };

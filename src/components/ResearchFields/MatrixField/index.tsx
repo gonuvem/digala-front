@@ -1,8 +1,9 @@
 import React, { InputHTMLAttributes, useRef, useEffect } from 'react';
+import { useTransition } from 'react-spring';
 import { useField } from '@unform/core';
 
 import CustomCheckbox from './CustomCheckbox';
-
+import ErrorMessage from '../../Common/ErrorMessage';
 import { Container, LineTitle } from './styles';
 
 interface MatrixFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -25,7 +26,12 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  const { fieldName, registerField } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
+  const transitions = useTransition(!!error, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   useEffect(() => {
     registerField({
@@ -80,6 +86,15 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
           ))}
         </tbody>
       </table>
+      {transitions(
+        (props, item) =>
+          item && (
+            <ErrorMessage
+              style={{ ...props, alignSelf: 'flex-start' }}
+              message={error}
+            />
+          ),
+      )}
     </Container>
   );
 };

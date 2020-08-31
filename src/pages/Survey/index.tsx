@@ -85,6 +85,7 @@ const Survey: React.FC = () => {
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErrors(error);
+          console.log('Errors: ', errors);
           formRef.current?.setErrors(errors);
           toast.error(
             'Verifique o formulário, existem campos obrigatórios vazio',
