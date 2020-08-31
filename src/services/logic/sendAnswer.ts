@@ -1,3 +1,5 @@
+import { isValid } from 'date-fns';
+
 import { Question, ListOptionsProps } from '../../store/ducks/questions/types';
 import FieldTypes from '../../utils/fieldsTypes';
 import parseToDate from '../../utils/parseToDate';
@@ -15,6 +17,27 @@ type Alias = 'shortText' | 'longText';
 interface AnswerObject {
   question: string;
   answer: Record<string, any>;
+}
+
+function checkIfAnswerIsFilled(alias: string, answer: any): boolean {
+  switch (alias) {
+    case FieldTypes.ImageChoice:
+    case FieldTypes.SingleChoice:
+    case FieldTypes.MultipleChoice:
+      return answer > 0;
+    case FieldTypes.Date:
+      return isValid(answer[0]);
+    case FieldTypes.LongText:
+    case FieldTypes.ShortText:
+    case FieldTypes.Phone:
+    case FieldTypes.Link:
+    case FieldTypes.Email:
+      return !!answer;
+    case FieldTypes.Dropdown:
+      return answer.includes(undefined);
+    default:
+      return true;
+  }
 }
 
 function formatAnswer(question: Question, answer: any): AnswerFormatted {
@@ -55,12 +78,16 @@ export default async function sendAnswer(
     );
 
     if (questionWithSameId) {
-      answersFormatted.push({
-        question: questionId,
-        answer: {
-          [questionWithSameId.alias]: formatAnswer(questionWithSameId, answer),
-        },
-      });
+      const formatedAnswer = formatAnswer(questionWithSameId, answer);
+
+      if (checkIfAnswerIsFilled(questionWithSameId.alias, answer)) {
+        answersFormatted.push({
+          question: questionId,
+          answer: {
+            [questionWithSameId.alias]: formatedAnswer,
+          },
+        });
+      }
     }
   });
 
@@ -68,6 +95,10 @@ export default async function sendAnswer(
     form: formId,
     answersAndQuestions: answersFormatted,
   };
+
+  console.log('Payload: ', payload);
+
+  return;
 
   try {
     const response = await submitResponse({ variables: { input: payload } });
