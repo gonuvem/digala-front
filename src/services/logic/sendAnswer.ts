@@ -34,6 +34,8 @@ function checkIfAnswerIsFilled(alias: string, answer: any): boolean {
     case FieldTypes.Link:
     case FieldTypes.Email:
       return !!answer;
+    case FieldTypes.Nps:
+      return answer > -1;
     default:
       return true;
   }
@@ -55,9 +57,12 @@ function formatAnswer(question: Question, answer: any): AnswerFormatted {
     case FieldTypes.SortList:
       return answer.map((option: any) => option._id);
     case FieldTypes.Number:
-      return parseInt(answer, 10);
     case FieldTypes.Slider:
       return parseInt(answer, 10);
+    case FieldTypes.Nps:
+      return parseInt(answer, 10) > -1
+        ? parseInt(answer, 10) + 1
+        : parseInt(answer, 10);
     default:
       return answer;
   }
@@ -94,8 +99,6 @@ export default async function sendAnswer(
     form: formId,
     answersAndQuestions: answersFormatted,
   };
-
-  console.log('Payload: ', payload);
 
   try {
     const response = await submitResponse({ variables: { input: payload } });

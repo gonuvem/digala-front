@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
 
-import { Container, Title, NumberBar, Number } from './styles';
+import { Container, NumberBar, Number } from './styles';
 
 interface NpsProps {
+  name: string;
   label: string;
   description: string;
   showSubtitles: boolean;
@@ -13,6 +15,7 @@ interface NpsProps {
 }
 
 const NpsField: React.FC<NpsProps> = ({
+  name,
   label,
   description,
   showSubtitles,
@@ -21,14 +24,25 @@ const NpsField: React.FC<NpsProps> = ({
   scale,
   startZero,
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [selectedNumber, setSelectedNumber] = useState(-1);
   const [arrayNumbers, setArrayNumbers] = useState<Array<number>>([]);
+
+  const { fieldName, registerField } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [registerField, fieldName]);
 
   useEffect(() => {
     const numbers = [];
     let i = startZero ? 0 : 1;
 
-    for (i; i <= scale; i++) {
+    for (i; i <= scale; i += 1) {
       numbers.push(i);
     }
     setArrayNumbers(numbers);
@@ -36,11 +50,11 @@ const NpsField: React.FC<NpsProps> = ({
 
   return (
     <Container>
-      <label htmlFor="">
+      <label htmlFor={name}>
         <span>{label}</span>
         <p>{description}</p>
       </label>
-      <div>
+      <div id={name}>
         {showSubtitles && (
           <div>
             <p>{leftSubtitle}</p>
@@ -50,13 +64,19 @@ const NpsField: React.FC<NpsProps> = ({
         <NumberBar>
           {arrayNumbers.map((value, index) => (
             <Number
-              key={index}
+              type="button"
+              key={value}
               isSelected={index === selectedNumber}
               onClick={() => setSelectedNumber(index)}
             >
               <h2>{value}</h2>
             </Number>
           ))}
+          <input
+            ref={inputRef}
+            style={{ display: 'none' }}
+            value={selectedNumber}
+          />
         </NumberBar>
       </div>
     </Container>

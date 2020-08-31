@@ -123,7 +123,7 @@ export default Yup.array().of(
           leftLabel: Yup.string().notRequired(),
           rightLabel: Yup.string().notRequired(),
           canStartAtZero: Yup.boolean().required(),
-          escale: Yup.string().required(),
+          escale: Yup.number().required(),
         })
         .notRequired(),
 

@@ -112,6 +112,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
     case FieldsTypes.Nps:
       return (
         <NpsField
+          name={question.name}
           label={question?.label || ''}
           description={question?.description || ''}
           showSubtitles={question?.canDisplayLabels || false}
