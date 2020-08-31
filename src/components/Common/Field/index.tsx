@@ -175,7 +175,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           label={question?.label}
           description={question?.description}
           name={question?.name || ''}
-          lines={question?.rowsLabels || ['']}
+          rows={question?.rowsLabels || ['']}
           columns={question?.colsLabels || ['']}
           multipleChoice={question?.isMultipleChoice || false}
         />

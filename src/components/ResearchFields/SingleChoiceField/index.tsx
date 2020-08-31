@@ -26,7 +26,6 @@ interface ChoicesProps {
 }
 
 const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
-  readOnly = false,
   id,
   name,
   choices,
@@ -39,7 +38,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
   const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },

@@ -73,6 +73,7 @@ const NpsField: React.FC<NpsProps> = ({
             </Number>
           ))}
           <input
+            readOnly
             ref={inputRef}
             style={{ display: 'none' }}
             value={selectedNumber}

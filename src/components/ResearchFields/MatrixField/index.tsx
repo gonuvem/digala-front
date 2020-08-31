@@ -1,8 +1,11 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, useRef, useEffect } from 'react';
+import { useField } from '@unform/core';
 
 import CustomCheckbox from './CustomCheckbox';
 
 import { Container, LineTitle } from './styles';
+
+import flattenArray from '../../../utils/flattenArray';
 
 interface MatrixFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   description?: string;
@@ -10,7 +13,7 @@ interface MatrixFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   multipleChoice: boolean;
   name: string;
   columns: string[];
-  lines: string[];
+  rows: string[];
 }
 
 const MatrixField: React.FC<MatrixFieldProps> = ({
@@ -19,35 +22,58 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
   multipleChoice,
   name,
   columns,
-  lines,
+  rows,
   ...rest
 }) => {
+  const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const { fieldName, registerField } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRefs.current,
+      getValue: (refs: HTMLInputElement[]) => {
+        return refs.filter((ref) => ref.checked).map((ref) => ref.value);
+      },
+    });
+  }, [registerField, fieldName]);
+
   return (
     <Container>
-      <label htmlFor="">
+      <label htmlFor={name}>
         {label && <span>{label}</span>}
         {description && <p>{description}</p>}
       </label>
-      <table>
+      <table id={name}>
         <thead>
           <tr>
             <th />
             {columns.map((column) => (
-              <th>{column}</th>
+              <th key={`${name}-${column}`}>{column}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {lines.map((line, lineIndex) => (
-            <tr>
+          {rows.map((row, rowIndex) => (
+            <tr key={`${name}-${row}`}>
               <td>
-                <LineTitle>{line}</LineTitle>
+                <LineTitle>{row}</LineTitle>
               </td>
               {columns.map((column, columnIndex) => (
-                <td>
+                <td key={`${name}-${row}-${column}`}>
                   <CustomCheckbox
-                    fieldName={`line-${lineIndex}`}
-                    id={`${name}-row${lineIndex}-col${columnIndex}`}
+                    key={`${name}-${
+                      rowIndex * columns.length - 1 + columnIndex
+                    }`}
+                    inputRef={(ref) => {
+                      inputRefs.current[
+                        rowIndex * columns.length - 1 + columnIndex
+                      ] = ref as HTMLInputElement;
+                    }}
+                    fieldName={`line-${rowIndex}`}
+                    value={[rowIndex.toString(), columnIndex.toString()]}
+                    id={`${name}-row${rowIndex}-col${columnIndex}`}
                     type={multipleChoice ? 'checkbox' : 'radio'}
                   />
                 </td>
