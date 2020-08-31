@@ -24,7 +24,8 @@ function checkIfAnswerIsFilled(alias: string, answer: any): boolean {
     case FieldTypes.ImageChoice:
     case FieldTypes.SingleChoice:
     case FieldTypes.MultipleChoice:
-      return answer > 0;
+    case FieldTypes.Dropdown:
+      return answer.length > 0;
     case FieldTypes.Date:
       return isValid(answer[0]);
     case FieldTypes.LongText:
@@ -33,8 +34,6 @@ function checkIfAnswerIsFilled(alias: string, answer: any): boolean {
     case FieldTypes.Link:
     case FieldTypes.Email:
       return !!answer;
-    case FieldTypes.Dropdown:
-      return answer.includes(undefined);
     default:
       return true;
   }
@@ -43,7 +42,7 @@ function checkIfAnswerIsFilled(alias: string, answer: any): boolean {
 function formatAnswer(question: Question, answer: any): AnswerFormatted {
   switch (question.alias) {
     case FieldTypes.Dropdown:
-      return [answer.value];
+      return answer.value ? [answer.value] : [];
     case FieldTypes.Date:
       return [
         parseToDate({
@@ -80,7 +79,7 @@ export default async function sendAnswer(
     if (questionWithSameId) {
       const formatedAnswer = formatAnswer(questionWithSameId, answer);
 
-      if (checkIfAnswerIsFilled(questionWithSameId.alias, answer)) {
+      if (checkIfAnswerIsFilled(questionWithSameId.alias, formatedAnswer)) {
         answersFormatted.push({
           question: questionId,
           answer: {
@@ -97,8 +96,6 @@ export default async function sendAnswer(
   };
 
   console.log('Payload: ', payload);
-
-  return;
 
   try {
     const response = await submitResponse({ variables: { input: payload } });

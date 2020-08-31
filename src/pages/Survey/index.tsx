@@ -164,7 +164,11 @@ const Survey: React.FC = () => {
         <div id="survey-separator" />
         <img src={gonuvemLogo} alt="logo da gonuvem" />
       </SurveyBody>
-      <ModalCompleteSurvey isOpen={isModalOpen} closeTimeoutMS={300}>
+      <ModalCompleteSurvey
+        ariaHideApp={false}
+        isOpen={isModalOpen}
+        closeTimeoutMS={300}
+      >
         <img src={surveyCompleted} alt="resposta enviada" />
         <h2>Resposta enviada com sucesso!</h2>
         <p>Muito obrigado por responder a pesquisa.</p>
