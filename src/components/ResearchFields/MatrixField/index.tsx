@@ -5,8 +5,6 @@ import CustomCheckbox from './CustomCheckbox';
 
 import { Container, LineTitle } from './styles';
 
-import flattenArray from '../../../utils/flattenArray';
-
 interface MatrixFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   description?: string;
   label?: string;
@@ -68,7 +66,7 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
                     }`}
                     inputRef={(ref) => {
                       inputRefs.current[
-                        rowIndex * columns.length - 1 + columnIndex
+                        rowIndex * columns.length + columnIndex
                       ] = ref as HTMLInputElement;
                     }}
                     fieldName={`line-${rowIndex}`}

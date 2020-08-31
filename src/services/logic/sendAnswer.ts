@@ -10,13 +10,23 @@ interface IFormData {
 
 type Answer = ListOptionsProps | string;
 
-type AnswerFormatted = string | string[] | Date[] | number;
-
-type Alias = 'shortText' | 'longText';
+type AnswerFormatted = string | string[] | Date[] | number | number[][];
 
 interface AnswerObject {
   question: string;
   answer: Record<string, any>;
+}
+
+function formatMatrixAnswer(matrixAnswers: string[]): number[][] {
+  const formatedMatrixAnswer = matrixAnswers.map((answer) => {
+    const answerComponents = answer.split(',');
+    return [
+      parseInt(answerComponents[0], 10),
+      parseInt(answerComponents[1], 10),
+    ];
+  });
+
+  return formatedMatrixAnswer;
 }
 
 function checkIfAnswerIsFilled(alias: string, answer: any): boolean {
@@ -25,6 +35,7 @@ function checkIfAnswerIsFilled(alias: string, answer: any): boolean {
     case FieldTypes.SingleChoice:
     case FieldTypes.MultipleChoice:
     case FieldTypes.Dropdown:
+    case FieldTypes.Matrix:
       return answer.length > 0;
     case FieldTypes.Date:
       return isValid(answer[0]);
@@ -63,6 +74,8 @@ function formatAnswer(question: Question, answer: any): AnswerFormatted {
       return parseInt(answer, 10) > -1
         ? parseInt(answer, 10) + 1
         : parseInt(answer, 10);
+    case FieldTypes.Matrix:
+      return formatMatrixAnswer(answer);
     default:
       return answer;
   }
