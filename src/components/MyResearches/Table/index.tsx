@@ -78,7 +78,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <p>{form.isActive ? 'Ativa' : 'Finalizado'}</p>
         </Status>
         <Actions>
-          <Link to={`survey/${form._id}`}>
+          <Link target="blank" to={`survey/${form._id}`}>
             <FiEye size={20} color="#3475D2" />
             <EditLabel>Ver</EditLabel>
           </Link>
