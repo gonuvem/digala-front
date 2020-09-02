@@ -44,6 +44,7 @@ const ResearchTypes: React.FC<ResearchTypesProps> = ({ questions }) => {
         <QuestionsContainer>
           {questions.map((question) => (
             <QuestionBox
+              key={question.alias}
               name={question.name}
               description={question.description}
               image={question.description}

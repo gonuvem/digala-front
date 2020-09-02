@@ -6,13 +6,14 @@ import React, {
   useMemo,
 } from 'react';
 import { useField } from '@unform/core';
+import { useTransition } from 'react-spring';
 import { components, Props as SelectProps, OptionTypeBase } from 'react-select';
 import { MdArrowDropDown } from 'react-icons/md';
 
+import ErrorMessage from '../../Common/ErrorMessage';
 import { Container, CustomSelect } from './styles';
 
 interface OptionsProps {
-  // label?: string;
   value?: string;
   text?: string;
 }
@@ -41,10 +42,16 @@ const SelectField: React.FC<SelectFieldProps> = ({
   ...rest
 }) => {
   const inputRef = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
   const [options, setOptions] = useState<Array<OptionsProps>>(
     answerOptions || [],
   );
+
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const transitions = useTransition(!!error, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   const noOptionsMessage = useCallback(() => 'Não há opções', []);
 
@@ -65,10 +72,10 @@ const SelectField: React.FC<SelectFieldProps> = ({
   useEffect(() => {
     if (!isTimeFormat && answerOptions) {
       const newArray = [];
-      for (let i = 0; i < answerOptions.length; i++) {
+      for (let i = 0; i < answerOptions.length; i += 1) {
         const option = {
           label: answerOptions[i].text,
-          value: answerOptions[i].text,
+          value: answerOptions[i].value,
         };
         newArray.push(option);
       }
@@ -87,7 +94,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   return (
     <Container>
-      <label>
+      <label htmlFor={name}>
         {label && <span>{label}</span>}
         {description && <p>{description}</p>}
       </label>
@@ -100,10 +107,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
           components={{ DropdownIndicator }}
           noOptionsMessage={noOptionsMessage}
           options={options}
-          // isLoading={refresh}
-          // loadOptions={optionsPromissed}
           {...rest}
         />
+      )}
+      {transitions(
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
       )}
     </Container>
   );

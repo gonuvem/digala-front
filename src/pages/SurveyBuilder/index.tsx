@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
@@ -56,7 +56,7 @@ const SurveyBuilder: React.FC = () => {
     }
     const questions = questionsList?.data?.questions;
     const questionsFormated = [];
-    for (let i = 0; i < questions.length; i++) {
+    for (let i = 0; i < questions.length; i += 1) {
       const newConfig = questions[i].config;
       Object.keys(newConfig).forEach(
         (key) => newConfig[key] == null && delete newConfig[key],

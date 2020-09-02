@@ -4,7 +4,7 @@ export interface AnswerOption {
   image?: string;
 }
 
-export interface SurveyQuestion {
+export interface QuestionResponse {
   _id: string;
   formPage: number;
   position: number;
@@ -23,7 +23,7 @@ export interface SurveyQuestion {
     };
     date: {
       isDateRequired: boolean;
-      isTimeRequired: string;
+      isTimeRequired: boolean;
       canCaptureInterval: boolean;
       dateFormat?: 'monthYear' | 'dayMonthYear' | 'dayMonth';
       timeFormat?: 'hourMinute' | 'hourMinuteSecond';
@@ -118,7 +118,7 @@ export interface ISurvey {
     footerText?: string;
     footerBackground?: string;
   };
-  questions: SurveyQuestion[];
+  questions: QuestionResponse[];
   numResponses?: number;
   numPages: number;
 }

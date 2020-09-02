@@ -73,7 +73,7 @@ export interface Question {
   limitChoices?: boolean;
 }
 
-interface ListOptionsProps {
+export interface ListOptionsProps {
   _id: string;
   text: string;
   value?: string;

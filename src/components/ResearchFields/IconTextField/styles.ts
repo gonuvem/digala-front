@@ -10,6 +10,8 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   width: 100%;
+  display: flex;
+  flex-direction: column;
 
   label {
     display: flex;
@@ -78,11 +80,5 @@ export const Container = styled.div<ContainerProps>`
           opacity: 1;
         }
       `}
-  }
-
-  span {
-    color: ${Colors.negative};
-    margin-bottom: 0.5rem;
-    margin-top: 0rem !important;
   }
 `;

@@ -64,11 +64,4 @@ export const Container = styled.div<ContainerProps>`
       }
     }
   }
-
-  span {
-    align-self: flex-end;
-    color: ${Colors.negative};
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem !important;
-  }
 `;

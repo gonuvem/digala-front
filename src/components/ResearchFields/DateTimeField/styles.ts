@@ -34,7 +34,7 @@ export const Container = styled.div<ContainerProps>`
     }
   }
 
-  #inputs {
+  > div {
     display: flex;
     align-items: center;
   }
@@ -76,20 +76,20 @@ export const Container = styled.div<ContainerProps>`
       background-color: transparent;
     }
   }
+`;
 
-  span {
-    margin: 0 0.5rem;
+export const SeparatorDot = styled.span<Partial<ContainerProps>>`
+  margin: 0 0.5rem;
 
-    font-size: 3rem;
+  font-size: 3rem;
 
-    ${(props) =>
-      props.selectRange &&
-      css`
-        font-size: 1rem;
-        font-weight: bold;
-      `}
-    line-height: 0;
-  }
+  ${(props) =>
+    props.selectRange &&
+    css`
+      font-size: 1rem;
+      font-weight: bold;
+    `}
+  line-height: 0;
 `;
 
 export const InputContainer = styled.div`

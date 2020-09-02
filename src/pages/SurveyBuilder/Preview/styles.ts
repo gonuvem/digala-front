@@ -8,10 +8,6 @@ interface NavLinkProps {
   isActive?: boolean;
 }
 
-interface QuestionsPanelProps {
-  show: boolean;
-}
-
 export const Container = styled.div`
   flex: 2;
   margin-left: 2.5rem;
@@ -54,7 +50,7 @@ export const PanelArea = styled.div`
   }
 `;
 
-export const QuestionsPanel = styled(animated.div)<QuestionsPanelProps>`
+export const QuestionsPanel = styled(animated.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
   justify-items: center;

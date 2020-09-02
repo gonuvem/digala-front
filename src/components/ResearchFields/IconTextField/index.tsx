@@ -8,10 +8,9 @@ import React, {
 import InputMask from 'react-input-mask';
 import { IconType } from 'react-icons';
 import { useField } from '@unform/core';
-import { useTransition, animated } from 'react-spring';
+import { useTransition } from 'react-spring';
 
-import { urlValidation } from '../../../utils/validations';
-
+import ErrorMessage from '../../Common/ErrorMessage';
 import { Container } from './styles';
 
 interface IconTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -45,11 +44,11 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   const [value, setValue] = useState('');
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
-  // const transitions = useTransition(!!error, null, {
-  //   from: { opacity: 0, transform: 'translateX(-50px)' },
-  //   enter: { opacity: 1, transform: 'translateX(0px)' },
-  //   leave: { opacity: 0, transform: 'translateX(-50px)' },
-  // });
+  const transitions = useTransition(!!error, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   const handleOnFocus = useCallback(() => {
     setHasFocus(true);
@@ -58,11 +57,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   const handleOnBlur = useCallback(() => {
     setHasFocus(false);
     setIsFilled(!!inputRef.current?.value);
-
-    if (validatePattern) {
-      console.log(urlValidation(value));
-    }
-  }, [value, validatePattern]);
+  }, []);
 
   useEffect(() => {
     registerField({
@@ -94,14 +89,9 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
           />
         </div>
       </label>
-      {/* {transitions.map(
-        ({ item, key, props }) =>
-          item && (
-            <animated.span key={key} style={props}>
-              {error}
-            </animated.span>
-          ),
-      )} */}
+      {transitions(
+        (props, item) => item && <ErrorMessage message={error} style={props} />,
+      )}
     </Container>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
+import { useField } from '@unform/core';
 import {
   DragDropContext,
   Droppable,
@@ -9,6 +10,7 @@ import { FiMove } from 'react-icons/fi';
 import { Container, DragContainer, Option } from './styles';
 
 interface SortAnswersProps {
+  name: string;
   label: string;
   description?: string;
   answerOptions?: ListOptions[];
@@ -32,6 +34,7 @@ const reorder = (
 };
 
 const SortAnswers: React.FC<SortAnswersProps> = ({
+  name,
   label,
   description,
   answerOptions,
@@ -39,6 +42,18 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   const [options, setOptions] = useState<Array<ListOptions>>(
     answerOptions || [],
   );
+
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: undefined,
+      getValue: () => {
+        return options;
+      },
+    });
+  }, [registerField, fieldName, options]);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -81,13 +96,13 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
                       draggableId={item._id ? item._id : ''}
                       index={index}
                     >
-                      {(provided) => (
+                      {(input) => (
                         <Option
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
+                          ref={input.innerRef}
+                          {...input.draggableProps}
+                          {...input.dragHandleProps}
                           style={{
-                            ...provided.draggableProps.style,
+                            ...input.draggableProps.style,
                           }}
                         >
                           {item.text}

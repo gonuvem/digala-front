@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 
 import Colors from '../../../utils/colors';
 
@@ -62,12 +63,5 @@ export const Container = styled.div<ContainerProps>`
         background-color: transparent;
       }
     }
-  }
-
-  span {
-    align-self: flex-end;
-    color: ${Colors.negative};
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem !important;
   }
 `;

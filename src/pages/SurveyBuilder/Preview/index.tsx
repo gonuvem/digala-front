@@ -6,7 +6,7 @@ import { useTransition } from 'react-spring';
 import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
-import Field from './field';
+import Field from '../../../components/Common/Field';
 
 import {
   Container,
@@ -75,8 +75,11 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
-            <FieldWrapper onClick={() => handleFocusQuestion(field.id)}>
-              <Field key={field.id} fieldId={field.id} config={field} />
+            <FieldWrapper
+              key={field.id}
+              onClick={() => handleFocusQuestion(field.id)}
+            >
+              <Field question={field} />
             </FieldWrapper>
           ))}
         </Form>
@@ -91,9 +94,10 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         {transitions(
           (props, item) =>
             item && (
-              <QuestionsPanel show={showQuestionsPanel} style={props}>
+              <QuestionsPanel style={props}>
                 {questionsTypes.map((question) => (
                   <QuestionBox
+                    key={question.alias}
                     icon={FiSliders}
                     name={question.name}
                     description={question.description}

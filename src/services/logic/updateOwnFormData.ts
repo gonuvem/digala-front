@@ -42,16 +42,15 @@ export default async function updateOwnFormData(
       beginDate: formData.config.beginDate,
       endDate: formData.config.endDate,
       hasLimitedResponses: formData.config.hasLimitedResponses,
-      maxResponses: formData.config.maxResponses,
       isTotemMode: formData.config.isTotemMode,
       canDisplayProgressBar: formData.config.canDisplayProgressBar,
       progressBarType: formData.config.progressBarType?.value,
       canAllowMultipleSubmissions: formData.config.canAllowMultipleSubmissions,
       background: formData.style.background,
-      logo: formData.style.logo,
       hasLogoInHeader: formData.style.hasLogoInHeader,
       headerBackground: formData.style.headerBackground,
       footerBackground: formData.style.footerBackground,
+      ...(formData.style.hasLogoInHeader ? { logo: formData.style.logo } : {}),
     };
 
     if (formData.config.description) {
@@ -66,12 +65,21 @@ export default async function updateOwnFormData(
       sendData.headerText = formData.style.headerText;
     }
 
-    await UpdateFormSchema.validate(sendData, { abortEarly: false });
-
-    if (formData === null) {
-      throw new Error('Form data is null');
+    if (formData.config.hasLimitedResponses) {
+      sendData.maxResponses = formData.config.maxResponses;
     }
-    const response = await updateForm({ variables: { ...sendData } });
+
+    const sendDataWithoutNullProperties = Object.fromEntries(
+      Object.entries(sendData).filter(([_, value]) => value !== null),
+    );
+
+    await UpdateFormSchema.validate(sendDataWithoutNullProperties, {
+      abortEarly: false,
+    });
+
+    const response = await updateForm({
+      variables: { ...sendDataWithoutNullProperties },
+    });
 
     if (response.data.data.error) {
       throw new Error(response.data.data.error.message);

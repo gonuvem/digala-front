@@ -6,7 +6,9 @@ import React, {
   InputHTMLAttributes,
 } from 'react';
 import { useField } from '@unform/core';
-import { useTransition, animated } from 'react-spring';
+import { useTransition } from 'react-spring';
+
+import ErrorMessage from '../../Common/ErrorMessage';
 
 import { Container } from './styles';
 
@@ -75,8 +77,7 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
         />
       </label>
       {transitions(
-        (props, item) =>
-          item && <animated.span style={props}>{error}</animated.span>,
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
       )}
     </Container>
   );

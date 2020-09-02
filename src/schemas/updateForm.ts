@@ -13,7 +13,7 @@ export default Yup.object().shape({
   canDisplayProgressBar: Yup.boolean().notRequired(),
   progressBarType: Yup.string().notRequired(),
   canAllowMultipleSubmissions: Yup.boolean().notRequired(),
-  background: Yup.string().required(),
+  background: Yup.string().notRequired(),
   logo: Yup.string().notRequired(),
   headerText: Yup.string().notRequired(),
   hasLogoInHeader: Yup.boolean().notRequired(),

@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { isUuid } from 'uuidv4';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { FiBookmark, FiPlusCircle } from 'react-icons/fi';
 
@@ -11,7 +12,7 @@ import { Container, PanelArea } from './styles';
 import { ApplicationState } from '../../../store';
 import { Form } from '../../../store/ducks/forms/types';
 import { Question } from '../../../store/ducks/questions/types';
-import { UPDATE_FORM, CREATE_OWN_FORM } from '../../../services/requests/forms';
+import { UPDATE_FORM } from '../../../services/requests/forms';
 import {
   CREATE_OWN_QUESTIONS,
   LIST_QUESTION_TYPES,
@@ -51,15 +52,19 @@ const Pagination: React.FC = () => {
 
   const handleUpdate = useCallback(() => {
     if (formData?.id && questionTypes) {
+      const questionsToCreate = questionsData.filter((question) =>
+        isUuid(question.id),
+      );
+
       createOwnQuestions(
         createQuestions,
-        questionsData,
+        questionsToCreate,
         formData?.id,
         questionTypes,
       );
     }
     updateOwnFormData(updateForm, formData);
-  }, [formData, updateForm, questionsData]);
+  }, [formData, updateForm, questionsData, questionTypes, createQuestions]);
 
   return (
     <Container>
@@ -74,11 +79,12 @@ const Pagination: React.FC = () => {
       </SolidButton>
       <PanelArea>
         {[...Array(pagesCount)].map((e, i) => (
-          <>
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={`page-${i}`}>
             <FiBookmark size={32} />
             <span>{`Página ${i + 1}`}</span>
             <div id="divisor" />
-          </>
+          </div>
         ))}
         <FiPlusCircle size={24} onClick={handleCreatePage} />
       </PanelArea>

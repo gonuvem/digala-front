@@ -4,10 +4,15 @@ import Select from 'react-select';
 import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
-  span {
-    display: inline-block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    span {
+      display: inline-block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
   }
 
   > p {

@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
+import { useTransition } from 'react-spring';
 import { useField } from '@unform/core';
-import { Container, CardImage } from './styles';
 
-import { ImageChoice } from '../../../store/ducks/questions/types';
+import ErrorMessage from '../../Common/ErrorMessage';
+import { Container, CardImage } from './styles';
 
 interface ImagesChoiceProps {
   name: string;
@@ -32,7 +33,13 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
   id,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
+
   const { fieldName, registerField, error, defaultValue } = useField(name);
+  const transitions = useTransition(!!error, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   useEffect(() => {
     registerField({
@@ -43,7 +50,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
       },
     });
   }, [fieldName, registerField]);
-  // console.log(choices);
+
   return (
     <Container>
       <label htmlFor={id}>
@@ -51,7 +58,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
         {description && <p>{description}</p>}
         <div>
           {choices.map((option, index) => (
-            <CardImage image={option?.image || ''}>
+            <CardImage key={option._id} image={option?.image || ''}>
               <label htmlFor={option?._id}>
                 <input
                   ref={(ref) => {
@@ -68,6 +75,9 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
           ))}
         </div>
       </label>
+      {transitions(
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
+      )}
     </Container>
   );
 };

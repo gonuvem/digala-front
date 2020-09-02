@@ -25,6 +25,10 @@
 * Na parte de tabelas não tá tendo paginação
 * No painel de configuração do Texto Longo o campo Placeholder está como 'label'
 * O fluxo de atualizar não está deixando publicar a pesquisa com nenhuma questão
+* Implementar o fluxo de atualizar a questão
+* Corrigir para que ao registrar uma questão o ID dela seja substituido pelo da API para não ser criada novamente e sim atualizada
+* Não está cadastrando o campo NPS
+
 
 
 # Survey Builder
@@ -60,12 +64,6 @@
 **RN**
 
 - O input de tempo só poderá aparecer se o usuário explicitar isso na configuração do campo
-
-## Image Choice Field
-
-**RN**
-
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
 
 ## Single Choice Field
 

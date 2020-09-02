@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
+import { useTransition } from 'react-spring';
 
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
+import ErrorMessage from '../../Common/ErrorMessage';
 
-import { Container } from './styles';
+import { Container, SeparatorDot } from './styles';
 
 interface DateTimeFieldProps {
   label: string;
@@ -28,6 +30,11 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   const childrenTimeInputRef = useRef<HTMLInputElement>(null);
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
+  const transitions = useTransition(!!error, {
+    from: { opacity: 0, transform: 'translateX(-50px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    leave: { opacity: 0, transform: 'translateX(-50px)' },
+  });
 
   useEffect(() => {
     registerField({
@@ -50,17 +57,19 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
 
   return (
     <Container selectRange={selectRange}>
-      <label htmlFor="">
+      <label htmlFor={name}>
         <span>{label}</span>
         <p>{description}</p>
       </label>
-      <div id="inputs">
+      <div id={name}>
         {selectRange && <span>De</span>}
         <DateInput
           childrenCalendarRef={childrenCalendarRef}
           dateFormat={dateFormat}
         />
-        <span>{selectRange ? 'Até' : ':'}</span>
+        <SeparatorDot selectRange={selectRange}>
+          {selectRange ? 'Até' : ':'}
+        </SeparatorDot>
         {selectRange ? (
           <DateInput
             childrenCalendarRef={endDateCalendarRef}
@@ -73,6 +82,15 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
           />
         )}
       </div>
+      {transitions(
+        (props, item) =>
+          item && (
+            <ErrorMessage
+              style={{ alignSelf: 'flex-start', ...props }}
+              message={error}
+            />
+          ),
+      )}
     </Container>
   );
 };
