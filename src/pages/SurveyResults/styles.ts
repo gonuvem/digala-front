@@ -184,3 +184,10 @@ export const PanelButton = styled.button<PanelButtonProps>`
       color: ${Colors.primary};
     `}
 `;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 3.75rem;
+`;
