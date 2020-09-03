@@ -9,3 +9,21 @@ export const SUBMIT_RESPONSE = gql`
     }
   }
 `;
+
+export const LIST_OWN_RESPONSES = gql`
+  query($form: ID!, $page: Int) {
+    data: listOwnResponses(form: $form, page: $page ,perPage: 7) {
+      responses {
+        _id
+        answersAndQuestions {
+          question {
+            _id
+          }
+        }
+        createdAt
+      }
+      total
+      ${errorFragment}
+    }
+  }
+`;
