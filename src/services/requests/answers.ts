@@ -15,6 +15,11 @@ export const LIST_OWN_RESPONSES = gql`
     data: listOwnResponses(form: $form, page: $page ,perPage: 7) {
       responses {
         _id
+        form {
+          questions {
+            _id
+          }
+        }
         answersAndQuestions {
           question {
             _id
@@ -23,6 +28,7 @@ export const LIST_OWN_RESPONSES = gql`
         createdAt
       }
       total
+      pages
       ${errorFragment}
     }
   }

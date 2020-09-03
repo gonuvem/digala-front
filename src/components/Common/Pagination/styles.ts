@@ -12,7 +12,6 @@ export const Container = styled.div`
 
   svg {
     cursor: pointer;
-    margin: 0rem 1rem;
   }
 `;
 

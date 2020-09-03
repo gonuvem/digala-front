@@ -18,7 +18,11 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const pagesToShow = useMemo(() => {
     let decrement = -1;
-    const pages = [];
+    const pages: number[] = [];
+
+    if (totalPages === 0) {
+      return pages;
+    }
 
     if (actualPage === 0) {
       decrement = 0;
@@ -33,8 +37,6 @@ const Pagination: React.FC<PaginationProps> = ({
       decrement += 1;
     }
 
-    console.log('Actual Page >> ', actualPage);
-
     return pages;
   }, [actualPage, totalPages, numberOfPagesToShow]);
 
@@ -43,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({
   }, [actualPage]);
 
   const showChevronRight = useMemo(() => {
-    return actualPage !== totalPages - 1;
+    return actualPage !== totalPages - 1 && totalPages > 0;
   }, [actualPage, totalPages]);
 
   return (

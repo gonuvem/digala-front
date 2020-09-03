@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
 import Pagination from '../../components/Common/Pagination';
+import LoadingSpinner from '../../components/Common/LoadingSpinner';
 
 import {
   Container,
@@ -15,6 +16,7 @@ import {
   TableRow,
   PanelButton,
   PaginationContainer,
+  LoadingContainer,
 } from './styles';
 
 import trash from '../../assets/trash_icon.png';
@@ -33,6 +35,11 @@ interface Response {
 interface ResponseData {
   _id: string;
   createdAt: string;
+  form: {
+    questions: {
+      _id: string;
+    }[];
+  };
   answersAndQuestions: {
     question: {
       _id: string;
@@ -67,11 +74,18 @@ const SurveyResults: React.FC = () => {
             "dd/MM/yyyy 'às' HH:mm:ss",
           ),
           answerCount: response.answersAndQuestions.length,
-          questionsCount: response.answersAndQuestions.length,
+          questionsCount: response.form.questions.length,
         };
       });
     }
     return [];
+  }, [responsesData]);
+
+  const totalPages = useMemo(() => {
+    if (responsesData?.data?.error === null) {
+      return responsesData.data.pages;
+    }
+    return 0;
   }, [responsesData]);
 
   const handleTabChange = useCallback(
@@ -143,31 +157,37 @@ const SurveyResults: React.FC = () => {
               <h3 style={{ flex: 2 }}>Quantidade de respostas</h3>
               <h3 style={{ flex: 1 }}>Ações</h3>
             </TableHeader>
-            {responses.map((response) => (
-              <TableRow key={response.id}>
-                <span style={{ flex: 2 }}>{response.createdAt}</span>
-                <span style={{ flex: 1 }}>Píaui, Teresina</span>
-                <span style={{ flex: 2 }}>
-                  {`${response.answerCount} respostas / ${response.questionsCount} perguntas`}
-                </span>
+            {listOwnResponsesLoading && (
+              <LoadingContainer>
+                <LoadingSpinner />
+              </LoadingContainer>
+            )}
+            {!listOwnResponsesLoading &&
+              responses.map((response) => (
+                <TableRow key={response.id}>
+                  <span style={{ flex: 2 }}>{response.createdAt}</span>
+                  <span style={{ flex: 1 }}>Píaui, Teresina</span>
+                  <span style={{ flex: 2 }}>
+                    {`${response.answerCount} respostas / ${response.questionsCount} perguntas`}
+                  </span>
 
-                <div style={{ flex: 1 }}>
-                  <a href="/survey">
-                    <img src={bookReader} alt="Ver" />
-                    <span>Ver</span>
-                  </a>
-                  <button type="button">
-                    <img src={trash} alt="Deletar" />
-                    <span>Deletar</span>
-                  </button>
-                </div>
-              </TableRow>
-            ))}
+                  <div style={{ flex: 1 }}>
+                    <a href="/survey">
+                      <img src={bookReader} alt="Ver" />
+                      <span>Ver</span>
+                    </a>
+                    <button type="button">
+                      <img src={trash} alt="Deletar" />
+                      <span>Deletar</span>
+                    </button>
+                  </div>
+                </TableRow>
+              ))}
             <PaginationContainer>
               <Pagination
                 onPageChange={handlePageChange}
                 actualPage={page}
-                totalPages={5}
+                totalPages={totalPages}
                 numberOfPagesToShow={3}
               />
             </PaginationContainer>

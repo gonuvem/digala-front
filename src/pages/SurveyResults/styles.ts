@@ -13,6 +13,11 @@ interface PanelButtonProps {
 
 export const Container = styled.div``;
 
+export const LoadingContainer = styled.div`
+  position: relative;
+  margin-top: 2rem;
+`;
+
 export const Navigation = styled.div`
   display: flex;
   align-items: center;
