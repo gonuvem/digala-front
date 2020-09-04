@@ -53,6 +53,7 @@ const SortAnswerConfigurarion: React.FC<SortAnswerConfigurarionProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   const [options, setOptions] = useState<Array<ListOptions>>([

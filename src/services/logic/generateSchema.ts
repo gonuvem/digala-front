@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { QuestionResponse, AnswerOption } from '../../pages/Survey/ISurvey';
+import { QuestionResponse } from '../../pages/Survey/ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
 
 function mountRule(question: QuestionResponse): Record<string, any> {

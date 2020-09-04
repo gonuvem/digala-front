@@ -38,7 +38,7 @@ interface FormStyleDTO {
 
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   const [tempInformation, setTempInformation] = useState('');
-  const [defaultLogo, setDefaultLogo] = useState<string>(() =>
+  const [defaultLogo] = useState<string>(() =>
     formData?.style?.logo ? formData.style.logo : '',
   );
   const formRef = useRef<FormHandles>(null);
@@ -51,10 +51,10 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   }, []);
 
   useEffect(() => {
-    const data = formRef.current?.getData();
+    const data = formRef.current?.getData() as FormStyleDTO;
     const dataUrl = {
       ...data,
-      logo: defaultLogo,
+      logo: data && data.logo ? data.logo : '',
     };
     changeFormConfiguration(dispatch, {
       attribute: 'style',
@@ -74,7 +74,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         style: dataUrl as FormStyleDTO,
       });
     },
-    [debouncedTrigger, dispatch],
+    [dispatch],
   );
 
   return (

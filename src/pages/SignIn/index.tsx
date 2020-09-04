@@ -33,30 +33,33 @@ const SignIn: React.FC = () => {
   const history = useHistory();
   const [signIn, { loading: signInLoading, client }] = useMutation(SIGN_IN);
 
-  const handleSignIn = useCallback(async (data: SignInFormData) => {
-    try {
-      await SignInSchema.validate(data, { abortEarly: false });
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        await SignInSchema.validate(data, { abortEarly: false });
 
-      const response = await signIn({ variables: { ...data } });
+        const response = await signIn({ variables: { ...data } });
 
-      if (response.data.login.error) {
-        throw new Error(response.data.login.error.internalCode);
+        if (response.data.login.error) {
+          throw new Error(response.data.login.error.internalCode);
+        }
+
+        client?.resetStore();
+        localStorage.setItem('Digl:token', response.data.login.token);
+        history.push('/my_researches');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+          return;
+        }
+
+        const internalCode = err.message as string;
+        toast.error(signInErrors[internalCode]);
       }
-
-      client?.resetStore();
-      localStorage.setItem('Digl:token', response.data.login.token);
-      history.push('/my_researches');
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
-        return;
-      }
-
-      const internalCode = err.message as string;
-      toast.error(signInErrors[internalCode]);
-    }
-  }, []);
+    },
+    [client, history, signIn],
+  );
 
   return (
     <Layout>

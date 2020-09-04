@@ -15,6 +15,7 @@ import { Container } from './styles';
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
 import useDebounce from '../../../../hooks/useDebounce';
+
 interface ResearchConfigurationsProps {
   formData: FormType | null;
 }
@@ -49,21 +50,12 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
 
   useEffect(() => {
     const data = formRef.current?.getData();
-    // console.log(data);
     changeFormConfiguration(dispatch, {
       attribute: 'config',
       config: data as FormConfigDTO,
     });
   }, [debouncedTrigger, dispatch]);
 
-  // console.log(formData?.config);
-
-  const b = new Date(
-    'Wed Jul 15 2020 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
-  );
-  const e = new Date(
-    'Wed Jul 20 2020 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
-  );
   return (
     <Container>
       <span>Informações Básicas</span>

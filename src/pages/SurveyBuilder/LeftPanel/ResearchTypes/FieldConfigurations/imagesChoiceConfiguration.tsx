@@ -9,7 +9,6 @@ import NumberField from '../../../../../components/ResearchFields/NumericField';
 import ImageUpload from '../../../../../components/Common/ImageUpload';
 
 import { Question } from '../../../../../store/ducks/questions/types';
-import randomSortArray from '../../../../../utils/randomSortArray';
 
 import { Container } from './styles';
 
@@ -33,22 +32,12 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
 }) => {
   const formRef = useRef<FormHandles>(null);
 
-  const randomSort = useMemo(() => field?.hasRandomResponsesOrder, [field]);
   const imageChoices = useMemo(() => {
     if (field?.imgChoices) {
       return field?.imgChoices;
     }
     return [];
   }, [field]);
-
-  const addOtherOption = useMemo(() => field?.addOtherOption, [field]);
-
-  useEffect(() => {
-    if (imageChoices && randomSort) {
-      const randomSortedArray = randomSortArray(imageChoices);
-      handleChange([randomSortedArray], ['imgChoices']);
-    }
-  }, [randomSort]);
 
   const addDefaultOption = useCallback(
     (toggleOtherOption) => {
@@ -76,12 +65,12 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
-        {console.log(field)}
         <section>
           <ShortTextField
             label="Nome"

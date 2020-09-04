@@ -24,6 +24,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   return (

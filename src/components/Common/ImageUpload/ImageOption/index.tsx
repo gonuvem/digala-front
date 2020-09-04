@@ -30,7 +30,7 @@ const ImageOption: React.FC<ListOptionsProps> = ({
     if (id !== '') {
       onChange({ id, text: inputRef.current?.value });
     }
-  }, [debouncedTrigger]);
+  }, [id, onChange, debouncedTrigger]);
 
   useEffect(() => {
     if (text) {

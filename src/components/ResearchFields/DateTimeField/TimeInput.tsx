@@ -43,11 +43,14 @@ const TimeInput: React.FC<TimeInputProps> = ({
     return generatedHours;
   }, []);
 
-  const handleSetTime = useCallback((newTime) => {
-    const timeFormated = format(newTime, timeFormats[timeFormat].fnsMask);
-    setTimeValue(timeFormated);
-    setShowTimeSelect(false);
-  }, []);
+  const handleSetTime = useCallback(
+    (newTime) => {
+      const timeFormated = format(newTime, timeFormats[timeFormat].fnsMask);
+      setTimeValue(timeFormated);
+      setShowTimeSelect(false);
+    },
+    [timeFormat],
+  );
 
   const handleChangeTime = useCallback((event) => {
     const { value } = event.target;

@@ -76,7 +76,7 @@ const EditMatrixModal: React.FC<EditMatrixModalProps> = ({
       handleChange([newLines, newColumns], ['rowsLabels', 'colsLabels']);
       onClose();
     },
-    [handleChange],
+    [handleChange, onClose],
   );
 
   const initialData = useMemo(() => {

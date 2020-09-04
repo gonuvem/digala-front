@@ -16,8 +16,8 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   onChange,
   defaultVal,
 }) => {
-  const [selectedColor, setSelectedColor] = useState<String>(() =>
-    defaultVal ? defaultVal : '#ffffff',
+  const [selectedColor, setSelectedColor] = useState<string>(
+    () => defaultVal || '#ffffff',
   );
 
   const { fieldName, registerField, defaultValue } = useField(name);
@@ -27,7 +27,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     registerField({
       name: fieldName,
       path: undefined,
-      getValue: (color) => {
+      getValue: () => {
         return selectedColor;
       },
     });
@@ -37,11 +37,14 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     setSelectedColor(defaultValue);
   }, [defaultValue]);
 
-  const handleSelectColor = useCallback((color: string) => {
-    setSelectedColor(color);
+  const handleSelectColor = useCallback(
+    (color: string) => {
+      setSelectedColor(color);
 
-    onChange(color);
-  }, []);
+      onChange(color);
+    },
+    [onChange],
+  );
 
   return (
     <Container>

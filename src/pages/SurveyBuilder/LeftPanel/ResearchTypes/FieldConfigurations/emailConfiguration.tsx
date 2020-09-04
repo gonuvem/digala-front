@@ -23,6 +23,7 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   return (

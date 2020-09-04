@@ -69,7 +69,7 @@ const Pagination: React.FC = () => {
   return (
     <Container>
       <SolidButton onClick={handleUpdate}>
-        {!updateFormLoading ? (
+        {!updateFormLoading && !createQuestionsLoading ? (
           'Publicar'
         ) : (
           <div id="loading-container">

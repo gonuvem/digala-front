@@ -57,6 +57,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   const onDragEnd = useCallback(
@@ -71,7 +72,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
       setOptions(items);
       handleChange([items], ['answerOptions']);
     },
-    [options, setOptions],
+    [handleChange, options],
   );
 
   const handleAddOption = useCallback(() => {

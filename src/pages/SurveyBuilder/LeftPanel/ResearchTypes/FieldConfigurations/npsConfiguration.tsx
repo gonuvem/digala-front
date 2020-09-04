@@ -27,6 +27,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   return (

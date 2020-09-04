@@ -56,6 +56,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   const onDragEnd = useCallback(
@@ -173,13 +174,13 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
                       draggableId={item._id}
                       index={index}
                     >
-                      {(provided) => (
+                      {(optionDraggable) => (
                         <Option
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
+                          ref={optionDraggable.innerRef}
+                          {...optionDraggable.draggableProps}
+                          {...optionDraggable.dragHandleProps}
                           style={{
-                            ...provided.draggableProps.style,
+                            ...optionDraggable.draggableProps.style,
                           }}
                         >
                           <input

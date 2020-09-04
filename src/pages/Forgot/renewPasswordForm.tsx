@@ -31,35 +31,38 @@ const RenewPasswordForm: React.FC<RenewFormProps> = ({ userEmail }) => {
   const history = useHistory();
   const [renew, { loading: renewLoading }] = useMutation(RENEW_PASSWORD);
 
-  const handleRenewPassword = useCallback(async (data: RenewFormData) => {
-    try {
-      await RenewSchema.validate(data, { abortEarly: false });
+  const handleRenewPassword = useCallback(
+    async (data: RenewFormData) => {
+      try {
+        await RenewSchema.validate(data, { abortEarly: false });
 
-      const response = await renew({
-        variables: {
-          email: userEmail,
-          password: data.newPassword,
-          code: data.code,
-        },
-      });
+        const response = await renew({
+          variables: {
+            email: userEmail,
+            password: data.newPassword,
+            code: data.code,
+          },
+        });
 
-      if (response.data.renewPassword.error) {
-        throw new Error(response.data.renewPassword.error.internalCode);
+        if (response.data.renewPassword.error) {
+          throw new Error(response.data.renewPassword.error.internalCode);
+        }
+
+        toast.success('Senha trocada com sucesso!');
+        setTimeout(() => history.push('/'), 2000);
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          renewFormRef.current?.setErrors(errors);
+          return;
+        }
+
+        const internalCode = err.message as string;
+        toast.error(renewErrors[internalCode]);
       }
-
-      toast.success('Senha trocada com sucesso!');
-      setTimeout(() => history.push('/'), 2000);
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        renewFormRef.current?.setErrors(errors);
-        return;
-      }
-
-      const internalCode = err.message as string;
-      toast.error(renewErrors[internalCode]);
-    }
-  }, []);
+    },
+    [history, renew, userEmail],
+  );
 
   return (
     <Form ref={renewFormRef} onSubmit={handleRenewPassword}>

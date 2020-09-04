@@ -39,6 +39,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   return (

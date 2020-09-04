@@ -27,6 +27,7 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
 
   useEffect(() => {
     formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
   return (
