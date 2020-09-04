@@ -15,12 +15,11 @@
 * O espaçamento no campo de texto longo entre a descrição e o input está maior que os outros.
 * Possível bug durante o primeira carregamento da página da pesquisa gerada, está acessando um valor de uma variável undefined
 * Existe uma regra de margin para corrigir o espaçamento das opções no componente de multipla escolha quando ele está em seu formato horizontal, que está interferindo no seu display vertical
-* Ao criar uma nova pesquisa, o redirecionamento não está levando para a página do survey builder
 * Na parte de tabelas não tá tendo paginação
-* No painel de configuração do Texto Longo o campo Placeholder está como 'label'
 * O fluxo de atualizar não está deixando publicar a pesquisa com nenhuma questão
 * Implementar o fluxo de atualizar a questão
 * Corrigir para que ao registrar uma questão o ID dela seja substituido pelo da API para não ser criada novamente e sim atualizada
+* Criar um component do Modal para corrigir o problema o appElement
 
 
 # Survey Builder

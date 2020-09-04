@@ -10,13 +10,20 @@ import { FaPlus } from 'react-icons/fa';
 import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
 
-import { Container, Header, ModalCreateResearch } from './styles';
+import {
+  Container,
+  Header,
+  ModalCreateResearch,
+  PaginationContainer,
+  LoadingContainer,
+} from './styles';
 
 import Table from '../../components/MyResearches/Table';
 import SolidButton from '../../components/Common/SolidButton';
 import GhostButton from '../../components/Common/GhostButton';
 import ShortTextField from '../../components/ResearchFields/ShortTextField';
 import LoadingSpinner from '../../components/Common/LoadingSpinner';
+import Pagination from '../../components/Common/Pagination';
 
 import { LIST_OWN_FORMS, CREATE_OWN_FORM } from '../../services/requests/forms';
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -26,17 +33,17 @@ interface CreateFormData {
   researchName: string;
 }
 
-interface CreateFormResponse {
-  form: {
-    _id: string;
-  };
-}
-
 const MyReasearches: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const history = useHistory();
   const [openCreateModal, setOpenCreateModal] = useState(false);
-  const { loading: formsLoading, data: formsData } = useQuery(LIST_OWN_FORMS);
+  const [page, setPage] = useState(0);
+
+  const history = useHistory();
+  const { loading: formsLoading, data: formsData } = useQuery(LIST_OWN_FORMS, {
+    variables: {
+      page,
+    },
+  });
   const [createForm, { loading: createFormLoading }] = useMutation(
     CREATE_OWN_FORM,
   );
@@ -47,6 +54,13 @@ const MyReasearches: React.FC = () => {
     }
     return [];
   }, [formsData, formsLoading]);
+
+  const totalPages = useMemo(() => {
+    if (formsData?.data?.error === null) {
+      return formsData.data.pages;
+    }
+    return 0;
+  }, [formsData]);
 
   const handleCreateResearch = useCallback(
     async (data: CreateFormData) => {
@@ -76,6 +90,10 @@ const MyReasearches: React.FC = () => {
     [createForm, history],
   );
 
+  const handlePageChange = useCallback((clickedPage) => {
+    setPage(clickedPage);
+  }, []);
+
   return (
     <>
       <PageHeader />
@@ -89,6 +107,19 @@ const MyReasearches: React.FC = () => {
             </SolidButton>
           </Header>
           <Table forms={forms} />
+          {formsLoading && (
+            <LoadingContainer>
+              <LoadingSpinner />
+            </LoadingContainer>
+          )}
+          <PaginationContainer>
+            <Pagination
+              onPageChange={handlePageChange}
+              actualPage={page}
+              totalPages={totalPages}
+              numberOfPagesToShow={3}
+            />
+          </PaginationContainer>
         </Container>
         <ModalCreateResearch
           isOpen={openCreateModal}

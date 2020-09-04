@@ -14,6 +14,7 @@ export const LIST_OWN_FORMS = gql`
           name
         }
       }
+      pages
       ${errorFragment}
     }
   }
