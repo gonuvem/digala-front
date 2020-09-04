@@ -104,6 +104,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           label={question?.label || ''}
           description={question?.description || ''}
           name={question?.name || 'date-time-field-name'}
+          isTimeRequired={question.isTimeRequired || false}
           dateFormat={question?.dateFormat || 'dayMonthYear'}
           timeFormat={question?.timeFormat || 'hourMinute'}
           selectRange={question?.canCaptureInterval || false}

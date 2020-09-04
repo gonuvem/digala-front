@@ -50,6 +50,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     <Container>
       {colors.map((color) => (
         <CardColor
+          key={color}
           ref={inputRef}
           isSelected={color === selectedColor}
           onClick={() => handleSelectColor(color)}

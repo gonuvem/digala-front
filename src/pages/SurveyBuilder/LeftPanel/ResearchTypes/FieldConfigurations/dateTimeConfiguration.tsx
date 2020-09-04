@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
@@ -36,6 +36,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
   field,
 }) => {
   const formRef = useRef<FormHandles>(null);
+  const [isTimeRequired, setIsTimeRequired] = useState(false);
 
   useEffect(() => {
     formRef.current?.setData(field);
@@ -104,25 +105,28 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             label="Exigir hora"
             helpHint="Usuário será obrigado a colocar horário"
             name="isTimeRequired"
-            onChange={(event) =>
-              handleChange([event.target.checked], ['isTimeRequired'])
-            }
+            onChange={(event) => {
+              handleChange([event.target.checked], ['isTimeRequired']);
+              setIsTimeRequired(event.target.checked);
+            }}
           />
         </section>
-        <section>
-          <SelectField
-            name="timeFormat"
-            label="Formato da hora"
-            isTimeFormat
-            answerOptions={timeOptions}
-            defaultValue={timeOptions?.find(
-              (option) => option.value === field?.timeFormat,
-            )}
-            onChange={(value: any) =>
-              handleChange([value?.value], ['timeFormat'])
-            }
-          />
-        </section>
+        {isTimeRequired && (
+          <section>
+            <SelectField
+              name="timeFormat"
+              label="Formato da hora"
+              isTimeFormat
+              answerOptions={timeOptions}
+              defaultValue={timeOptions?.find(
+                (option) => option.value === field?.timeFormat,
+              )}
+              onChange={(value: any) =>
+                handleChange([value?.value], ['timeFormat'])
+              }
+            />
+          </section>
+        )}
         <section>
           <ToggleSwitch
             label="Capturar intervalo"

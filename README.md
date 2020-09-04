@@ -1,7 +1,5 @@
 # BUGS
 
-* Ao adicionar duas questões do mesmo tipo o painel de configuração não é recarregado
-* Campo de data está sempre pedindo o tempo também
 * O componente de imagem do escolha de imagens está ficando esticado com imagens longas
 * O usuário não pode deselecionar uma opção no componente de ImageChoice
 * Não está implementado o debounce nos paines de configuração dos inputs
@@ -26,7 +24,6 @@
 * O fluxo de atualizar não está deixando publicar a pesquisa com nenhuma questão
 * Implementar o fluxo de atualizar a questão
 * Corrigir para que ao registrar uma questão o ID dela seja substituido pelo da API para não ser criada novamente e sim atualizada
-* Não está cadastrando o campo NPS
 
 
 # Survey Builder

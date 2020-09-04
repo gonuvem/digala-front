@@ -11,6 +11,7 @@ import { Container, SeparatorDot } from './styles';
 interface DateTimeFieldProps {
   label: string;
   description?: string;
+  isTimeRequired: boolean;
   name: string;
   selectRange?: boolean;
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
@@ -23,6 +24,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   description,
   selectRange,
   dateFormat,
+  isTimeRequired,
   timeFormat,
 }) => {
   const childrenCalendarRef = useRef<HTMLInputElement>(null);
@@ -67,19 +69,25 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
           childrenCalendarRef={childrenCalendarRef}
           dateFormat={dateFormat}
         />
-        <SeparatorDot selectRange={selectRange}>
-          {selectRange ? 'Até' : ':'}
-        </SeparatorDot>
+        {selectRange || isTimeRequired ? (
+          <SeparatorDot selectRange={selectRange}>
+            {selectRange ? 'Até' : ':'}
+          </SeparatorDot>
+        ) : (
+          <></>
+        )}
         {selectRange ? (
           <DateInput
             childrenCalendarRef={endDateCalendarRef}
             dateFormat={dateFormat}
           />
         ) : (
-          <TimeInput
-            childrenTimeInputRef={childrenTimeInputRef}
-            timeFormat={timeFormat}
-          />
+          isTimeRequired && (
+            <TimeInput
+              childrenTimeInputRef={childrenTimeInputRef}
+              timeFormat={timeFormat}
+            />
+          )
         )}
       </div>
       {transitions(
