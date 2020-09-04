@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import EmailConfiguration from './emailConfiguration';
@@ -75,7 +75,6 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       return (
         <ImagesChoiceConfiguration field={field} handleChange={handleChange} />
       );
-
     case FieldsTypes.ShortText:
       return (
         <ShortTextConfiguration field={field} handleChange={handleChange} />

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -18,9 +19,15 @@ const TelephoneConfiguration: React.FC<TelephoneConfigurationProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field.id]);
+
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"

@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiMove } from 'react-icons/fi';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -46,9 +47,14 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [options, setOptions] = useState<Array<ListOptions>>([
     { _id: uuid(), text: '' },
   ]);
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field.id]);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -104,7 +110,7 @@ const SingleChoiceConfigurarion: React.FC<SingleChoiceConfigurarionProps> = ({
 
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"

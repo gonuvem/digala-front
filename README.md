@@ -1,6 +1,5 @@
 # BUGS
 
-* Ao enviar questão do tipo ShortText ele tá indo como LongText
 * Ao adicionar duas questões do mesmo tipo o painel de configuração não é recarregado
 * Campo de data está sempre pedindo o tempo também
 * O componente de imagem do escolha de imagens está ficando esticado com imagens longas
@@ -30,17 +29,12 @@
 * Não está cadastrando o campo NPS
 
 
-
 # Survey Builder
 
 **RF**
 
 - O usuário deverá poder remover questões adicionadas
 - O usuário deverá poder atualizar a configuração das questões que já foram adicionadas
-
-**RN**
-
-- Caso a questão já esteja adicionada, ela deverá ser atualizada e não adicionada novamente
 
 # Survey Page
 
@@ -50,7 +44,6 @@
 
 **RN**
 
-- Ao enviar as respostas, checar quais tem o atributo isRequired ativo para validar obrigatoriedade
 - Ao disparar o envio das questões é preciso também mudar o estado da pesquisa para carregando
 
 ## E-mail Field
@@ -65,12 +58,6 @@
 
 - O input de tempo só poderá aparecer se o usuário explicitar isso na configuração do campo
 
-## Single Choice Field
-
-**RN**
-
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
-
 ## Link Field
 
 **RN**
@@ -83,35 +70,16 @@
 
 - O usuário poderá selecionar somente a quentidade permitida, quando a configuração correspondente estiver ativa
 
-**RN**
-
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
-
 ## Nps Field
 
 **RN**
 
 - Ao passar o mouse por cima de uma opção, uma animação de hover deve acontecer
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
-
-## Numeric Field
-
-**RN**
-
-- Quando no estado de erro, o input deve sinalizar para o usuário seu estado e auxiliar na correção do erro.
-
-## Sort Field
-
-**RN**
-
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
-- Quando no estado de erro, o input deve sinalizar para o usuário seu estado e auxiliar na correção do erro.
 
 ## Slider Field
 
 **RN**
 
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
 - O valor no seletor deve ficar oculto quando a configuração correspondente estiver ativada
 
 ## Matrix Field
@@ -119,10 +87,6 @@
 **RF**
 
 - O usuário deve poder marcar mais de um elemento por linha quando a configuração correspondente estiver ativa.
-
-**RN**
-
-- O campo deve estar conectado com o unform para enviar seu valor para o formulário
 
 
 ### OBS:

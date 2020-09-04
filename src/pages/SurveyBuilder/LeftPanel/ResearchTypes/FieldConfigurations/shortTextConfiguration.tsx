@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -19,13 +20,18 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [limitCharacter, setLimitCharacter] = useState(
     field.hasLimitedChars || false,
   );
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field.id]);
+
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
-        {/* {console.log(field)} */}
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"

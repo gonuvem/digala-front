@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -19,13 +20,18 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [showLimiters, setShowLimiters] = useState(
     field?.hasMaxMinLimit || false,
   );
 
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field.id]);
+
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"

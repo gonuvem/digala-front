@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -13,19 +14,24 @@ import { Container, SectionTitle } from './styles';
 
 interface MatrixConfigurationProps {
   handleChange: Function;
-  field: Question | undefined;
+  field: Question;
 }
 
 const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field?.id]);
 
   return (
     <>
       <Container>
-        <Form initialData={field} onSubmit={() => null}>
+        <Form ref={formRef} onSubmit={() => null}>
           <section>
             <ShortTextField
               label="Nome"

@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiMove } from 'react-icons/fi';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -46,12 +47,17 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [limitChoiceAmmount, setLimitChoiceAmmount] = useState(
     field.limitChoices || false,
   );
   const [options, setOptions] = useState<Array<ListOptions>>([
     { _id: uuid(), text: '' },
   ]);
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field.id]);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -107,7 +113,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
 
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"

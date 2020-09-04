@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiMove } from 'react-icons/fi';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -48,9 +49,14 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [options, setOptions] = useState<Array<ListOptions>>([
     { _id: uuid(), text: '', label: '', value: '' },
   ]);
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field.id]);
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -109,7 +115,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
 
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"

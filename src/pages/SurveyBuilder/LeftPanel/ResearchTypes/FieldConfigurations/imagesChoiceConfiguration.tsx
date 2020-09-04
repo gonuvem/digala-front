@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -7,17 +8,14 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 import ImageUpload from '../../../../../components/Common/ImageUpload';
 
-import {
-  Question,
-  ImageChoice,
-} from '../../../../../store/ducks/questions/types';
+import { Question } from '../../../../../store/ducks/questions/types';
 import randomSortArray from '../../../../../utils/randomSortArray';
 
 import { Container } from './styles';
 
 interface ImagesChoiceConfigurationProps {
   handleChange: Function;
-  field: Question | undefined;
+  field: Question;
 }
 
 interface ListOptionsProps {
@@ -33,6 +31,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
+
   const randomSort = useMemo(() => field?.hasRandomResponsesOrder, [field]);
   const imageChoices = useMemo(() => {
     if (field?.imgChoices) {
@@ -40,6 +40,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
     }
     return [];
   }, [field]);
+
   const addOtherOption = useMemo(() => field?.addOtherOption, [field]);
 
   useEffect(() => {
@@ -72,6 +73,10 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
     },
     [imageChoices, handleChange],
   );
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+  }, [field.id]);
 
   return (
     <Container>
