@@ -37,8 +37,11 @@ interface FormConfigDTO {
 const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
   formData,
 }) => {
-  const [tempInformation, setTempInformation] = useState('');
   const formRef = useRef<FormHandles>(null);
+  const [showProgressBarType, setShowProgressBarType] = useState(
+    formData?.config.canDisplayProgressBar || false,
+  );
+  const [tempInformation, setTempInformation] = useState('');
   const dispatch = useDispatch();
   // const [hasLimitedResponses, setHasLimitResponses] = useState(false);
 
@@ -123,20 +126,25 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="canDisplayProgressBar"
             label="Mostrar barra de progresso"
             helpHint="Lorem ipsum"
-            onChange={(event) => handleChange(event.target.checked)}
+            onChange={(event) => {
+              handleChange(event.target.checked);
+              setShowProgressBarType(event.target.checked);
+            }}
           />
         </section>
-        <section>
-          <SelectField
-            name="progressBarType"
-            label="Tipo da barra de progresso"
-            options={[
-              { value: 'Step', label: 'Step' },
-              { value: 'Linear', label: 'Linear' },
-            ]}
-            onChange={(value) => handleChange(value)}
-          />
-        </section>
+        {showProgressBarType && (
+          <section>
+            <SelectField
+              name="progressBarType"
+              label="Tipo da barra de progresso"
+              options={[
+                { value: 'Step', label: 'Step' },
+                { value: 'Linear', label: 'Linear' },
+              ]}
+              onChange={(value) => handleChange(value)}
+            />
+          </section>
+        )}
         <section>
           <SwitchToggle
             name="canAllowMultipleSubmissions"

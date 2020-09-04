@@ -73,7 +73,6 @@ const SelectField: React.FC<SelectFieldProps> = ({
         };
         newArray.push(option);
       }
-      // console.log(newArray);
       setOptions(newArray);
     }
   }, [answerOptions, isTimeFormat]);
@@ -87,7 +86,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
       {options && (
         <CustomSelect
           ref={inputRef}
-          // defaultValue={defaultSelectValue}
+          defaultValue={defaultValue}
           classNamePrefix="react-select"
           placeholder="Escolha uma opção"
           components={{ DropdownIndicator }}
