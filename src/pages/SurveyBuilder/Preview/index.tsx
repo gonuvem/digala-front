@@ -69,7 +69,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       <nav>
         <NavLink href="/">Editar</NavLink>
         <NavLink href={`/share/${id}`}>Compartilhar</NavLink>
-        <NavLink href="/">Resultados</NavLink>
+        <NavLink href={`/survey_results/${id}`}>Resultados</NavLink>
       </nav>
       <PanelArea>
         <h1>{formData?.config.name}</h1>
