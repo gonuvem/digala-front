@@ -26,6 +26,12 @@ interface CreateFormData {
   researchName: string;
 }
 
+interface CreateFormResponse {
+  form: {
+    _id: string;
+  };
+}
+
 const MyReasearches: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
@@ -55,7 +61,7 @@ const MyReasearches: React.FC = () => {
           throw new Error(response.data.createOwnForm.error.internalCode);
         }
 
-        history.push('/edit_survey');
+        history.push(`/edit_survey/${response.data.createOwnForm.form._id}`);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
