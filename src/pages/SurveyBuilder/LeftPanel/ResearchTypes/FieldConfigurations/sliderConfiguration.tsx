@@ -57,7 +57,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
             defaultValue={0}
             name="minValue"
             onChange={(event) =>
-              handleChange([event.target.value], ['minValue'])
+              handleChange([parseInt(event.target.value, 10)], ['minValue'])
             }
           />
         </section>
@@ -79,7 +79,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
             defaultValue={10}
             name="maxValue"
             onChange={(event) =>
-              handleChange([event.target.value], ['maxValue'])
+              handleChange([parseInt(event.target.value, 10)], ['maxValue'])
             }
           />
         </section>

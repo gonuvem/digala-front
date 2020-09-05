@@ -5,7 +5,6 @@
 * Está dando erro 400 quando o usuário tentar publicar novamente após já ter publicado
 * Respostas de erro durante o cadastro não estão sendo tratadas devidamente, está sendo mostrado no toast a menssagem que vem da api
 * No campo de Multipla Escolha, está dando erro ao enviar para a api a quantidade de opções selecionaveis
-* No campo do NPS ao usar os botões de incrementar e decrementar, está sendo possível ir além dos limites inferior e superior
 * No campo numérico está dando erro ao enviar para API os campos de maxValue e minValue, eles estão no formato string e a api espera um inteiro
 * Ao desabilitar o limitador, mesmo assim ele continua enviando o maxValue e o minValue para a api.
 * O campo de reodernar as opções está dando um warning e isso está afetando a performance do componente
@@ -19,6 +18,7 @@
 * Implementar o fluxo de atualizar a questão
 * Corrigir para que ao registrar uma questão o ID dela seja substituido pelo da API para não ser criada novamente e sim atualizada
 * Criar um component do Modal para corrigir o problema o appElement
+* Modificar o painel lateral do lado esquerdo para ele ser sticky
 
 
 # Survey Builder
