@@ -7,6 +7,7 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
@@ -26,6 +27,13 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
+
   return (
     <Container>
       <Form ref={formRef} onSubmit={() => null}>
@@ -35,7 +43,7 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
             placeholder="Link"
             name="label"
             id="linkLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -45,7 +53,7 @@ const LinkFieldConfigurarion: React.FC<LinkFieldConfigurarionProps> = ({
             name="description"
             id="linkDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>

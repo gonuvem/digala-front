@@ -18,6 +18,7 @@ import NumberField from '../../../../../components/ResearchFields/NumericField';
 import SolidButton from '../../../../../components/Common/SolidButton';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container, DragContainer, Option, ViewButton } from './styles';
 
@@ -59,6 +60,13 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
     formRef.current?.setData(field);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
+
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -121,7 +129,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
             placeholder="Nome"
             name="label"
             id="multipleChoiceLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -131,7 +139,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
             name="description"
             id="multipleChoiceDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -219,13 +227,13 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
                       draggableId={item._id}
                       index={index}
                     >
-                      {(provided) => (
+                      {(itemOption) => (
                         <Option
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
+                          ref={itemOption.innerRef}
+                          {...itemOption.draggableProps}
+                          {...itemOption.dragHandleProps}
                           style={{
-                            ...provided.draggableProps.style,
+                            ...itemOption.draggableProps.style,
                           }}
                         >
                           <input

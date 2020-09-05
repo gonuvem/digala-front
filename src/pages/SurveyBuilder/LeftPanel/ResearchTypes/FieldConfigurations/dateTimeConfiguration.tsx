@@ -80,7 +80,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Campo é obrigatório responder"
             name="isRequired"
             onChange={(event) =>
-              onChange([event.target.checked], ['isRequired'])
+              handleChange([event.target.checked], ['isRequired'])
             }
           />
         </section>
@@ -90,7 +90,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Usuário será obrigado a colocar data"
             name="isDateRequired"
             onChange={(event) =>
-              onChange([event.target.checked], ['isDateRequired'])
+              handleChange([event.target.checked], ['isDateRequired'])
             }
           />
         </section>
@@ -103,7 +103,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
               (option) => option.value === field?.dateFormat,
             )}
             isTimeFormat
-            onChange={(value: any) => onChange([value?.value], ['dateFormat'])}
+            onChange={(value: any) =>
+              handleChange([value?.value], ['dateFormat'])
+            }
           />
         </section>
         <section>
@@ -112,7 +114,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Usuário será obrigado a colocar horário"
             name="isTimeRequired"
             onChange={(event) => {
-              onChange([event.target.checked], ['isTimeRequired']);
+              handleChange([event.target.checked], ['isTimeRequired']);
               setIsTimeRequired(event.target.checked);
             }}
           />
@@ -128,7 +130,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
                 (option) => option.value === field?.timeFormat,
               )}
               onChange={(value: any) =>
-                onChange([value?.value], ['timeFormat'])
+                handleChange([value?.value], ['timeFormat'])
               }
             />
           </section>
@@ -139,7 +141,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Usuário é perguntado por um intervalo de datas"
             name="canCaptureInterval"
             onChange={(event) =>
-              onChange([event.target.checked], ['canCaptureInterval'])
+              handleChange([event.target.checked], ['canCaptureInterval'])
             }
           />
         </section>

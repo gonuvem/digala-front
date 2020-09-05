@@ -8,6 +8,7 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
@@ -30,6 +31,13 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
+
   return (
     <Container>
       <Form ref={formRef} onSubmit={() => null}>
@@ -39,7 +47,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             placeholder="NPS"
             name="label"
             id="npsLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -49,7 +57,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             name="description"
             id="npsDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -83,7 +91,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
                 name="leftLabel"
                 id="npsLeftSubtitleField"
                 onChange={(event) =>
-                  handleChange([event.target.value], ['leftLabel'])
+                  onChange([event.target.value], ['leftLabel'])
                 }
               />
             </section>
@@ -94,7 +102,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
                 name="rightLabel"
                 id="npsRightSubtitleField"
                 onChange={(event) =>
-                  handleChange([event.target.value], ['rightLabel'])
+                  onChange([event.target.value], ['rightLabel'])
                 }
               />
             </section>

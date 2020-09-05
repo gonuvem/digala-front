@@ -9,6 +9,7 @@ import SolidButton from '../../../../../components/Common/SolidButton';
 import EditMatrixModal from '../../../../../components/SurveyBuilder/EditMatrixModal';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container, SectionTitle } from './styles';
 
@@ -29,6 +30,13 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field?.id]);
 
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
+
   return (
     <>
       <Container>
@@ -39,9 +47,7 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               placeholder="matrix"
               name="label"
               id="matrixLabelField"
-              onChange={(event) =>
-                handleChange([event.target.value], ['label'])
-              }
+              onChange={(event) => onChange([event.target.value], ['label'])}
             />
           </section>
           <section>
@@ -51,7 +57,7 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
               name="description"
               id="matrixDescriptionField"
               onChange={(event) =>
-                handleChange([event.target.value], ['description'])
+                onChange([event.target.value], ['description'])
               }
             />
           </section>

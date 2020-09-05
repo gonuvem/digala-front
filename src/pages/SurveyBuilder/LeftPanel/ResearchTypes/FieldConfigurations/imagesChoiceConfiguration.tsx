@@ -9,6 +9,7 @@ import NumberField from '../../../../../components/ResearchFields/NumericField';
 import ImageUpload from '../../../../../components/Common/ImageUpload';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
@@ -38,6 +39,13 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
     }
     return [];
   }, [field]);
+
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
 
   const addDefaultOption = useCallback(
     (toggleOtherOption) => {
@@ -77,7 +85,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             placeholder="Escolha de imagens"
             name="label"
             id="imagesChoiceLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -87,7 +95,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             name="description"
             id="imagesChoiceDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -153,7 +161,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ImageUpload
             label="Opções"
             imageOptions={field?.answerOptions || []}
-            onChange={(value: any) => handleChange([value], ['answerOptions'])}
+            onChange={(value: any) => onChange([value], ['answerOptions'])}
           />
         </section>
       </Form>

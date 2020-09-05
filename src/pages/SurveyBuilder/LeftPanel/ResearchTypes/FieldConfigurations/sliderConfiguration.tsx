@@ -8,6 +8,7 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
@@ -27,6 +28,13 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
+
   return (
     <Container>
       <Form ref={formRef} onSubmit={() => null}>
@@ -36,7 +44,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
             placeholder="Slider"
             name="label"
             id="sliderLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -46,7 +54,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
             name="description"
             id="sliderDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -67,9 +75,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
             placeholder="Legenda esquerda"
             name="minLabel"
             id="leftSubtitleLabelField"
-            onChange={(event) =>
-              handleChange([event.target.value], ['minLabel'])
-            }
+            onChange={(event) => onChange([event.target.value], ['minLabel'])}
           />
         </section>
         <section>
@@ -89,9 +95,7 @@ const SliderConfiguration: React.FC<SliderConfigurationProps> = ({
             placeholder="Legenda direita"
             name="maxLabel"
             id="rightSubtileLabelField"
-            onChange={(event) =>
-              handleChange([event.target.value], ['maxLabel'])
-            }
+            onChange={(event) => onChange([event.target.value], ['maxLabel'])}
           />
         </section>
         <section>

@@ -20,6 +20,7 @@ import SolidButton from '../../../../../components/Common/SolidButton';
 import { Container, DragContainer, Option, ViewButton } from './styles';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 interface DropdownConfigurarionProps {
   handleChange: Function;
@@ -58,6 +59,13 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
     formRef.current?.setData(field);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
+
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -123,7 +131,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
             placeholder="Nome"
             name="label"
             id="DropdownLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -133,7 +141,7 @@ const DropdownConfigurarion: React.FC<DropdownConfigurarionProps> = ({
             name="description"
             id="DropdownDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
