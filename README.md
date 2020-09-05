@@ -1,6 +1,5 @@
 # BUGS
 
-* Não está implementado o debounce nos paines de configuração dos inputs
 * No componente de SingleChoice ele está apenas mostrando a opção outros mas não envia ela para a api
 * Está dando erro 400 quando o usuário tentar publicar novamente após já ter publicado
 * Respostas de erro durante o cadastro não estão sendo tratadas devidamente, está sendo mostrado no toast a menssagem que vem da api
