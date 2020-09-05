@@ -38,16 +38,18 @@ const NumericField: React.FC<NumericFieldProps> = ({
 
   const handleChangeInValue = useCallback(
     (signal: number) => {
-      if (signal > 0) {
+      const inputValue = inputRef.current?.value || 0;
+
+      if (signal > 0 && inputValue < maxValue) {
         inputRef.current?.stepUp(stepSize);
-      } else {
+      } else if (signal < 0 && inputValue > minValue) {
         inputRef.current?.stepDown(stepSize);
       }
 
       const event = new Event('input', { bubbles: true });
       inputRef.current?.dispatchEvent(event);
     },
-    [stepSize],
+    [maxValue, minValue, stepSize],
   );
 
   useEffect(() => {
@@ -60,11 +62,11 @@ const NumericField: React.FC<NumericFieldProps> = ({
 
   return (
     <Container>
-      <label htmlFor="">
+      <label htmlFor={`${name}-numeric`}>
         {label && <span>{label}</span>}
         {description && <p>{description}</p>}
       </label>
-      <InputContainer>
+      <InputContainer id={`${name}-numeric`}>
         <div>
           <input
             ref={inputRef}
