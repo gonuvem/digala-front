@@ -8,6 +8,7 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import SelectField from '../../../../../components/ResearchFields/SelectField';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
@@ -43,6 +44,13 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [field.id]);
 
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
+
   return (
     <Container>
       <Form ref={formRef} onSubmit={() => null}>
@@ -52,7 +60,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             placeholder="Data e Hora"
             name="label"
             id="dateTimeField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -62,7 +70,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             name="description"
             id="dateTimeDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -72,7 +80,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Campo é obrigatório responder"
             name="isRequired"
             onChange={(event) =>
-              handleChange([event.target.checked], ['isRequired'])
+              onChange([event.target.checked], ['isRequired'])
             }
           />
         </section>
@@ -82,7 +90,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Usuário será obrigado a colocar data"
             name="isDateRequired"
             onChange={(event) =>
-              handleChange([event.target.checked], ['isDateRequired'])
+              onChange([event.target.checked], ['isDateRequired'])
             }
           />
         </section>
@@ -95,9 +103,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
               (option) => option.value === field?.dateFormat,
             )}
             isTimeFormat
-            onChange={(value: any) =>
-              handleChange([value?.value], ['dateFormat'])
-            }
+            onChange={(value: any) => onChange([value?.value], ['dateFormat'])}
           />
         </section>
         <section>
@@ -106,7 +112,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Usuário será obrigado a colocar horário"
             name="isTimeRequired"
             onChange={(event) => {
-              handleChange([event.target.checked], ['isTimeRequired']);
+              onChange([event.target.checked], ['isTimeRequired']);
               setIsTimeRequired(event.target.checked);
             }}
           />
@@ -122,7 +128,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
                 (option) => option.value === field?.timeFormat,
               )}
               onChange={(value: any) =>
-                handleChange([value?.value], ['timeFormat'])
+                onChange([value?.value], ['timeFormat'])
               }
             />
           </section>
@@ -133,7 +139,7 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
             helpHint="Usuário é perguntado por um intervalo de datas"
             name="canCaptureInterval"
             onChange={(event) =>
-              handleChange([event.target.checked], ['canCaptureInterval'])
+              onChange([event.target.checked], ['canCaptureInterval'])
             }
           />
         </section>

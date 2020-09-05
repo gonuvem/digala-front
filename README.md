@@ -8,10 +8,8 @@
 * No campo numérico está dando erro ao enviar para API os campos de maxValue e minValue, eles estão no formato string e a api espera um inteiro
 * Ao desabilitar o limitador, mesmo assim ele continua enviando o maxValue e o minValue para a api.
 * O campo de reodernar as opções está dando um warning e isso está afetando a performance do componente
-* O campo de slider está dando erro ao enviar para api os valores de minimo e máximo após alteração. Eles estão sendo enviados como uma string enquanto a api espera um número.
 * O espaçamento da tabela de Matriz está muito pequeno
 * Ao remover uma linha ou coluna durante a edição da matriz está ocorrendo um erro onde valores são substituidos e a impressão que dar é que você está apagando o elemento errado.
-* O espaçamento no campo de texto longo entre a descrição e o input está maior que os outros.
 * Possível bug durante o primeira carregamento da página da pesquisa gerada, está acessando um valor de uma variável undefined
 * Existe uma regra de margin para corrigir o espaçamento das opções no componente de multipla escolha quando ele está em seu formato horizontal, que está interferindo no seu display vertical
 * O fluxo de atualizar não está deixando publicar a pesquisa com nenhuma questão
@@ -19,7 +17,7 @@
 * Corrigir para que ao registrar uma questão o ID dela seja substituido pelo da API para não ser criada novamente e sim atualizada
 * Criar um component do Modal para corrigir o problema o appElement
 * Modificar o painel lateral do lado esquerdo para ele ser sticky
-
+* Resolver o bug do valor default do campo maxValue e minValue do Numeric Field
 
 # Survey Builder
 
