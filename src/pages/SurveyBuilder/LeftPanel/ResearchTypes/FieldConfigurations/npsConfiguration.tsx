@@ -124,6 +124,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             name="escale"
             id="scaleFieldId"
             measurement="unidades"
+            maxValue={10}
             defaultValue={field?.escale ? field.escale : 10}
             onChange={(event) =>
               parseInt(event.target.value, 10) <= 10

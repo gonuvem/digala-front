@@ -69,6 +69,17 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
     }
   }, [choices, setListChoices]);
 
+  const onChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const checkeds = inputRefs.current.filter((ref) => ref.checked);
+
+      if (checkeds.length > choiceMaxAmmount) {
+        event.target.checked = false;
+      }
+    },
+    [choiceMaxAmmount],
+  );
+
   return (
     <Container>
       <label htmlFor={id}>
@@ -87,6 +98,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 value={choice._id}
                 fieldName={name}
                 label={choice.text}
+                onChange={onChange}
               />
             ))}
           {anotherOption && (
