@@ -58,6 +58,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         loading: false,
         _id: uuid(),
       };
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
       onChange([...imageOptions, newImageOption]);
     },
     [imageOptions, onChange],

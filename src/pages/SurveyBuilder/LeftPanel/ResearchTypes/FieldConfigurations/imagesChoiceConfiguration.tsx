@@ -161,7 +161,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ImageUpload
             label="Opções"
             imageOptions={field?.answerOptions || []}
-            onChange={(value: any) => handleChange([value], ['answerOptions'])}
+            onChange={(value: any) => onChange([value], ['answerOptions'])}
           />
         </section>
       </Form>
