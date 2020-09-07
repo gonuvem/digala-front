@@ -6,7 +6,7 @@ interface AnswerOptions {
   image?: string;
 }
 
-interface QuestionConfig {
+export interface QuestionConfig {
   name: string;
   description?: string;
   isRequired: boolean;
