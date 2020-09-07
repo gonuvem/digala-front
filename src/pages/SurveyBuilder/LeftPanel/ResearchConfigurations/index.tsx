@@ -15,6 +15,7 @@ import { Container } from './styles';
 import { Form as FormType } from '../../../../store/ducks/forms/types';
 import changeFormConfiguration from '../../../../services/logic/changeFormConfiguration';
 import useDebounce from '../../../../hooks/useDebounce';
+
 interface ResearchConfigurationsProps {
   formData: FormType | null;
 }
@@ -36,8 +37,11 @@ interface FormConfigDTO {
 const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
   formData,
 }) => {
-  const [tempInformation, setTempInformation] = useState('');
   const formRef = useRef<FormHandles>(null);
+  const [showProgressBarType, setShowProgressBarType] = useState(
+    formData?.config.canDisplayProgressBar || false,
+  );
+  const [tempInformation, setTempInformation] = useState('');
   const dispatch = useDispatch();
   // const [hasLimitedResponses, setHasLimitResponses] = useState(false);
 
@@ -49,21 +53,12 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
 
   useEffect(() => {
     const data = formRef.current?.getData();
-    // console.log(data);
     changeFormConfiguration(dispatch, {
       attribute: 'config',
       config: data as FormConfigDTO,
     });
   }, [debouncedTrigger, dispatch]);
 
-  // console.log(formData?.config);
-
-  const b = new Date(
-    'Wed Jul 15 2020 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
-  );
-  const e = new Date(
-    'Wed Jul 20 2020 00:00:00 GMT-0300 (Horário Padrão de Brasília)',
-  );
   return (
     <Container>
       <span>Informações Básicas</span>
@@ -131,20 +126,25 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="canDisplayProgressBar"
             label="Mostrar barra de progresso"
             helpHint="Lorem ipsum"
-            onChange={(event) => handleChange(event.target.checked)}
+            onChange={(event) => {
+              handleChange(event.target.checked);
+              setShowProgressBarType(event.target.checked);
+            }}
           />
         </section>
-        <section>
-          <SelectField
-            name="progressBarType"
-            label="Tipo da barra de progresso"
-            options={[
-              { value: 'Step', label: 'Step' },
-              { value: 'Linear', label: 'Linear' },
-            ]}
-            onChange={(value) => handleChange(value)}
-          />
-        </section>
+        {showProgressBarType && (
+          <section>
+            <SelectField
+              name="progressBarType"
+              label="Tipo da barra de progresso"
+              options={[
+                { value: 'Step', label: 'Step' },
+                { value: 'Linear', label: 'Linear' },
+              ]}
+              onChange={(value) => handleChange(value)}
+            />
+          </section>
+        )}
         <section>
           <SwitchToggle
             name="canAllowMultipleSubmissions"

@@ -18,7 +18,7 @@ const Switch: React.FC<ToggleSwitchProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isChecked, setIsChecked] = useState(false);
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField, defaultValue } = useField(name);
 
   useEffect(() => {
     registerField({

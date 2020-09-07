@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -6,6 +7,7 @@ import TextAreaField from '../../../../../components/ResearchFields/TextAreaFiel
 import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
@@ -18,16 +20,30 @@ const TelephoneConfiguration: React.FC<TelephoneConfigurationProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field.id]);
+
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
+
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Telefone"
             name="label"
             id="phoneLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -37,7 +53,7 @@ const TelephoneConfiguration: React.FC<TelephoneConfigurationProps> = ({
             name="description"
             id="phoneDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>

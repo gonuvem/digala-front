@@ -27,28 +27,31 @@ const ForgotForm: React.FC<ForgotForm> = ({ onFinish }) => {
   const forgotFormRef = useRef<FormHandles>(null);
   const [forgot, { loading: forgotLoading }] = useMutation(FORGOT_PASSWORD);
 
-  const handleSendCode = useCallback(async (data: FormCodeData) => {
-    try {
-      await ForgotSchema.validate(data, { abortEarly: false });
+  const handleSendCode = useCallback(
+    async (data: FormCodeData) => {
+      try {
+        await ForgotSchema.validate(data, { abortEarly: false });
 
-      const response = await forgot({ variables: { ...data } });
+        const response = await forgot({ variables: { ...data } });
 
-      if (response.data.forgotPassword.error) {
-        throw new Error(response.data.forgotPassword.error.internalCode);
+        if (response.data.forgotPassword.error) {
+          throw new Error(response.data.forgotPassword.error.internalCode);
+        }
+
+        onFinish(data.email);
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          forgotFormRef.current?.setErrors(errors);
+          return;
+        }
+
+        const internalCode = err.message as string;
+        toast.error(forgotErrors[internalCode]);
       }
-
-      onFinish(data.email);
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        forgotFormRef.current?.setErrors(errors);
-        return;
-      }
-
-      const internalCode = err.message as string;
-      toast.error(forgotErrors[internalCode]);
-    }
-  }, []);
+    },
+    [forgot, onFinish],
+  );
 
   return (
     <Form ref={forgotFormRef} onSubmit={handleSendCode}>

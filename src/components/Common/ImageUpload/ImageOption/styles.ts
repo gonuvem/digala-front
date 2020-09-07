@@ -21,8 +21,11 @@ export const Container = styled.div`
   }
 
   img {
-    max-width: 100%;
+    max-height: 15rem;
+    width: 100%;
+
     border-radius: 4px;
+    object-fit: cover;
   }
 
   input {

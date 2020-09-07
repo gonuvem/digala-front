@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -7,6 +8,7 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
@@ -19,19 +21,33 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [showSubtitles, setShowSubtitles] = useState(
     field.canDisplayLabels || false,
   );
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field.id]);
+
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
+
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="NPS"
             name="label"
             id="npsLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -41,7 +57,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             name="description"
             id="npsDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -75,7 +91,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
                 name="leftLabel"
                 id="npsLeftSubtitleField"
                 onChange={(event) =>
-                  handleChange([event.target.value], ['leftLabel'])
+                  onChange([event.target.value], ['leftLabel'])
                 }
               />
             </section>
@@ -86,7 +102,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
                 name="rightLabel"
                 id="npsRightSubtitleField"
                 onChange={(event) =>
-                  handleChange([event.target.value], ['rightLabel'])
+                  onChange([event.target.value], ['rightLabel'])
                 }
               />
             </section>
@@ -108,6 +124,7 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             name="escale"
             id="scaleFieldId"
             measurement="unidades"
+            maxValue={10}
             defaultValue={field?.escale ? field.escale : 10}
             onChange={(event) =>
               parseInt(event.target.value, 10) <= 10

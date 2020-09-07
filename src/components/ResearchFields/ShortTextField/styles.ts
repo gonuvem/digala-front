@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components';
-import { animated } from 'react-spring';
 
 import Colors from '../../../utils/colors';
 

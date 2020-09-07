@@ -1,4 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiMove } from 'react-icons/fi';
 import { FaTrashAlt } from 'react-icons/fa';
@@ -17,6 +18,7 @@ import NumberField from '../../../../../components/ResearchFields/NumericField';
 import SolidButton from '../../../../../components/Common/SolidButton';
 
 import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container, DragContainer, Option, ViewButton } from './styles';
 
@@ -46,12 +48,25 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
   handleChange,
   field,
 }) => {
+  const formRef = useRef<FormHandles>(null);
   const [limitChoiceAmmount, setLimitChoiceAmmount] = useState(
     field.limitChoices || false,
   );
   const [options, setOptions] = useState<Array<ListOptions>>([
     { _id: uuid(), text: '' },
   ]);
+
+  useEffect(() => {
+    formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field.id]);
+
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
 
   const onDragEnd = useCallback(
     (result: DropResult) => {
@@ -65,7 +80,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
       setOptions(items);
       handleChange([items], ['answerOptions']);
     },
-    [options, setOptions],
+    [handleChange, options],
   );
 
   const handleAddOption = useCallback(() => {
@@ -107,14 +122,14 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
 
   return (
     <Container>
-      <Form initialData={field} onSubmit={() => null}>
+      <Form ref={formRef} onSubmit={() => null}>
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Nome"
             name="label"
             id="multipleChoiceLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -124,7 +139,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
             name="description"
             id="multipleChoiceDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -212,13 +227,13 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
                       draggableId={item._id}
                       index={index}
                     >
-                      {(provided) => (
+                      {(itemOption) => (
                         <Option
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
+                          ref={itemOption.innerRef}
+                          {...itemOption.draggableProps}
+                          {...itemOption.dragHandleProps}
                           style={{
-                            ...provided.draggableProps.style,
+                            ...itemOption.draggableProps.style,
                           }}
                         >
                           <input

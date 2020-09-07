@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useCallback,
-  useEffect,
-  useState,
-  useMemo,
-} from 'react';
+import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { useField } from '@unform/core';
 import { useTransition } from 'react-spring';
 import { components, Props as SelectProps, OptionTypeBase } from 'react-select';
@@ -79,18 +73,9 @@ const SelectField: React.FC<SelectFieldProps> = ({
         };
         newArray.push(option);
       }
-      // console.log(newArray);
       setOptions(newArray);
     }
-  }, [answerOptions]);
-
-  const defaultSelectValue = useMemo(() => {
-    const defaultOption = answerOptions?.find(
-      (option) => option.text === defaultValue,
-    );
-
-    return defaultOption;
-  }, [defaultValue, answerOptions]);
+  }, [answerOptions, isTimeFormat]);
 
   return (
     <Container>
@@ -101,7 +86,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
       {options && (
         <CustomSelect
           ref={inputRef}
-          // defaultValue={defaultSelectValue}
+          defaultValue={defaultValue}
           classNamePrefix="react-select"
           placeholder="Escolha uma opção"
           components={{ DropdownIndicator }}

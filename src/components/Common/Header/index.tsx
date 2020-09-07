@@ -18,7 +18,9 @@ const Header: React.FC = () => {
   return (
     <Container>
       <div>
-        <img src={logo} alt="digala-logo" />
+        <a href="/">
+          <img src={logo} alt="digala-logo" />
+        </a>
         <nav>
           <NavLink isActive href="/survey">
             Pesquisas

@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { useEffect, useMemo, useCallback, useRef } from 'react';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
 import ShortTextField from '../../../../../components/ResearchFields/ShortTextField';
@@ -7,17 +8,14 @@ import ToggleSwitch from '../../../../../components/Common/ToggleSwitch';
 import NumberField from '../../../../../components/ResearchFields/NumericField';
 import ImageUpload from '../../../../../components/Common/ImageUpload';
 
-import {
-  Question,
-  ImageChoice,
-} from '../../../../../store/ducks/questions/types';
-import randomSortArray from '../../../../../utils/randomSortArray';
+import { Question } from '../../../../../store/ducks/questions/types';
+import { useDebouncedCallback } from '../../../../../hooks/useDebouncedCallback';
 
 import { Container } from './styles';
 
 interface ImagesChoiceConfigurationProps {
   handleChange: Function;
-  field: Question | undefined;
+  field: Question;
 }
 
 interface ListOptionsProps {
@@ -33,21 +31,21 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
   handleChange,
   field,
 }) => {
-  const randomSort = useMemo(() => field?.hasRandomResponsesOrder, [field]);
+  const formRef = useRef<FormHandles>(null);
+
   const imageChoices = useMemo(() => {
     if (field?.imgChoices) {
       return field?.imgChoices;
     }
     return [];
   }, [field]);
-  const addOtherOption = useMemo(() => field?.addOtherOption, [field]);
 
-  useEffect(() => {
-    if (imageChoices && randomSort) {
-      const randomSortedArray = randomSortArray(imageChoices);
-      handleChange([randomSortedArray], ['imgChoices']);
-    }
-  }, [randomSort]);
+  const onChange = useDebouncedCallback(
+    (value: any[], properties: string[]) => {
+      handleChange(value, properties);
+    },
+    500,
+  );
 
   const addDefaultOption = useCallback(
     (toggleOtherOption) => {
@@ -73,17 +71,21 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
     [imageChoices, handleChange],
   );
 
+  useEffect(() => {
+    formRef.current?.setData(field);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [field.id]);
+
   return (
     <Container>
       <Form initialData={field} onSubmit={() => null}>
-        {console.log(field)}
         <section>
           <ShortTextField
             label="Nome"
             placeholder="Escolha de imagens"
             name="label"
             id="imagesChoiceLabelField"
-            onChange={(event) => handleChange([event.target.value], ['label'])}
+            onChange={(event) => onChange([event.target.value], ['label'])}
           />
         </section>
         <section>
@@ -93,7 +95,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
             name="description"
             id="imagesChoiceDescriptionField"
             onChange={(event) =>
-              handleChange([event.target.value], ['description'])
+              onChange([event.target.value], ['description'])
             }
           />
         </section>
@@ -159,7 +161,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
           <ImageUpload
             label="Opções"
             imageOptions={field?.answerOptions || []}
-            onChange={(value: any) => handleChange([value], ['answerOptions'])}
+            onChange={(value: any) => onChange([value], ['answerOptions'])}
           />
         </section>
       </Form>

@@ -7,7 +7,6 @@ import SolidButton from '../SolidButton';
 import { Container, OptionsContainer } from './styles';
 
 import uploadImage from '../../../services/logic/uploadImage';
-import { ImageChoice } from '../../../store/ducks/questions/types';
 
 interface ImageUploadProps {
   label?: string;
@@ -59,6 +58,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         loading: false,
         _id: uuid(),
       };
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
       onChange([...imageOptions, newImageOption]);
     },
     [imageOptions, onChange],
@@ -75,7 +77,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       onChange([...imageOptions, preImageOption]);
       uploadImage(event, onPhotoUploaded);
     },
-    [imageOptions, onChange],
+    [imageOptions, onChange, onPhotoUploaded],
   );
   return (
     <Container>

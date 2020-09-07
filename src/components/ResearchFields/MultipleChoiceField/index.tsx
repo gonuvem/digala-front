@@ -43,7 +43,6 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   const [listChoices, setListChoices] = useState<Array<ChoicesProps>>(
     choices || [],
   );
-  const [checkeds, setCheckeds] = useState<string[]>([]);
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
   const transitions = useTransition(!!error, {
@@ -70,22 +69,15 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
     }
   }, [choices, setListChoices]);
 
-  const handleOptionClick = useCallback(
-    (event, choiceId: string) => {
-      const { checked } = event.target;
+  const onChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const checkeds = inputRefs.current.filter((ref) => ref.checked);
 
-      if (limitChoices && checkeds.length >= choiceMaxAmmount && checked) {
-        return;
+      if (checkeds.length > choiceMaxAmmount) {
+        event.target.checked = false;
       }
-      if (checked) {
-        setCheckeds((state) => [...state, choiceId]);
-        return;
-      }
-      setCheckeds((state) => [
-        ...state.filter((checkedId) => checkedId !== choiceId),
-      ]);
     },
-    [checkeds, limitChoices, choiceMaxAmmount],
+    [choiceMaxAmmount],
   );
 
   return (
@@ -106,6 +98,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 value={choice._id}
                 fieldName={name}
                 label={choice.text}
+                onChange={onChange}
               />
             ))}
           {anotherOption && (

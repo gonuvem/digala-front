@@ -41,7 +41,6 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const [value, setValue] = useState('');
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
   const transitions = useTransition(!!error, {
@@ -84,7 +83,6 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
             readOnly={readOnly}
-            onChange={(text) => setValue(text?.target?.value)}
             {...rest}
           />
         </div>

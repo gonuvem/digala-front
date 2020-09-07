@@ -2,10 +2,11 @@ import React, { useRef, useCallback, useState } from 'react';
 
 import uploadImage from '../../../services/logic/uploadImage';
 
-import LoadingSpinner from '../../Common/LoadingSpinner';
+import LoadingSpinner from '../LoadingSpinner';
 import uploadIcon from '../../../assets/uploud_icon.png';
 
 import { DashedContainer, ImgLogo, IconLogoUpload } from './styles';
+
 interface LogoUploadProps {
   label?: string;
   onChange: Function;
@@ -29,12 +30,15 @@ const LogoUpload: React.FC<LogoUploadProps> = ({ label, onChange, logo }) => {
     fileInputRef.current?.click();
   }, []);
 
-  const handleUploadPhoto = useCallback((event) => {
-    const preImageOption = '';
-    setIsLoading(true);
-    onChange(preImageOption);
-    uploadImage(event, onPhotoUploaded);
-  }, []);
+  const handleUploadPhoto = useCallback(
+    (event) => {
+      const preImageOption = '';
+      setIsLoading(true);
+      onChange(preImageOption);
+      uploadImage(event, onPhotoUploaded);
+    },
+    [onChange, onPhotoUploaded],
+  );
 
   return (
     <>

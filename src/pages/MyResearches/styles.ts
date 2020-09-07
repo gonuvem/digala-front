@@ -82,3 +82,15 @@ export const ModalCreateResearch = styled(Modal).attrs({
     }
   }
 `;
+
+export const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 3.75rem;
+`;
+
+export const LoadingContainer = styled.div`
+  position: relative;
+  margin-top: 2rem;
+`;
