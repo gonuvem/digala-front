@@ -141,7 +141,7 @@ function getTypeQuestion(question: Question): any {
         checkBox: {
           hasHorizontalAlignment: question.hasHorizontalAlignment,
           hasRandomResponsesOrder: question.hasRandomResponsesOrder,
-          hasLimitedChoices: question.limitChoices,
+          hasLimitedChoices: question.hasLimitedChoices,
           maxChoices: question?.maxChoices,
           answerOptions: formatList(question.answerOptions),
         },

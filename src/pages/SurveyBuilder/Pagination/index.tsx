@@ -16,9 +16,11 @@ import { UPDATE_FORM } from '../../../services/requests/forms';
 import {
   CREATE_OWN_QUESTIONS,
   LIST_QUESTION_TYPES,
+  UPDATE_OWN_QUESTIONS,
 } from '../../../services/requests/questions';
 import updateOwnFormData from '../../../services/logic/updateOwnFormData';
 import createOwnQuestions from '../../../services/logic/createOwnQuestions';
+import updateOwnQuestions from '../../../services/logic/updateOwnQuestions';
 
 const Pagination: React.FC = () => {
   const [pagesCount, setPagesCount] = useState(1);
@@ -31,6 +33,9 @@ const Pagination: React.FC = () => {
   const [updateForm, { loading: updateFormLoading }] = useMutation(UPDATE_FORM);
   const [createQuestions, { loading: createQuestionsLoading }] = useMutation(
     CREATE_OWN_QUESTIONS,
+  );
+  const [updateQuestions, { loading: updateQuestionsLoading }] = useMutation(
+    UPDATE_OWN_QUESTIONS,
   );
 
   const { data: questionsTypesData } = useQuery(LIST_QUESTION_TYPES, {
@@ -56,15 +61,32 @@ const Pagination: React.FC = () => {
         isUuid(question.id),
       );
 
-      createOwnQuestions(
-        createQuestions,
-        questionsToCreate,
-        formData?.id,
-        questionTypes,
+      const questionsToUpdate = questionsData.filter(
+        (question) => !isUuid(question.id),
       );
+
+      if (questionsToCreate.length > 0) {
+        createOwnQuestions(
+          createQuestions,
+          questionsToCreate,
+          formData?.id,
+          questionTypes,
+        );
+      }
+
+      if (questionsToUpdate.length > 0) {
+        updateOwnQuestions(updateQuestions, questionsToUpdate, formData?.id);
+      }
     }
-    updateOwnFormData(updateForm, formData);
-  }, [formData, updateForm, questionsData, questionTypes, createQuestions]);
+    // updateOwnFormData(updateForm, formData);
+  }, [
+    formData,
+    questionTypes,
+    updateForm,
+    questionsData,
+    createQuestions,
+    updateQuestions,
+  ]);
 
   return (
     <Container>

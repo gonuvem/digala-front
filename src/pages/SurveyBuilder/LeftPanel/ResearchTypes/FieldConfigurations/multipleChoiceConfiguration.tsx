@@ -50,7 +50,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
 }) => {
   const formRef = useRef<FormHandles>(null);
   const [limitChoiceAmmount, setLimitChoiceAmmount] = useState(
-    field.limitChoices || false,
+    field.hasLimitedChoices || false,
   );
   const [options, setOptions] = useState<Array<ListOptions>>([
     { _id: uuid(), text: '' },

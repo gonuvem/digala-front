@@ -168,10 +168,15 @@ export const CREATE_OWN_QUESTIONS = gql`
       questions {
         _id
       }
-      error {
-        message
-        statusCode
-      }
+      ${errorFragment}
+    }
+  }
+`;
+
+export const UPDATE_OWN_QUESTIONS = gql`
+  mutation($input: CreateOwnQuestionsInput!) {
+    data: updateOwnQuestions(input: $input) {
+      ${errorFragment}
     }
   }
 `;
