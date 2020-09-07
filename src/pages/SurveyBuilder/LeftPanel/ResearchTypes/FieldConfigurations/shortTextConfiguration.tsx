@@ -89,7 +89,10 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
             name="hasLimitedChars"
             onChange={(event) => {
               setLimitCharacter(event.target.checked);
-              handleChange([event.target.checked], ['hasLimitedChars']);
+              handleChange(
+                [event.target.checked, 100],
+                ['hasLimitedChars', 'maxChars'],
+              );
             }}
           />
         </section>
@@ -99,6 +102,7 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
               label="Limite de caracteres"
               id="shortTextMaxValueField"
               name="maxChars"
+              defaultValue={100}
               onChange={(event) =>
                 handleChange([parseInt(event.target.value, 10)], ['maxChars'])
               }

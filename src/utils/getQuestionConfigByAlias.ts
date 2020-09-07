@@ -127,8 +127,10 @@ export default function getQuestionConfigByAlias(
           hasHorizontalAlignment: question.hasHorizontalAlignment || false,
           hasRandomResponsesOrder: question.hasRandomResponsesOrder || false,
           hasLimitedChoices: question.hasLimitedChoices || false,
-          maxChoices: question?.maxChoices,
           answerOptions: formatList(question.answerOptions),
+          ...(question.hasLimitedChoices
+            ? { maxChoices: question.maxChoices }
+            : {}),
         },
       };
     }
@@ -137,9 +139,9 @@ export default function getQuestionConfigByAlias(
         ...initialConfig,
         date: {
           isDateRequired: question.isDateRequired || false,
-          dateFormat: question?.dateFormat,
+          dateFormat: question?.dateFormat || 'dayMonthYear',
           isTimeRequired: question.isTimeRequired || false,
-          timeFormat: question?.timeFormat,
+          timeFormat: question?.timeFormat || 'hourMinuteSecond',
           canCaptureInterval: question.canCaptureInterval || false,
         },
       };
@@ -186,9 +188,9 @@ export default function getQuestionConfigByAlias(
       return {
         ...initialConfig,
         longText: {
-          placeholder: question?.placeholder,
+          placeholder: question?.placeholder || '',
           hasLimitedChars: question.hasLimitedChars || false,
-          maxChars: question?.maxChars,
+          ...(question.hasLimitedChars ? { maxChars: question.maxChars } : {}),
         },
       };
     }
@@ -222,9 +224,10 @@ export default function getQuestionConfigByAlias(
         ...initialConfig,
         number: {
           hasMaxMinLimit: question.hasMaxMinLimit || false,
-          maxValue: question?.maxValue,
-          minValue: question?.minValue,
-          incValue: question?.incValue,
+          ...(question.hasMaxMinLimit
+            ? { maxValue: question?.maxValue, minValue: question?.minValue }
+            : {}),
+          incValue: question?.incValue || 1,
         },
       };
     }
@@ -250,9 +253,9 @@ export default function getQuestionConfigByAlias(
       return {
         ...initialConfig,
         shortText: {
-          placeholder: question?.placeholder,
+          placeholder: question?.placeholder || '',
           hasLimitedChars: question.hasLimitedChars || false,
-          maxChars: question?.maxChars,
+          ...(question.hasLimitedChars ? { maxChars: question.maxChars } : {}),
         },
       };
     }

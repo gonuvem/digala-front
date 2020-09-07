@@ -57,10 +57,6 @@ export default async function createOwnQuestions(
 
     await CreateQuestion.validate(sendData.questions, { abortEarly: false });
 
-    if (questions === null) {
-      throw new Error('Form data is null');
-    }
-
     const response = await createQuestions({ variables: { input: sendData } });
 
     if (response.data.data.error) {

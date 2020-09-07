@@ -75,7 +75,12 @@ const Pagination: React.FC = () => {
       }
 
       if (questionsToUpdate.length > 0) {
-        updateOwnQuestions(updateQuestions, questionsToUpdate, formData?.id);
+        updateOwnQuestions(
+          updateQuestions,
+          questionsToUpdate,
+          formData?.id,
+          questionTypes,
+        );
       }
     }
     // updateOwnFormData(updateForm, formData);

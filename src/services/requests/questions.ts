@@ -174,7 +174,7 @@ export const CREATE_OWN_QUESTIONS = gql`
 `;
 
 export const UPDATE_OWN_QUESTIONS = gql`
-  mutation($input: CreateOwnQuestionsInput!) {
+  mutation($input: UpdateOwnQuestionsInput!) {
     data: updateOwnQuestions(input: $input) {
       ${errorFragment}
     }
