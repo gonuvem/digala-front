@@ -55,6 +55,12 @@ const Pagination: React.FC = () => {
     [],
   );
 
+  const loading = useMemo(() => {
+    return (
+      updateFormLoading || createQuestionsLoading || updateQuestionsLoading
+    );
+  }, [createQuestionsLoading, updateFormLoading, updateQuestionsLoading]);
+
   const handleUpdate = useCallback(() => {
     if (formData?.id && questionTypes) {
       const questionsToCreate = questionsData.filter((question) =>
@@ -83,7 +89,7 @@ const Pagination: React.FC = () => {
         );
       }
     }
-    // updateOwnFormData(updateForm, formData);
+    updateOwnFormData(updateForm, formData);
   }, [
     formData,
     questionTypes,
@@ -96,12 +102,12 @@ const Pagination: React.FC = () => {
   return (
     <Container>
       <SolidButton onClick={handleUpdate}>
-        {!updateFormLoading && !createQuestionsLoading ? (
-          'Publicar'
-        ) : (
+        {loading ? (
           <div id="loading-container">
             <LoadingSpinner />
           </div>
+        ) : (
+          'Publicar'
         )}
       </SolidButton>
       <PanelArea>

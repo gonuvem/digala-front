@@ -188,8 +188,10 @@ export default function getQuestionConfigByAlias(
       return {
         ...initialConfig,
         longText: {
-          placeholder: question?.placeholder || '',
           hasLimitedChars: question.hasLimitedChars || false,
+          ...(question.placeholder
+            ? { placeholder: question.placeholder }
+            : {}),
           ...(question.hasLimitedChars ? { maxChars: question.maxChars } : {}),
         },
       };
@@ -253,8 +255,10 @@ export default function getQuestionConfigByAlias(
       return {
         ...initialConfig,
         shortText: {
-          placeholder: question?.placeholder || '',
           hasLimitedChars: question.hasLimitedChars || false,
+          ...(question.placeholder
+            ? { placeholder: question.placeholder }
+            : {}),
           ...(question.hasLimitedChars ? { maxChars: question.maxChars } : {}),
         },
       };

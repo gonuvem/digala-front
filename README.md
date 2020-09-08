@@ -18,6 +18,7 @@
 * Modificar o painel lateral do lado esquerdo para ele ser sticky
 * Resolver o bug do valor default do campo maxValue e minValue do Numeric Field
 * Melhorar a menssagem de erro indicando qual é a questão que está com algum campo inválido
+* É preciso implementar a ordenação das questões
 
 # Survey Builder
 
