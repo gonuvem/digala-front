@@ -9,11 +9,12 @@ import { FaPlus } from 'react-icons/fa';
 
 import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
+import Modal from '../../components/Common/Modal';
 
 import {
   Container,
   Header,
-  ModalCreateResearch,
+  ModalContent,
   PaginationContainer,
   LoadingContainer,
 } from './styles';
@@ -121,28 +122,29 @@ const MyReasearches: React.FC = () => {
             />
           </PaginationContainer>
         </Container>
-        <ModalCreateResearch
+        <Modal
           isOpen={openCreateModal}
           onRequestClose={() => setOpenCreateModal(false)}
-          closeTimeoutMS={300}
         >
-          <h3>Criar nova pesquisa</h3>
-          <Form ref={formRef} onSubmit={handleCreateResearch}>
-            <ShortTextField
-              name="researchName"
-              id="research-name-field"
-              placeholder="Coloque um título para sua pesquisa"
-            />
-            <div>
-              <GhostButton onClick={() => setOpenCreateModal(false)}>
-                Voltar
-              </GhostButton>
-              <SolidButton type="submit">
-                {createFormLoading ? <LoadingSpinner /> : 'Continuar'}
-              </SolidButton>
-            </div>
-          </Form>
-        </ModalCreateResearch>
+          <ModalContent>
+            <h3>Criar nova pesquisa</h3>
+            <Form ref={formRef} onSubmit={handleCreateResearch}>
+              <ShortTextField
+                name="researchName"
+                id="research-name-field"
+                placeholder="Coloque um título para sua pesquisa"
+              />
+              <div>
+                <GhostButton onClick={() => setOpenCreateModal(false)}>
+                  Voltar
+                </GhostButton>
+                <SolidButton type="submit">
+                  {createFormLoading ? <LoadingSpinner /> : 'Continuar'}
+                </SolidButton>
+              </div>
+            </Form>
+          </ModalContent>
+        </Modal>
       </Layout>
     </>
   );
