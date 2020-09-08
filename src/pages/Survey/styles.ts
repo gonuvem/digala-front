@@ -78,6 +78,7 @@ export const SurveyHeader = styled.div<SurveyHeaderProps>`
 
   @media (max-width: 670px) {
     flex-direction: column;
+    border-radius: 0;
 
     div {
       margin-left: 0rem;
@@ -170,6 +171,7 @@ export const ProgressBar = styled.div<ProgressBarProps>`
     position: relative;
     margin-left: 0;
     margin-bottom: 1rem;
+    border-radius: 0px;
 
     div {
       flex-direction: row;
@@ -251,13 +253,19 @@ export const SurveyBody = styled.div`
     background-color: ${transparentize(0.75, Colors.primary)};
   }
 
+  @media (max-width: 768px) {
+    max-width: 70%;
+  }
+
   @media (max-width: 670px) {
-    max-width: 95%;
-    padding: 0 1rem;
+    max-width: 100%;
+    width: 100%;
     margin-top: 2rem;
 
     form {
       width: auto;
+      border-radius: 0px;
+      padding: 1rem;
 
       button {
         width: 100%;
