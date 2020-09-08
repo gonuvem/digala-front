@@ -7,8 +7,6 @@ import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
 import Pagination from '../../components/Common/Pagination';
 import LoadingSpinner from '../../components/Common/LoadingSpinner';
-import Modal from '../../components/Common/Modal';
-import SolidButton from '../../components/Common/SolidButton';
 
 import {
   Container,
@@ -19,7 +17,6 @@ import {
   PanelButton,
   PaginationContainer,
   LoadingContainer,
-  ModalContent,
 } from './styles';
 
 import trash from '../../assets/trash_icon.png';
@@ -53,7 +50,6 @@ interface ResponseData {
 const SurveyResults: React.FC = () => {
   const { id } = useParams();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [page, setPage] = useState(0);
   const [distanceToTravel, setDistanceToTravel] = useState(0);
   const [activePanel, setActivePanel] = useState(1);
@@ -104,8 +100,6 @@ const SurveyResults: React.FC = () => {
     },
     [activePanel],
   );
-
-  const toggleModal = useCallback(() => setIsModalOpen((state) => !state), []);
 
   const handlePageChange = useCallback((clickedPage) => {
     setPage(clickedPage);
@@ -182,10 +176,6 @@ const SurveyResults: React.FC = () => {
                       <img src={bookReader} alt="Ver" />
                       <span>Ver</span>
                     </a>
-                    <button type="button" onClick={toggleModal}>
-                      <img src={trash} alt="Deletar" />
-                      <span>Deletar</span>
-                    </button>
                   </div>
                 </TableRow>
               ))}
@@ -199,18 +189,6 @@ const SurveyResults: React.FC = () => {
             </PaginationContainer>
           </Table>
         </Container>
-        <Modal
-          isOpen={isModalOpen}
-          onRequestClose={() => setIsModalOpen(false)}
-        >
-          <ModalContent>
-            <h2>Você confirma a remoção dessa resposta ?</h2>
-            <div>
-              <SolidButton colorScheme="danger">Remover</SolidButton>
-              <SolidButton onClick={toggleModal}>Não remover</SolidButton>
-            </div>
-          </ModalContent>
-        </Modal>
       </Layout>
     </>
   );
