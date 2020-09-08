@@ -196,3 +196,12 @@ export const PaginationContainer = styled.div`
 
   margin-top: 3.75rem;
 `;
+
+export const ModalContent = styled.div`
+  div {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 1rem;
+  }
+`;
