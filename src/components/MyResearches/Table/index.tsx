@@ -7,6 +7,7 @@ import { DELETE_FORM } from '../../../services/requests/forms';
 
 import SolidButton from '../../Common/SolidButton';
 import GhostButton from '../../Common/GhostButton';
+import Modal from '../../Common/Modal';
 
 import {
   Name,
@@ -20,7 +21,7 @@ import {
   EditLabel,
   DeleteLabel,
   Separator,
-  ModalDelete,
+  ModalContent,
 } from './styles';
 
 import { formtDate } from '../../../utils/dates';
@@ -119,22 +120,23 @@ const Table: React.FC<TableProps> = ({ forms }) => {
       </TableLabels>
       {forms.map((form) => listForms(form))}
 
-      <ModalDelete
+      <Modal
         isOpen={deleteResearch}
         onRequestClose={() => setDeleteReasearch(false)}
-        closeTimeoutMS={300}
       >
-        <div>
-          <img src={trash} alt="Deletar" />
-          <p>Você deseja apagar esta pesquisa?</p>
-        </div>
-        <div>
-          <GhostButton onClick={() => deleteForm()}>Apagar</GhostButton>
-          <SolidButton onClick={() => setDeleteReasearch(false)}>
-            Cancelar
-          </SolidButton>
-        </div>
-      </ModalDelete>
+        <ModalContent>
+          <div>
+            <img src={trash} alt="Deletar" />
+            <p>Você deseja apagar esta pesquisa?</p>
+          </div>
+          <div>
+            <GhostButton onClick={() => deleteForm()}>Apagar</GhostButton>
+            <SolidButton onClick={() => setDeleteReasearch(false)}>
+              Cancelar
+            </SolidButton>
+          </div>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
