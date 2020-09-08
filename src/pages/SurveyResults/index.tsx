@@ -105,7 +105,7 @@ const SurveyResults: React.FC = () => {
     [activePanel],
   );
 
-  const handleDeleteClick = useCallback(() => setIsModalOpen(true), []);
+  const toggleModal = useCallback(() => setIsModalOpen((state) => !state), []);
 
   const handlePageChange = useCallback((clickedPage) => {
     setPage(clickedPage);
@@ -182,7 +182,7 @@ const SurveyResults: React.FC = () => {
                       <img src={bookReader} alt="Ver" />
                       <span>Ver</span>
                     </a>
-                    <button type="button" onClick={handleDeleteClick}>
+                    <button type="button" onClick={toggleModal}>
                       <img src={trash} alt="Deletar" />
                       <span>Deletar</span>
                     </button>
@@ -199,12 +199,15 @@ const SurveyResults: React.FC = () => {
             </PaginationContainer>
           </Table>
         </Container>
-        <Modal isOpen onRequestClose={() => setIsModalOpen(false)}>
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={() => setIsModalOpen(false)}
+        >
           <ModalContent>
             <h2>Você confirma a remoção dessa resposta ?</h2>
             <div>
               <SolidButton colorScheme="danger">Remover</SolidButton>
-              <SolidButton>Não remover</SolidButton>
+              <SolidButton onClick={toggleModal}>Não remover</SolidButton>
             </div>
           </ModalContent>
         </Modal>

@@ -13,6 +13,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onRequestClose, children }) => {
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       closeTimeoutMS={300}
+      appElement={document.getElementById('root') || undefined}
     >
       {children}
     </Container>
