@@ -9,7 +9,7 @@ export default function getDefaultConfigByAlias(
       return {
         hasHorizontalAlignment: false,
         hasRandomResponsesOrder: false,
-        limitChoices: false,
+        hasLimitedChoices: false,
       };
     }
     case fields.Date: {

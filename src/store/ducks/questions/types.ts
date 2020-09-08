@@ -70,7 +70,7 @@ export interface Question {
   colsLabels?: string[];
   rowsLabels?: string[];
   /* Limit Choices */
-  limitChoices?: boolean;
+  hasLimitedChoices?: boolean;
 }
 
 export interface ListOptionsProps {
