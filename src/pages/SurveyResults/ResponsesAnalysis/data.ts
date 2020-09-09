@@ -48,7 +48,6 @@ export const mockData: QuestionData[] = [
       {
         id: 'Pouca aprovação',
         value: 24,
-        color: '#f90',
       },
       {
         id: 'Media aprovação',
@@ -60,4 +59,34 @@ export const mockData: QuestionData[] = [
       },
     ],
   },
+  {
+    type: 'calendar',
+    name: 'Data',
+    data: [
+      {
+        day: '2016-03-27',
+        value: 257,
+      },
+      {
+        day: '2016-05-15',
+        value: 383,
+      },
+      {
+        day: '2016-11-02',
+        value: 32,
+      },
+      {
+        day: '2015-07-09',
+        value: 398,
+      },
+      {
+        day: '2017-12-18',
+        value: 55,
+      },
+    ],
+  },
 ];
+
+/**
+ * No calendário enviar ordenado por data se for possível
+ */
