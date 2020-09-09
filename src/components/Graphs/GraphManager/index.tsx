@@ -3,6 +3,7 @@ import React from 'react';
 import FieldTypes from '../../../utils/fieldsTypes';
 
 import CheckboxGraph from '../Checkbox';
+import SingleChoiceGraph from '../SingleChoice';
 
 interface QuestionData {
   type: string;
@@ -18,6 +19,8 @@ const GraphManager: React.FC<GraphManagerProps> = ({ graph }) => {
   switch (graph.type) {
     case FieldTypes.MultipleChoice:
       return <CheckboxGraph data={graph.data} />;
+    case FieldTypes.SingleChoice:
+      return <SingleChoiceGraph data={graph.data} />;
     default:
       return <div />;
   }

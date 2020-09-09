@@ -23,4 +23,22 @@ export const mockData: QuestionData[] = [
       },
     ],
   },
+  {
+    type: 'radioButton',
+    name: 'Escolha única',
+    data: [
+      {
+        id: 'Opção 01',
+        value: 17,
+      },
+      {
+        id: 'Opção 02',
+        value: 95,
+      },
+      {
+        id: 'Opção 03',
+        value: 48,
+      },
+    ],
+  },
 ];
