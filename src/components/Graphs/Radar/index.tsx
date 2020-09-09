@@ -1,16 +1,16 @@
 import React from 'react';
 import { ResponsiveRadar } from '@nivo/radar';
 
-interface CheckboxData {
+interface RadarData {
   label: string;
   respostas: number;
 }
 
-interface CheckboxGraphProps {
-  data: CheckboxData[];
+interface RadarProps {
+  data: RadarData[];
 }
 
-const CheckboxGraph: React.FC<CheckboxGraphProps> = ({ data }) => {
+const Radar: React.FC<RadarProps> = ({ data }) => {
   return (
     <ResponsiveRadar
       data={data}
@@ -39,4 +39,4 @@ const CheckboxGraph: React.FC<CheckboxGraphProps> = ({ data }) => {
   );
 };
 
-export default CheckboxGraph;
+export default Radar;

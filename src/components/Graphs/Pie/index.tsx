@@ -1,18 +1,11 @@
 import React from 'react';
 import { ResponsivePie, PieDatum } from '@nivo/pie';
 
-interface CheckboxGraphProps {
+interface PieProps {
   data: PieDatum[];
 }
 
-const mockData: PieDatum[] = [
-  {
-    id: 'go',
-    value: 24,
-  },
-];
-
-const CheckboxGraph: React.FC<CheckboxGraphProps> = ({ data = mockData }) => {
+const Pie: React.FC<PieProps> = ({ data }) => {
   return (
     <ResponsivePie
       data={data}
@@ -57,4 +50,4 @@ const CheckboxGraph: React.FC<CheckboxGraphProps> = ({ data = mockData }) => {
   );
 };
 
-export default CheckboxGraph;
+export default Pie;

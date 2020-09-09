@@ -1,9 +1,8 @@
 import React from 'react';
 
-import FieldTypes from '../../../utils/fieldsTypes';
-
-import CheckboxGraph from '../Checkbox';
-import SingleChoiceGraph from '../SingleChoice';
+import Radar from '../Radar';
+import Pie from '../Pie';
+import BarRace from '../BarRace';
 
 interface QuestionData {
   type: string;
@@ -15,12 +14,20 @@ interface GraphManagerProps {
   graph: QuestionData;
 }
 
+const GraphTypes = {
+  radar: 'radar',
+  pie: 'pie',
+  barRace: 'barRace',
+};
+
 const GraphManager: React.FC<GraphManagerProps> = ({ graph }) => {
   switch (graph.type) {
-    case FieldTypes.MultipleChoice:
-      return <CheckboxGraph data={graph.data} />;
-    case FieldTypes.SingleChoice:
-      return <SingleChoiceGraph data={graph.data} />;
+    case GraphTypes.radar:
+      return <Radar data={graph.data} />;
+    case GraphTypes.pie:
+      return <Pie data={graph.data} />;
+    case GraphTypes.barRace:
+      return <BarRace data={graph.data} />;
     default:
       return <div />;
   }

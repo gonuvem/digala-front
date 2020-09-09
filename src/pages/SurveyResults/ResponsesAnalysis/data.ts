@@ -6,7 +6,7 @@ interface QuestionData {
 
 export const mockData: QuestionData[] = [
   {
-    type: 'checkBox',
+    type: 'radar',
     name: 'Múltipla Escolha',
     data: [
       {
@@ -24,7 +24,7 @@ export const mockData: QuestionData[] = [
     ],
   },
   {
-    type: 'radioButton',
+    type: 'pie',
     name: 'Escolha única',
     data: [
       {
@@ -38,6 +38,25 @@ export const mockData: QuestionData[] = [
       {
         id: 'Opção 03',
         value: 48,
+      },
+    ],
+  },
+  {
+    type: 'barRace',
+    name: 'NPS',
+    data: [
+      {
+        id: 'Pouca aprovação',
+        value: 24,
+        color: '#f90',
+      },
+      {
+        id: 'Media aprovação',
+        value: 34,
+      },
+      {
+        id: 'Muita aprovação',
+        value: 14,
       },
     ],
   },
