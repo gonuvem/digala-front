@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
 import IndividualResponses from './IndividualResponses';
+import ResponsesAnalysis from './ResponsesAnalysis';
 
 import { Container, Navigation, Panel, PanelButton } from './styles';
 
@@ -13,7 +14,7 @@ const SurveyResults: React.FC = () => {
   const { id } = useParams();
 
   const [distanceToTravel, setDistanceToTravel] = useState(0);
-  const [activePanel, setActivePanel] = useState(1);
+  const [activePanel, setActivePanel] = useState(2);
 
   const handleTabChange = useCallback(
     (tab) => {
@@ -30,8 +31,10 @@ const SurveyResults: React.FC = () => {
 
   const ComponentToRender = useMemo(() => {
     switch (activePanel) {
-      case 0:
+      case 1:
         return <IndividualResponses formId={id} />;
+      case 2:
+        return <ResponsesAnalysis formId={id} />;
       default:
         return <IndividualResponses formId={id} />;
     }

@@ -91,6 +91,11 @@ export const READ_FORM = gql`
       form {
         isActive
         _id
+        questions {
+          type {
+            alias
+          }
+        }
         config {
           name
           description
