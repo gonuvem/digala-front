@@ -1,22 +1,37 @@
 import React from 'react';
-import { ResponsiveRadar } from '@nivo/radar';
+import { ResponsiveRadar, CustomFormatter } from '@nivo/radar';
 
-interface RadarData {
+import { Container } from './styles';
+
+interface RadarWithImagesData {
   label: string;
   respostas: number;
 }
 
-interface RadarProps {
-  data: RadarData[];
+interface RadarWithImagesProps {
+  data: RadarWithImagesData[];
 }
 
-const Radar: React.FC<RadarProps> = ({ data }) => {
+const Tooltip: CustomFormatter = (...args: any[]) => {
+  console.log('Args: ', args);
+
+  return (
+    <>
+      <Container>
+        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/51F3/production/_106997902_gettyimages-611696954.jpg" />
+      </Container>
+    </>
+  );
+};
+
+const RadarWithImages: React.FC<RadarWithImagesProps> = ({ data }) => {
   return (
     <ResponsiveRadar
       data={data}
       keys={['respostas']}
       indexBy="label"
       margin={{ top: 30, bottom: 35 }}
+      tooltipFormat={Tooltip}
       legends={[
         {
           anchor: 'top-left',
@@ -40,4 +55,4 @@ const Radar: React.FC<RadarProps> = ({ data }) => {
   );
 };
 
-export default Radar;
+export default RadarWithImages;

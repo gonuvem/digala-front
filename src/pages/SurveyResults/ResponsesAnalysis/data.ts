@@ -21,6 +21,42 @@ export const mockData: QuestionData[] = [
         label: 'Opção 03',
         respostas: 48,
       },
+      {
+        label: 'Opção 04',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 05',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 06',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 07',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 08',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 09',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 10',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 11',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 12',
+        respostas: 48,
+      },
     ],
   },
   {
@@ -82,6 +118,60 @@ export const mockData: QuestionData[] = [
       {
         day: '2017-12-18',
         value: 55,
+      },
+    ],
+  },
+  {
+    type: 'radarImage',
+    name: 'Escolha de imagem',
+    data: [
+      {
+        label: 'Opção 01',
+        respostas: 17,
+      },
+      {
+        label: 'Opção 02',
+        respostas: 95,
+      },
+      {
+        label: 'Opção 03',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 04',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 05',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 06',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 07',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 08',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 09',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 10',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 11',
+        respostas: 48,
+      },
+      {
+        label: 'Opção 12',
+        respostas: 48,
       },
     ],
   },

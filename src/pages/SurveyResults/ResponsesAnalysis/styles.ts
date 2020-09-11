@@ -8,8 +8,8 @@ export const Container = styled.div`
 `;
 
 export const QuestionBox = styled.div`
-  flex: 1;
   min-width: 45%;
+  flex: 1;
 
   padding: 1rem;
 
@@ -22,8 +22,8 @@ export const QuestionBox = styled.div`
     margin-bottom: 1rem;
     font-size: 1.2rem;
   }
+`;
 
-  div {
-    height: 15rem;
-  }
+export const ChartContainer = styled.div`
+  height: 20rem;
 `;

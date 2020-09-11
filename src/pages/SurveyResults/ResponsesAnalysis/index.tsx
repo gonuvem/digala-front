@@ -2,7 +2,7 @@ import React from 'react';
 
 import GraphManager from '../../../components/Graphs/GraphManager';
 
-import { Container, QuestionBox } from './styles';
+import { Container, QuestionBox, ChartContainer } from './styles';
 
 import { mockData } from './data';
 
@@ -16,9 +16,9 @@ const ResponsesAnalysis: React.FC<ResponsesAnalysisProps> = ({ formId }) => {
       {mockData.map((data) => (
         <QuestionBox>
           <h1>{data.name}</h1>
-          <div>
+          <ChartContainer>
             <GraphManager graph={data} />
-          </div>
+          </ChartContainer>
         </QuestionBox>
       ))}
     </Container>

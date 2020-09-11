@@ -4,6 +4,7 @@ import Radar from '../Radar';
 import Pie from '../Pie';
 import BarRace from '../BarRace';
 import Calendar from '../Calendar';
+import RadarWithImage from '../RadarWithImage';
 
 interface QuestionData {
   type: string;
@@ -20,6 +21,7 @@ const GraphTypes = {
   pie: 'pie',
   barRace: 'barRace',
   calendar: 'calendar',
+  radarImage: 'radarImage',
 };
 
 const GraphManager: React.FC<GraphManagerProps> = ({ graph }) => {
@@ -32,6 +34,8 @@ const GraphManager: React.FC<GraphManagerProps> = ({ graph }) => {
       return <BarRace data={graph.data} />;
     case GraphTypes.calendar:
       return <Calendar data={graph.data} />;
+    case GraphTypes.radarImage:
+      return <RadarWithImage data={graph.data} />;
     default:
       return <div />;
   }
