@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { useParams } from 'react-router-dom';
 import { useTransition } from 'react-spring';
-import { FiPlusCircle, FiSliders } from 'react-icons/fi';
+import {
+  FiPlusCircle,
+  FiSliders,
+  FiChevronDown,
+  FiChevronUp,
+} from 'react-icons/fi';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from '../../../components/Common/Field';
@@ -14,6 +19,7 @@ import {
   NavLink,
   QuestionsPanel,
   FieldWrapper,
+  FieldController,
 } from './styles';
 
 import { ApplicationState } from '../../../store';
@@ -38,10 +44,14 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const [fieldsRegistered, formData] = useSelector<
+  const [fieldsRegistered, formData, focusedQuestion] = useSelector<
     ApplicationState,
-    [Question[], FormType | null]
-  >((state) => [state.questions.questions, state.forms.form]);
+    [Question[], FormType | null, string | null]
+  >((state) => [
+    state.questions.questions,
+    state.forms.form,
+    state.questions.focusedQuestion,
+  ]);
 
   const transitions = useTransition(showQuestionsPanel, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -75,12 +85,25 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field) => (
-            <FieldWrapper
-              key={field.id}
-              onClick={() => handleFocusQuestion(field.id)}
-            >
-              <Field question={field} />
-            </FieldWrapper>
+            <>
+              <FieldWrapper
+                key={field.id}
+                selected={focusedQuestion === field.id}
+                onClick={() => handleFocusQuestion(field.id)}
+              >
+                <Field question={field} />
+                {focusedQuestion === field.id && (
+                  <FieldController>
+                    <button type="submit">
+                      <FiChevronUp size={24} />
+                    </button>
+                    <button type="submit">
+                      <FiChevronDown size={24} />
+                    </button>
+                  </FieldController>
+                )}
+              </FieldWrapper>
+            </>
           ))}
         </Form>
         <button

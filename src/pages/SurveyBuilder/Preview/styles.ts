@@ -8,6 +8,10 @@ interface NavLinkProps {
   isActive?: boolean;
 }
 
+interface FieldWrapperProps {
+  selected: boolean;
+}
+
 export const Container = styled.div`
   flex: 2;
   margin-left: 2.5rem;
@@ -87,15 +91,64 @@ export const NavLink = styled.a<NavLinkProps>`
     `}
 `;
 
-export const FieldWrapper = styled.div`
+export const FieldWrapper = styled.div<FieldWrapperProps>`
   cursor: pointer;
+  position: relative;
 
   transition: border 0.2s ease, padding 0.2s ease;
+
+  ${(props) =>
+    props.selected &&
+    css`
+      border: solid 3px ${Colors.primary};
+      border-radius: 4px;
+      padding: 0.5rem;
+      z-index: 9999;
+    `}
 
   &:hover {
     border: solid 3px ${Colors.primary};
     border-radius: 4px;
     padding: 0.5rem;
     z-index: 9999;
+  }
+`;
+
+export const FieldController = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  position: absolute;
+  top: 0;
+  left: -5.5rem;
+
+  width: 5rem;
+  height: 100px;
+
+  background-color: ${Colors.white};
+  border-radius: 4px;
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+
+  button:first-child {
+    border-radius: 4px 4px 0px 0px;
+  }
+
+  button:last-child {
+    border-radius: 0px 0px 4px 4px;
+  }
+
+  button {
+    flex: 1;
+    border: none;
+    background: none;
+
+    &:hover {
+      background-color: ${Colors.primary};
+
+      svg {
+        color: ${Colors.white};
+      }
+    }
   }
 `;
