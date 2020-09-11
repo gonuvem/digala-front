@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Modal from 'react-modal';
 
 import Colors from '../../../utils/colors';
 
@@ -116,19 +115,7 @@ export const Separator = styled.div`
   opacity: 0.12;
 `;
 
-export const ModalDelete = styled(Modal).attrs({
-  style: { overlay: { background: Colors.blackOpacity } },
-})`
-  display: flex;
-  position: static;
-  width: 22rem;
-  padding: 1.8rem 1rem;
-  margin: 2rem auto;
-  background: ${Colors.white};
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
+export const ModalContent = styled.div`
   div {
     width: 20.8rem;
     display: flex;

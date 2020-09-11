@@ -4,14 +4,16 @@ import { Container } from './styles';
 
 interface SolidButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   hasShadow?: boolean;
+  colorScheme?: 'info' | 'danger';
 }
 
 const SolidButton: React.FC<SolidButtonProps> = ({
   children,
   hasShadow = true,
+  colorScheme = 'info',
   ...rest
 }) => (
-  <Container hasShadow={hasShadow} {...rest}>
+  <Container colorScheme={colorScheme} hasShadow={hasShadow} {...rest}>
     {children}
   </Container>
 );

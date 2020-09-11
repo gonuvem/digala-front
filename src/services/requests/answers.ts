@@ -33,3 +33,54 @@ export const LIST_OWN_RESPONSES = gql`
     }
   }
 `;
+
+export const LIST_OWN_RESPONSES_WITH_ANSWERS = gql`
+  query($form: ID!, $perPage: Int) {
+    data: listOwnResponses(form: $form, perPage: $perPage) {
+      responses {
+        _id
+        form {
+          questions {
+            _id
+          }
+        }
+        answersAndQuestions {
+          question {
+            _id
+            type {
+              alias
+            }
+            config {
+              name
+            }
+          }
+          answer {
+            checkBox
+            date
+            dropDown
+            email
+            imageChoice
+            link
+            longText
+            matrix
+            nps
+            number
+            phone
+            radioButton
+            shortText
+            slider
+            sortList
+          }
+        }
+        createdAt
+      }
+      total
+      pages
+      error {
+        message
+        statusCode
+        internalCode
+      }
+    }
+  }
+`;

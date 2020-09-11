@@ -5,6 +5,7 @@ import Colors from '../../../utils/colors';
 
 interface ButtonStyleProps {
   hasShadow?: boolean;
+  colorScheme: 'info' | 'danger';
 }
 
 export const Container = styled.button<ButtonStyleProps>`
@@ -14,9 +15,8 @@ export const Container = styled.button<ButtonStyleProps>`
   align-items: center;
   height: 2.9375rem;
   padding: 0rem 1.5rem;
-  background: ${Colors.primary};
+
   text-decoration: none;
-  color: ${Colors.white};
   border-radius: 4px;
 
   font-size: 1.125rem;
@@ -34,7 +34,25 @@ export const Container = styled.button<ButtonStyleProps>`
     margin-right: 0.5rem;
   }
 
-  &:hover {
-    background: ${shade(0.2, Colors.primary)};
-  }
+  ${(props) =>
+    props.colorScheme === 'info' &&
+    css`
+      background-color: ${Colors.primary};
+      color: ${Colors.white};
+
+      &:hover {
+        background: ${shade(0.2, Colors.primary)};
+      }
+    `}
+
+  ${(props) =>
+    props.colorScheme === 'danger' &&
+    css`
+      background-color: ${Colors.negative};
+      color: ${Colors.white};
+
+      &:hover {
+        background: ${shade(0.2, Colors.negative)};
+      }
+    `}
 `;
