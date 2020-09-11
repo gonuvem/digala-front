@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResponsivePie, PieDatum } from '@nivo/pie';
+import { PieDatum, ResponsivePie } from '@nivo/pie';
 
 interface PieProps {
   data: PieDatum[];

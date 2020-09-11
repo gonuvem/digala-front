@@ -14,7 +14,7 @@ const SurveyResults: React.FC = () => {
   const { id } = useParams();
 
   const [distanceToTravel, setDistanceToTravel] = useState(0);
-  const [activePanel, setActivePanel] = useState(2);
+  const [activePanel, setActivePanel] = useState(1);
 
   const handleTabChange = useCallback(
     (tab) => {

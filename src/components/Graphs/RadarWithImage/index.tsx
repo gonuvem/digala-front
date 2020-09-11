@@ -1,7 +1,5 @@
 import React from 'react';
-import { ResponsiveRadar, CustomFormatter } from '@nivo/radar';
-
-import { Container } from './styles';
+import { ResponsiveRadar } from '@nivo/radar';
 
 interface RadarWithImagesData {
   label: string;
@@ -12,18 +10,6 @@ interface RadarWithImagesProps {
   data: RadarWithImagesData[];
 }
 
-const Tooltip: CustomFormatter = (...args: any[]) => {
-  console.log('Args: ', args);
-
-  return (
-    <>
-      <Container>
-        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/51F3/production/_106997902_gettyimages-611696954.jpg" />
-      </Container>
-    </>
-  );
-};
-
 const RadarWithImages: React.FC<RadarWithImagesProps> = ({ data }) => {
   return (
     <ResponsiveRadar
@@ -31,7 +17,6 @@ const RadarWithImages: React.FC<RadarWithImagesProps> = ({ data }) => {
       keys={['respostas']}
       indexBy="label"
       margin={{ top: 30, bottom: 35 }}
-      tooltipFormat={Tooltip}
       legends={[
         {
           anchor: 'top-left',
