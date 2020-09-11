@@ -71,6 +71,7 @@ export interface Question {
   rowsLabels?: string[];
   /* Limit Choices */
   hasLimitedChoices?: boolean;
+  position?: number;
 }
 
 export interface ListOptionsProps {

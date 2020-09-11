@@ -39,9 +39,13 @@ interface PreviewProps {
   questionsTypes: QuestionDTO[];
 }
 
+interface IParams {
+  id: string;
+}
+
 const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams<IParams>();
   const dispatch = useDispatch();
 
   const [fieldsRegistered, formData, focusedQuestion] = useSelector<
@@ -74,6 +78,14 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     [dispatch],
   );
 
+  const handleChangePosition = useCallback(
+    (direction: 'up' | 'down', fieldIndex: number) => {
+      const field = fieldsRegistered[fieldIndex];
+      console.log('Field: ', field);
+    },
+    [fieldsRegistered],
+  );
+
   return (
     <Container>
       <nav>
@@ -84,7 +96,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       <PanelArea>
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
-          {fieldsRegistered.map((field) => (
+          {fieldsRegistered.map((field, index) => (
             <>
               <FieldWrapper
                 key={field.id}
@@ -94,10 +106,16 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
                 <Field question={field} />
                 {focusedQuestion === field.id && (
                   <FieldController>
-                    <button type="submit">
+                    <button
+                      onClick={() => handleChangePosition('up', index)}
+                      type="button"
+                    >
                       <FiChevronUp size={24} />
                     </button>
-                    <button type="submit">
+                    <button
+                      onClick={() => handleChangePosition('down', index)}
+                      type="button"
+                    >
                       <FiChevronDown size={24} />
                     </button>
                   </FieldController>

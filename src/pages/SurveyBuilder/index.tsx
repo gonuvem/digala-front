@@ -20,9 +20,13 @@ import {
 } from '../../services/requests/questions';
 import loadOwnForm from '../../services/logic/loadOwnForm';
 
+interface IParams {
+  id: string;
+}
+
 const SurveyBuilder: React.FC = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id } = useParams<IParams>();
 
   const { data: form, loading: formLoading } = useQuery(READ_FORM, {
     variables: { id },
@@ -70,6 +74,7 @@ const SurveyBuilder: React.FC = () => {
         name: newConfig?.name,
         isRequired: newConfig?.isRequired,
         description: newConfig?.description,
+        position: questions[i]?.position || 0,
       };
       questionsFormated.push(newQuestion);
     }
