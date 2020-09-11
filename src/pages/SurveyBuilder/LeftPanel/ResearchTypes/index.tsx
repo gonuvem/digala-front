@@ -24,15 +24,19 @@ interface ResearchTypesProps {
 const ResearchTypes: React.FC<ResearchTypesProps> = ({ questions }) => {
   const dispatch = useDispatch();
 
-  const focusedQuestionId = useSelector<ApplicationState, string | null>(
-    (state) => state.questions.focusedQuestion,
-  );
+  const [focusedQuestionId, totalQuestions] = useSelector<
+    ApplicationState,
+    [string | null, number]
+  >((state) => [
+    state.questions.focusedQuestion,
+    state.questions.questions.length,
+  ]);
 
   const handleQuestionBoxClick = useCallback(
     (alias) => {
-      addFieldToForm(dispatch, alias);
+      addFieldToForm(dispatch, alias, totalQuestions);
     },
-    [dispatch],
+    [dispatch, totalQuestions],
   );
 
   return (

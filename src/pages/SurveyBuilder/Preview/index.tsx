@@ -27,6 +27,7 @@ import { Question } from '../../../store/ducks/questions/types';
 import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 import focusQuestion from '../../../services/logic/focusQuestion';
+import changeFieldPosition from '../../../services/logic/changeFieldPosition';
 
 interface QuestionDTO {
   name: string;
@@ -65,10 +66,10 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
 
   const handleQuestionBoxClick = useCallback(
     (alias: string) => {
-      addFieldToForm(dispatch, alias);
+      addFieldToForm(dispatch, alias, fieldsRegistered.length);
       setShowQuestionsPanel(false);
     },
-    [dispatch],
+    [dispatch, fieldsRegistered.length],
   );
 
   const handleFocusQuestion = useCallback(
@@ -80,10 +81,13 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
 
   const handleChangePosition = useCallback(
     (direction: 'up' | 'down', fieldIndex: number) => {
-      const field = fieldsRegistered[fieldIndex];
-      console.log('Field: ', field);
+      changeFieldPosition(dispatch, {
+        fieldIndex,
+        questions: fieldsRegistered,
+        direction,
+      });
     },
-    [fieldsRegistered],
+    [dispatch, fieldsRegistered],
   );
 
   return (
@@ -97,31 +101,29 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field, index) => (
-            <>
-              <FieldWrapper
-                key={field.id}
-                selected={focusedQuestion === field.id}
-                onClick={() => handleFocusQuestion(field.id)}
-              >
-                <Field question={field} />
-                {focusedQuestion === field.id && (
-                  <FieldController>
-                    <button
-                      onClick={() => handleChangePosition('up', index)}
-                      type="button"
-                    >
-                      <FiChevronUp size={24} />
-                    </button>
-                    <button
-                      onClick={() => handleChangePosition('down', index)}
-                      type="button"
-                    >
-                      <FiChevronDown size={24} />
-                    </button>
-                  </FieldController>
-                )}
-              </FieldWrapper>
-            </>
+            <FieldWrapper
+              key={field.id}
+              selected={focusedQuestion === field.id}
+              onClick={() => handleFocusQuestion(field.id)}
+            >
+              <Field question={field} />
+              {focusedQuestion === field.id && (
+                <FieldController>
+                  <button
+                    onClick={() => handleChangePosition('up', index)}
+                    type="button"
+                  >
+                    <FiChevronUp size={24} />
+                  </button>
+                  <button
+                    onClick={() => handleChangePosition('down', index)}
+                    type="button"
+                  >
+                    <FiChevronDown size={24} />
+                  </button>
+                </FieldController>
+              )}
+            </FieldWrapper>
           ))}
         </Form>
         <button

@@ -6,6 +6,7 @@ import getDefaultConfigByAlias from '../../utils/getDefaultConfigByAlias';
 export default async function addFieldToForm(
   dispatch: Function,
   alias: string,
+  position: number,
 ): Promise<void> {
   const localQuestionId = uuid();
   const localFieldName = `${alias}:${localQuestionId}`;
@@ -16,6 +17,7 @@ export default async function addFieldToForm(
     QuestionsActions.addQuestion({
       ...defaultConfig,
       alias,
+      position,
       id: localQuestionId,
       name: localFieldName,
       isRequired: false,
