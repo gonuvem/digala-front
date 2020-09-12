@@ -64,6 +64,12 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     leave: { opacity: 0, transform: 'translateY(-10vh)' },
   });
 
+  const fieldControllerTransitions = useTransition(focusedQuestion, {
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+  });
+
   const handleQuestionBoxClick = useCallback(
     (alias: string) => {
       addFieldToForm(dispatch, alias, fieldsRegistered.length);

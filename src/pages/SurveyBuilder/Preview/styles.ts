@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 import { animated } from 'react-spring';
+import { motion } from 'framer-motion';
 
 import Colors from '../../../utils/colors';
 
@@ -114,14 +115,16 @@ export const FieldWrapper = styled.div<FieldWrapperProps>`
   }
 `;
 
-export const FieldController = styled.div`
+export const FieldController = styled(motion.div).attrs({
+  initial: { opacity: 0.8, x: 0 },
+  animate: { opacity: 1, x: '-6rem' },
+})`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   position: absolute;
   top: 0;
-  left: -5.5rem;
 
   width: 5rem;
   height: 100px;

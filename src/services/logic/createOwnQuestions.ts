@@ -43,7 +43,7 @@ export default async function createOwnQuestions(
         const questionConfig: QuestionProps = {
           type: questionType?._id,
           formPage: 1,
-          position: i,
+          position: questions[i].position || i,
           config,
         };
         questionsArray.push(questionConfig);
