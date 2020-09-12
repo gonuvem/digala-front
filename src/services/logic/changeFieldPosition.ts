@@ -15,11 +15,18 @@ export default function changeFieldPosition(
   let fieldChangedIndex = 0;
   let positionHolder = 0;
 
-  if (direction === 'up' && fieldIndex - 1 >= 0) {
+  if (
+    (direction === 'up' && fieldIndex - 1 < 0) ||
+    (direction === 'down' && fieldIndex + 1 > questions.length - 1)
+  ) {
+    return;
+  }
+
+  if (direction === 'up') {
     fieldChangedIndex = fieldIndex - 1;
   }
 
-  if (direction === 'down' && fieldIndex + 1 <= questions.length) {
+  if (direction === 'down') {
     fieldChangedIndex = fieldIndex + 1;
   }
 
