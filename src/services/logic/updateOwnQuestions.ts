@@ -37,7 +37,7 @@ export default async function updateOwnQuestions(
           _id: question.id,
           type: questionType?._id,
           formPage: 1,
-          position: index,
+          position: question.position || index,
           config: getQuestionConfigByAlias(question),
         };
       },

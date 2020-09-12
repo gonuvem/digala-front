@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { useParams } from 'react-router-dom';
 import { useTransition } from 'react-spring';
-import { FiPlusCircle, FiSliders } from 'react-icons/fi';
+import {
+  FiPlusCircle,
+  FiSliders,
+  FiChevronDown,
+  FiChevronUp,
+} from 'react-icons/fi';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from '../../../components/Common/Field';
@@ -14,6 +19,7 @@ import {
   NavLink,
   QuestionsPanel,
   FieldWrapper,
+  FieldController,
 } from './styles';
 
 import { ApplicationState } from '../../../store';
@@ -21,6 +27,7 @@ import { Question } from '../../../store/ducks/questions/types';
 import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 import focusQuestion from '../../../services/logic/focusQuestion';
+import changeFieldPosition from '../../../services/logic/changeFieldPosition';
 
 interface QuestionDTO {
   name: string;
@@ -33,15 +40,23 @@ interface PreviewProps {
   questionsTypes: QuestionDTO[];
 }
 
+interface IParams {
+  id: string;
+}
+
 const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
-  const { id } = useParams();
+  const { id } = useParams<IParams>();
   const dispatch = useDispatch();
 
-  const [fieldsRegistered, formData] = useSelector<
+  const [fieldsRegistered, formData, focusedQuestion] = useSelector<
     ApplicationState,
-    [Question[], FormType | null]
-  >((state) => [state.questions.questions, state.forms.form]);
+    [Question[], FormType | null, string | null]
+  >((state) => [
+    state.questions.questions,
+    state.forms.form,
+    state.questions.focusedQuestion,
+  ]);
 
   const transitions = useTransition(showQuestionsPanel, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -51,10 +66,10 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
 
   const handleQuestionBoxClick = useCallback(
     (alias: string) => {
-      addFieldToForm(dispatch, alias);
+      addFieldToForm(dispatch, alias, fieldsRegistered.length);
       setShowQuestionsPanel(false);
     },
-    [dispatch],
+    [dispatch, fieldsRegistered.length],
   );
 
   const handleFocusQuestion = useCallback(
@@ -62,6 +77,17 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       focusQuestion(dispatch, { questionId });
     },
     [dispatch],
+  );
+
+  const handleChangePosition = useCallback(
+    (direction: 'up' | 'down', fieldIndex: number) => {
+      changeFieldPosition(dispatch, {
+        fieldIndex,
+        questions: fieldsRegistered,
+        direction,
+      });
+    },
+    [dispatch, fieldsRegistered],
   );
 
   return (
@@ -74,12 +100,29 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       <PanelArea>
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
-          {fieldsRegistered.map((field) => (
+          {fieldsRegistered.map((field, index) => (
             <FieldWrapper
               key={field.id}
+              selected={focusedQuestion === field.id}
               onClick={() => handleFocusQuestion(field.id)}
             >
               <Field question={field} />
+              {focusedQuestion === field.id && (
+                <FieldController>
+                  <button
+                    onClick={() => handleChangePosition('up', index)}
+                    type="button"
+                  >
+                    <FiChevronUp size={24} />
+                  </button>
+                  <button
+                    onClick={() => handleChangePosition('down', index)}
+                    type="button"
+                  >
+                    <FiChevronDown size={24} />
+                  </button>
+                </FieldController>
+              )}
             </FieldWrapper>
           ))}
         </Form>
