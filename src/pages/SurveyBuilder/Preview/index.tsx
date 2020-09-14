@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { useParams } from 'react-router-dom';
@@ -29,6 +30,8 @@ import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 import focusQuestion from '../../../services/logic/focusQuestion';
 import changeFieldPosition from '../../../services/logic/changeFieldPosition';
+import deleteQuestion from '../../../services/logic/deleteQuestion';
+import { DELETE_OWN_QUESTION } from '../../../services/requests/questions';
 
 interface QuestionDTO {
   name: string;
@@ -58,6 +61,11 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     state.forms.form,
     state.questions.focusedQuestion,
   ]);
+
+  const [
+    deleteOwnQuestion,
+    { loading: deleteOwnQuestionLoading },
+  ] = useMutation(DELETE_OWN_QUESTION);
 
   const transitions = useTransition(showQuestionsPanel, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -89,6 +97,16 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       });
     },
     [dispatch, fieldsRegistered],
+  );
+
+  const handleDeleteQuestion = useCallback(
+    (fieldId: string) => {
+      deleteQuestion(dispatch, deleteOwnQuestion, {
+        fieldId,
+        questions: fieldsRegistered,
+      });
+    },
+    [deleteOwnQuestion, fieldsRegistered],
   );
 
   return (
@@ -125,7 +143,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
                     </button>
                   </div>
                   <button
-                    onClick={() => handleChangePosition('down', index)}
+                    onClick={() => handleDeleteQuestion(field.id)}
                     type="button"
                     id="delete-button"
                   >
