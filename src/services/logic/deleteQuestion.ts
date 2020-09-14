@@ -4,7 +4,7 @@ import * as QuestionsActions from '../../store/ducks/questions/actions';
 import { Question } from '../../store/ducks/questions/types';
 
 interface DeleteFieldDTO {
-  fieldId: string;
+  fieldId: string | null | undefined;
   questions: Question[];
 }
 
@@ -14,6 +14,10 @@ export default async function deleteQuestion(
   { fieldId, questions }: DeleteFieldDTO,
 ): Promise<void> {
   try {
+    if (!fieldId) {
+      throw new Error(undefined);
+    }
+
     await deleteOwnQuestion({ variables: { id: fieldId } });
 
     const questionsFiltered = questions.filter(

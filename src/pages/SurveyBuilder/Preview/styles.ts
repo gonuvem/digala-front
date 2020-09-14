@@ -104,7 +104,7 @@ export const FieldWrapper = styled.div<FieldWrapperProps>`
       border: solid 3px ${Colors.primary};
       border-radius: 4px;
       padding: 0.5rem;
-      z-index: 9999;
+      z-index: 999;
     `}
 
   &:hover {
@@ -173,5 +173,26 @@ export const FieldController = styled(motion.div).attrs({
     &:hover {
       background-color: ${shade(0.1, Colors.negative)};
     }
+  }
+`;
+
+export const ModalContent = styled.div`
+  div {
+    width: 20.8rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  img {
+    height: 1.375rem;
+    width: 1.375rem;
+
+    margin-right: 0.475rem;
+  }
+
+  p {
+    margin-bottom: 1.2rem;
   }
 `;

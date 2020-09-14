@@ -14,6 +14,8 @@ import {
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from '../../../components/Common/Field';
+import Modal from '../../../components/Common/Modal';
+import SolidButton from '../../../components/Common/SolidButton';
 
 import {
   Container,
@@ -22,6 +24,7 @@ import {
   QuestionsPanel,
   FieldWrapper,
   FieldController,
+  ModalContent,
 } from './styles';
 
 import { ApplicationState } from '../../../store';
@@ -32,6 +35,8 @@ import focusQuestion from '../../../services/logic/focusQuestion';
 import changeFieldPosition from '../../../services/logic/changeFieldPosition';
 import deleteQuestion from '../../../services/logic/deleteQuestion';
 import { DELETE_OWN_QUESTION } from '../../../services/requests/questions';
+
+import trash from '../../../assets/trash_icon.png';
 
 interface QuestionDTO {
   name: string;
@@ -50,6 +55,7 @@ interface IParams {
 
 const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const { id } = useParams<IParams>();
   const dispatch = useDispatch();
 
@@ -99,15 +105,17 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     [dispatch, fieldsRegistered],
   );
 
-  const handleDeleteQuestion = useCallback(
-    (fieldId: string) => {
-      deleteQuestion(dispatch, deleteOwnQuestion, {
-        fieldId,
-        questions: fieldsRegistered,
-      });
-    },
-    [deleteOwnQuestion, fieldsRegistered],
-  );
+  const handleDeleteQuestion = useCallback(() => {
+    deleteQuestion(dispatch, deleteOwnQuestion, {
+      fieldId: focusedQuestion,
+      questions: fieldsRegistered,
+    });
+    setIsDeleteModalOpen(false);
+  }, [deleteOwnQuestion, dispatch, fieldsRegistered, focusedQuestion]);
+
+  const toggleModal = useCallback(() => {
+    setIsDeleteModalOpen((state) => !state);
+  }, []);
 
   return (
     <Container>
@@ -143,7 +151,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
                     </button>
                   </div>
                   <button
-                    onClick={() => handleDeleteQuestion(field.id)}
+                    onClick={toggleModal}
                     type="button"
                     id="delete-button"
                   >
@@ -180,6 +188,25 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
             ),
         )}
       </PanelArea>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onRequestClose={() => setIsDeleteModalOpen(false)}
+      >
+        <ModalContent>
+          <div>
+            <img src={trash} alt="Deletar" />
+            <p>Você deseja apagar esta questão?</p>
+          </div>
+          <div>
+            <SolidButton colorScheme="danger" onClick={handleDeleteQuestion}>
+              Apagar
+            </SolidButton>
+            <SolidButton onClick={() => setIsDeleteModalOpen(false)}>
+              Não apagar
+            </SolidButton>
+          </div>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };
