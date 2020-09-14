@@ -16,6 +16,7 @@ import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from '../../../components/Common/Field';
 import Modal from '../../../components/Common/Modal';
 import SolidButton from '../../../components/Common/SolidButton';
+import LoadingSpinner from '../../../components/Common/LoadingSpinner';
 
 import {
   Container,
@@ -56,6 +57,7 @@ interface IParams {
 const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteQuestionLoading, setDeleteQuestionLoading] = useState(false);
   const { id } = useParams<IParams>();
   const dispatch = useDispatch();
 
@@ -68,10 +70,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     state.questions.focusedQuestion,
   ]);
 
-  const [
-    deleteOwnQuestion,
-    { loading: deleteOwnQuestionLoading },
-  ] = useMutation(DELETE_OWN_QUESTION);
+  const [deleteOwnQuestion] = useMutation(DELETE_OWN_QUESTION);
 
   const transitions = useTransition(showQuestionsPanel, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -105,12 +104,14 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     [dispatch, fieldsRegistered],
   );
 
-  const handleDeleteQuestion = useCallback(() => {
-    deleteQuestion(dispatch, deleteOwnQuestion, {
+  const handleDeleteQuestion = useCallback(async () => {
+    setDeleteQuestionLoading(true);
+    await deleteQuestion(dispatch, deleteOwnQuestion, {
       fieldId: focusedQuestion,
       questions: fieldsRegistered,
     });
     setIsDeleteModalOpen(false);
+    setDeleteQuestionLoading(false);
   }, [deleteOwnQuestion, dispatch, fieldsRegistered, focusedQuestion]);
 
   const toggleModal = useCallback(() => {
@@ -198,12 +199,21 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
             <p>Você deseja apagar esta questão?</p>
           </div>
           <div>
-            <SolidButton colorScheme="danger" onClick={handleDeleteQuestion}>
-              Apagar
-            </SolidButton>
-            <SolidButton onClick={() => setIsDeleteModalOpen(false)}>
-              Não apagar
-            </SolidButton>
+            {deleteQuestionLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <>
+                <SolidButton
+                  colorScheme="danger"
+                  onClick={handleDeleteQuestion}
+                >
+                  Apagar
+                </SolidButton>
+                <SolidButton onClick={() => setIsDeleteModalOpen(false)}>
+                  Não apagar
+                </SolidButton>
+              </>
+            )}
           </div>
         </ModalContent>
       </Modal>
