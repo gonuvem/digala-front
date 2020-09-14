@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
+import { transparentize, shade } from 'polished';
 import { animated } from 'react-spring';
 import { motion } from 'framer-motion';
 
@@ -121,7 +121,6 @@ export const FieldController = styled(motion.div).attrs({
 })`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   position: absolute;
   top: 0;
@@ -129,9 +128,15 @@ export const FieldController = styled(motion.div).attrs({
   width: 5rem;
   height: 100px;
 
-  background-color: ${Colors.white};
-  border-radius: 4px;
-  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: ${Colors.white};
+    border-radius: 4px;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+  }
 
   button:first-child {
     border-radius: 4px 4px 0px 0px;
@@ -152,6 +157,21 @@ export const FieldController = styled(motion.div).attrs({
       svg {
         color: ${Colors.white};
       }
+    }
+  }
+
+  #delete-button {
+    margin-top: 0.5rem;
+
+    background-color: ${Colors.negative};
+    border-radius: 4px;
+
+    svg {
+      color: ${Colors.white};
+    }
+
+    &:hover {
+      background-color: ${shade(0.1, Colors.negative)};
     }
   }
 `;

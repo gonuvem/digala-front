@@ -8,6 +8,7 @@ import {
   FiSliders,
   FiChevronDown,
   FiChevronUp,
+  FiTrash,
 } from 'react-icons/fi';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
@@ -109,17 +110,26 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
               <Field question={field} />
               {focusedQuestion === field.id && (
                 <FieldController>
-                  <button
-                    onClick={() => handleChangePosition('up', index)}
-                    type="button"
-                  >
-                    <FiChevronUp size={24} />
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => handleChangePosition('up', index)}
+                      type="button"
+                    >
+                      <FiChevronUp size={24} />
+                    </button>
+                    <button
+                      onClick={() => handleChangePosition('down', index)}
+                      type="button"
+                    >
+                      <FiChevronDown size={24} />
+                    </button>
+                  </div>
                   <button
                     onClick={() => handleChangePosition('down', index)}
                     type="button"
+                    id="delete-button"
                   >
-                    <FiChevronDown size={24} />
+                    <FiTrash size={24} />
                   </button>
                 </FieldController>
               )}
