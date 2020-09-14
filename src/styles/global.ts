@@ -45,6 +45,7 @@ export default createGlobalStyle`
 
   .ReactModal__Overlay--after-open {
     opacity: 1;
+    z-index: 1000;
   }
 
   .ReactModal__Overlay--before-close {
