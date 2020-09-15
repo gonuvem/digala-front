@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { useParams } from 'react-router-dom';
@@ -8,10 +9,14 @@ import {
   FiSliders,
   FiChevronDown,
   FiChevronUp,
+  FiTrash,
 } from 'react-icons/fi';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
 import Field from '../../../components/Common/Field';
+import Modal from '../../../components/Common/Modal';
+import SolidButton from '../../../components/Common/SolidButton';
+import LoadingSpinner from '../../../components/Common/LoadingSpinner';
 
 import {
   Container,
@@ -20,6 +25,7 @@ import {
   QuestionsPanel,
   FieldWrapper,
   FieldController,
+  ModalContent,
 } from './styles';
 
 import { ApplicationState } from '../../../store';
@@ -28,6 +34,10 @@ import { Form as FormType } from '../../../store/ducks/forms/types';
 import addFieldToForm from '../../../services/logic/addFieldToForm';
 import focusQuestion from '../../../services/logic/focusQuestion';
 import changeFieldPosition from '../../../services/logic/changeFieldPosition';
+import deleteQuestion from '../../../services/logic/deleteQuestion';
+import { DELETE_OWN_QUESTION } from '../../../services/requests/questions';
+
+import trash from '../../../assets/trash_icon.png';
 
 interface QuestionDTO {
   name: string;
@@ -46,6 +56,8 @@ interface IParams {
 
 const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [deleteQuestionLoading, setDeleteQuestionLoading] = useState(false);
   const { id } = useParams<IParams>();
   const dispatch = useDispatch();
 
@@ -57,6 +69,8 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     state.forms.form,
     state.questions.focusedQuestion,
   ]);
+
+  const [deleteOwnQuestion] = useMutation(DELETE_OWN_QUESTION);
 
   const transitions = useTransition(showQuestionsPanel, {
     from: { opacity: 0, transform: 'translateY(-10vh)' },
@@ -90,6 +104,20 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
     [dispatch, fieldsRegistered],
   );
 
+  const handleDeleteQuestion = useCallback(async () => {
+    setDeleteQuestionLoading(true);
+    await deleteQuestion(dispatch, deleteOwnQuestion, {
+      fieldId: focusedQuestion,
+      questions: fieldsRegistered,
+    });
+    setIsDeleteModalOpen(false);
+    setDeleteQuestionLoading(false);
+  }, [deleteOwnQuestion, dispatch, fieldsRegistered, focusedQuestion]);
+
+  const toggleModal = useCallback(() => {
+    setIsDeleteModalOpen((state) => !state);
+  }, []);
+
   return (
     <Container>
       <nav>
@@ -109,17 +137,26 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
               <Field question={field} />
               {focusedQuestion === field.id && (
                 <FieldController>
+                  <div>
+                    <button
+                      onClick={() => handleChangePosition('up', index)}
+                      type="button"
+                    >
+                      <FiChevronUp size={24} />
+                    </button>
+                    <button
+                      onClick={() => handleChangePosition('down', index)}
+                      type="button"
+                    >
+                      <FiChevronDown size={24} />
+                    </button>
+                  </div>
                   <button
-                    onClick={() => handleChangePosition('up', index)}
+                    onClick={toggleModal}
                     type="button"
+                    id="delete-button"
                   >
-                    <FiChevronUp size={24} />
-                  </button>
-                  <button
-                    onClick={() => handleChangePosition('down', index)}
-                    type="button"
-                  >
-                    <FiChevronDown size={24} />
+                    <FiTrash size={24} />
                   </button>
                 </FieldController>
               )}
@@ -152,6 +189,37 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
             ),
         )}
       </PanelArea>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onRequestClose={() => setIsDeleteModalOpen(false)}
+      >
+        <ModalContent>
+          <div>
+            <img src={trash} alt="Deletar" />
+            <p>Você deseja remover esta questão?</p>
+          </div>
+          <div>
+            {deleteQuestionLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <>
+                <SolidButton
+                  colorScheme="danger"
+                  onClick={handleDeleteQuestion}
+                >
+                  Apagar
+                </SolidButton>
+                <SolidButton
+                  colorScheme="disabled"
+                  onClick={() => setIsDeleteModalOpen(false)}
+                >
+                  Cancelar
+                </SolidButton>
+              </>
+            )}
+          </div>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };

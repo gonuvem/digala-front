@@ -180,3 +180,11 @@ export const UPDATE_OWN_QUESTIONS = gql`
     }
   }
 `;
+
+export const DELETE_OWN_QUESTION = gql`
+  mutation($id: ID!) {
+    data: deleteOwnQuestion(id: $id) {
+      ${errorFragment}
+    }
+  }
+`;

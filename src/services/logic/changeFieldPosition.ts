@@ -37,8 +37,8 @@ export default function changeFieldPosition(
   field.position = positionHolder;
 
   const questionsCopy = [...questions];
-  questionsCopy[field.position] = field;
-  questionsCopy[fieldChanged.position || 0] = fieldChanged;
+  questionsCopy[fieldChangedIndex] = field;
+  questionsCopy[fieldIndex] = fieldChanged;
 
   dispatch(QuestionsActions.replaceQuestion(questionsCopy));
 }

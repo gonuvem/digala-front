@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
+import { transparentize, shade } from 'polished';
 import { animated } from 'react-spring';
 import { motion } from 'framer-motion';
 
@@ -104,7 +104,7 @@ export const FieldWrapper = styled.div<FieldWrapperProps>`
       border: solid 3px ${Colors.primary};
       border-radius: 4px;
       padding: 0.5rem;
-      z-index: 9999;
+      z-index: 999;
     `}
 
   &:hover {
@@ -121,7 +121,6 @@ export const FieldController = styled(motion.div).attrs({
 })`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   position: absolute;
   top: 0;
@@ -129,9 +128,15 @@ export const FieldController = styled(motion.div).attrs({
   width: 5rem;
   height: 100px;
 
-  background-color: ${Colors.white};
-  border-radius: 4px;
-  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: ${Colors.white};
+    border-radius: 4px;
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+  }
 
   button:first-child {
     border-radius: 4px 4px 0px 0px;
@@ -153,5 +158,42 @@ export const FieldController = styled(motion.div).attrs({
         color: ${Colors.white};
       }
     }
+  }
+
+  #delete-button {
+    margin-top: 0.5rem;
+
+    background-color: ${Colors.negative};
+    border-radius: 4px;
+
+    svg {
+      color: ${Colors.white};
+    }
+
+    &:hover {
+      background-color: ${shade(0.1, Colors.negative)};
+    }
+  }
+`;
+
+export const ModalContent = styled.div`
+  > div:first-child {
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+
+  div {
+    width: 20.8rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  img {
+    height: 1rem;
+    width: 1rem;
+
+    margin-right: 0.475rem;
   }
 `;
