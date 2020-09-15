@@ -177,6 +177,11 @@ export const FieldController = styled(motion.div).attrs({
 `;
 
 export const ModalContent = styled.div`
+  > div:first-child {
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+
   div {
     width: 20.8rem;
     display: flex;
@@ -186,13 +191,9 @@ export const ModalContent = styled.div`
   }
 
   img {
-    height: 1.375rem;
-    width: 1.375rem;
+    height: 1rem;
+    width: 1rem;
 
     margin-right: 0.475rem;
-  }
-
-  p {
-    margin-bottom: 1.2rem;
   }
 `;

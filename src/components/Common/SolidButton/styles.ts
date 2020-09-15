@@ -5,7 +5,7 @@ import Colors from '../../../utils/colors';
 
 interface ButtonStyleProps {
   hasShadow?: boolean;
-  colorScheme: 'info' | 'danger';
+  colorScheme: 'info' | 'danger' | 'disabled';
 }
 
 export const Container = styled.button<ButtonStyleProps>`
@@ -55,4 +55,15 @@ export const Container = styled.button<ButtonStyleProps>`
         background: ${shade(0.2, Colors.negative)};
       }
     `}
+
+    ${(props) =>
+      props.colorScheme === 'disabled' &&
+      css`
+        background-color: ${Colors.gray};
+        color: ${Colors.white};
+
+        &:hover {
+          background: ${shade(0.2, Colors.gray)};
+        }
+      `}
 `;

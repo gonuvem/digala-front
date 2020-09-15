@@ -196,7 +196,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
         <ModalContent>
           <div>
             <img src={trash} alt="Deletar" />
-            <p>Você deseja apagar esta questão?</p>
+            <p>Você deseja remover esta questão?</p>
           </div>
           <div>
             {deleteQuestionLoading ? (
@@ -209,8 +209,11 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
                 >
                   Apagar
                 </SolidButton>
-                <SolidButton onClick={() => setIsDeleteModalOpen(false)}>
-                  Não apagar
+                <SolidButton
+                  colorScheme="disabled"
+                  onClick={() => setIsDeleteModalOpen(false)}
+                >
+                  Cancelar
                 </SolidButton>
               </>
             )}
