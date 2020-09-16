@@ -31,7 +31,6 @@ const ResponsesAnalysis: React.FC<ResponsesAnalysisProps> = ({ formId }) => {
   });
 
   const charts: IChart[] = useMemo(() => {
-    console.log('Charts: ', chartData);
     if (chartData?.data?.error === null) {
       return chartData.data.data.filter(
         (chart: IChart) => chart.data.length > 0,

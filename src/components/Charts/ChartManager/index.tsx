@@ -38,8 +38,8 @@ const ChartManager: React.FC<ChartManagerProps> = ({ chart }) => {
       return <Pie data={chart.data} />;
     case GraphTypes.barRace:
       return <BarRace data={chart.data} />;
-    // case GraphTypes.calendar:
-    //   return <Calendar data={graph.data} />;
+    case GraphTypes.calendar:
+      return <Calendar data={chart.data} />;
     case GraphTypes.radarImage:
       return <RadarWithImage data={chart.data} />;
     default:
