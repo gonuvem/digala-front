@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useMemo } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useMemo, useEffect } from 'react';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 
 import GraphManager from '../../../components/Charts/ChartManager';
 
@@ -27,9 +27,11 @@ interface IChart {
 const ResponsesAnalysis: React.FC<ResponsesAnalysisProps> = ({ formId }) => {
   const { loading: getChartsLoading, data: chartData } = useQuery(GET_CHARTS, {
     variables: { id: formId },
+    fetchPolicy: 'no-cache',
   });
 
   const charts: IChart[] = useMemo(() => {
+    console.log('Charts: ', chartData);
     if (chartData?.data?.error === null) {
       return chartData.data.data.filter(
         (chart: IChart) => chart.data.length > 0,
@@ -37,8 +39,6 @@ const ResponsesAnalysis: React.FC<ResponsesAnalysisProps> = ({ formId }) => {
     }
     return [];
   }, [chartData]);
-
-  console.log('Charts: ', charts);
 
   return (
     <Container>

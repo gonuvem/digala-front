@@ -32,16 +32,16 @@ const GraphTypes = {
 
 const ChartManager: React.FC<ChartManagerProps> = ({ chart }) => {
   switch (chart.type) {
-    // case GraphTypes.radar:
-    //   return <Radar data={chart.data} />;
+    case GraphTypes.radar:
+      return <Radar data={chart.data} />;
     case GraphTypes.pie:
       return <Pie data={chart.data} />;
     case GraphTypes.barRace:
       return <BarRace data={chart.data} />;
     // case GraphTypes.calendar:
     //   return <Calendar data={graph.data} />;
-    // case GraphTypes.radarImage:
-    //   return <RadarWithImage data={graph.data} />;
+    case GraphTypes.radarImage:
+      return <RadarWithImage data={chart.data} />;
     default:
       return <div />;
   }
