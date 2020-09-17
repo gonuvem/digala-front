@@ -9,11 +9,17 @@ import RadarWithImage from '../RadarWithImage';
 interface QuestionData {
   type: string;
   name: string;
-  data: any[];
+  data: {
+    id: string;
+    day: string;
+    label: string;
+    respostas: number;
+    value: number;
+  }[];
 }
 
-interface GraphManagerProps {
-  graph: QuestionData;
+interface ChartManagerProps {
+  chart: QuestionData;
 }
 
 const GraphTypes = {
@@ -24,21 +30,21 @@ const GraphTypes = {
   radarImage: 'radarImage',
 };
 
-const GraphManager: React.FC<GraphManagerProps> = ({ graph }) => {
-  switch (graph.type) {
+const ChartManager: React.FC<ChartManagerProps> = ({ chart }) => {
+  switch (chart.type) {
     case GraphTypes.radar:
-      return <Radar data={graph.data} />;
+      return <Radar data={chart.data} />;
     case GraphTypes.pie:
-      return <Pie data={graph.data} />;
+      return <Pie data={chart.data} />;
     case GraphTypes.barRace:
-      return <BarRace data={graph.data} />;
+      return <BarRace data={chart.data} />;
     case GraphTypes.calendar:
-      return <Calendar data={graph.data} />;
+      return <Calendar data={chart.data} />;
     case GraphTypes.radarImage:
-      return <RadarWithImage data={graph.data} />;
+      return <RadarWithImage data={chart.data} />;
     default:
       return <div />;
   }
 };
 
-export default GraphManager;
+export default ChartManager;
