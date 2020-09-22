@@ -7,13 +7,24 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { FaPlus } from 'react-icons/fa';
 
-import { Container, Header, ModalCreateResearch } from './styles';
+import Layout from '../../layout';
+import PageHeader from '../../components/Common/Header';
+import Modal from '../../components/Common/Modal';
+
+import {
+  Container,
+  Header,
+  ModalContent,
+  PaginationContainer,
+  LoadingContainer,
+} from './styles';
 
 import Table from '../../components/MyResearches/Table';
 import SolidButton from '../../components/Common/SolidButton';
 import GhostButton from '../../components/Common/GhostButton';
 import ShortTextField from '../../components/ResearchFields/ShortTextField';
 import LoadingSpinner from '../../components/Common/LoadingSpinner';
+import Pagination from '../../components/Common/Pagination';
 
 import { LIST_OWN_FORMS, CREATE_OWN_FORM } from '../../services/requests/forms';
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -25,9 +36,15 @@ interface CreateFormData {
 
 const MyReasearches: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const history = useHistory();
   const [openCreateModal, setOpenCreateModal] = useState(false);
-  const { loading: formsLoading, data: formsData } = useQuery(LIST_OWN_FORMS);
+  const [page, setPage] = useState(0);
+
+  const history = useHistory();
+  const { loading: formsLoading, data: formsData } = useQuery(LIST_OWN_FORMS, {
+    variables: {
+      page,
+    },
+  });
   const [createForm, { loading: createFormLoading }] = useMutation(
     CREATE_OWN_FORM,
   );
@@ -38,6 +55,13 @@ const MyReasearches: React.FC = () => {
     }
     return [];
   }, [formsData, formsLoading]);
+
+  const totalPages = useMemo(() => {
+    if (formsData?.data?.error === null) {
+      return formsData.data.pages;
+    }
+    return 0;
+  }, [formsData]);
 
   const handleCreateResearch = useCallback(
     async (data: CreateFormData) => {
@@ -52,7 +76,7 @@ const MyReasearches: React.FC = () => {
           throw new Error(response.data.createOwnForm.error.internalCode);
         }
 
-        history.push('/edit_survey');
+        history.push(`/edit_survey/${response.data.createOwnForm.form._id}`);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -67,40 +91,61 @@ const MyReasearches: React.FC = () => {
     [createForm, history],
   );
 
+  const handlePageChange = useCallback((clickedPage) => {
+    setPage(clickedPage);
+  }, []);
+
   return (
     <>
-      <Container>
-        <Header>
-          <h1>Minhas pesquisas</h1>
-          <SolidButton onClick={() => setOpenCreateModal(true)}>
-            <FaPlus size={20} />
-            Nova Pesquisa
-          </SolidButton>
-        </Header>
-        <Table forms={forms} />
-      </Container>
-      <ModalCreateResearch
-        isOpen={openCreateModal}
-        onRequestClose={() => setOpenCreateModal(false)}
-        closeTimeoutMS={300}
-      >
-        <h3>Criar nova pesquisa</h3>
-        <Form ref={formRef} onSubmit={handleCreateResearch}>
-          <ShortTextField
-            name="researchName"
-            id="research-name-field"
-            placeholder="Coloque um título para sua pesquisa"
-          />
-          <div>
-            <GhostButton onClick={() => setOpenCreateModal(false)}>
-              Voltar
-            </GhostButton>
-            <SolidButton type="submit">
-              {createFormLoading ? <LoadingSpinner /> : 'Continuar'}
+      <PageHeader />
+      <Layout>
+        <Container>
+          <Header>
+            <h1>Minhas pesquisas</h1>
+            <SolidButton onClick={() => setOpenCreateModal(true)}>
+              <FaPlus size={20} />
+              Nova Pesquisa
             </SolidButton>
-          </div>
-        </Form>
-      </ModalCreateResearch>
+          </Header>
+          <Table forms={forms} />
+          {formsLoading && (
+            <LoadingContainer>
+              <LoadingSpinner />
+            </LoadingContainer>
+          )}
+          <PaginationContainer>
+            <Pagination
+              onPageChange={handlePageChange}
+              actualPage={page}
+              totalPages={totalPages}
+              numberOfPagesToShow={3}
+            />
+          </PaginationContainer>
+        </Container>
+        <Modal
+          isOpen={openCreateModal}
+          onRequestClose={() => setOpenCreateModal(false)}
+        >
+          <ModalContent>
+            <h3>Criar nova pesquisa</h3>
+            <Form ref={formRef} onSubmit={handleCreateResearch}>
+              <ShortTextField
+                name="researchName"
+                id="research-name-field"
+                placeholder="Coloque um título para sua pesquisa"
+              />
+              <div>
+                <GhostButton onClick={() => setOpenCreateModal(false)}>
+                  Voltar
+                </GhostButton>
+                <SolidButton type="submit">
+                  {createFormLoading ? <LoadingSpinner /> : 'Continuar'}
+                </SolidButton>
+              </div>
+            </Form>
+          </ModalContent>
+        </Modal>
+      </Layout>
     </>
   );
 };

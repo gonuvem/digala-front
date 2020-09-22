@@ -3,12 +3,15 @@ import ReactTooltip from 'react-tooltip';
 
 import Colors from '../../../utils/colors';
 
-export const Container = styled.div`
+export const Container = styled.button`
   cursor: pointer;
   padding: 1rem 0rem;
   display: flex;
   flex-direction: column;
-  place-content: center;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
 
   border: solid 1px ${Colors.black};
   border-radius: 4px;

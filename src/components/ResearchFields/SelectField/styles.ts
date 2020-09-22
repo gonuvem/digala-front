@@ -4,14 +4,24 @@ import Select from 'react-select';
 import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
-  span {
-    display: inline-block;
-    font-weight: 500;
-    margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  label {
+    span {
+      display: inline-block;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  > p {
+    margin-top: 0.5rem;
   }
 `;
 
 export const CustomSelect = styled(Select)`
+  margin-top: 1rem;
   .react-select__control {
     border-radius: 4px;
     border: solid 2px ${Colors.black};

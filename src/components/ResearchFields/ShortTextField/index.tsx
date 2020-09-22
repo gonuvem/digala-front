@@ -1,10 +1,18 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+  InputHTMLAttributes,
+} from 'react';
 import { useField } from '@unform/core';
-import { useTransition, animated } from 'react-spring';
+import { useTransition } from 'react-spring';
+
+import ErrorMessage from '../../Common/ErrorMessage';
 
 import { Container } from './styles';
 
-interface ShortTextFieldProps {
+interface ShortTextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   readOnly?: boolean;
   placeholder?: string;
   description?: string;
@@ -15,18 +23,19 @@ interface ShortTextFieldProps {
 
 const ShortTextField: React.FC<ShortTextFieldProps> = ({
   readOnly = false,
-  placeholder = '',
+  placeholder,
   description,
   name,
   id,
   label,
+  ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [hasFocus, setHasFocus] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
   const { fieldName, registerField, error, defaultValue } = useField(name);
-  const transitions = useTransition(!!error, null, {
+  const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
     leave: { opacity: 0, transform: 'translateX(-50px)' },
@@ -52,26 +61,23 @@ const ShortTextField: React.FC<ShortTextFieldProps> = ({
   return (
     <Container hasFocus={hasFocus} isInvalid={!!error} isFilled={isFilled}>
       <label htmlFor={id}>
-        {label && label}
+        {label && <span>{label}</span>}
         {description && <p>{description}</p>}
         <input
           ref={inputRef}
           disabled={readOnly}
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
+          defaultValue={defaultValue}
           name={name}
           type="text"
           id={id}
           placeholder={placeholder}
+          {...rest}
         />
       </label>
-      {transitions.map(
-        ({ item, key, props }) =>
-          item && (
-            <animated.span key={key} style={props}>
-              {error}
-            </animated.span>
-          ),
+      {transitions(
+        (props, item) => item && <ErrorMessage style={props} message={error} />,
       )}
     </Container>
   );

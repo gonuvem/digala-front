@@ -2,10 +2,6 @@ import styled from 'styled-components';
 
 import Colors from '../../../../utils/colors';
 
-interface CardColorProps {
-  color: string;
-}
-
 export const Container = styled.div`
   div {
     /* margin-bottom: 1.5rem; */
@@ -21,21 +17,13 @@ export const Container = styled.div`
   }
 `;
 
-export const CardColor = styled.button<CardColorProps>`
-  height: 3.25rem;
-  width: 3.25rem;
-  border-radius: 4px;
-  margin: 0 0.5rem 0.5rem 0;
-  background: ${(props) => props.color};
-  border: none;
-`;
-
-export const DashedContainer = styled.div`
+export const DashedContainer = styled.button`
   /* height: 2rem; */
   display: flex;
   padding: 1.5rem;
   flex-direction: column;
   place-content: center;
+  background: ${Colors.white};
   border: 1px dashed ${Colors.black};
   border-radius: 6px;
 

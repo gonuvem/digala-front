@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import { IconType } from 'react-icons';
 
 import { Container, Tooltip } from './styles';
 
-interface QuestionBoxProps {
+interface QuestionBoxProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: IconType;
   name: string;
   description: string;
@@ -15,13 +15,14 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
   name,
   description,
   image,
+  ...rest
 }) => (
   <>
-    <Container data-tip data-for={`question-${name}`}>
+    <Container data-tip data-for={`question-${name}`} {...rest}>
       <Icon size={20} />
       <span>{name}</span>
     </Container>
-    <Tooltip id={`question-${name}`} effect="solid" place="right" type="light">
+    <Tooltip id={`question-${name}`} effect="solid" place="top" type="light">
       <img alt="question-helper-video" src={image} />
       <h3>{name}</h3>
       <p>{description}</p>

@@ -14,15 +14,18 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
 
   label {
-    font-weight: 500;
-    color: ${Colors.black};
     display: flex;
     flex-direction: column;
+
+    span {
+      align-self: flex-start;
+      font-weight: 500;
+      color: ${Colors.black};
+    }
 
     p {
       font-weight: 400;
       margin-top: 0.5rem;
-      margin-bottom: 1rem;
     }
 
     input {
@@ -59,12 +62,5 @@ export const Container = styled.div<ContainerProps>`
         background-color: transparent;
       }
     }
-  }
-
-  span {
-    align-self: flex-end;
-    color: ${Colors.negative};
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem !important;
   }
 `;

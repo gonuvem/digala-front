@@ -8,6 +8,21 @@ interface NumberProps {
 export const Container = styled.div`
   line-height: 1.1875rem;
 
+  label {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      font-weight: 500;
+      color: ${Colors.black};
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-weight: 400;
+    }
+  }
+
   div {
     div {
       display: flex;
@@ -32,8 +47,6 @@ export const Title = styled.p`
 `;
 
 export const NumberBar = styled.div`
-  /* height: 4.25rem; */
-  /* display: flex; */
   border: 1px solid ${Colors.black};
   border-radius: 4px;
 
@@ -51,5 +64,12 @@ export const Number = styled.button<NumberProps>`
   border-right: 1px solid ${Colors.black};
 
   color: ${(props) => (props.isSelected ? Colors.white : Colors.black)};
-  /* font-size: 1.5rem; */
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0.8rem;
+  }
 `;

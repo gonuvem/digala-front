@@ -8,13 +8,19 @@ import logo from '../../../assets/logo.png';
 const Header: React.FC = () => {
   const location = useLocation();
 
-  if (location.pathname === '/' || location.pathname.includes('forgot'))
+  if (
+    location.pathname === '/' ||
+    location.pathname.includes('forgot') ||
+    location.pathname.includes('research/')
+  )
     return null;
 
   return (
     <Container>
       <div>
-        <img src={logo} alt="digala-logo" />
+        <a href="/">
+          <img src={logo} alt="digala-logo" />
+        </a>
         <nav>
           <NavLink isActive href="/survey">
             Pesquisas

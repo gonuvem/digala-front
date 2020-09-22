@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Container, PanelTabLink, PanelArea } from './styles';
 
@@ -7,12 +8,22 @@ import ResearchTypes from './ResearchTypes';
 import ResearchConfigurations from './ResearchConfigurations';
 
 import getDistanceBetweenElements from '../../../utils/getDistanceBetweenElements';
+import { ApplicationState } from '../../../store';
+import { Form } from '../../../store/ducks/forms/types';
 
 const TabLinks: string[] = ['Tipos', 'Estilos', 'Configurações'];
 
-const LeftPanel: React.FC = () => {
+interface LeftPanelProps {
+  questionsTypes: [];
+}
+
+const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
   const [activePanelNumber, setActivePanelNumber] = useState(0);
   const [distanceToTravel, setDistanceToTravel] = useState(0);
+
+  const formData = useSelector<ApplicationState, Form | null>(
+    (state) => state.forms.form,
+  );
 
   const handleTabChange = useCallback(
     (tab) => {
@@ -27,20 +38,22 @@ const LeftPanel: React.FC = () => {
     [activePanelNumber],
   );
 
-  const renderSection = () => {
+  const renderSection = (): React.ReactNode => {
     switch (activePanelNumber) {
       case 1:
-        return <ResearchStyles />;
+        return <ResearchStyles formData={formData} />;
       case 2:
-        return <ResearchConfigurations />;
+        return <ResearchConfigurations formData={formData} />;
       default:
-        return <ResearchTypes />;
+        return <ResearchTypes questions={questionsTypes} />;
     }
   };
 
+  // console.log(formData);
+
   return (
     <Container>
-      <h5>Pesquisa Eleitoral de Lagoa Alegre</h5>
+      <h5>{formData?.config.name}</h5>
       <PanelArea
         activePanelNumber={activePanelNumber}
         distance={distanceToTravel}
@@ -48,6 +61,7 @@ const LeftPanel: React.FC = () => {
         <nav>
           {TabLinks.map((tabLink, index) => (
             <PanelTabLink
+              key={`panelLink-${tabLink}`}
               id={`panellink-${index}`}
               isActive={activePanelNumber === index}
               onClick={() => handleTabChange(index)}

@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import { useField } from '@unform/core';
 import {
   DragDropContext,
   Droppable,
@@ -9,14 +10,15 @@ import { FiMove } from 'react-icons/fi';
 import { Container, DragContainer, Option } from './styles';
 
 interface SortAnswersProps {
+  name: string;
   label: string;
   description?: string;
-  listOptions: ListOptions[];
+  answerOptions?: ListOptions[];
 }
 
 interface ListOptions {
-  id: string;
-  content: string;
+  _id?: string;
+  text?: string;
 }
 
 const reorder = (
@@ -32,59 +34,88 @@ const reorder = (
 };
 
 const SortAnswers: React.FC<SortAnswersProps> = ({
+  name,
   label,
   description,
-  listOptions,
+  answerOptions,
 }) => {
-  const [options, setOptions] = useState<Array<ListOptions>>(listOptions);
+  const [options, setOptions] = useState<Array<ListOptions>>(
+    answerOptions || [],
+  );
 
-  const onDragEnd = useCallback((result: DropResult) => {
-    if (!result.destination) return;
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
-    const items = reorder(
-      options,
-      result.source.index,
-      result.destination.index,
-    );
-    setOptions(items);
-  }, []);
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: undefined,
+      getValue: () => {
+        return options;
+      },
+    });
+  }, [registerField, fieldName, options]);
+
+  const onDragEnd = useCallback(
+    (result: DropResult) => {
+      if (!result.destination) return;
+
+      const items = reorder(
+        options,
+        result.source.index,
+        result.destination.index,
+      );
+      setOptions(items);
+    },
+    [options, setOptions],
+  );
+
+  useEffect(() => {
+    if (answerOptions) {
+      setOptions(answerOptions);
+    }
+  }, [answerOptions, setOptions]);
 
   return (
     <Container>
       <label htmlFor="id">
-        {label}
+        <span>{label}</span>
         {description && <p>{description}</p>}
-
-        <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
-          <Droppable droppableId="id" key="id">
-            {(provided, snapshot) => (
-              <DragContainer
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-                isDraggingOver={snapshot.isDraggingOver}
-                optionsLength={options.length}
-              >
-                {options.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided) => (
-                      <Option
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{
-                          ...provided.draggableProps.style,
-                        }}
-                      >
-                        {item.content}
-                        <FiMove />
-                      </Option>
-                    )}
-                  </Draggable>
-                ))}
-              </DragContainer>
-            )}
-          </Droppable>
-        </DragDropContext>
+        {options && (
+          <DragDropContext onDragEnd={(result) => onDragEnd(result)}>
+            <Droppable droppableId="id" key="id">
+              {(provided, snapshot) => (
+                <DragContainer
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  isDraggingOver={snapshot.isDraggingOver}
+                  optionsLength={options.length}
+                >
+                  {options.map((item, index) => (
+                    <Draggable
+                      key={item._id}
+                      draggableId={item._id ? item._id : ''}
+                      index={index}
+                    >
+                      {(input) => (
+                        <Option
+                          ref={input.innerRef}
+                          {...input.draggableProps}
+                          {...input.dragHandleProps}
+                          style={{
+                            ...input.draggableProps.style,
+                          }}
+                        >
+                          {item.text}
+                          <FiMove />
+                        </Option>
+                      )}
+                    </Draggable>
+                  ))}
+                </DragContainer>
+              )}
+            </Droppable>
+          </DragDropContext>
+        )}
       </label>
     </Container>
   );
