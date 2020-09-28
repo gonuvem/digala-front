@@ -26,7 +26,7 @@ const ProtectedRoute: React.FC<RouteProps> = ({
         ) : (
           <Redirect
             to={{
-              pathname: isPrivate ? '/' : '/my_researches',
+              pathname: isPrivate ? '/' : '/my_surveys',
               state: { from: location },
             }}
           />

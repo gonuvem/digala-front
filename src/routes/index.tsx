@@ -15,7 +15,7 @@ const Routes: React.FC = () => (
   <Switch>
     <ProtectedRoute path="/" exact component={SignIn} />
     <ProtectedRoute path="/forgot" component={Forgot} />
-    <ProtectedRoute path="/my_researches" isPrivate component={MyResearches} />
+    <ProtectedRoute path="/my_surveys" isPrivate component={MyResearches} />
     <ProtectedRoute
       path="/edit_survey/:id"
       isPrivate
