@@ -218,7 +218,7 @@ export const SurveyBody = styled.div`
   align-items: center;
   flex: 1;
 
-  margin-top: 5rem;
+  margin-top: rem;
   max-width: 45%;
 
   form {
@@ -247,8 +247,8 @@ export const SurveyBody = styled.div`
     height: 2px;
     width: 50%;
 
-    margin-top: 3rem;
-    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
 
     background-color: ${transparentize(0.75, Colors.primary)};
   }
