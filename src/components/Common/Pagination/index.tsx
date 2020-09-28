@@ -18,10 +18,15 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const pagesToShow = useMemo(() => {
     let decrement = -1;
+    let upperLimitOfPages = numberOfPagesToShow;
     const pages: number[] = [];
 
     if (totalPages === 0) {
       return pages;
+    }
+
+    if (totalPages < numberOfPagesToShow) {
+      upperLimitOfPages = totalPages;
     }
 
     if (actualPage === 0) {
@@ -29,10 +34,10 @@ const Pagination: React.FC<PaginationProps> = ({
     }
 
     if (actualPage === totalPages - 1) {
-      decrement = -2;
+      decrement = upperLimitOfPages * -1 + 1;
     }
 
-    while (pages.length < numberOfPagesToShow) {
+    while (pages.length < upperLimitOfPages) {
       pages.push(actualPage + decrement);
       decrement += 1;
     }
