@@ -49,6 +49,13 @@ export const PanelArea = styled.div`
     opacity: 0.9;
     border-radius: 4px;
 
+    transition: border-color 0.3s;
+
+    &:hover {
+      border-color: ${Colors.primary};
+      border-width: 2px;
+    }
+
     svg {
       margin-top: 1rem;
     }

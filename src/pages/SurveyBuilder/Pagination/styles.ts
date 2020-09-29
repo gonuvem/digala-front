@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 import Colors from '../../../utils/colors';
 
@@ -52,10 +53,15 @@ export const PanelArea = styled.div`
 
   svg:last-child {
     cursor: pointer;
-    color: ${Colors.smokeWhite};
-    background-color: ${Colors.secondary};
-    border-radius: 50%;
+    color: ${Colors.secondary};
+    background-color: ${Colors.smokeWhite};
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+
+    transition: color 0.3s, background-color 0.3s;
+
+    &:hover {
+      background-color: ${shade(0.1, Colors.white)};
+    }
   }
 `;
