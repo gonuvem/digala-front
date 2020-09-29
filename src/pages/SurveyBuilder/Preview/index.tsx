@@ -167,8 +167,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
           type="button"
           onClick={() => setShowQuestionsPanel(!showQuestionsPanel)}
         >
-          Arraste uma opção ao lado o clique no botão para adicionar uma nova
-          pergunta
+          Clique no botão para adicionar uma nova pergunta
           <FiPlusCircle size={24} />
         </button>
         {transitions(
