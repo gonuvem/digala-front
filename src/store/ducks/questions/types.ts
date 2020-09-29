@@ -4,6 +4,7 @@
 export enum QuestionsTypes {
   ADD_QUESTION = '@questions/ADD_QUESTION',
   FOCUS_QUESTION = '@questions/FOCUS_QUESTION',
+  CLEAR_FOCUSED_QUESTION = '@questions/CLEAR_FOCUSED_QUESTION',
   REPLACE_QUESTION = '@questions/REPLACE_QUESTION',
   LOAD_QUESTIONS = '@questions/LOAD_QUESTIONS',
 }
