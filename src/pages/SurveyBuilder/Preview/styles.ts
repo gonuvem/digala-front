@@ -18,6 +18,23 @@ export const Container = styled.div`
   margin-left: 2.5rem;
 `;
 
+export const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const PreviewLink = styled.a`
+  font-size: 1.125rem;
+  font-weight: bold;
+  text-decoration: none;
+
+  color: ${Colors.primary};
+
+  &:hover {
+    color: ${shade(0.2, Colors.primary)};
+  }
+`;
+
 export const PanelArea = styled.div`
   margin-top: 1.5rem;
   padding: 2.5rem 4rem;
