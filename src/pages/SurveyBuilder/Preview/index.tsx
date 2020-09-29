@@ -121,7 +121,9 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   return (
     <Container>
       <nav>
-        <NavLink href="/">Editar</NavLink>
+        <NavLink isActive href="#">
+          Editar
+        </NavLink>
         <NavLink href={`/share/${id}`}>Compartilhar</NavLink>
         <NavLink href={`/survey_results/${id}`}>Resultados</NavLink>
       </nav>
