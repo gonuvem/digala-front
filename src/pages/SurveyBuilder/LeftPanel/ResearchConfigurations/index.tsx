@@ -41,6 +41,9 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
   const [showProgressBarType, setShowProgressBarType] = useState(
     formData?.config.canDisplayProgressBar || false,
   );
+  const [showMaxResponses, setShowMaxResponses] = useState(
+    formData?.config.hasLimitedResponses || false,
+  );
   const dispatch = useDispatch();
   // const [hasLimitedResponses, setHasLimitResponses] = useState(false);
 
@@ -75,7 +78,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
         <section>
           <Calendar
             name="researchExpireDate"
-            label="Data de validade"
+            label="Validade da pesquisa"
             selectRange
             view="month"
             next2Label={null}
@@ -93,17 +96,22 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
             name="hasLimitedResponses"
             label="Quantidade de respostas limitada?"
             helpHint="Lorem ipsum sit dolor amet"
-            onChange={onChange}
+            onChange={(event) => {
+              onChange();
+              setShowMaxResponses(event.target.checked);
+            }}
           />
         </section>
-        <section>
-          <NumericField
-            id="maxResponsesField"
-            name="maxResponses"
-            label="Quantidade de respostas"
-            onChange={onChange}
-          />
-        </section>
+        {showMaxResponses && (
+          <section>
+            <NumericField
+              id="maxResponsesField"
+              name="maxResponses"
+              label="Quantidade de respostas"
+              onChange={onChange}
+            />
+          </section>
+        )}
         <section>
           <SwitchToggle
             name="isTotemMode"
@@ -129,8 +137,8 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
               name="progressBarType"
               label="Tipo da barra de progresso"
               options={[
-                { value: 'Step', label: 'Step' },
-                { value: 'Linear', label: 'Linear' },
+                { value: 'Step', label: 'Por páginas' },
+                { value: 'Linear', label: 'Por questão respondida' },
               ]}
               onChange={onChange}
             />

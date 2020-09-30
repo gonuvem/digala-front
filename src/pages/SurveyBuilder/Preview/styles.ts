@@ -45,7 +45,11 @@ export const PanelArea = styled.div`
   h1 {
     font-weight: 500;
     font-size: 2.2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  > p {
+    margin-bottom: 0.5rem;
   }
 
   form > div {

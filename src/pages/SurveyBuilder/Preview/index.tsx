@@ -136,6 +136,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       </HeaderContainer>
       <PanelArea>
         <h1>{formData?.config.name}</h1>
+        <p>{formData?.config.description}</p>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field, index) => (
             <FieldWrapper
