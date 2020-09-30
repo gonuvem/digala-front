@@ -46,7 +46,7 @@ const SignIn: React.FC = () => {
 
         client?.resetStore();
         localStorage.setItem('Digl:token', response.data.login.token);
-        history.push('/my_researches');
+        history.push('/my_surveys');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
