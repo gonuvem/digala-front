@@ -48,14 +48,13 @@ export const InputContainer = styled.div`
       -webkit-appearance: none;
     }
 
-    border: none;
-
     margin-right: 0.3rem;
-
-    width: 1.2rem;
-    text-align: right;
+    width: 100%;
 
     font-size: 1.1rem;
+
+    background-color: transparent;
+    border: none;
 
     transition: border-color 0.2s;
 

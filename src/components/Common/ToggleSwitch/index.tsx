@@ -23,7 +23,6 @@ const Switch: React.FC<ToggleSwitchProps> = ({
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isChecked, setIsChecked] = useState(false);
   const { fieldName, registerField, defaultValue } = useField(name);
 
   useEffect(() => {
@@ -43,18 +42,19 @@ const Switch: React.FC<ToggleSwitchProps> = ({
             <FiHelpCircle data-tip data-for={`switch-for-${name}`} />
           )}
         </div>
-        <CheckBoxWrapper isChecked={isChecked}>
+        <CheckBoxWrapper isChecked={inputRef.current?.checked || false}>
           <CheckBox
             ref={inputRef}
             name={name}
             defaultChecked={defaultValue}
             id="checkbox"
             type="checkbox"
-            onChange={(event) => setIsChecked(event.target.checked)}
             {...rest}
           />
           <CheckBoxLabel htmlFor="checkbox" />
-          <span>{isChecked ? 'Habilitado' : 'Desabilitado'}</span>
+          <span>
+            {inputRef.current?.checked ? 'Habilitado' : 'Desabilitado'}
+          </span>
         </CheckBoxWrapper>
       </Container>
       <Tooltip
