@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ReactTooltip from 'react-tooltip';
 
 import Colors from '../../../utils/colors';
 
@@ -9,19 +10,18 @@ interface CheckBoxWrapperProps {
 export const Container = styled.div`
   div {
     display: flex;
-    align-items: end;
+    align-items: center;
 
     span {
       display: inline-block;
       font-weight: 500;
       color: ${Colors.black};
-      margin-bottom: 1rem;
     }
   }
 
   svg {
-    margin-top: 0.2rem;
     margin-left: 0.5rem;
+    color: ${Colors.secondary};
   }
 `;
 
@@ -29,6 +29,8 @@ export const CheckBoxWrapper = styled.div<CheckBoxWrapperProps>`
   position: relative;
   display: flex;
   align-items: center;
+
+  margin-top: 1rem;
 
   span {
     margin: 0.3rem 0 0 1rem;
@@ -85,4 +87,14 @@ export const CheckBox = styled.input`
       transition: 0.2s;
     }
   }
+`;
+
+export const Tooltip = styled(ReactTooltip)`
+  display: flex;
+  flex-direction: column;
+  width: auto;
+
+  opacity: 1 !important;
+
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.5);
 `;

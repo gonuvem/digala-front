@@ -33,3 +33,11 @@ export const RENEW_PASSWORD = gql`
     }
   }
 `;
+
+export const VALIDATE_TOKEN = gql`
+  mutation($token: String!) {
+    data: validateToken(token: $token) {
+      ${errorFragment}
+    }
+  }
+`;

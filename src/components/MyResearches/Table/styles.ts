@@ -75,7 +75,7 @@ export const TableLabels = styled.div`
 `;
 
 export const TableRow = styled.div`
-  height: 6.25rem;
+  height: 4rem;
   padding: 0 1rem;
   display: flex;
   align-items: center;

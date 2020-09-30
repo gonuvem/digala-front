@@ -4,7 +4,7 @@ import QRCode from 'qrcode.react';
 import { MdMail } from 'react-icons/md';
 import { RiQrCodeLine } from 'react-icons/ri';
 import { AiFillHtml5 } from 'react-icons/ai';
-
+import { useParams } from 'react-router-dom';
 import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
 
@@ -28,9 +28,14 @@ import facebook from '../../assets/facebook_icon.png';
 import telegram from '../../assets/telegram_icon.png';
 import twitter from '../../assets/twitter_icon.png';
 
+interface IParams {
+  id: string;
+}
+
 const ShareSurvey: React.FC = () => {
   const surveyUrlFieldRef = useRef<HTMLInputElement>(null);
   const downloadQrCodeAnchorRef = useRef<HTMLAnchorElement>(null);
+  const { id } = useParams<IParams>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const surveyUrl = useMemo(() => {
@@ -86,11 +91,11 @@ const ShareSurvey: React.FC = () => {
             <Titles>
               <span>Pesquisa Eleitoral de Lago Alegre</span>
               <nav>
-                <NavLink href="/">Editar</NavLink>
-                <NavLink isActive href="/share">
+                <NavLink href={`/edit_survey/${id}`}>Editar</NavLink>
+                <NavLink isActive href="#">
                   Compartilhar
                 </NavLink>
-                <NavLink href="/">Resultados</NavLink>
+                <NavLink href={`/survey_results/${id}`}>Resultados</NavLink>
               </nav>
             </Titles>
             <LinkShare>

@@ -48,6 +48,10 @@ const SurveyBuilder: React.FC = () => {
   }, [formLoading, form]);
 
   useEffect(() => {
+    dispatch(QuestionsActions.clearFocusedQuestion());
+  }, []);
+
+  useEffect(() => {
     if (formData) {
       loadOwnForm(dispatch, formData);
     }

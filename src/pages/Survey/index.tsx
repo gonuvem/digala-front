@@ -163,7 +163,9 @@ const Survey: React.FC = () => {
           </SurveyFooter>
         )}
         <div id="survey-separator" />
-        <img src={gonuvemLogo} alt="logo da gonuvem" />
+        <a href="https://www.gonuvem.com.br" target="_blank" rel="noreferrer">
+          <img src={gonuvemLogo} alt="logo da gonuvem" />
+        </a>
       </SurveyBody>
       <ModalCompleteSurvey
         ariaHideApp={false}

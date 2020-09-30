@@ -14,4 +14,11 @@ export const Container = styled.button`
 
   color: ${Colors.negative};
   font-weight: bold;
+
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: ${Colors.negative};
+    color: ${Colors.smokeWhite};
+  }
 `;

@@ -24,6 +24,7 @@ export default async function deleteQuestion(
       (question) => question.id !== fieldId,
     );
 
+    await dispatch(QuestionsActions.clearFocusedQuestion());
     await dispatch(QuestionsActions.replaceQuestion(questionsFiltered));
   } catch (err) {
     toast.error('Ocorreu um erro ao deletar a questão');

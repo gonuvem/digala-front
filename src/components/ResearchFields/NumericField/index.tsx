@@ -40,9 +40,9 @@ const NumericField: React.FC<NumericFieldProps> = ({
     (signal: number) => {
       const inputValue = inputRef.current?.value || 0;
 
-      if (signal > 0 && inputValue < maxValue) {
+      if (signal > 0 && (!limitMaxMin || inputValue < maxValue)) {
         inputRef.current?.stepUp(stepSize);
-      } else if (signal < 0 && inputValue > minValue) {
+      } else if (signal < 0 && (!limitMaxMin || inputValue > minValue)) {
         inputRef.current?.stepDown(stepSize);
       }
 
