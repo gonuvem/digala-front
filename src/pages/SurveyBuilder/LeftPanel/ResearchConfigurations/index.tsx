@@ -66,7 +66,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
         </section>
         <section>
           <TextAreaField
-            label="Descrição da Pesquisa"
+            label="Descrição da pesquisa"
             name="description"
             id="researchDescriptionField"
             onChange={onChange}
@@ -75,6 +75,7 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
         <section>
           <Calendar
             name="researchExpireDate"
+            label="Data de validade"
             selectRange
             view="month"
             next2Label={null}

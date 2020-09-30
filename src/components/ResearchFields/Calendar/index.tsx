@@ -16,9 +16,9 @@ interface CustomCalendarProps extends CalendarProps {
 
 const Calendar: React.FC<CustomCalendarProps> = ({
   name,
-  label,
   onParentChange,
   defaultValue,
+  label,
   ...rest
 }) => {
   const calendarRef = useRef(null);
@@ -42,6 +42,12 @@ const Calendar: React.FC<CustomCalendarProps> = ({
     return dateFormated.slice(0, 1);
   }, []);
 
+  const formatMonthYear = useCallback((locale: string, date: Date) => {
+    const dateFormated = format(date, 'MMMM yyyy', { locale: ptBR });
+
+    return dateFormated;
+  }, []);
+
   useEffect(() => {
     registerField({
       name: fieldName,
@@ -58,12 +64,14 @@ const Calendar: React.FC<CustomCalendarProps> = ({
 
   return (
     <Container>
+      {label && <span>{label}</span>}
       <CustomCalendar
         value={value}
         onChange={onChange}
         onClickMonth={onChange}
         defaultValue={defaultValue}
         formatShortWeekday={formatShortWeekday}
+        formatMonthYear={formatMonthYear}
         {...rest}
       />
     </Container>
