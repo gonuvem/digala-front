@@ -2,7 +2,13 @@ import React, { useRef, useEffect, useState, InputHTMLAttributes } from 'react';
 import { useField } from '@unform/core';
 import { FiHelpCircle } from 'react-icons/fi';
 
-import { CheckBoxWrapper, CheckBox, CheckBoxLabel, Container } from './styles';
+import {
+  CheckBoxWrapper,
+  CheckBox,
+  CheckBoxLabel,
+  Container,
+  Tooltip,
+} from './styles';
 
 interface ToggleSwitchProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -17,7 +23,6 @@ const Switch: React.FC<ToggleSwitchProps> = ({
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isChecked, setIsChecked] = useState(false);
   const { fieldName, registerField, defaultValue } = useField(name);
 
   useEffect(() => {
@@ -29,25 +34,38 @@ const Switch: React.FC<ToggleSwitchProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <Container>
-      <div>
-        {label && <span>{label}</span>}
-        {!!helpHint && <FiHelpCircle />}
-      </div>
-      <CheckBoxWrapper isChecked={isChecked}>
-        <CheckBox
-          ref={inputRef}
-          name={name}
-          defaultChecked={defaultValue}
-          id="checkbox"
-          type="checkbox"
-          onChange={(event) => setIsChecked(event.target.checked)}
-          {...rest}
-        />
-        <CheckBoxLabel htmlFor="checkbox" />
-        <span>{isChecked ? 'Habilitado' : 'Desabilitado'}</span>
-      </CheckBoxWrapper>
-    </Container>
+    <>
+      <Container>
+        <div>
+          {label && <span>{label}</span>}
+          {!!helpHint && (
+            <FiHelpCircle data-tip data-for={`switch-for-${name}`} />
+          )}
+        </div>
+        <CheckBoxWrapper isChecked={inputRef.current?.checked || false}>
+          <CheckBox
+            ref={inputRef}
+            name={name}
+            defaultChecked={defaultValue}
+            id="checkbox"
+            type="checkbox"
+            {...rest}
+          />
+          <CheckBoxLabel htmlFor="checkbox" />
+          <span>
+            {inputRef.current?.checked ? 'Habilitado' : 'Desabilitado'}
+          </span>
+        </CheckBoxWrapper>
+      </Container>
+      <Tooltip
+        id={`switch-for-${name}`}
+        effect="solid"
+        place="top"
+        type="light"
+      >
+        <p>Helper Text</p>
+      </Tooltip>
+    </>
   );
 };
 

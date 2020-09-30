@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 import store from './store';
+import { AuthProvider } from './hooks/AuthContext';
 
 import GlobalStyles from './styles/global';
 
@@ -17,8 +18,10 @@ const App: React.FC = () => (
   <BrowserRouter>
     <Provider store={store}>
       <ApolloProvider client={ApolloClient}>
-        <Routes />
-        <GlobalStyles />
+        <AuthProvider>
+          <Routes />
+          <GlobalStyles />
+        </AuthProvider>
       </ApolloProvider>
     </Provider>
     <ToastContainer />

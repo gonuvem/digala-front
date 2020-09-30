@@ -26,6 +26,8 @@ import {
   FieldWrapper,
   FieldController,
   ModalContent,
+  HeaderContainer,
+  PreviewLink,
 } from './styles';
 
 import { ApplicationState } from '../../../store';
@@ -120,11 +122,18 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
 
   return (
     <Container>
-      <nav>
-        <NavLink href="/">Editar</NavLink>
-        <NavLink href={`/share/${id}`}>Compartilhar</NavLink>
-        <NavLink href={`/survey_results/${id}`}>Resultados</NavLink>
-      </nav>
+      <HeaderContainer>
+        <nav>
+          <NavLink isActive href="#">
+            Editar
+          </NavLink>
+          <NavLink href={`/share/${id}`}>Compartilhar</NavLink>
+          <NavLink href={`/survey_results/${id}`}>Resultados</NavLink>
+        </nav>
+        <PreviewLink href={`/survey/${id}`} target="_blank">
+          Pré-visualizar
+        </PreviewLink>
+      </HeaderContainer>
       <PanelArea>
         <h1>{formData?.config.name}</h1>
         <Form onSubmit={() => null}>
@@ -167,8 +176,7 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
           type="button"
           onClick={() => setShowQuestionsPanel(!showQuestionsPanel)}
         >
-          Arraste uma opção ao lado o clique no botão para adicionar uma nova
-          pergunta
+          Clique no botão para adicionar uma nova pergunta
           <FiPlusCircle size={24} />
         </button>
         {transitions(

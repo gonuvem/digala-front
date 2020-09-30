@@ -69,9 +69,16 @@ export default async function updateOwnFormData(
       sendData.maxResponses = formData.config.maxResponses;
     }
 
-    const sendDataWithoutNullProperties = Object.fromEntries(
-      Object.entries(sendData).filter(([_, value]) => value !== null),
+    const filteredData = Object.entries(sendData).filter(
+      ([_, value]) => value !== null,
     );
+
+    const sendDataWithoutNullProperties = filteredData.reduce((obj, pair) => {
+      return {
+        ...obj,
+        [pair[0]]: pair[1],
+      };
+    }, {});
 
     await UpdateFormSchema.validate(sendDataWithoutNullProperties, {
       abortEarly: false,

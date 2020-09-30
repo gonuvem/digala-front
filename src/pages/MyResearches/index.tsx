@@ -44,6 +44,7 @@ const MyReasearches: React.FC = () => {
     variables: {
       page,
     },
+    fetchPolicy: 'network-only',
   });
   const [createForm, { loading: createFormLoading }] = useMutation(
     CREATE_OWN_FORM,

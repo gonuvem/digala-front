@@ -22,12 +22,12 @@ const Header: React.FC = () => {
           <img src={logo} alt="digala-logo" />
         </a>
         <nav>
-          <NavLink isActive href="/survey">
+          <NavLink isActive href="/my_surveys">
             Pesquisas
           </NavLink>
-          <NavLink href="/models">Modelos</NavLink>
-          <NavLink href="/help">Ajuda</NavLink>
-          <NavLink href="/profile">Perfil</NavLink>
+          <NavLink href="#">Modelos</NavLink>
+          <NavLink href="#">Ajuda</NavLink>
+          <NavLink href="#">Perfil</NavLink>
         </nav>
       </div>
     </Container>

@@ -48,13 +48,13 @@ const SurveyResults: React.FC = () => {
           <Navigation>
             <h2>Pesquisa Eleitoral Lagoa Alegre</h2>
             <nav>
-              <a href="/survey" id="edit">
+              <a href={`/edit_survey/${id}`} id="edit">
                 Editar
               </a>
-              <a href="/survey" id="share">
+              <a href={`/share/${id}`} id="share">
                 Compartilhar
               </a>
-              <a href="/survey" id="results">
+              <a href={`/survey_results/${id}`} id="results">
                 Resultados
               </a>
             </nav>

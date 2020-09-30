@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { shade } from 'polished';
 
 import Colors from '../../../utils/colors';
 
@@ -26,6 +27,11 @@ export const NavLink = styled.a<NavLinkProps>`
   position: relative;
   text-decoration: none;
   color: ${(props) => (props.isActive ? Colors.primary : Colors.black)};
+
+  &:hover {
+    color: ${shade(0.2, Colors.primary)};
+    font-weight: 500;
+  }
 
   ${(props) =>
     props.isActive &&

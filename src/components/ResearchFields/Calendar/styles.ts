@@ -5,7 +5,7 @@ import { transparentize } from 'polished';
 import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
-  span {
+  > span {
     display: inline-block;
     font-weight: 500;
     margin-bottom: 1rem;
