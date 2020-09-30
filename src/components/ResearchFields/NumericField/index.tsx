@@ -49,7 +49,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
       const event = new Event('input', { bubbles: true });
       inputRef.current?.dispatchEvent(event);
     },
-    [maxValue, minValue, stepSize],
+    [limitMaxMin, maxValue, minValue, stepSize],
   );
 
   useEffect(() => {
