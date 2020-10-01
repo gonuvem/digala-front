@@ -80,6 +80,10 @@ export default async function updateOwnFormData(
       };
     }, {});
 
+    console.log('Form Data: ', formData);
+    console.log('Raw Data: ', sendData);
+    console.log('Data: ', sendDataWithoutNullProperties);
+
     await UpdateFormSchema.validate(sendDataWithoutNullProperties, {
       abortEarly: false,
     });

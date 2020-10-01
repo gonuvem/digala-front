@@ -21,11 +21,11 @@ const LogoUpload: React.FC<LogoUploadProps> = ({
   onChange,
   logo,
 }) => {
-  const [fileSecureUrl, setFileSecureUrl] = useState('');
+  const [fileSecureUrl, setFileSecureUrl] = useState(logo || '');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
