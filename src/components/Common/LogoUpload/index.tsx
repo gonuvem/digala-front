@@ -1,11 +1,11 @@
 import React, { useRef, useCallback, useState } from 'react';
+import { FaCloudUploadAlt } from 'react-icons/fa';
 
 import uploadImage from '../../../services/logic/uploadImage';
 
 import LoadingSpinner from '../LoadingSpinner';
-import uploadIcon from '../../../assets/uploud_icon.png';
 
-import { DashedContainer, ImgLogo, IconLogoUpload } from './styles';
+import { DashedContainer, ImgLogo } from './styles';
 
 interface LogoUploadProps {
   label?: string;
@@ -52,7 +52,7 @@ const LogoUpload: React.FC<LogoUploadProps> = ({ label, onChange, logo }) => {
               <ImgLogo alt="logo" src={logo} />
             ) : (
               <div>
-                <IconLogoUpload src={uploadIcon} alt="Upload Logo" />
+                <FaCloudUploadAlt width={42} />
                 <p>Coloque sua marca aqui</p>
               </div>
             )}

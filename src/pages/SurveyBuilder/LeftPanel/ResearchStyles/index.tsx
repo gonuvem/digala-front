@@ -94,7 +94,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         <Section>
           <LogoUpload
             label="Logo"
-            onChange={(value: any) => {
+            onChange={(value: string) => {
               handleUploadLogo(value);
             }}
             logo={formData?.style?.logo || defaultLogo}
