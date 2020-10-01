@@ -1,5 +1,6 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { FaCloudUploadAlt } from 'react-icons/fa';
+import { useField } from '@unform/core';
 
 import uploadImage from '../../../services/logic/uploadImage';
 
@@ -9,17 +10,38 @@ import { DashedContainer, ImgLogo } from './styles';
 
 interface LogoUploadProps {
   label?: string;
+  name: string;
   onChange: Function;
   logo: string;
 }
 
-const LogoUpload: React.FC<LogoUploadProps> = ({ label, onChange, logo }) => {
+const LogoUpload: React.FC<LogoUploadProps> = ({
+  label,
+  name,
+  onChange,
+  logo,
+}) => {
+  const [fileSecureUrl, setFileSecureUrl] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { fieldName, registerField, error, defaultValue } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: fileInputRef.current,
+      path: undefined,
+      getValue: (ref: any) => {
+        return fileSecureUrl;
+      },
+    });
+  }, [fieldName, fileSecureUrl, registerField]);
 
   const onPhotoUploaded = useCallback(
     (imageData) => {
       const newImageOption = imageData.secure_url;
+      setFileSecureUrl(newImageOption);
       setIsLoading(false);
       onChange(newImageOption);
     },

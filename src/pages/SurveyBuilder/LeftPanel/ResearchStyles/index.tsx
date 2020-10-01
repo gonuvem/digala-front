@@ -52,6 +52,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
 
   useEffect(() => {
     const data = formRef.current?.getData() as FormStyleDTO;
+    console.log('Data: ', data);
     const dataUrl = {
       ...data,
       logo: data && data.logo ? data.logo : '',
@@ -93,6 +94,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         </Section>
         <Section>
           <LogoUpload
+            name="logo"
             label="Logo"
             onChange={(value: string) => {
               handleUploadLogo(value);
@@ -102,7 +104,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         </Section>
         <Section>
           <ShortTextField
-            label="Texto no header"
+            label="Texto do cabeçalho"
             name="headerText"
             id="headerTextField"
             onChange={(event) => handleChange(event.target.value)}
@@ -111,13 +113,13 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
         <Section>
           <SwitchToggle
             name="hasLogoInHeader"
-            label="Logo no header"
+            label="Logo no cabeçalho?"
             helpHint="Lorem ipsum sit dolor amet"
             onChange={(event) => handleChange(event.target.checked)}
           />
         </Section>
         <Section>
-          <p>Fundo no header</p>
+          <p>Fundo do cabeçalho</p>
           <div>
             <ColorPicker
               name="headerBackground"
@@ -136,7 +138,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
           />
         </Section>
         <Section>
-          <p>Fundo da pesquisa</p>
+          <p>Fundo do rodapé</p>
           <div>
             <ColorPicker
               name="footerBackground"
