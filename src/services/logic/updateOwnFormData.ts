@@ -92,7 +92,7 @@ export default async function updateOwnFormData(
       throw new Error(response.data.data.error.message);
     }
 
-    toast.success('Formulário atualizado com sucesso');
+    toast.success('Pesquisa atualizada com sucesso');
   } catch (err) {
     if (err instanceof Yup.ValidationError) {
       console.log(err);
