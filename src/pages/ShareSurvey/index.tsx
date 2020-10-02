@@ -29,7 +29,6 @@ import facebook from '../../assets/facebook_icon.png';
 import telegram from '../../assets/telegram_icon.png';
 import twitter from '../../assets/twitter_icon.png';
 
-import { ApplicationState } from '../../store';
 import { READ_FORM } from '../../services/requests/forms';
 
 interface IParams {
