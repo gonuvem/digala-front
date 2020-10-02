@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import Colors from '../../utils/colors';
 
 interface CardOptionProps {
-  gradientColor: string;
+  color: string;
 }
 
 interface NameProps {
@@ -69,7 +69,7 @@ export const LinkShare = styled.div`
   border-radius: 6px;
 
   p {
-    font-size: 0.75rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
   }
 
@@ -146,7 +146,9 @@ export const CardOption = styled.div<CardOptionProps>`
   height: 12.75rem;
   justify-content: center;
   align-items: center;
-  background: ${(props) => `linear-gradient(${props.gradientColor})`};
+  background-color: ${(props) => `${props.color}`};
+
+  border: solid 5px ${(props) => props.color};
 
   svg {
     height: 5.5rem;

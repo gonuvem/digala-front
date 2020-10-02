@@ -151,7 +151,7 @@ const ShareSurvey: React.FC = () => {
           </Header>
           <ShareOptions>
             <button type="button">
-              <CardOption gradientColor="180deg, #3475D2 0%, #3475D2 0.01%, #4E8DE6 100%">
+              <CardOption color="#3475D2">
                 <MdMail />
               </CardOption>
               <Name fontColor="#3778D4">E-mail Lote</Name>
@@ -161,7 +161,7 @@ const ShareSurvey: React.FC = () => {
               </p>
             </button>
             <button onClick={handleShareByQRCode} type="button">
-              <CardOption gradientColor="180deg, #C85C83 0%, #FF75A7 100%">
+              <CardOption color="#FF75A7">
                 <RiQrCodeLine />
               </CardOption>
               <Name fontColor="#C85C83">Qr Code</Name>
@@ -171,7 +171,7 @@ const ShareSurvey: React.FC = () => {
               </p>
             </button>
             <button type="button">
-              <CardOption gradientColor="180deg, #E2846A 0%, #E2846A 0.01%, #FF9578 100%">
+              <CardOption color="#E2846A">
                 <AiFillHtml5 />
               </CardOption>
               <Name fontColor="#EB8A6F">Incorporar</Name>
