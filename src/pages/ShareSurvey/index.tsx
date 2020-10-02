@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useCallback } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import QRCode from 'qrcode.react';
 import { MdMail } from 'react-icons/md';
@@ -28,6 +29,9 @@ import facebook from '../../assets/facebook_icon.png';
 import telegram from '../../assets/telegram_icon.png';
 import twitter from '../../assets/twitter_icon.png';
 
+import { ApplicationState } from '../../store';
+import { READ_FORM } from '../../services/requests/forms';
+
 interface IParams {
   id: string;
 }
@@ -37,6 +41,17 @@ const ShareSurvey: React.FC = () => {
   const downloadQrCodeAnchorRef = useRef<HTMLAnchorElement>(null);
   const { id } = useParams<IParams>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data: formData, loading: formLoading } = useQuery(READ_FORM, {
+    variables: { id },
+  });
+
+  const surveyName = useMemo(() => {
+    if (formData && formData.data) {
+      return formData.data.form.config.name;
+    }
+    return '';
+  }, [formData]);
 
   const surveyUrl = useMemo(() => {
     if (window) {
@@ -89,7 +104,7 @@ const ShareSurvey: React.FC = () => {
         <Container>
           <Header>
             <Titles>
-              <span>Pesquisa Eleitoral de Lago Alegre</span>
+              <span>{surveyName}</span>
               <nav>
                 <NavLink href={`/edit_survey/${id}`}>Editar</NavLink>
                 <NavLink isActive href="#">
