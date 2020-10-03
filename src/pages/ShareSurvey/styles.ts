@@ -76,6 +76,8 @@ export const LinkShare = styled.div`
   div {
     div {
       display: flex;
+      justify-content: space-between;
+      max-width: 40%;
     }
   }
 

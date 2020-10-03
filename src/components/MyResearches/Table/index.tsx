@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { FiEye } from 'react-icons/fi';
 
@@ -49,6 +49,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
   const [formDelete, { loading: deleteLoading, error }] = useMutation(
     DELETE_FORM,
   );
+  const history = useHistory();
 
   const deleteForm = useCallback(() => {
     formDelete({ variables: { id: idForm } });
@@ -57,14 +58,25 @@ const Table: React.FC<TableProps> = ({ forms }) => {
     }
   }, [error, formDelete, idForm]);
 
-  const showModal = useCallback((id: string) => {
-    setIdForm(id);
-    setDeleteReasearch(true);
-  }, []);
+  const showModal = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
+      event.stopPropagation();
+      setIdForm(id);
+      setDeleteReasearch(true);
+    },
+    [],
+  );
+
+  const handleRowClick = useCallback(
+    (surveyId: string) => {
+      history.push(`/edit_survey/${surveyId}`);
+    },
+    [history],
+  );
 
   const listForms = (form: FormData): React.ReactElement => (
     <div key={form._id}>
-      <TableRow>
+      <TableRow onClick={() => handleRowClick(form._id)}>
         <Name>
           <p>{form.config.name}</p>
         </Name>
@@ -78,7 +90,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
           <ColorStatus isActive={form.isActive} />
           <p>{form.isActive ? 'Ativa' : 'Finalizado'}</p>
         </Status>
-        <Actions>
+        <Actions onClick={(event) => event.stopPropagation()}>
           <Link target="blank" to={`survey/${form._id}`}>
             <FiEye size={20} color="#3475D2" />
             <EditLabel>Ver</EditLabel>
@@ -89,7 +101,7 @@ const Table: React.FC<TableProps> = ({ forms }) => {
             <EditLabel>Editar</EditLabel>
           </Link>
           <div />
-          <button type="button" onClick={() => showModal(form._id)}>
+          <button type="button" onClick={(event) => showModal(event, form._id)}>
             <img src={trash} alt="Deletar" />
             <DeleteLabel>Deletar</DeleteLabel>
           </button>

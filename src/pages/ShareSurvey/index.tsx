@@ -154,7 +154,7 @@ const ShareSurvey: React.FC = () => {
               <CardOption color="#3475D2">
                 <MdMail />
               </CardOption>
-              <Name fontColor="#3778D4">E-mail Lote</Name>
+              <Name fontColor="#3778D4">E-mails em lote</Name>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua
@@ -164,7 +164,7 @@ const ShareSurvey: React.FC = () => {
               <CardOption color="#FF75A7">
                 <RiQrCodeLine />
               </CardOption>
-              <Name fontColor="#C85C83">Qr Code</Name>
+              <Name fontColor="#C85C83">QR Code</Name>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua
@@ -189,13 +189,13 @@ const ShareSurvey: React.FC = () => {
         >
           <h2>QR Code</h2>
           <p>
-            Você pode colocar esse QRCode em suas redes sociais, campanhas
+            Você pode colocar esse QR Code em suas redes sociais, campanhas
             publicitarias entre outros vários locais. Qualquer pessoa com um
             celular smartphone pode ler e irá direto para sua pesquisa
           </p>
           <QRCode id="qr-code-canvas" value={surveyUrl} size={256} />
           <button type="button" onClick={handleDownloadQRCode}>
-            Baixar QRCode
+            Baixar QR Code
           </button>
           <a ref={downloadQrCodeAnchorRef} href="/share">
             Link
