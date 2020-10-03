@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 
 import Layout from '../../layout';
@@ -9,12 +10,35 @@ import ResponsesAnalysis from './ResponsesAnalysis';
 import { Container, Navigation, Panel, PanelButton } from './styles';
 
 import getDistanceBetweenElements from '../../utils/getDistanceBetweenElements';
+import { READ_FORM } from '../../services/requests/forms';
 
 const SurveyResults: React.FC = () => {
   const { id } = useParams();
 
   const [distanceToTravel, setDistanceToTravel] = useState(0);
   const [activePanel, setActivePanel] = useState(1);
+
+  const { data: formData, loading: formLoading } = useQuery(READ_FORM, {
+    variables: { id },
+  });
+
+  const surveyName = useMemo(() => {
+    if (formData && formData.data) {
+      return formData.data.form.config.name;
+    }
+    return '';
+  }, [formData]);
+
+  const ComponentToRender = useMemo(() => {
+    switch (activePanel) {
+      case 1:
+        return <IndividualResponses formId={id} />;
+      case 2:
+        return <ResponsesAnalysis formId={id} />;
+      default:
+        return <IndividualResponses formId={id} />;
+    }
+  }, [activePanel, id]);
 
   const handleTabChange = useCallback(
     (tab) => {
@@ -29,24 +53,13 @@ const SurveyResults: React.FC = () => {
     [activePanel],
   );
 
-  const ComponentToRender = useMemo(() => {
-    switch (activePanel) {
-      case 1:
-        return <IndividualResponses formId={id} />;
-      case 2:
-        return <ResponsesAnalysis formId={id} />;
-      default:
-        return <IndividualResponses formId={id} />;
-    }
-  }, [activePanel, id]);
-
   return (
     <>
       <PageHeader />
       <Layout>
         <Container>
           <Navigation>
-            <h2>Pesquisa Eleitoral Lagoa Alegre</h2>
+            <h2>{surveyName}</h2>
             <nav>
               <a href={`/edit_survey/${id}`} id="edit">
                 Editar

@@ -1,10 +1,16 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useMemo, useEffect } from 'react';
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
+import React, { useMemo } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 
+import LoadingSpinner from '../../../components/Common/LoadingSpinner';
 import GraphManager from '../../../components/Charts/ChartManager';
 
-import { Container, QuestionBox, ChartContainer } from './styles';
+import {
+  Container,
+  QuestionBox,
+  ChartContainer,
+  LoadingContainer,
+} from './styles';
 
 import { GET_CHARTS } from '../../../services/requests/charts';
 
@@ -41,6 +47,11 @@ const ResponsesAnalysis: React.FC<ResponsesAnalysisProps> = ({ formId }) => {
 
   return (
     <Container>
+      {getChartsLoading && (
+        <LoadingContainer>
+          <LoadingSpinner />
+        </LoadingContainer>
+      )}
       {charts.map((chart, index) => (
         <QuestionBox key={`${chart.name}-${index}`}>
           <h1>{chart.name}</h1>

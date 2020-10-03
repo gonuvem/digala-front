@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { shade } from 'polished';
 
 import Colors from '../../../utils/colors';
 
@@ -23,18 +24,35 @@ export const Actions = styled.div`
   display: flex;
   align-items: center;
   flex: 1;
+  z-index: 50;
 
   a {
     text-decoration: none;
     display: flex;
     align-items: flex-end;
+
+    &:hover {
+      svg {
+        color: ${shade(0.2, Colors.primary)};
+      }
+
+      h3 {
+        color: ${shade(0.2, Colors.primary)};
+      }
+    }
   }
 
   button {
     border: none;
     display: flex;
     align-items: flex-end;
-    background: ${Colors.white};
+    background: transparent;
+
+    &:hover {
+      h3 {
+        color: ${shade(0.2, Colors.negative)};
+      }
+    }
   }
 
   img {
@@ -75,11 +93,20 @@ export const TableLabels = styled.div`
 `;
 
 export const TableRow = styled.div`
-  height: 4rem;
-  padding: 0 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 4rem;
+  padding: 0 1rem;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
+
   p {
     font-size: 1rem;
     color: ${Colors.black};

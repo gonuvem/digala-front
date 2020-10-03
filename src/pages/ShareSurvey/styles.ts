@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import Colors from '../../utils/colors';
 
 interface CardOptionProps {
-  gradientColor: string;
+  color: string;
 }
 
 interface NameProps {
@@ -69,13 +69,15 @@ export const LinkShare = styled.div`
   border-radius: 6px;
 
   p {
-    font-size: 0.75rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
   }
 
   div {
     div {
       display: flex;
+      justify-content: space-between;
+      max-width: 40%;
     }
   }
 
@@ -88,13 +90,17 @@ export const LinkShare = styled.div`
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border: none;
-    border-radius: 4px;
+    border: solid 1px ${Colors.smokeWhite};
+    border-radius: 4px 0px 0px 4px;
     padding: 0 1rem;
     height: 3rem;
     background: ${Colors.smokeWhite};
 
     color: ${Colors.primary};
+
+    &:focus {
+      border-color: ${Colors.primary};
+    }
   }
 `;
 
@@ -142,7 +148,9 @@ export const CardOption = styled.div<CardOptionProps>`
   height: 12.75rem;
   justify-content: center;
   align-items: center;
-  background: ${(props) => `linear-gradient(${props.gradientColor})`};
+  background-color: ${(props) => `${props.color}`};
+
+  border: solid 5px ${(props) => props.color};
 
   svg {
     height: 5.5rem;
@@ -165,9 +173,8 @@ export const ButtonMedia = styled.button`
 export const ButtonCopy = styled.button`
   display: flex;
   justify-content: center;
-  border: none;
+  border: solid 1px ${Colors.primary};
   align-items: center;
-  height: 2.9375rem;
   padding: 0rem 1.5rem;
   background: ${Colors.primary};
   text-decoration: none;

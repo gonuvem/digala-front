@@ -38,6 +38,9 @@ interface FormStyleDTO {
 
 const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
   const [tempInformation, setTempInformation] = useState('');
+  const [hasLogoInHeader, setHasLogoInHeader] = useState(
+    formData?.style.hasLogoInHeader || false,
+  );
   const [defaultLogo] = useState<string>(() =>
     formData?.style?.logo ? formData.style.logo : '',
   );
@@ -92,32 +95,38 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
           </div>
         </Section>
         <Section>
-          <LogoUpload
-            label="Logo"
-            onChange={(value: any) => {
-              handleUploadLogo(value);
+          <SwitchToggle
+            name="hasLogoInHeader"
+            label="Logo no cabeçalho?"
+            helpHint="Lorem ipsum sit dolor amet"
+            onChange={(event) => {
+              handleChange(event.target.checked);
+              setHasLogoInHeader(event.target.checked);
             }}
-            logo={formData?.style?.logo || defaultLogo}
           />
         </Section>
+        {hasLogoInHeader && (
+          <Section>
+            <LogoUpload
+              name="logo"
+              label="Logo"
+              onChange={(value: string) => {
+                handleUploadLogo(value);
+              }}
+              logo={formData?.style?.logo || defaultLogo}
+            />
+          </Section>
+        )}
         <Section>
           <ShortTextField
-            label="Texto no header"
+            label="Texto do cabeçalho"
             name="headerText"
             id="headerTextField"
             onChange={(event) => handleChange(event.target.value)}
           />
         </Section>
         <Section>
-          <SwitchToggle
-            name="hasLogoInHeader"
-            label="Logo no header"
-            helpHint="Lorem ipsum sit dolor amet"
-            onChange={(event) => handleChange(event.target.checked)}
-          />
-        </Section>
-        <Section>
-          <p>Fundo no header</p>
+          <p>Fundo do cabeçalho</p>
           <div>
             <ColorPicker
               name="headerBackground"
@@ -136,7 +145,7 @@ const ResearchStyles: React.FC<ResearchStylesProps> = ({ formData }) => {
           />
         </Section>
         <Section>
-          <p>Fundo da pesquisa</p>
+          <p>Fundo do rodapé</p>
           <div>
             <ColorPicker
               name="footerBackground"
