@@ -2,6 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { format, parseISO } from 'date-fns';
 import { useQuery } from '@apollo/react-hooks';
 
+import NoData from '../../../components/Common/NoData';
 import LoadingSpinner from '../../../components/Common/LoadingSpinner';
 import Pagination from '../../../components/Common/Pagination';
 
@@ -81,6 +82,10 @@ const IndividualResponses: React.FC<IndividualResponsesProps> = ({
     return 0;
   }, [responsesData]);
 
+  const isResponseListEmpty = useMemo(() => {
+    return !listOwnResponsesLoading && responses.length === 0;
+  }, [listOwnResponsesLoading, responses.length]);
+
   const handlePageChange = useCallback((clickedPage) => {
     setPage(clickedPage);
   }, []);
@@ -115,6 +120,9 @@ const IndividualResponses: React.FC<IndividualResponsesProps> = ({
             </div>
           </TableRow>
         ))}
+      {isResponseListEmpty && (
+        <NoData message="Infelizmente você ainda não tem nenhuma resposta em sua pesquisa :(" />
+      )}
       <PaginationContainer>
         <Pagination
           onPageChange={handlePageChange}
