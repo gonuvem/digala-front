@@ -7,6 +7,12 @@ export const Container = styled.div`
   flex-wrap: wrap;
 `;
 
+export const LoadingContainer = styled.div`
+  position: relative;
+  width: 100%;
+  margin-top: 2rem;
+`;
+
 export const QuestionBox = styled.div`
   min-width: 45%;
   flex: 1;
