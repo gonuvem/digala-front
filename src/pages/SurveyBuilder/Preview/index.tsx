@@ -4,16 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
 import { useParams } from 'react-router-dom';
 import { useTransition } from 'react-spring';
-import {
-  FiPlusCircle,
-  FiSliders,
-  FiChevronDown,
-  FiChevronUp,
-  FiTrash,
-} from 'react-icons/fi';
+import { FiPlusCircle, FiSliders } from 'react-icons/fi';
 
 import QuestionBox from '../../../components/SurveyBuilder/QuestionBox';
-import Field from '../../../components/Common/Field';
+import FieldWrapper from '../../../components/SurveyBuilder/FieldWrapper';
 import Modal from '../../../components/Common/Modal';
 import SolidButton from '../../../components/Common/SolidButton';
 import LoadingSpinner from '../../../components/Common/LoadingSpinner';
@@ -23,8 +17,6 @@ import {
   PanelArea,
   NavLink,
   QuestionsPanel,
-  FieldWrapper,
-  FieldController,
   ModalContent,
   HeaderContainer,
   PreviewLink,
@@ -136,40 +128,17 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
       </HeaderContainer>
       <PanelArea>
         <h1>{formData?.config.name}</h1>
+        <p>{formData?.config.description}</p>
         <Form onSubmit={() => null}>
-          {fieldsRegistered.map((field, index) => (
+          {fieldsRegistered.map((field, fieldIndex) => (
             <FieldWrapper
-              key={field.id}
-              selected={focusedQuestion === field.id}
-              onClick={() => handleFocusQuestion(field.id)}
-            >
-              <Field question={field} />
-              {focusedQuestion === field.id && (
-                <FieldController>
-                  <div>
-                    <button
-                      onClick={() => handleChangePosition('up', index)}
-                      type="button"
-                    >
-                      <FiChevronUp size={24} />
-                    </button>
-                    <button
-                      onClick={() => handleChangePosition('down', index)}
-                      type="button"
-                    >
-                      <FiChevronDown size={24} />
-                    </button>
-                  </div>
-                  <button
-                    onClick={toggleModal}
-                    type="button"
-                    id="delete-button"
-                  >
-                    <FiTrash size={24} />
-                  </button>
-                </FieldController>
-              )}
-            </FieldWrapper>
+              field={field}
+              fieldIndex={fieldIndex}
+              isSelected={field.id === focusedQuestion}
+              handleFocusQuestion={handleFocusQuestion}
+              handleChangePosition={handleChangePosition}
+              toggleModal={toggleModal}
+            />
           ))}
         </Form>
         <button

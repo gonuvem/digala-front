@@ -63,7 +63,7 @@ export default async function createOwnQuestions(
       throw new Error(response.data.data.error.message);
     }
 
-    toast.success('Pesquisa cadastrada com sucesso');
+    toast.success('Questões criadas com sucesso');
   } catch (err) {
     if (err instanceof Yup.ValidationError) {
       console.log(err);

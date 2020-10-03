@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useCallback } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import QRCode from 'qrcode.react';
 import { MdMail } from 'react-icons/md';
@@ -28,6 +29,8 @@ import facebook from '../../assets/facebook_icon.png';
 import telegram from '../../assets/telegram_icon.png';
 import twitter from '../../assets/twitter_icon.png';
 
+import { READ_FORM } from '../../services/requests/forms';
+
 interface IParams {
   id: string;
 }
@@ -37,6 +40,17 @@ const ShareSurvey: React.FC = () => {
   const downloadQrCodeAnchorRef = useRef<HTMLAnchorElement>(null);
   const { id } = useParams<IParams>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data: formData, loading: formLoading } = useQuery(READ_FORM, {
+    variables: { id },
+  });
+
+  const surveyName = useMemo(() => {
+    if (formData && formData.data) {
+      return formData.data.form.config.name;
+    }
+    return '';
+  }, [formData]);
 
   const surveyUrl = useMemo(() => {
     if (window) {
@@ -89,7 +103,7 @@ const ShareSurvey: React.FC = () => {
         <Container>
           <Header>
             <Titles>
-              <span>Pesquisa Eleitoral de Lago Alegre</span>
+              <span>{surveyName}</span>
               <nav>
                 <NavLink href={`/edit_survey/${id}`}>Editar</NavLink>
                 <NavLink isActive href="#">
@@ -137,27 +151,27 @@ const ShareSurvey: React.FC = () => {
           </Header>
           <ShareOptions>
             <button type="button">
-              <CardOption gradientColor="180deg, #3475D2 0%, #3475D2 0.01%, #4E8DE6 100%">
+              <CardOption color="#3475D2">
                 <MdMail />
               </CardOption>
-              <Name fontColor="#3778D4">E-mail Lote</Name>
+              <Name fontColor="#3778D4">E-mails em lote</Name>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua
               </p>
             </button>
             <button onClick={handleShareByQRCode} type="button">
-              <CardOption gradientColor="180deg, #C85C83 0%, #FF75A7 100%">
+              <CardOption color="#FF75A7">
                 <RiQrCodeLine />
               </CardOption>
-              <Name fontColor="#C85C83">Qr Code</Name>
+              <Name fontColor="#C85C83">QR Code</Name>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua
               </p>
             </button>
             <button type="button">
-              <CardOption gradientColor="180deg, #E2846A 0%, #E2846A 0.01%, #FF9578 100%">
+              <CardOption color="#E2846A">
                 <AiFillHtml5 />
               </CardOption>
               <Name fontColor="#EB8A6F">Incorporar</Name>
@@ -175,13 +189,13 @@ const ShareSurvey: React.FC = () => {
         >
           <h2>QR Code</h2>
           <p>
-            Você pode colocar esse QRCode em suas redes sociais, campanhas
+            Você pode colocar esse QR Code em suas redes sociais, campanhas
             publicitarias entre outros vários locais. Qualquer pessoa com um
             celular smartphone pode ler e irá direto para sua pesquisa
           </p>
           <QRCode id="qr-code-canvas" value={surveyUrl} size={256} />
           <button type="button" onClick={handleDownloadQRCode}>
-            Baixar QRCode
+            Baixar QR Code
           </button>
           <a ref={downloadQrCodeAnchorRef} href="/share">
             Link

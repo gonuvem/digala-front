@@ -8,6 +8,8 @@ interface CheckBoxWrapperProps {
 }
 
 export const Container = styled.div`
+  flex-direction: column;
+
   div {
     display: flex;
     align-items: center;

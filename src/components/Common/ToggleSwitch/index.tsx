@@ -63,7 +63,7 @@ const Switch: React.FC<ToggleSwitchProps> = ({
         place="top"
         type="light"
       >
-        <p>Helper Text</p>
+        <p>{helpHint}</p>
       </Tooltip>
     </>
   );
