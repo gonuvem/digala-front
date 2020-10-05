@@ -91,31 +91,3 @@ export const LeftController = styled(motion.div).attrs({
     }
   }
 `;
-
-export const RightController = styled(motion.div).attrs({
-  initial: { opacity: 0.8, x: 0 },
-  animate: { opacity: 1, x: '3rem' },
-})`
-  display: flex;
-  flex-direction: column;
-
-  position: absolute;
-  top: 0;
-  right: 0rem;
-
-  button {
-    flex: 1;
-    background: none;
-    border: none;
-
-    svg {
-      color: ${Colors.negative};
-    }
-
-    &:hover {
-      svg {
-        color: ${shade(0.2, Colors.negative)};
-      }
-    }
-  }
-`;

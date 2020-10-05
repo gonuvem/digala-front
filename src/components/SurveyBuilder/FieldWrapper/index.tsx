@@ -1,6 +1,5 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import { FiChevronDown, FiChevronUp, FiTrash } from 'react-icons/fi';
-import { TiDelete } from 'react-icons/ti';
 import { useDispatch } from 'react-redux';
 
 import Field from '../../Common/Field';
@@ -8,7 +7,7 @@ import Field from '../../Common/Field';
 import { Question } from '../../../store/ducks/questions/types';
 import * as QuestionActions from '../../../store/ducks/questions/actions';
 
-import { Container, LeftController, RightController } from './styles';
+import { Container, LeftController } from './styles';
 
 interface FieldWrapperProps {
   field: Question;
@@ -17,6 +16,8 @@ interface FieldWrapperProps {
   handleFocusQuestion(questionId: string): void;
   handleChangePosition(direction: 'up' | 'down', fieldIndex: number): void;
   toggleModal(): void;
+  leftPanelRef: any;
+  paginationRef: any;
 }
 
 const FieldWrapper: React.FC<FieldWrapperProps> = ({
@@ -26,35 +27,53 @@ const FieldWrapper: React.FC<FieldWrapperProps> = ({
   handleChangePosition,
   toggleModal,
   fieldIndex,
+  leftPanelRef,
+  paginationRef,
 }) => {
-  const fieldWrapperRef = useRef(null);
+  const fieldWrapperRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
-  const handleContainerClick = useCallback(() => {
+  const handleClickOutsideContainer = useCallback(
+    (event: any) => {
+      if (fieldWrapperRef.current) {
+        if (
+          !fieldWrapperRef.current.contains(event.target) &&
+          !leftPanelRef.current.contains(event.target) &&
+          !paginationRef.current.contains(event.target)
+        ) {
+          dispatch(QuestionActions.clearFocusedQuestion());
+        }
+      }
+    },
+    [dispatch, leftPanelRef, paginationRef],
+  );
+
+  useEffect(() => {
     if (isSelected) {
-      dispatch(QuestionActions.clearFocusedQuestion());
+      document.addEventListener('click', handleClickOutsideContainer);
     } else {
-      handleFocusQuestion(field.id);
+      document.removeEventListener('click', handleClickOutsideContainer);
     }
-  }, [dispatch, field.id, handleFocusQuestion, isSelected]);
+  }, [handleClickOutsideContainer, isSelected]);
+
+  const handleContainerClick = useCallback(() => {
+    handleFocusQuestion(field.id);
+  }, [field.id, handleFocusQuestion]);
 
   const handleEscapeKeyPress = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.keyCode === 27) {
-        console.log('Pressed esc...');
+        dispatch(QuestionActions.clearFocusedQuestion());
+        document.removeEventListener('click', handleClickOutsideContainer);
       }
     },
-    [],
+    [dispatch, handleClickOutsideContainer],
   );
-
-  const handleCloseController = useCallback(() => {
-    dispatch(QuestionActions.clearFocusedQuestion());
-  }, [dispatch]);
 
   return (
     <Container ref={fieldWrapperRef} key={field.id} selected={isSelected}>
       <div
-        onKeyPress={handleEscapeKeyPress}
+        onKeyDown={handleEscapeKeyPress}
         tabIndex={fieldIndex}
         role="button"
         onClick={handleContainerClick}
@@ -82,11 +101,6 @@ const FieldWrapper: React.FC<FieldWrapperProps> = ({
               <FiTrash size={24} />
             </button>
           </LeftController>
-          <RightController>
-            <button onClick={handleCloseController} type="button">
-              <TiDelete size={32} />
-            </button>
-          </RightController>
         </>
       )}
     </Container>

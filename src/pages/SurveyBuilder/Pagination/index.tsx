@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, forwardRef } from 'react';
 import { useSelector } from 'react-redux';
 import { isUuid } from 'uuidv4';
 import { useMutation, useQuery } from '@apollo/react-hooks';
@@ -22,7 +22,7 @@ import updateOwnFormData from '../../../services/logic/updateOwnFormData';
 import createOwnQuestions from '../../../services/logic/createOwnQuestions';
 import updateOwnQuestions from '../../../services/logic/updateOwnQuestions';
 
-const Pagination: React.FC = () => {
+const Pagination: React.RefForwardingComponent<HTMLDivElement> = (_, ref) => {
   const [pagesCount, setPagesCount] = useState(1);
 
   const [questionsData, formData] = useSelector<
@@ -100,7 +100,7 @@ const Pagination: React.FC = () => {
   ]);
 
   return (
-    <Container>
+    <Container ref={ref}>
       <SolidButton onClick={handleUpdate}>
         {loading ? (
           <div id="loading-container">
@@ -125,4 +125,4 @@ const Pagination: React.FC = () => {
   );
 };
 
-export default Pagination;
+export default forwardRef(Pagination);

@@ -42,13 +42,19 @@ interface QuestionDTO {
 
 interface PreviewProps {
   questionsTypes: QuestionDTO[];
+  leftPanelRef: any;
+  paginationRef: any;
 }
 
 interface IParams {
   id: string;
 }
 
-const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
+const Preview: React.FC<PreviewProps> = ({
+  questionsTypes,
+  leftPanelRef,
+  paginationRef,
+}) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteQuestionLoading, setDeleteQuestionLoading] = useState(false);
@@ -138,6 +144,8 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
               handleFocusQuestion={handleFocusQuestion}
               handleChangePosition={handleChangePosition}
               toggleModal={toggleModal}
+              leftPanelRef={leftPanelRef}
+              paginationRef={paginationRef}
             />
           ))}
         </Form>
