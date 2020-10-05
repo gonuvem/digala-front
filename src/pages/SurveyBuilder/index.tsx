@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
@@ -27,6 +27,8 @@ interface IParams {
 const SurveyBuilder: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<IParams>();
+  const leftPanelRef = useRef<HTMLDivElement>(null);
+  const paginationRef = useRef(null);
 
   const { data: form, loading: formLoading } = useQuery(READ_FORM, {
     variables: { id },
@@ -99,9 +101,13 @@ const SurveyBuilder: React.FC = () => {
       <Layout>
         <Container>
           <Panels>
-            <LeftPanel questionsTypes={questionTypes} />
-            <Preview questionsTypes={questionTypes} />
-            <Pagination />
+            <LeftPanel ref={leftPanelRef} questionsTypes={questionTypes} />
+            <Preview
+              leftPanelRef={leftPanelRef}
+              paginationRef={paginationRef}
+              questionsTypes={questionTypes}
+            />
+            <Pagination ref={paginationRef} />
           </Panels>
         </Container>
       </Layout>
