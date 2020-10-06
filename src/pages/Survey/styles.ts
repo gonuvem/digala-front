@@ -49,6 +49,7 @@ export const SurveyHeader = styled.div<SurveyHeaderProps>`
   width: 100%;
   padding: 1.5rem 0rem;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 
   background-color: ${(props) => props.backgroundColor};
   border-radius: 4px;
