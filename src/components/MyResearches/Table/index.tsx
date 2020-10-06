@@ -8,6 +8,7 @@ import { DELETE_FORM } from '../../../services/requests/forms';
 import SolidButton from '../../Common/SolidButton';
 import GhostButton from '../../Common/GhostButton';
 import Modal from '../../Common/Modal';
+import NoData from '../../Common/NoData';
 
 import {
   Name,
@@ -31,6 +32,7 @@ import trash from '../../../assets/trash_icon.png';
 
 interface TableProps {
   forms: FormData[];
+  isFormListEmpty: boolean;
 }
 
 interface FormData {
@@ -43,7 +45,7 @@ interface FormData {
   };
 }
 
-const Table: React.FC<TableProps> = ({ forms }) => {
+const Table: React.FC<TableProps> = ({ forms, isFormListEmpty }) => {
   const [deleteResearch, setDeleteReasearch] = useState(false);
   const [idForm, setIdForm] = useState('');
   const [formDelete, { loading: deleteLoading, error }] = useMutation(
@@ -131,7 +133,9 @@ const Table: React.FC<TableProps> = ({ forms }) => {
         </Actions>
       </TableLabels>
       {forms.map((form) => listForms(form))}
-
+      {isFormListEmpty && (
+        <NoData message="Você não possui nenhum formulário cadastrado" />
+      )}
       <Modal
         isOpen={deleteResearch}
         onRequestClose={() => setDeleteReasearch(false)}
