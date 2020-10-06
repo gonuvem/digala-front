@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
+import Loading from '../../components/Common/LoadingAnimation';
 
 import { Container, Panels } from './styles';
 
@@ -95,7 +96,11 @@ const SurveyBuilder: React.FC = () => {
     [questionsTypesData],
   );
 
-  return !formLoading ? (
+  if (formLoading) {
+    return <Loading isLoading={formLoading} />;
+  }
+
+  return (
     <>
       <PageHeader />
       <Layout>
@@ -112,8 +117,6 @@ const SurveyBuilder: React.FC = () => {
         </Container>
       </Layout>
     </>
-  ) : (
-    <h3>Carregando</h3>
   );
 };
 
