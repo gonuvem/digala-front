@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 import { useTransition } from 'react-spring';
+import { parseISO, format } from 'date-fns';
 
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
 import ErrorMessage from '../../Common/ErrorMessage';
+
+import { dateFormats, timeFormats } from '../../../utils/dateTimeFormats';
 
 import { Container, SeparatorDot } from './styles';
 
@@ -17,6 +20,20 @@ interface DateTimeFieldProps {
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat: 'hourMinute' | 'hourMinuteSecond';
 }
+
+type IValueFromForm =
+  | {
+      date: string | undefined;
+      time: string | undefined;
+      beginDate?: undefined;
+      endDate?: undefined;
+    }
+  | {
+      beginDate: string | undefined;
+      endDate: string | undefined;
+      date?: undefined;
+      time?: undefined;
+    };
 
 const DateTimeField: React.FC<DateTimeFieldProps> = ({
   name,
@@ -54,11 +71,43 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
           endDate: endDateCalendarRef.current?.value,
         };
       },
-      setValue: (ref, value) => {
-        console.log('Value => ', value);
+      setValue: (ref, value: any) => {
+        const parsedDate = parseISO(value[0]);
+        const formattedDate = format(
+          parsedDate,
+          dateFormats[dateFormat].fnsMask,
+        );
+
+        if (childrenCalendarRef.current) {
+          childrenCalendarRef.current.value = formattedDate;
+        }
+
+        if (selectRange && endDateCalendarRef.current) {
+          const endDateParsed = parseISO(value[1]);
+          const endDateFormatted = format(
+            endDateParsed,
+            dateFormats[dateFormat].fnsMask,
+          );
+
+          endDateCalendarRef.current.value = endDateFormatted;
+        }
+
+        if (isTimeRequired) {
+          const formattedTime = format(
+            parsedDate,
+            timeFormats[timeFormat].fnsMask,
+          );
+        }
       },
     });
-  }, [fieldName, registerField, selectRange]);
+  }, [
+    dateFormat,
+    fieldName,
+    isTimeRequired,
+    registerField,
+    selectRange,
+    timeFormat,
+  ]);
 
   return (
     <Container selectRange={selectRange}>
