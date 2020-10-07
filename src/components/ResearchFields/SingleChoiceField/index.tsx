@@ -54,8 +54,18 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
       getValue: (refs: HTMLInputElement[]) => {
         return refs.filter((ref) => ref.checked).map((ref) => ref.value);
       },
+      setValue: (refs: HTMLInputElement[], value: string[]) => {
+        if (value === undefined) {
+          return;
+        }
+
+        const refSelected = refs.find((ref) => ref.value === value[0]);
+        if (refSelected) {
+          refSelected.checked = true;
+        }
+      },
     });
-  }, [registerField, fieldName]);
+  }, [registerField, fieldName, name]);
 
   useEffect(() => {
     if (choices) {

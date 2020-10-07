@@ -31,7 +31,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   const endDateCalendarRef = useRef<HTMLInputElement>(null);
   const childrenTimeInputRef = useRef<HTMLInputElement>(null);
 
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
   const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
@@ -42,7 +42,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
     registerField({
       name: fieldName,
       ref: undefined,
-      getValue: (ref: any) => {
+      getValue: (_) => {
         if (!selectRange) {
           return {
             date: childrenCalendarRef.current?.value,
@@ -53,6 +53,9 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
           beginDate: childrenCalendarRef.current?.value,
           endDate: endDateCalendarRef.current?.value,
         };
+      },
+      setValue: (ref, value) => {
+        console.log('Value => ', value);
       },
     });
   }, [fieldName, registerField, selectRange]);

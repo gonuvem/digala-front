@@ -113,7 +113,11 @@ const IndividualResponses: React.FC<IndividualResponsesProps> = ({
             </span>
 
             <div style={{ flex: 1 }}>
-              <a href="/survey">
+              <a
+                href={`/preview_response/${response.id}`}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <img src={bookReader} alt="Ver" />
                 <span>Ver</span>
               </a>
