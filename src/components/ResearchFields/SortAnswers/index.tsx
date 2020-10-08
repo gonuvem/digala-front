@@ -61,7 +61,11 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
           return options.find((option) => option._id === value);
         });
 
-        if (optionsInOrder) {
+        const optionsInOrderIncludesUndefined = optionsInOrder.includes(
+          undefined,
+        );
+
+        if (!optionsInOrderIncludesUndefined) {
           setOptions(optionsInOrder as ListOptions[]);
         }
       },
