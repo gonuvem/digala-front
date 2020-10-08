@@ -52,7 +52,7 @@ const SurveyBuilder: React.FC = () => {
 
   useEffect(() => {
     dispatch(QuestionsActions.clearFocusedQuestion());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (formData) {

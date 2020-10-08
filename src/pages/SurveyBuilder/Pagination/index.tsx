@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo, forwardRef } from 'react';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { isUuid } from 'uuidv4';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { FiBookmark, FiPlusCircle } from 'react-icons/fi';
@@ -63,6 +64,11 @@ const Pagination: React.RefForwardingComponent<HTMLDivElement> = (_, ref) => {
 
   const handleUpdate = useCallback(() => {
     if (formData?.id && questionTypes) {
+      if (formData.numResponses > 0) {
+        toast.warning('Essa pesquisa já foi respondida');
+        return;
+      }
+
       const questionsToCreate = questionsData.filter((question) =>
         isUuid(question.id),
       );
