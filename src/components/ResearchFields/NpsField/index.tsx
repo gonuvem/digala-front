@@ -35,6 +35,9 @@ const NpsField: React.FC<NpsProps> = ({
       name: fieldName,
       ref: inputRef.current,
       path: 'value',
+      setValue: (_, value: number) => {
+        setSelectedNumber(value - 1);
+      },
     });
   }, [registerField, fieldName]);
 
