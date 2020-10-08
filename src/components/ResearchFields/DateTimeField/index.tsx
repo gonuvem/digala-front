@@ -72,6 +72,10 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
         };
       },
       setValue: (ref, value: any) => {
+        if (!value) {
+          return;
+        }
+
         const parsedDate = parseISO(value[0]);
         const formattedDate = format(
           parsedDate,

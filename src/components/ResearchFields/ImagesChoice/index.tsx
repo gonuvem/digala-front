@@ -48,6 +48,17 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
       getValue: (refs: HTMLInputElement[]) => {
         return refs.filter((ref) => ref.checked).map((ref) => ref.value);
       },
+      setValue: (refs: HTMLInputElement[], values: string[]) => {
+        if (values === undefined) {
+          return;
+        }
+
+        refs.forEach((ref) => {
+          if (values.includes(ref.value)) {
+            ref.checked = true;
+          }
+        });
+      },
     });
   }, [fieldName, registerField]);
 

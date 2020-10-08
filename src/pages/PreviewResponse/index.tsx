@@ -123,13 +123,12 @@ const Survey: React.FC = () => {
               </ProgressBar>
             </div>
           )}
-          <Form ref={formRef} onSubmit={(data) => console.log(data)}>
+          <Form ref={formRef} onSubmit={() => null}>
             {questions.map((question) => (
               <QuestionWrapper key={question.id}>
                 <Field question={question} />
               </QuestionWrapper>
             ))}
-            <button type="submit">Enviar</button>
             <div id="form-separator" />
           </Form>
         </FormArea>

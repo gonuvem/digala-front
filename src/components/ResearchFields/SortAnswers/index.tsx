@@ -43,7 +43,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
     answerOptions || [],
   );
 
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -51,6 +51,19 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
       ref: undefined,
       getValue: () => {
         return options;
+      },
+      setValue: (ref: any, values: ListOptions[]) => {
+        if (!values) {
+          return;
+        }
+
+        const optionsInOrder = values.map((value) => {
+          return options.find((option) => option._id === value);
+        });
+
+        if (optionsInOrder) {
+          setOptions(optionsInOrder as ListOptions[]);
+        }
       },
     });
   }, [registerField, fieldName, options]);

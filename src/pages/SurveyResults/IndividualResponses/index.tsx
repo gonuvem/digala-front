@@ -116,7 +116,7 @@ const IndividualResponses: React.FC<IndividualResponsesProps> = ({
               <a
                 href={`/preview_response/${response.id}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 <img src={bookReader} alt="Ver" />
                 <span>Ver</span>
