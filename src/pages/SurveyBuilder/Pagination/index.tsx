@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo, forwardRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { isUuid } from 'uuidv4';
 import { useMutation, useQuery } from '@apollo/react-hooks';
@@ -25,6 +25,8 @@ import updateOwnQuestions from '../../../services/logic/updateOwnQuestions';
 
 const Pagination: React.RefForwardingComponent<HTMLDivElement> = (_, ref) => {
   const [pagesCount, setPagesCount] = useState(1);
+
+  const dispatch = useDispatch();
 
   const [questionsData, formData] = useSelector<
     ApplicationState,
@@ -80,6 +82,7 @@ const Pagination: React.RefForwardingComponent<HTMLDivElement> = (_, ref) => {
       if (questionsToCreate.length > 0) {
         createOwnQuestions(
           createQuestions,
+          dispatch,
           questionsToCreate,
           formData?.id,
           questionTypes,

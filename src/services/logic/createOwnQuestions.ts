@@ -5,6 +5,8 @@ import getQuestionConfigByAlias, {
   QuestionConfig,
 } from '../../utils/getQuestionConfigByAlias';
 
+import * as QuestionsActions from '../../store/ducks/questions/actions';
+
 import { Question } from '../../store/ducks/questions/types';
 import CreateQuestion from '../../schemas/createQuestion';
 
@@ -20,8 +22,14 @@ interface QuestionProps {
   config: QuestionConfig;
 }
 
+interface IQuestionsInResponse {
+  _id: string;
+  position: number;
+}
+
 export default async function createOwnQuestions(
   createQuestions: Function,
+  dispatch: Function,
   questions: Question[] | null,
   formId: string,
   questionTypes: any[],
@@ -63,10 +71,15 @@ export default async function createOwnQuestions(
       throw new Error(response.data.data.error.message);
     }
 
+    if (response.data.data.questions) {
+      dispatch(
+        QuestionsActions.replaceQuestionsId(response.data.data.questions),
+      );
+    }
+
     toast.success('Questões criadas com sucesso');
   } catch (err) {
     if (err instanceof Yup.ValidationError) {
-      console.log(err);
       toast.error('Você precisa preencher todos os campos obragatórios');
       return;
     }

@@ -167,6 +167,7 @@ export const CREATE_OWN_QUESTIONS = gql`
     data: createOwnQuestions(input: $input) {
       questions {
         _id
+        position
       }
       ${errorFragment}
     }
