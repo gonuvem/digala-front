@@ -19,6 +19,7 @@ interface DateTimeFieldProps {
   selectRange?: boolean;
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat: 'hourMinute' | 'hourMinuteSecond';
+  disabled?: boolean;
 }
 
 type IValueFromForm =
@@ -43,6 +44,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   dateFormat,
   isTimeRequired,
   timeFormat,
+  disabled,
 }) => {
   const childrenCalendarRef = useRef<HTMLInputElement>(null);
   const endDateCalendarRef = useRef<HTMLInputElement>(null);
@@ -124,6 +126,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
         <DateInput
           childrenCalendarRef={childrenCalendarRef}
           dateFormat={dateFormat}
+          disabled={disabled}
         />
         {selectRange || isTimeRequired ? (
           <SeparatorDot selectRange={selectRange}>
@@ -136,12 +139,14 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
           <DateInput
             childrenCalendarRef={endDateCalendarRef}
             dateFormat={dateFormat}
+            disabled={disabled}
           />
         ) : (
           isTimeRequired && (
             <TimeInput
               childrenTimeInputRef={childrenTimeInputRef}
               timeFormat={timeFormat}
+              disabled={disabled}
             />
           )
         )}

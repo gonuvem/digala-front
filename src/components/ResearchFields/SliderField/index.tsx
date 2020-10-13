@@ -21,6 +21,7 @@ const SliderField: React.FC<SliderFieldProps> = ({
   maxValue,
   leftSubtitle,
   rightSubtitle,
+  ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -66,6 +67,7 @@ const SliderField: React.FC<SliderFieldProps> = ({
           max={maxValue}
           data-tip
           data-for="rangeSlider"
+          {...rest}
         />
         <div>
           <p>{minValue}</p>

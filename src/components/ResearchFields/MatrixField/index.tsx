@@ -22,6 +22,7 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
   name,
   columns,
   rows,
+  disabled,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
@@ -83,6 +84,7 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
                     value={[rowIndex.toString(), columnIndex.toString()]}
                     id={`${name}-row${rowIndex}-col${columnIndex}`}
                     type={multipleChoice ? 'checkbox' : 'radio'}
+                    disabled={disabled}
                   />
                 </td>
               ))}

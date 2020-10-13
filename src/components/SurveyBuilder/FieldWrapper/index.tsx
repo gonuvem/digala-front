@@ -78,7 +78,7 @@ const FieldWrapper: React.FC<FieldWrapperProps> = ({
         role="button"
         onClick={handleContainerClick}
       >
-        <Field question={field} />
+        <Field question={field} readOnly />
       </div>
       {isSelected && (
         <>

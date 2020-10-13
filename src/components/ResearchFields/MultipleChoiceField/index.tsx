@@ -36,7 +36,6 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   description,
   anotherOption,
   rowDirection = false,
-  limitChoices,
   choiceMaxAmmount = 2,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -110,6 +109,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 fieldName={name}
                 label={choice.text}
                 onChange={onChange}
+                readOnly={readOnly}
               />
             ))}
           {anotherOption && (
@@ -123,6 +123,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
               id={another.id}
               fieldName={name}
               label={another.text}
+              readOnly={readOnly}
             />
           )}
         </ViewOptions>

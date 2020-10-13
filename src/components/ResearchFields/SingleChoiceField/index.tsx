@@ -32,6 +32,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   label,
   description,
   anotherOption,
+  readOnly = false,
   rowDirection = false,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -90,6 +91,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 value={choice._id}
                 fieldName={name}
                 label={choice.text}
+                readOnly={readOnly}
               />
             ))}
           {anotherOption && (
@@ -102,6 +104,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
               value="another-option"
               fieldName={name}
               label={another.text}
+              readOnly={readOnly}
             />
           )}
         </ViewOptions>

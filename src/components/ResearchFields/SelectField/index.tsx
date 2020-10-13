@@ -18,6 +18,7 @@ interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   description?: string;
   isTimeFormat?: boolean;
   answerOptions?: OptionsProps[];
+  disabled?: boolean;
 }
 
 // I have to fix the type of this parameter later
@@ -33,6 +34,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   description,
   answerOptions,
   isTimeFormat,
+  disabled,
   ...rest
 }) => {
   const inputRef = useRef(null);
@@ -106,6 +108,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
           components={{ DropdownIndicator }}
           noOptionsMessage={noOptionsMessage}
           options={options}
+          isDisabled={disabled}
           {...rest}
         />
       )}

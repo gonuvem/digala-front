@@ -14,6 +14,7 @@ interface SortAnswersProps {
   label: string;
   description?: string;
   answerOptions?: ListOptions[];
+  disabled?: boolean;
 }
 
 interface ListOptions {
@@ -38,6 +39,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   label,
   description,
   answerOptions,
+  disabled,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>(
     answerOptions || [],
@@ -109,6 +111,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
+                      isDragDisabled={disabled}
                       key={item._id}
                       draggableId={item._id ? item._id : ''}
                       index={index}
