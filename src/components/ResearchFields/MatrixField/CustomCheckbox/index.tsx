@@ -7,6 +7,7 @@ interface CustomCheckboxProps {
   fieldName: string;
   type: string;
   value: string[];
+  disabled?: boolean;
   inputRef(ref: any): void;
 }
 
@@ -16,6 +17,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
   type,
   value,
   inputRef,
+  disabled,
   ...rest
 }) => (
   <Container htmlFor={id}>
@@ -25,6 +27,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
       id={id}
       type={type}
       name={fieldName}
+      disabled={disabled}
       {...rest}
     />
     <span />

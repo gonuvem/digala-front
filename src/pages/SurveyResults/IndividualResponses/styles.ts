@@ -20,7 +20,7 @@ export const TableHeader = styled.div`
   }
 `;
 
-export const TableRow = styled.div`
+export const TableRow = styled.a`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,8 +29,20 @@ export const TableRow = styled.div`
 
   border-bottom: solid 1px ${transparentize(0.88, Colors.black)};
 
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
+
   span {
     transition: color 0.2s;
+
+    color: ${Colors.black};
   }
 
   a {

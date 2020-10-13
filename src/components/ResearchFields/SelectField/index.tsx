@@ -18,6 +18,7 @@ interface SelectFieldProps extends SelectProps<OptionTypeBase> {
   description?: string;
   isTimeFormat?: boolean;
   answerOptions?: OptionsProps[];
+  disabled?: boolean;
 }
 
 // I have to fix the type of this parameter later
@@ -33,14 +34,16 @@ const SelectField: React.FC<SelectFieldProps> = ({
   description,
   answerOptions,
   isTimeFormat,
+  disabled,
   ...rest
 }) => {
   const inputRef = useRef(null);
+  const [defaultValue, setDefaultValue] = useState('');
   const [options, setOptions] = useState<Array<OptionsProps>>(
     answerOptions || [],
   );
 
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
   const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
@@ -60,8 +63,21 @@ const SelectField: React.FC<SelectFieldProps> = ({
         }
         return ref.state.value;
       },
+      setValue: (ref: any, value: any) => {
+        if (value === undefined) {
+          return;
+        }
+
+        const option = answerOptions?.find(
+          (answerOption) => answerOption.value === value[0],
+        );
+
+        if (option) {
+          ref.select.setValue({ label: option.text, value: option.value });
+        }
+      },
     });
-  }, [fieldName, inputRef, registerField]);
+  }, [answerOptions, fieldName, inputRef, registerField]);
 
   useEffect(() => {
     if (!isTimeFormat && answerOptions) {
@@ -92,6 +108,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
           components={{ DropdownIndicator }}
           noOptionsMessage={noOptionsMessage}
           options={options}
+          isDisabled={disabled}
           {...rest}
         />
       )}

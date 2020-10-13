@@ -32,6 +32,7 @@ export interface Form {
     footerText?: string;
     footerBackground?: string;
   };
+  numResponses: number;
   id: string;
 }
 

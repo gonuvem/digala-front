@@ -11,11 +11,13 @@ import useOutsider from '../../../hooks/useOutsider';
 interface TimeInputProps {
   timeFormat: 'hourMinute' | 'hourMinuteSecond';
   childrenTimeInputRef: any;
+  disabled?: boolean;
 }
 
 const TimeInput: React.FC<TimeInputProps> = ({
   timeFormat,
   childrenTimeInputRef,
+  disabled,
 }) => {
   const timeSelectorRef = useRef(null);
   const [timeValue, setTimeValue] = useState('');
@@ -67,6 +69,7 @@ const TimeInput: React.FC<TimeInputProps> = ({
         value={timeValue}
         type="text"
         placeholder={timeFormats[timeFormat].placeholder}
+        disabled={disabled}
       />
       {timeSelectorTransitions(
         (props, item) =>

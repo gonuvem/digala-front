@@ -9,6 +9,7 @@ import MyResearches from '../pages/MyResearches';
 import SurveyBuilder from '../pages/SurveyBuilder';
 import ShareSurvey from '../pages/ShareSurvey';
 import SurveyResults from '../pages/SurveyResults';
+import PreviewResponse from '../pages/PreviewResponse';
 import Survey from '../pages/Survey';
 
 const Routes: React.FC = () => (
@@ -26,6 +27,11 @@ const Routes: React.FC = () => (
       path="/survey_results/:id"
       isPrivate
       component={SurveyResults}
+    />
+    <ProtectedRoute
+      path="/preview_response/:id"
+      isPrivate
+      component={PreviewResponse}
     />
 
     <Route path="/survey/:id" component={Survey} />

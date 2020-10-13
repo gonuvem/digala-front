@@ -21,10 +21,11 @@ const SliderField: React.FC<SliderFieldProps> = ({
   maxValue,
   leftSubtitle,
   rightSubtitle,
+  ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -32,6 +33,15 @@ const SliderField: React.FC<SliderFieldProps> = ({
       ref: inputRef.current,
       getValue: () => {
         return inputRef.current?.value;
+      },
+      setValue: (ref: any, value: string | undefined) => {
+        if (!value) {
+          return;
+        }
+
+        if (inputRef.current) {
+          inputRef.current.value = value;
+        }
       },
     });
   }, [fieldName, registerField]);
@@ -57,6 +67,7 @@ const SliderField: React.FC<SliderFieldProps> = ({
           max={maxValue}
           data-tip
           data-for="rangeSlider"
+          {...rest}
         />
         <div>
           <p>{minValue}</p>

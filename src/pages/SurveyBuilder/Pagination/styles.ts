@@ -30,8 +30,7 @@ export const PanelArea = styled.div`
   border-radius: 4px;
 
   svg {
-    color: ${Colors.black};
-    background-color: ${Colors.white};
+    color: ${Colors.white};
     padding: 0.5rem;
     border-radius: 4px;
   }

@@ -31,6 +31,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
   stepSize = 1,
   minValue = 1,
   maxValue = 10,
+  disabled,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,6 +39,10 @@ const NumericField: React.FC<NumericFieldProps> = ({
 
   const handleChangeInValue = useCallback(
     (signal: number) => {
+      if (disabled) {
+        return;
+      }
+
       const inputValue = inputRef.current?.value || 0;
 
       if (signal > 0 && (!limitMaxMin || inputValue < maxValue)) {
@@ -49,7 +54,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
       const event = new Event('input', { bubbles: true });
       inputRef.current?.dispatchEvent(event);
     },
-    [limitMaxMin, maxValue, minValue, stepSize],
+    [disabled, limitMaxMin, maxValue, minValue, stepSize],
   );
 
   useEffect(() => {
@@ -76,6 +81,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
             defaultValue={defaultValue}
             min={limitMaxMin ? minValue : undefined}
             max={limitMaxMin ? maxValue : undefined}
+            disabled={disabled}
             {...rest}
           />
           <p>{measurement}</p>

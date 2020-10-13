@@ -11,6 +11,7 @@ interface OptionProps {
   checked?: boolean;
   onChange?: Function;
   inputRef(ref: any): void;
+  readOnly: boolean;
 }
 
 const Option: React.FC<OptionProps> = ({
@@ -22,6 +23,7 @@ const Option: React.FC<OptionProps> = ({
   checked,
   onChange,
   inputRef,
+  readOnly,
 }) => (
   <Container htmlFor={id}>
     <input
@@ -32,6 +34,7 @@ const Option: React.FC<OptionProps> = ({
       name={fieldName}
       value={value}
       onChange={(event) => onChange && onChange(event)}
+      disabled={readOnly}
     />
     <span />
     {label}
