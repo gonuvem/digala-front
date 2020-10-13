@@ -7,6 +7,7 @@ export enum QuestionsTypes {
   CLEAR_FOCUSED_QUESTION = '@questions/CLEAR_FOCUSED_QUESTION',
   REPLACE_QUESTION = '@questions/REPLACE_QUESTION',
   LOAD_QUESTIONS = '@questions/LOAD_QUESTIONS',
+  REPLACE_QUESTIONS_IDS = '@questions/REPLACE_QUESTIONS_IDS',
 }
 
 /**
@@ -17,6 +18,11 @@ export interface ImageChoice {
   text?: string;
   loading: boolean;
   id: string;
+}
+
+export interface IListOfUpdatedIds {
+  _id: string;
+  position: number;
 }
 
 export interface Question {
