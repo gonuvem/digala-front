@@ -39,7 +39,8 @@ const FieldWrapper: React.FC<FieldWrapperProps> = ({
         if (
           !fieldWrapperRef.current.contains(event.target) &&
           !leftPanelRef.current.contains(event.target) &&
-          !paginationRef.current.contains(event.target)
+          !paginationRef.current.contains(event.target) &&
+          !event.target.classList.contains('react-select__option')
         ) {
           dispatch(QuestionActions.clearFocusedQuestion());
         }
