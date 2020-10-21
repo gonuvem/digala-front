@@ -47,7 +47,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
 
       if (signal > 0 && (!limitMaxMin || inputValue < maxValue)) {
         inputRef.current?.stepUp(stepSize);
-      } else if (signal < 0 && (!limitMaxMin || inputValue > minValue)) {
+      } else if (signal < 0 && inputValue > minValue) {
         inputRef.current?.stepDown(stepSize);
       }
 
@@ -79,7 +79,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
             name={name}
             id={id}
             defaultValue={defaultValue}
-            min={limitMaxMin ? minValue : undefined}
+            min={minValue}
             max={limitMaxMin ? maxValue : undefined}
             disabled={disabled}
             {...rest}

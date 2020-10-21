@@ -47,6 +47,17 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
     500,
   );
 
+  const handleLimitChoicesChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const parsedNumber = parseInt(event.target.value, 10);
+
+      if (parsedNumber > 0) {
+        handleChange([parseInt(event.target.value, 10)], ['maxChoices']);
+      }
+    },
+    [handleChange],
+  );
+
   const addDefaultOption = useCallback(
     (toggleOtherOption) => {
       if (toggleOtherOption) {
@@ -125,15 +136,7 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
               label="Limite de Escolhas"
               name="maxChoices"
               id="choiceMaxAmmountField"
-              // defaultValue={2}
-              onChange={(event) =>
-                parseInt(event.target.value, 10) <= 10
-                  ? handleChange(
-                      [parseInt(event.target.value, 10)],
-                      ['maxChoices'],
-                    )
-                  : undefined
-              }
+              onChange={handleLimitChoicesChange}
             />
           </section>
         )}
@@ -149,8 +152,8 @@ const ImagesChoiceConfiguration: React.FC<ImagesChoiceConfigurationProps> = ({
         </section>
         <section>
           <ToggleSwitch
-            label="Ordem das respostas aleatória"
-            helpHint="Toda vez que será gerado uma ordem aleatória para as opções"
+            label="Ordem aleatória para as opções?"
+            helpHint="As opções serão embaralhadas em cada exibição"
             name="hasRandomResponsesOrder"
             onChange={(event) =>
               handleChange([event.target.checked], ['hasRandomResponsesOrder'])
