@@ -27,9 +27,17 @@ function mountRule(question: QuestionResponse): Record<string, any> {
           (value) => value.date.length >= 1 && value.time.length >= 1,
         ),
       };
+    case FieldsTypes.Link:
+      return question.config.link.hasValidation
+        ? {
+            [question._id]: Yup.string()
+              .url('O campo precisa ter uma link válido')
+              .required('Campo obrigatório'),
+          }
+        : { [question._id]: Yup.string().required() };
     default:
       return {
-        [question._id]: Yup.string().required(`Campo obrigatório`),
+        [question._id]: Yup.string().required('Campo obrigatório'),
       };
   }
 }
@@ -40,6 +48,10 @@ export default function generateSchema(
   const rules = {};
 
   questions.forEach((question) => {
+    if (question.type.alias === FieldsTypes.Link) {
+      console.log('question: ', question);
+    }
+
     if (question.config.isRequired) {
       const rule = mountRule(question);
       Object.assign(rules, rule);
