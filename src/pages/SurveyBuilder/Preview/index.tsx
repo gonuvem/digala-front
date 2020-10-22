@@ -119,8 +119,8 @@ const Preview: React.FC<PreviewProps> = ({
   }, []);
 
   return (
-    <Container>
-      <HeaderContainer>
+    <Container data-outside="outside">
+      <HeaderContainer data-outside="outside">
         <nav>
           <NavLink isActive href="#">
             Editar
@@ -132,8 +132,8 @@ const Preview: React.FC<PreviewProps> = ({
           Pré-visualizar
         </PreviewLink>
       </HeaderContainer>
-      <PanelArea>
-        <h1>{formData?.config.name}</h1>
+      <PanelArea data-outside="outside">
+        <h1 data-outside="outside">{formData?.config.name}</h1>
         <p>{formData?.config.description}</p>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field, fieldIndex) => (

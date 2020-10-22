@@ -81,7 +81,11 @@ const FieldConfiguration: React.FC<FieldConfigurationsProps> = ({
       );
     case FieldsTypes.LongText:
       return (
-        <ShortTextConfiguration field={field} handleChange={handleChange} />
+        <ShortTextConfiguration
+          field={field}
+          handleChange={handleChange}
+          isLongText
+        />
       );
     case FieldsTypes.Number:
       return (
