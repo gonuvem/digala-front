@@ -48,10 +48,6 @@ export default function generateSchema(
   const rules = {};
 
   questions.forEach((question) => {
-    if (question.type.alias === FieldsTypes.Link) {
-      console.log('question: ', question);
-    }
-
     if (question.config.isRequired) {
       const rule = mountRule(question);
       Object.assign(rules, rule);
