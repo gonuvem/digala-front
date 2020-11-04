@@ -1,4 +1,7 @@
 import * as Yup from 'yup';
+
+import buildEmailRules from './ruleBuilders/email';
+
 import { QuestionResponse } from '../../pages/Survey/ISurvey';
 import FieldsTypes from '../../utils/fieldsTypes';
 
@@ -35,6 +38,8 @@ function mountRule(question: QuestionResponse): Record<string, any> {
               .required('Campo obrigatório'),
           }
         : { [question._id]: Yup.string().required() };
+    case FieldsTypes.Email:
+      return buildEmailRules(question);
     default:
       return {
         [question._id]: Yup.string().required('Campo obrigatório'),
@@ -48,10 +53,8 @@ export default function generateSchema(
   const rules = {};
 
   questions.forEach((question) => {
-    if (question.config.isRequired) {
-      const rule = mountRule(question);
-      Object.assign(rules, rule);
-    }
+    const rule = mountRule(question);
+    Object.assign(rules, rule);
   });
 
   return Yup.object().shape(rules);

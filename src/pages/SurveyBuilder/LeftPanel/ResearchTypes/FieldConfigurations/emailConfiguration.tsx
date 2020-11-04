@@ -60,7 +60,7 @@ const EmailConfiguration: React.FC<EmailConfigutationProps> = ({
         <section>
           <ToggleSwitch
             label="Obrigatório"
-            helpHint="Caso o usuário seja obrigado a responder"
+            helpHint="Campo é obrigatório responder"
             name="isRequired"
             onChange={(event) =>
               handleChange([event.target.checked], ['isRequired'])
