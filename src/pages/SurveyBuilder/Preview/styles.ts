@@ -36,7 +36,7 @@ export const PreviewLink = styled.a`
 
 export const PanelArea = styled.div`
   margin-top: 1.5rem;
-  padding: 2.5rem 4rem;
+  padding: 2.5rem 2rem;
 
   background-color: ${Colors.white};
   border-radius: 4px;

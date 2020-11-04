@@ -84,7 +84,7 @@ const NumericField: React.FC<NumericFieldProps> = ({
             disabled={disabled}
             {...rest}
           />
-          <p>{measurement}</p>
+          {/* <p>{measurement}</p> */}
         </div>
         <div>
           <MdArrowDropUp onClick={() => handleChangeInValue(1)} size={32} />

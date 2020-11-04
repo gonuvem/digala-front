@@ -49,7 +49,7 @@ export const InputContainer = styled.div`
     }
 
     margin-right: 0.3rem;
-    width: 100%;
+    /* max-width: 1.5rem; */
 
     font-size: 1.1rem;
 
