@@ -105,6 +105,7 @@ const Pagination: React.RefForwardingComponent<HTMLDivElement> = (_, ref) => {
     updateForm,
     questionsData,
     createQuestions,
+    dispatch,
     updateQuestions,
   ]);
 

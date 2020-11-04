@@ -208,7 +208,7 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
               minValue={2}
               maxValue={field.answerOptions?.length || 10}
               onChange={(event) =>
-                handleChange([event.target.value], ['maxChoices'])
+                handleChange([parseInt(event.target.value, 10)], ['maxChoices'])
               }
             />
           </section>
