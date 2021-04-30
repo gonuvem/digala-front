@@ -27,25 +27,19 @@ const FieldWrapper: React.FC<FieldWrapperProps> = ({
   handleChangePosition,
   toggleModal,
   fieldIndex,
-  leftPanelRef,
-  paginationRef,
 }) => {
   const fieldWrapperRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
 
   const handleClickOutsideContainer = useCallback(
     (event: any) => {
-      if (fieldWrapperRef.current) {
-        if (
-          !fieldWrapperRef.current.contains(event.target) &&
-          !leftPanelRef.current.contains(event.target) &&
-          !paginationRef.current.contains(event.target)
-        ) {
-          dispatch(QuestionActions.clearFocusedQuestion());
-        }
+      console.log('Event target: ', event.target.dataset.outside);
+
+      if (event.target.dataset.outside !== undefined) {
+        dispatch(QuestionActions.clearFocusedQuestion());
       }
     },
-    [dispatch, leftPanelRef, paginationRef],
+    [dispatch],
   );
 
   useEffect(() => {

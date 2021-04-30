@@ -45,7 +45,6 @@ const ResearchConfigurations: React.FC<ResearchConfigurationsProps> = ({
     formData?.config.hasLimitedResponses || false,
   );
   const dispatch = useDispatch();
-  // const [hasLimitedResponses, setHasLimitResponses] = useState(false);
 
   const onChange = useDebouncedCallback(() => {
     const data = formRef.current?.getData();

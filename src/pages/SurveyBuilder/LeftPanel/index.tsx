@@ -53,8 +53,8 @@ const LeftPanel: React.RefForwardingComponent<
   };
 
   return (
-    <Container ref={ref}>
-      <h5>{formData?.config.name}</h5>
+    <Container ref={ref} data-outside="outside">
+      <h5 data-outside="outside">{formData?.config.name}</h5>
       <PanelArea
         activePanelNumber={activePanelNumber}
         distance={distanceToTravel}

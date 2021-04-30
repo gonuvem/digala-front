@@ -14,7 +14,7 @@ export default Yup.object().shape({
   progressBarType: Yup.string().notRequired(),
   canAllowMultipleSubmissions: Yup.boolean().notRequired(),
   background: Yup.string().notRequired(),
-  logo: Yup.string().notRequired(),
+  logo: Yup.string().typeError('É preciso colocar uma logo').notRequired(),
   headerText: Yup.string().notRequired(),
   hasLogoInHeader: Yup.boolean().notRequired(),
   headerBackground: Yup.string().notRequired(),

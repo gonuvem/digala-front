@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import Colors from '../../../../utils/colors';
+
 export const Container = styled.div`
   display: flex;
   position: relative;
@@ -24,6 +26,7 @@ export const Container = styled.div`
     max-height: 15rem;
     width: 100%;
 
+    border: solid 4px ${Colors.secondary};
     border-radius: 4px;
     object-fit: cover;
   }

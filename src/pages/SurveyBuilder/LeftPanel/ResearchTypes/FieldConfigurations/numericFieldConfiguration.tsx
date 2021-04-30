@@ -74,7 +74,7 @@ const NumericFieldConfiguration: React.FC<NumericFieldConfigurationProps> = ({
         <section>
           <ToggleSwitch
             label="Limitar máximo e mínimo"
-            helpHint="Limitar valores máximos e minímos"
+            helpHint="Limitar valores máximos e mínimos"
             name="hasMaxMinLimit"
             onChange={(event) => {
               handleChange(

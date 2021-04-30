@@ -37,6 +37,11 @@ export const Container = styled.div<ContainerProps>`
   > div {
     display: flex;
     align-items: center;
+
+    span:first-child {
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
   }
 
   input {

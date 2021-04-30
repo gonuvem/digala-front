@@ -105,7 +105,7 @@ const SurveyBuilder: React.FC = () => {
       <PageHeader />
       <Layout>
         <Container>
-          <Panels>
+          <Panels data-outside="outside">
             <LeftPanel ref={leftPanelRef} questionsTypes={questionTypes} />
             <Preview
               leftPanelRef={leftPanelRef}

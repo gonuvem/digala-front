@@ -201,14 +201,14 @@ const MultipleChoiceConfigurarion: React.FC<MultipleChoiceConfigurarionProps> = 
           <section>
             <NumberField
               id="choiceMaxAmmountField"
-              label="Quantidade de opções selecionaveis"
+              label="Quantidade de opções selecionáveis"
               name="maxChoices"
               defaultValue={2}
               limitMaxMin
               minValue={2}
-              maxValue={Number.MAX_SAFE_INTEGER}
+              maxValue={field.answerOptions?.length || 10}
               onChange={(event) =>
-                handleChange([event.target.value], ['maxChoices'])
+                handleChange([parseInt(event.target.value, 10)], ['maxChoices'])
               }
             />
           </section>

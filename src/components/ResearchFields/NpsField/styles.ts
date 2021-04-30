@@ -69,7 +69,14 @@ export const Number = styled.button<NumberProps>`
     font-size: 1rem;
   }
 
-  @media (max-width: 1024px) {
-    padding: 0.8rem;
+  transition: 0.3s ease;
+
+  &:hover {
+    background: ${Colors.primary};
+    color: ${Colors.white};
+  }
+
+  @media (max-width: 1280px) {
+    padding: 1rem 0.8rem;
   }
 `;

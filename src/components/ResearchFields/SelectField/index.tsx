@@ -102,6 +102,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
       {options && (
         <CustomSelect
           ref={inputRef}
+          data-outside="outside"
           defaultValue={defaultValue}
           classNamePrefix="react-select"
           placeholder="Escolha uma opção"
