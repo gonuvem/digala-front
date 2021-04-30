@@ -1,5 +1,7 @@
 import { Reducer } from 'redux';
+
 import { QuestionsTypes, QuestionsState } from './types';
+import replaceQuestionsId from '../../../utils/replaceQuestionsId';
 
 const INITIAL_STATE: QuestionsState = {
   questions: [],
@@ -20,6 +22,11 @@ const reducer: Reducer<QuestionsState> = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         questions: action.payload,
+      };
+    case QuestionsTypes.REPLACE_QUESTIONS_IDS:
+      return {
+        ...state,
+        questions: replaceQuestionsId(state.questions, action.payload),
       };
     default:
       return { ...state };

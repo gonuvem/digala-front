@@ -21,9 +21,10 @@ import FieldsTypes from '../../../utils/fieldsTypes';
 
 interface FieldProps {
   question: Question;
+  readOnly?: boolean;
 }
 
-const Field: React.FC<FieldProps> = ({ question }) => {
+const Field: React.FC<FieldProps> = ({ question, readOnly }) => {
   switch (question.alias) {
     case FieldsTypes.ShortText:
       return (
@@ -34,6 +35,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           description={question?.description}
           placeholder={question?.placeholder}
           maxLength={question?.hasLimitedChars ? question?.maxChars : undefined}
+          readOnly={readOnly}
         />
       );
     case FieldsTypes.LongText: {
@@ -45,6 +47,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           description={question?.description}
           placeholder={question?.placeholder}
           maxLength={question?.hasLimitedChars ? question?.maxChars : undefined}
+          readOnly={readOnly}
         />
       );
     }
@@ -57,6 +60,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           label={question?.label || ''}
           description={question?.description || ''}
           validatePattern={question?.hasValidation || false}
+          readOnly={readOnly}
         />
       );
     case FieldsTypes.SingleChoice:
@@ -70,6 +74,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           anotherOption={question?.anotherOption}
           hasRandomResponsesOrder={question?.hasRandomResponsesOrder}
           rowDirection={question?.hasHorizontalAlignment}
+          readOnly={readOnly}
         />
       );
     case FieldsTypes.MultipleChoice:
@@ -85,6 +90,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           rowDirection={question?.hasHorizontalAlignment}
           limitChoices={question?.isMultipleChoice || false}
           choiceMaxAmmount={question?.maxChoices || 2}
+          readOnly={readOnly}
         />
       );
     case FieldsTypes.Link:
@@ -96,6 +102,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           label={question?.label}
           description={question?.description}
           validatePattern={question?.hasValidation}
+          readOnly={readOnly}
         />
       );
     case FieldsTypes.Date:
@@ -108,6 +115,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           dateFormat={question?.dateFormat || 'dayMonthYear'}
           timeFormat={question?.timeFormat || 'hourMinute'}
           selectRange={question?.canCaptureInterval || false}
+          disabled={readOnly}
         />
       );
     case FieldsTypes.Nps:
@@ -121,6 +129,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           rightSubtitle={question?.rightLabel}
           scale={question?.escale || 10}
           startZero={question?.canStartAtZero || false}
+          disabled={readOnly}
         />
       );
     case FieldsTypes.Slider:
@@ -133,6 +142,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           maxValue={question?.maxValue || 10}
           leftSubtitle={question?.minLabel}
           rightSubtitle={question?.maxLabel}
+          disabled={readOnly}
         />
       );
     case FieldsTypes.ImageChoice: {
@@ -145,6 +155,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           choices={question?.answerOptions || []}
           multipleChoice={question?.isMultipleChoice || false}
           choiceMaxAmmount={question?.maxChoices || 2}
+          disabled={readOnly}
         />
       );
     }
@@ -155,6 +166,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           label={question?.label || ''}
           description={question?.description}
           answerOptions={question?.answerOptions}
+          disabled={readOnly}
         />
       );
     case FieldsTypes.Number:
@@ -168,6 +180,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           limitMaxMin={question?.hasMaxMinLimit || false}
           maxValue={question?.maxValue}
           minValue={question?.minValue}
+          disabled={readOnly}
         />
       );
     case FieldsTypes.Matrix:
@@ -179,6 +192,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           rows={question?.rowsLabels || ['']}
           columns={question?.colsLabels || ['']}
           multipleChoice={question?.isMultipleChoice || false}
+          disabled={readOnly}
         />
       );
     case FieldsTypes.Phone:
@@ -191,6 +205,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           description={question?.description}
           validatePattern={question?.hasValidation || false}
           mask="(99) 99999-9999"
+          readOnly={readOnly}
         />
       );
     case FieldsTypes.Dropdown:
@@ -200,6 +215,7 @@ const Field: React.FC<FieldProps> = ({ question }) => {
           label={question?.label}
           description={question?.description}
           answerOptions={question?.answerOptions}
+          disabled={readOnly}
         />
       );
     default:

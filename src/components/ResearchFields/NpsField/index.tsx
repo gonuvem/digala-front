@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useField } from '@unform/core';
 
 import { Container, NumberBar, Number } from './styles';
@@ -12,6 +12,7 @@ interface NpsProps {
   rightSubtitle?: string;
   scale: number;
   startZero?: boolean;
+  disabled?: boolean;
 }
 
 const NpsField: React.FC<NpsProps> = ({
@@ -23,6 +24,7 @@ const NpsField: React.FC<NpsProps> = ({
   rightSubtitle,
   scale,
   startZero,
+  disabled,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [selectedNumber, setSelectedNumber] = useState(-1);
@@ -35,6 +37,9 @@ const NpsField: React.FC<NpsProps> = ({
       name: fieldName,
       ref: inputRef.current,
       path: 'value',
+      setValue: (_, value: number) => {
+        setSelectedNumber(value - 1);
+      },
     });
   }, [registerField, fieldName]);
 
@@ -47,6 +52,15 @@ const NpsField: React.FC<NpsProps> = ({
     }
     setArrayNumbers(numbers);
   }, [startZero, scale]);
+
+  const handleNumberClick = useCallback(
+    (index: number) => {
+      if (!disabled) {
+        setSelectedNumber(index);
+      }
+    },
+    [disabled],
+  );
 
   return (
     <Container>
@@ -67,13 +81,13 @@ const NpsField: React.FC<NpsProps> = ({
               type="button"
               key={value}
               isSelected={index === selectedNumber}
-              onClick={() => setSelectedNumber(index)}
+              onClick={() => handleNumberClick(index)}
             >
               <h2>{value}</h2>
             </Number>
           ))}
           <input
-            readOnly
+            disabled={disabled}
             ref={inputRef}
             style={{ display: 'none' }}
             value={selectedNumber}

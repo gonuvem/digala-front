@@ -1,5 +1,5 @@
 import { action } from 'typesafe-actions';
-import { QuestionsTypes, Question } from './types';
+import { QuestionsTypes, Question, IListOfUpdatedIds } from './types';
 
 export const addQuestion = (question: Question): {} =>
   action(QuestionsTypes.ADD_QUESTION, question);
@@ -15,3 +15,6 @@ export const clearFocusedQuestion = (): {} =>
 
 export const replaceQuestion = (updatedQuestions: Question[]): {} =>
   action(QuestionsTypes.REPLACE_QUESTION, updatedQuestions);
+
+export const replaceQuestionsId = (listOfUpdateIds: IListOfUpdatedIds[]): {} =>
+  action(QuestionsTypes.REPLACE_QUESTIONS_IDS, listOfUpdateIds);

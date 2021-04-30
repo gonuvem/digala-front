@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 
 import Layout from '../../layout';
 import PageHeader from '../../components/Common/Header';
+import Loading from '../../components/Common/LoadingAnimation';
 
 import { Container, Panels } from './styles';
 
@@ -27,6 +28,8 @@ interface IParams {
 const SurveyBuilder: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<IParams>();
+  const leftPanelRef = useRef<HTMLDivElement>(null);
+  const paginationRef = useRef(null);
 
   const { data: form, loading: formLoading } = useQuery(READ_FORM, {
     variables: { id },
@@ -49,7 +52,7 @@ const SurveyBuilder: React.FC = () => {
 
   useEffect(() => {
     dispatch(QuestionsActions.clearFocusedQuestion());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (formData) {
@@ -93,21 +96,27 @@ const SurveyBuilder: React.FC = () => {
     [questionsTypesData],
   );
 
-  return !formLoading ? (
+  if (formLoading) {
+    return <Loading isLoading={formLoading} />;
+  }
+
+  return (
     <>
       <PageHeader />
       <Layout>
         <Container>
-          <Panels>
-            <LeftPanel questionsTypes={questionTypes} />
-            <Preview questionsTypes={questionTypes} />
-            <Pagination />
+          <Panels data-outside="outside">
+            <LeftPanel ref={leftPanelRef} questionsTypes={questionTypes} />
+            <Preview
+              leftPanelRef={leftPanelRef}
+              paginationRef={paginationRef}
+              questionsTypes={questionTypes}
+            />
+            <Pagination ref={paginationRef} />
           </Panels>
         </Container>
       </Layout>
     </>
-  ) : (
-    <h3>Carregando</h3>
   );
 };
 

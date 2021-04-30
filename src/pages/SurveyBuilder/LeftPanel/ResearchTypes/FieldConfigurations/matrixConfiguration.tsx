@@ -44,7 +44,7 @@ const MatrixConfiguration: React.FC<MatrixConfigurationProps> = ({
           <section>
             <ShortTextField
               label="Nome"
-              placeholder="matrix"
+              placeholder="Tabela de opções"
               name="label"
               id="matrixLabelField"
               onChange={(event) => onChange([event.target.value], ['label'])}

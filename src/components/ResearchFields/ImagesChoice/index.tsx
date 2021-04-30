@@ -13,6 +13,7 @@ interface ImagesChoiceProps {
   label: string;
   id: string;
   choices: ListOptionsProps[];
+  disabled?: boolean;
 }
 
 interface ListOptionsProps {
@@ -30,6 +31,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
   multipleChoice,
   choiceMaxAmmount,
   choices,
+  disabled,
   id,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -47,6 +49,17 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
       ref: inputRefs.current,
       getValue: (refs: HTMLInputElement[]) => {
         return refs.filter((ref) => ref.checked).map((ref) => ref.value);
+      },
+      setValue: (refs: HTMLInputElement[], values: string[]) => {
+        if (values === undefined) {
+          return;
+        }
+
+        refs.forEach((ref) => {
+          if (values.includes(ref.value)) {
+            ref.checked = true;
+          }
+        });
       },
     });
   }, [fieldName, registerField]);
@@ -80,6 +93,7 @@ const ImagesChoice: React.FC<ImagesChoiceProps> = ({
                   value={option?._id}
                   id={option?._id}
                   onChange={onChange}
+                  disabled={disabled}
                 />
                 <span />
                 {option.text}

@@ -32,6 +32,7 @@ const ImageOption: React.FC<ListOptionsProps> = ({
             defaultValue={text}
             onChange={(event) => onChange({ id, text: event.target.value })}
             type="text"
+            placeholder="Coloque aqui o nome da opção..."
             name=""
             id=""
           />

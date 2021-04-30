@@ -22,7 +22,7 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
   name,
   columns,
   rows,
-  ...rest
+  disabled,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
@@ -40,8 +40,13 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
       getValue: (refs: HTMLInputElement[]) => {
         return refs.filter((ref) => ref.checked).map((ref) => ref.value);
       },
+      setValue: (_, values: any) => {
+        values.forEach((pair: number[]) => {
+          inputRefs.current[pair[0] * columns.length + pair[1]].checked = true;
+        });
+      },
     });
-  }, [registerField, fieldName]);
+  }, [registerField, fieldName, columns.length]);
 
   return (
     <Container>
@@ -79,6 +84,7 @@ const MatrixField: React.FC<MatrixFieldProps> = ({
                     value={[rowIndex.toString(), columnIndex.toString()]}
                     id={`${name}-row${rowIndex}-col${columnIndex}`}
                     type={multipleChoice ? 'checkbox' : 'radio'}
+                    disabled={disabled}
                   />
                 </td>
               ))}

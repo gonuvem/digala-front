@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, forwardRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Container, PanelTabLink, PanelArea } from './styles';
@@ -17,7 +17,10 @@ interface LeftPanelProps {
   questionsTypes: [];
 }
 
-const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
+const LeftPanel: React.RefForwardingComponent<
+  HTMLDivElement,
+  LeftPanelProps
+> = ({ questionsTypes }, ref) => {
   const [activePanelNumber, setActivePanelNumber] = useState(0);
   const [distanceToTravel, setDistanceToTravel] = useState(0);
 
@@ -49,11 +52,9 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
     }
   };
 
-  // console.log(formData);
-
   return (
-    <Container>
-      <h5>{formData?.config.name}</h5>
+    <Container ref={ref} data-outside="outside">
+      <h5 data-outside="outside">{formData?.config.name}</h5>
       <PanelArea
         activePanelNumber={activePanelNumber}
         distance={distanceToTravel}
@@ -76,4 +77,4 @@ const LeftPanel: React.FC<LeftPanelProps> = ({ questionsTypes }) => {
   );
 };
 
-export default LeftPanel;
+export default forwardRef(LeftPanel);

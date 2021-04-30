@@ -36,7 +36,6 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   description,
   anotherOption,
   rowDirection = false,
-  limitChoices,
   choiceMaxAmmount = 2,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -44,7 +43,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
     choices || [],
   );
 
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
   const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
@@ -59,6 +58,17 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
       ref: inputRefs.current,
       getValue: (refs: HTMLInputElement[]) => {
         return refs.filter((ref) => ref.checked).map((ref) => ref.value);
+      },
+      setValue: (refs: HTMLInputElement[], value: string[]) => {
+        if (value === undefined) {
+          return;
+        }
+
+        refs.forEach((ref) => {
+          if (value.includes(ref.value)) {
+            ref.checked = true;
+          }
+        });
       },
     });
   }, [fieldName, registerField]);
@@ -99,6 +109,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 fieldName={name}
                 label={choice.text}
                 onChange={onChange}
+                readOnly={readOnly}
               />
             ))}
           {anotherOption && (
@@ -112,6 +123,7 @@ const MultipleChoiceField: React.FC<SingleChoiceFieldProps> = ({
               id={another.id}
               fieldName={name}
               label={another.text}
+              readOnly={readOnly}
             />
           )}
         </ViewOptions>

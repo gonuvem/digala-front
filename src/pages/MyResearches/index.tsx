@@ -64,6 +64,10 @@ const MyReasearches: React.FC = () => {
     return 0;
   }, [formsData]);
 
+  const isFormListEmpty = useMemo(() => {
+    return !formsLoading && forms.length === 0;
+  }, [forms.length, formsLoading]);
+
   const handleCreateResearch = useCallback(
     async (data: CreateFormData) => {
       try {
@@ -108,7 +112,7 @@ const MyReasearches: React.FC = () => {
               Nova Pesquisa
             </SolidButton>
           </Header>
-          <Table forms={forms} />
+          <Table isFormListEmpty={isFormListEmpty} forms={forms} />
           {formsLoading && (
             <LoadingContainer>
               <LoadingSpinner />

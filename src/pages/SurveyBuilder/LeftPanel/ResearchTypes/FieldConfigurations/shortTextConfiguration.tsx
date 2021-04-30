@@ -14,11 +14,13 @@ import { Container } from './styles';
 
 interface ShortTextConfigurarionProps {
   handleChange: Function;
+  isLongText?: boolean;
   field: Question;
 }
 
 const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
   handleChange,
+  isLongText,
   field,
 }) => {
   const formRef = useRef<FormHandles>(null);
@@ -44,7 +46,7 @@ const ShortTextConfigurarion: React.FC<ShortTextConfigurarionProps> = ({
         <section>
           <ShortTextField
             label="Nome"
-            placeholder="Texto Curto"
+            placeholder={isLongText ? 'Texto Longo' : 'Texto Curto'}
             name="label"
             id="shortTextLabelField"
             onChange={(event) => onChange([event.target.value], ['label'])}

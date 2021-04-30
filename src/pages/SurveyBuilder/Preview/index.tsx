@@ -42,13 +42,19 @@ interface QuestionDTO {
 
 interface PreviewProps {
   questionsTypes: QuestionDTO[];
+  leftPanelRef: any;
+  paginationRef: any;
 }
 
 interface IParams {
   id: string;
 }
 
-const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
+const Preview: React.FC<PreviewProps> = ({
+  questionsTypes,
+  leftPanelRef,
+  paginationRef,
+}) => {
   const [showQuestionsPanel, setShowQuestionsPanel] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteQuestionLoading, setDeleteQuestionLoading] = useState(false);
@@ -113,8 +119,8 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
   }, []);
 
   return (
-    <Container>
-      <HeaderContainer>
+    <Container data-outside="outside">
+      <HeaderContainer data-outside="outside">
         <nav>
           <NavLink isActive href="#">
             Editar
@@ -126,8 +132,8 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
           Pré-visualizar
         </PreviewLink>
       </HeaderContainer>
-      <PanelArea>
-        <h1>{formData?.config.name}</h1>
+      <PanelArea data-outside="outside">
+        <h1 data-outside="outside">{formData?.config.name}</h1>
         <p>{formData?.config.description}</p>
         <Form onSubmit={() => null}>
           {fieldsRegistered.map((field, fieldIndex) => (
@@ -138,6 +144,8 @@ const Preview: React.FC<PreviewProps> = ({ questionsTypes }) => {
               handleFocusQuestion={handleFocusQuestion}
               handleChangePosition={handleChangePosition}
               toggleModal={toggleModal}
+              leftPanelRef={leftPanelRef}
+              paginationRef={paginationRef}
             />
           ))}
         </Form>

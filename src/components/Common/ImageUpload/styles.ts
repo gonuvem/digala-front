@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
-  div:first-child {
+  > div:first-child {
     display: flex;
     align-items: end;
 
@@ -22,6 +22,6 @@ export const OptionsContainer = styled.div`
   align-items: center;
 
   button {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 `;

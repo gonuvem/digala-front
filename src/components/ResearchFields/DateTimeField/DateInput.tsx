@@ -13,11 +13,13 @@ import { InputContainer, CalendarContainer } from './styles';
 interface DateInputProps {
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   childrenCalendarRef: any;
+  disabled?: boolean;
 }
 
 const DateInput: React.FC<DateInputProps> = ({
   dateFormat,
   childrenCalendarRef,
+  disabled,
 }) => {
   const calendarRef = useRef(null);
   const [dateValue, setDateValue] = useState('');
@@ -55,6 +57,7 @@ const DateInput: React.FC<DateInputProps> = ({
         value={dateValue}
         type="text"
         placeholder={dateFormats[dateFormat].placeholder}
+        disabled={disabled}
       />
       {calendarTransitions((props, item) => {
         return (

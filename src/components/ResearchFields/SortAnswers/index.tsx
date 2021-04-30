@@ -14,6 +14,7 @@ interface SortAnswersProps {
   label: string;
   description?: string;
   answerOptions?: ListOptions[];
+  disabled?: boolean;
 }
 
 interface ListOptions {
@@ -38,12 +39,13 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
   label,
   description,
   answerOptions,
+  disabled,
 }) => {
   const [options, setOptions] = useState<Array<ListOptions>>(
     answerOptions || [],
   );
 
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -51,6 +53,23 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
       ref: undefined,
       getValue: () => {
         return options;
+      },
+      setValue: (ref: any, values: ListOptions[]) => {
+        if (!values) {
+          return;
+        }
+
+        const optionsInOrder = values.map((value) => {
+          return options.find((option) => option._id === value);
+        });
+
+        const optionsInOrderIncludesUndefined = optionsInOrder.includes(
+          undefined,
+        );
+
+        if (!optionsInOrderIncludesUndefined) {
+          setOptions(optionsInOrder as ListOptions[]);
+        }
       },
     });
   }, [registerField, fieldName, options]);
@@ -92,6 +111,7 @@ const SortAnswers: React.FC<SortAnswersProps> = ({
                 >
                   {options.map((item, index) => (
                     <Draggable
+                      isDragDisabled={disabled}
                       key={item._id}
                       draggableId={item._id ? item._id : ''}
                       index={index}
