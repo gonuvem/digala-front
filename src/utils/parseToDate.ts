@@ -32,9 +32,11 @@ export default function parseToDate({
     timeFormatted += ':00';
   }
 
-  return parse(
-    `${dateFormatted}T${timeFormatted}`,
-    "dd/MM/yyyy'T'HH:mm:ss",
-    new Date(),
-  );
+  if (timeFormat) {
+    timeFormatted = '00:00:00';
+  }
+
+  const dateString = `${dateFormatted}T${timeFormatted}`;
+
+  return parse(dateString, "dd/MM/yyyy'T'HH:mm:ss", new Date());
 }

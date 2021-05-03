@@ -21,6 +21,33 @@ export const Container = styled.div`
     max-width: 1520px;
     margin: 0 auto;
   }
+
+  nav {
+    display: flex;
+    align-items: center;
+
+    button {
+      display: flex;
+      align-items: center;
+
+      margin-left: 1.5rem;
+      padding: 0.5rem;
+
+      color: ${Colors.secondary};
+      background: transparent;
+      border: solid 2px ${Colors.secondary};
+      border-radius: 4px;
+
+      &:hover {
+        background: ${Colors.secondary};
+        color: ${Colors.white};
+      }
+
+      svg {
+        margin-right: 0.5rem;
+      }
+    }
+  }
 `;
 
 export const NavLink = styled.a<NavLinkProps>`

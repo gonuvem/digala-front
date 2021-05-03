@@ -1,5 +1,6 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useCallback, useMemo, forwardRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { isUuid } from 'uuidv4';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { FiBookmark, FiPlusCircle } from 'react-icons/fi';
@@ -22,8 +23,10 @@ import updateOwnFormData from '../../../services/logic/updateOwnFormData';
 import createOwnQuestions from '../../../services/logic/createOwnQuestions';
 import updateOwnQuestions from '../../../services/logic/updateOwnQuestions';
 
-const Pagination: React.FC = () => {
+const Pagination: React.RefForwardingComponent<HTMLDivElement> = (_, ref) => {
   const [pagesCount, setPagesCount] = useState(1);
+
+  const dispatch = useDispatch();
 
   const [questionsData, formData] = useSelector<
     ApplicationState,
@@ -63,6 +66,11 @@ const Pagination: React.FC = () => {
 
   const handleUpdate = useCallback(() => {
     if (formData?.id && questionTypes) {
+      if (formData.numResponses > 0) {
+        toast.warning('Essa pesquisa já foi respondida');
+        return;
+      }
+
       const questionsToCreate = questionsData.filter((question) =>
         isUuid(question.id),
       );
@@ -74,6 +82,7 @@ const Pagination: React.FC = () => {
       if (questionsToCreate.length > 0) {
         createOwnQuestions(
           createQuestions,
+          dispatch,
           questionsToCreate,
           formData?.id,
           questionTypes,
@@ -96,11 +105,12 @@ const Pagination: React.FC = () => {
     updateForm,
     questionsData,
     createQuestions,
+    dispatch,
     updateQuestions,
   ]);
 
   return (
-    <Container>
+    <Container ref={ref}>
       <SolidButton onClick={handleUpdate}>
         {loading ? (
           <div id="loading-container">
@@ -125,4 +135,4 @@ const Pagination: React.FC = () => {
   );
 };
 
-export default Pagination;
+export default forwardRef(Pagination);

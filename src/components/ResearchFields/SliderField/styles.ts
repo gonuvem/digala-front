@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import ReactTooltip from 'react-tooltip';
-
 import Colors from '../../../utils/colors';
 
 export const Container = styled.div`
@@ -47,6 +45,7 @@ export const Slider = styled.input`
 
   &::-moz-range-thumb {
     -webkit-appearance: none;
+    content: 'Teste';
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
@@ -56,7 +55,7 @@ export const Slider = styled.input`
   ::-moz-range-track {
     -webkit-appearance: none;
     outline: none;
-    background: ${Colors.primary};
+    background: ${Colors.disabledGray};
     height: 0.4rem;
     opacity: 0.7;
     border-radius: 4px;
@@ -65,7 +64,7 @@ export const Slider = styled.input`
   ::-webkit-slider-runnable-track {
     -webkit-appearance: none;
     outline: none;
-    background: ${Colors.primaryOpacity};
+    background: ${Colors.disabledGray};
     height: 0.52rem;
     border-radius: 4px;
     margin-bottom: 0.5rem;
@@ -82,19 +81,40 @@ export const Slider = styled.input`
   }
 `;
 
-export const Tooltip = styled(ReactTooltip)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  padding: 0.5rem;
-  transition: opacity 0.3s;
-  opacity: 1 !important;
-  left: 15rem;
-  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+export const SliderBubble = styled.div`
+  position: absolute;
+  top: -225%;
 
-  p {
-    font-size: 0.75rem;
-    line-height: 1rem;
+  span {
+    width: 30px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background: #03a9f4;
+    color: #fff;
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-radius: 6px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 10px solid #03a9f4;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      margin-top: -1px;
+    }
   }
+`;
+
+export const SliderWrap = styled.div`
+  position: relative;
 `;

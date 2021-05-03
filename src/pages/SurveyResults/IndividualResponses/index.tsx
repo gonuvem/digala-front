@@ -105,7 +105,12 @@ const IndividualResponses: React.FC<IndividualResponsesProps> = ({
       )}
       {!listOwnResponsesLoading &&
         responses.map((response) => (
-          <TableRow key={response.id}>
+          <TableRow
+            key={response.id}
+            href={`/preview_response/${response.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <span style={{ flex: 2 }}>{response.createdAt}</span>
             <span style={{ flex: 1 }}>Píaui, Teresina</span>
             <span style={{ flex: 2 }}>
@@ -113,7 +118,11 @@ const IndividualResponses: React.FC<IndividualResponsesProps> = ({
             </span>
 
             <div style={{ flex: 1 }}>
-              <a href="/survey">
+              <a
+                href={`/preview_response/${response.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img src={bookReader} alt="Ver" />
                 <span>Ver</span>
               </a>

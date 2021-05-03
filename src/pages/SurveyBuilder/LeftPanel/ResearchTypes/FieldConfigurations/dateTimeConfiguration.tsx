@@ -37,7 +37,9 @@ const DateTimeConfiguration: React.FC<DateTimeConfigurationProps> = ({
   field,
 }) => {
   const formRef = useRef<FormHandles>(null);
-  const [isTimeRequired, setIsTimeRequired] = useState(false);
+  const [isTimeRequired, setIsTimeRequired] = useState(
+    field.isTimeRequired || false,
+  );
 
   useEffect(() => {
     formRef.current?.setData(field);

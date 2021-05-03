@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 import { useTransition } from 'react-spring';
+import { parseISO, format } from 'date-fns';
 
 import DateInput from './DateInput';
 import TimeInput from './TimeInput';
 import ErrorMessage from '../../Common/ErrorMessage';
+
+import { dateFormats, timeFormats } from '../../../utils/dateTimeFormats';
 
 import { Container, SeparatorDot } from './styles';
 
@@ -16,7 +19,22 @@ interface DateTimeFieldProps {
   selectRange?: boolean;
   dateFormat: 'monthYear' | 'dayMonthYear' | 'dayMonth';
   timeFormat: 'hourMinute' | 'hourMinuteSecond';
+  disabled?: boolean;
 }
+
+type IValueFromForm =
+  | {
+      date: string | undefined;
+      time: string | undefined;
+      beginDate?: undefined;
+      endDate?: undefined;
+    }
+  | {
+      beginDate: string | undefined;
+      endDate: string | undefined;
+      date?: undefined;
+      time?: undefined;
+    };
 
 const DateTimeField: React.FC<DateTimeFieldProps> = ({
   name,
@@ -26,12 +44,13 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
   dateFormat,
   isTimeRequired,
   timeFormat,
+  disabled,
 }) => {
   const childrenCalendarRef = useRef<HTMLInputElement>(null);
   const endDateCalendarRef = useRef<HTMLInputElement>(null);
   const childrenTimeInputRef = useRef<HTMLInputElement>(null);
 
-  const { fieldName, registerField, error, defaultValue } = useField(name);
+  const { fieldName, registerField, error } = useField(name);
   const transitions = useTransition(!!error, {
     from: { opacity: 0, transform: 'translateX(-50px)' },
     enter: { opacity: 1, transform: 'translateX(0px)' },
@@ -42,7 +61,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
     registerField({
       name: fieldName,
       ref: undefined,
-      getValue: (ref: any) => {
+      getValue: (_) => {
         if (!selectRange) {
           return {
             date: childrenCalendarRef.current?.value,
@@ -54,8 +73,47 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
           endDate: endDateCalendarRef.current?.value,
         };
       },
+      setValue: (ref, value: any) => {
+        if (!value) {
+          return;
+        }
+
+        const parsedDate = parseISO(value[0]);
+        const formattedDate = format(
+          parsedDate,
+          dateFormats[dateFormat].fnsMask,
+        );
+
+        if (childrenCalendarRef.current) {
+          childrenCalendarRef.current.value = formattedDate;
+        }
+
+        if (selectRange && endDateCalendarRef.current) {
+          const endDateParsed = parseISO(value[1]);
+          const endDateFormatted = format(
+            endDateParsed,
+            dateFormats[dateFormat].fnsMask,
+          );
+
+          endDateCalendarRef.current.value = endDateFormatted;
+        }
+
+        if (isTimeRequired) {
+          const formattedTime = format(
+            parsedDate,
+            timeFormats[timeFormat].fnsMask,
+          );
+        }
+      },
     });
-  }, [fieldName, registerField, selectRange]);
+  }, [
+    dateFormat,
+    fieldName,
+    isTimeRequired,
+    registerField,
+    selectRange,
+    timeFormat,
+  ]);
 
   return (
     <Container selectRange={selectRange}>
@@ -68,6 +126,7 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
         <DateInput
           childrenCalendarRef={childrenCalendarRef}
           dateFormat={dateFormat}
+          disabled={disabled}
         />
         {selectRange || isTimeRequired ? (
           <SeparatorDot selectRange={selectRange}>
@@ -80,12 +139,14 @@ const DateTimeField: React.FC<DateTimeFieldProps> = ({
           <DateInput
             childrenCalendarRef={endDateCalendarRef}
             dateFormat={dateFormat}
+            disabled={disabled}
           />
         ) : (
           isTimeRequired && (
             <TimeInput
               childrenTimeInputRef={childrenTimeInputRef}
               timeFormat={timeFormat}
+              disabled={disabled}
             />
           )
         )}

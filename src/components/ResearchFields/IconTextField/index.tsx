@@ -29,7 +29,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
   icon: Icon,
   placeholder,
   label,
-  readOnly,
+  readOnly = false,
   validatePattern,
   mask,
   description,
@@ -82,7 +82,7 @@ const IconTextField: React.FC<IconTextFieldProps> = ({
             id={id}
             onFocus={handleOnFocus}
             onBlur={handleOnBlur}
-            readOnly={readOnly}
+            disabled={readOnly}
             {...rest}
           />
         </div>

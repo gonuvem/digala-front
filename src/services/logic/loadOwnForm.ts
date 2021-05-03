@@ -26,6 +26,7 @@ interface FormDTO {
         footerText: string;
         footerBackground: string;
       };
+      numResponses: number;
     } | null;
     __typename: string;
   };
@@ -54,6 +55,7 @@ export default function loadOwnForm(
           footerBackground: formData.data.form.style.footerBackground,
           logo: formData.data.form.style.logo,
         },
+        numResponses: formData.data.form.numResponses,
       }),
     );
   }

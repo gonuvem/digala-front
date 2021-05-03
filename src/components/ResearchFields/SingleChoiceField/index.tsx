@@ -32,6 +32,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
   label,
   description,
   anotherOption,
+  readOnly = false,
   rowDirection = false,
 }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -54,8 +55,18 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
       getValue: (refs: HTMLInputElement[]) => {
         return refs.filter((ref) => ref.checked).map((ref) => ref.value);
       },
+      setValue: (refs: HTMLInputElement[], value: string[]) => {
+        if (value === undefined) {
+          return;
+        }
+
+        const refSelected = refs.find((ref) => ref.value === value[0]);
+        if (refSelected) {
+          refSelected.checked = true;
+        }
+      },
     });
-  }, [registerField, fieldName]);
+  }, [registerField, fieldName, name]);
 
   useEffect(() => {
     if (choices) {
@@ -80,6 +91,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
                 value={choice._id}
                 fieldName={name}
                 label={choice.text}
+                readOnly={readOnly}
               />
             ))}
           {anotherOption && (
@@ -92,6 +104,7 @@ const SingleChoiceField: React.FC<SingleChoiceFieldProps> = ({
               value="another-option"
               fieldName={name}
               label={another.text}
+              readOnly={readOnly}
             />
           )}
         </ViewOptions>

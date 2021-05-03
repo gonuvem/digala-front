@@ -25,6 +25,8 @@
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "jsx-quotes": [2, "prefer-double"],
     "no-underscore-dangle": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",

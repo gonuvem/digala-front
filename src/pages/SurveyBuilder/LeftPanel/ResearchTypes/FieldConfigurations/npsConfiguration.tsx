@@ -82,32 +82,26 @@ const NpsConfiguration: React.FC<NpsConfigurationProps> = ({
             }}
           />
         </section>
-        {showSubtitles && (
-          <>
-            <section>
-              <ShortTextField
-                label="Legenda ao lado esquerdo"
-                placeholder="Pouco provável"
-                name="leftLabel"
-                id="npsLeftSubtitleField"
-                onChange={(event) =>
-                  onChange([event.target.value], ['leftLabel'])
-                }
-              />
-            </section>
-            <section>
-              <ShortTextField
-                label="Legenda ao lado direito "
-                placeholder="Muito provável"
-                name="rightLabel"
-                id="npsRightSubtitleField"
-                onChange={(event) =>
-                  onChange([event.target.value], ['rightLabel'])
-                }
-              />
-            </section>
-          </>
-        )}
+
+        <section style={{ display: showSubtitles ? 'block' : 'none' }}>
+          <ShortTextField
+            label="Legenda ao lado esquerdo"
+            placeholder="Pouco provável"
+            name="leftLabel"
+            id="npsLeftSubtitleField"
+            onChange={(event) => onChange([event.target.value], ['leftLabel'])}
+          />
+        </section>
+        <section style={{ display: showSubtitles ? 'block' : 'none' }}>
+          <ShortTextField
+            label="Legenda ao lado direito "
+            placeholder="Muito provável"
+            name="rightLabel"
+            id="npsRightSubtitleField"
+            onChange={(event) => onChange([event.target.value], ['rightLabel'])}
+          />
+        </section>
+
         <section>
           <ToggleSwitch
             label="Começar no zero"

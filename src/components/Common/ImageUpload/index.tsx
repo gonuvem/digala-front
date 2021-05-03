@@ -3,6 +3,7 @@ import { uuid } from 'uuidv4';
 
 import ImageOption from './ImageOption';
 import SolidButton from '../SolidButton';
+import DashedUploader from '../DashedUploader';
 
 import { Container, OptionsContainer } from './styles';
 
@@ -93,6 +94,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
             onChange={handleLabelChange}
           />
         ))}
+        <DashedUploader
+          handleClick={handleClick}
+          text="Clique aqui para adicionar uma nova opção"
+        />
         <input
           ref={fileInputRef}
           onChange={handleUploadPhoto}
@@ -101,7 +106,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
           name="newOption"
           id="newOptionFile"
         />
-        <SolidButton onClick={handleClick}>Adicionar opção</SolidButton>
       </OptionsContainer>
     </Container>
   );
